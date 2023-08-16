@@ -9,11 +9,15 @@ public class MainController {
 	// 최초 진입 시 실행 페이지
 	@GetMapping(value="/")
 	public String home() { return "main"; }
+	
+	// 관리자 로그인 페이지
+	@GetMapping(value="/admin")
+	public String admin() { return "admin"; }
 
-	// 관람정보 페이지
-	@GetMapping(value="/tour_info")
-	public String tour_info() {
-		return "tour_info";
+	// 관람정보-관람안내 페이지
+	@GetMapping(value="/viewing_guidance")
+	public String guidance() {
+		return "viewing_guidance";
 	}
 
 	// 전시 페이지
