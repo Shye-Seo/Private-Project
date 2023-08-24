@@ -14,11 +14,28 @@ public class MainController {
 	@GetMapping(value="/admin")
 	public String admin() { return "admin"; }
 
-	// 관람정보-관람안내 페이지
+	// 이용안내-관람안내
 	@GetMapping(value="/viewing_guidance")
 	public String guidance() {
 		return "viewing_guidance";
 	}
+	
+	// 이용안내-찾아오시는 길
+	@GetMapping(value="/map")
+	public String map() {
+		return "map";
+	}
+	
+	// 예약-단체
+	@GetMapping(value="/reservation_group")
+	public String reservation_group() {
+		return "reservation_group";
+	}
+	
+//	@GetMapping(value="/reservation_group_date")
+//	public String reservation_group_date() {
+//		return "reservation_group_date";
+//	}
 
 	// 전시 페이지
 	@GetMapping(value="/exhibition")
