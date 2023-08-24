@@ -1,0 +1,339 @@
+* {
+    margin: 0;
+}
+
+ul{
+	display: flex;
+}
+
+li{
+	list-style: none;
+}
+
+.wrap{
+	width: 1760px;
+    margin: 0 auto;
+}
+
+.gnb_bar{
+	background-color: #E94E24;	
+}
+
+.gnb_wrap{
+	margin: 0 auto;
+	align-items: center;
+	height: 50px;
+	width: 1760px;
+	color: white;
+}
+
+.contents_wrap{
+	height: 170px;
+}
+
+.page_title{
+	border-bottom: 2px solid black;
+}
+
+.page_name_area{
+	text-align: center;
+	margin: 100px auto;
+	font-size: x-large;
+}
+
+/* ---------전시관선택 및 개인정보 동의 PAGE--------- */
+
+.place_area {
+    display: flex;
+    width: 700px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.img_1, .img_2 {
+    width: 50%;
+    text-align: center;
+}
+
+.agree_area {
+/*     display: flex; */
+    width: 700px;
+/*     height: 300px; */
+    margin: 30px auto;
+    text-align: center;
+}
+
+/* ---------DATE PAGE--------- */
+/* 달력 ui */
+
+.sec_cal {
+    width: 360px;
+    margin: 0 auto;
+    font-family: "NotoSansR";
+}
+
+.sec_cal .cal_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 78px;
+}
+
+.sec_cal .cal_nav .year-month {
+    width: 300px;
+    text-align: center;
+    line-height: 1;
+}
+
+.sec_cal .cal_nav .nav {
+    display: flex;
+    border: 1px solid #333333;
+    border-radius: 5px;
+}
+
+.sec_cal .cal_nav .go-prev,
+.sec_cal .cal_nav .go-next {
+    display: block;
+    width: 50px;
+    height: 78px;
+    font-size: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sec_cal .cal_nav .go-prev::before,
+.sec_cal .cal_nav .go-next::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #000;
+    border-width: 3px 3px 0 0;
+    transition: border 0.1s;
+}
+
+.sec_cal .cal_nav .go-prev:hover::before,
+.sec_cal .cal_nav .go-next:hover::before {
+    border-color: #ed2a61;
+}
+
+.sec_cal .cal_nav .go-prev::before {
+    transform: rotate(-135deg);
+}
+
+.sec_cal .cal_nav .go-next::before {
+    transform: rotate(45deg);
+}
+
+.sec_cal .cal_wrap {
+    padding-top: 40px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.sec_cal .cal_wrap .days {
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sec_cal .cal_wrap::after {
+    top: 368px;
+}
+
+.sec_cal .cal_wrap .day {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 7);
+    text-align: left;
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    border-radius:5px
+}
+
+.current.today {background: rgb(242 242 242);}
+
+.current.choice {border: 1px solid red; border-radius: 15px;}
+
+.dayStyle {
+/*     border: 1px solid red; */
+/*     border-radius: 15px; */
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.dayStyle.choiceDay{
+	border: 1px solid red;
+	border-radius: 15px;
+}
+
+.sec_cal .cal_wrap .dates {
+    display: flex;
+    flex-flow: wrap;
+    height: 290px;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n -1) {
+    color: #3c6ffa;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n) {
+    color: #ed2a61;
+}
+
+.sec_cal .cal_wrap .day.disable {
+    color: #ddd;
+}
+
+.resDate_check{
+	width: 360px;
+	height: 70px;
+	margin: 10px auto;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.resDate_text {
+    border: 1px solid red;
+    display: flex;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.reservation_date {
+    width: 70%;
+    border: 1px solid blue;
+    height: 100%;
+    text-align: center;
+    line-height: 70px;
+}
+
+/* 회차별 시간표 */
+.turnTable_area{
+	margin: 30px auto;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    vertical-align: middle;
+}
+
+.table_contents{
+	margin: 30px auto;
+	width: 700px;
+}
+
+.res_table {
+    border-top: 1px solid #222;
+    width: 100%;
+}
+
+.res_table thead{
+	font-family: 'Noto Sans KR',sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    word-break: keep-all;
+    letter-spacing: -0.5px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.res_table tr {
+    text-align: center;
+}
+
+.res_table thead th {
+    padding: 14px 15px;
+/*     font-weight: 500; */
+    line-height: 1.2;
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    border-width: 0 1px 1px 1px;
+}
+
+.res_table tbody tr.off th {
+    border-bottom: 1px solid #eee;
+    height: 35px;
+}
+
+.res_table tbody tr.off td {
+    color: #595959;
+    border-bottom: 1px solid #eee;
+    height: 35px;
+}
+
+/* 버튼 영역 */
+.button_area {
+    width: 360px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+/* ---------INFO PAGE--------- */
+.res_form{
+	width: 100%;
+	display: flex;	
+}
+
+.info_area{
+	width: 50%;
+	border: 1px solid blue;
+}
+
+.result_area{
+	width: 50%;
+	border: 1px solid red;
+}
+
+/* 가격표 style */
+.num_price_table{
+	width: 70%;
+    margin: 15px auto;
+}
+
+table.table-basic {
+    width: 100%;
+}
+
+.table-basic th {
+    background: #f3f6fb;
+    color: #5e5e5e;
+    font-weight: 600;
+}
+
+.table-basic th, .table-basic td {
+    height: 48px;
+    padding: 10px 3px;
+    border: 1px solid #b8ceea;
+    font-size: 16px;
+    text-align: center;
+    word-break: keep-all;
+    word-wrap: break-word;
+}
+
+.table-basic td {
+    background: #fff;
+    color: #595959;
+}
+
+.total {
+    padding: 0.3em 0;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #ef2571;
+    text-align: center;
+}

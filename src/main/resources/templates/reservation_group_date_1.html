@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/reservation.css">
+    <title>부산영화체험박물관 | 단체예약-전시관1</title>
+    <script type="text/javascript" src="/js/reservation.js"></script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li><img src="/imgs/home_icon.svg"></li>
+        <li>관람정보</li>
+        <li>관람예약</li>
+        <li>단체</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>단체</h1></div>
+		</div>
+	</div>
+		<div class="reservation_wrap">
+		<form>
+		<input type="hidden" name="res_theaterCheck" value="1">
+		<input type="hidden" name="res_visitDate">
+			<div class="calendar_area">
+				<div class="sec_cal">
+					<div class="cal_nav">
+				    	<a href="javascript:;" class="nav-btn go-prev">prev</a>
+				    	<div class="year-month"></div>
+				    	<a href="javascript:;" class="nav-btn go-next">next</a>
+				    </div>
+				    <div class="cal_wrap">
+					    <div class="days">
+					    	<div class="day">MON</div>
+					      	<div class="day">TUE</div>
+					      	<div class="day">WED</div>
+					      	<div class="day">THU</div>
+					      	<div class="day">FRI</div>
+					      	<div class="day">SAT</div>
+					      	<div class="day">SUN</div>
+					    </div>
+				    	<div class="dates"></div>
+				  	</div>
+				</div>
+				<div class="resDate_check">
+					<div class="resDate_text">
+						<p>예약날짜 : </p>
+						<div class="reservation_date"></div> 
+					</div>
+				</div>
+			</div>
+			<div class="turnTable_area">
+				<div class="table_contents">
+					<table class="res_table">
+					<colgroup>
+						<col style="width:50px">
+						<col>
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col"></th>
+							<th scope="col">회차</th>
+							<th scope="col">시간</th>
+							<th scope="col">잔여인원</th>
+						</tr>
+					</thead>
+					<tbody id="reserve_time_tb">
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_1" name="res_visitNum" value="1">
+								</span>
+							</th>
+							<td>1회</td>
+							<td>10:00</td>
+							<td><div id="Rcnt_1">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_2" name="res_visitNum" value="2">
+								</span>
+							</th>
+							<td>2회</td>
+							<td>10:30</td>
+							<td><div id="Rcnt_2">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_3" name="res_visitNum" value="3">
+								</span>
+							</th>
+							<td>3회</td>
+							<td>11:00</td>
+							<td><div id="Rcnt_3">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_4" name="res_visitNum" value="4">
+								</span>
+							</th>
+							<td>4회</td>
+							<td>11:30</td>
+							<td><div id="Rcnt_4">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_5" name="res_visitNum" value="5">
+								</span>
+							</th>
+							<td>5회</td>
+							<td>12:00</td>
+							<td><div id="Rcnt_5">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_6" name="res_visitNum" value="6">
+								</span>
+							</th>
+							<td>6회</td>
+							<td>12:30</td>
+							<td><div id="Rcnt_6">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_7" name="res_visitNum" value="7">
+								</span>
+							</th>
+							<td>7회</td>
+							<td>13:00</td>
+							<td><div id="Rcnt_7">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_8" name="res_visitNum" value="8">
+								</span>
+							</th>
+							<td>8회</td>
+							<td>13:30</td>
+							<td><div id="Rcnt_8">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_9" name="res_visitNum" value="9">
+								</span>
+							</th>
+							<td>9회</td>
+							<td>14:00</td>
+							<td><div id="Rcnt_9">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_10" name="res_visitNum" value="10">
+								</span>
+							</th>
+							<td>10회</td>
+							<td>14:30</td>
+							<td><div id="Rcnt_10">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_11" name="res_visitNum" value="11">
+								</span>
+							</th>
+							<td>11회</td>
+							<td>15:00</td>
+							<td><div id="Rcnt_11">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_12" name="res_visitNum" value="12">
+								</span>
+							</th>
+							<td>12회</td>
+							<td>15:30</td>
+							<td><div id="Rcnt_12">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_13" name="res_visitNum" value="13">
+								</span>
+							</th>
+							<td>13회</td>
+							<td>16:00</td>
+							<td><div id="Rcnt_13">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_14" name="res_visitNum" value="14">
+								</span>
+							</th>
+							<td>14회</td>
+							<td>16:30</td>
+							<td><div id="Rcnt_14">500 명</div></td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+			</div>
+			<div class="button_area">
+				<div>
+					<input type="button" value="확인" class="submit_btn" id="date_submit">
+				</div>
+			</div>
+			</form>
+		</div>
+</div>
+<div></div>
+<div></div>
+<script>
+    $(document).ready(function() {
+        calendarInit();
+    });
+    /*
+        달력 렌더링 할 때 필요한 정보 목록 
+
+        현재 월(초기값 : 현재 시간)
+        금월 마지막일 날짜와 요일
+        전월 마지막일 날짜와 요일
+    */
+
+    function calendarInit() {
+
+        // 날짜 정보 가져오기
+        var date = new Date(); // 현재 날짜(로컬 기준) 가져오기
+        var utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000); // uct 표준시 도출
+        var kstGap = 9 * 60 * 60 * 1000; // 한국 kst 기준시간 더하기
+        var today = new Date(utc + kstGap); // 한국 시간으로 date 객체 만들기(오늘)
+      
+        var thisMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        // 달력에서 표기하는 날짜 객체
+      
+        
+        var currentYear = thisMonth.getFullYear(); // 달력에서 표기하는 연
+        var currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
+        var currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
+
+        // kst 기준 현재시간
+        // console.log(thisMonth);
+
+        // 캘린더 렌더링
+        renderCalender(thisMonth);
+
+        function renderCalender(thisMonth) {
+
+            // 렌더링을 위한 데이터 정리
+            currentYear = thisMonth.getFullYear();
+            currentMonth = thisMonth.getMonth();
+            currentDate = thisMonth.getDate();
+
+            // 이전 달의 마지막 날 날짜와 요일 구하기
+            var startDay = new Date(currentYear, currentMonth, 0);
+            var prevDate = startDay.getDate();
+            var prevDay = startDay.getDay();
+
+            // 이번 달의 마지막날 날짜와 요일 구하기
+            var endDay = new Date(currentYear, currentMonth + 1, 0);
+            var nextDate = endDay.getDate();
+            var nextDay = endDay.getDay();
+
+            // console.log(prevDate, prevDay, nextDate, nextDay);
+
+            // 현재 월 표기
+            $('.year-month').text(currentYear + '.' + (currentMonth + 1));
+
+            // 렌더링 html 요소 생성
+            calendar = document.querySelector('.dates')
+            calendar.innerHTML = '';
+            
+            // 지난달
+            for (var i = prevDate - prevDay + 1; i <= prevDate; i++) {
+                calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">' + i + '</div>'
+            }
+            // 이번달
+            for (var i = 1; i <= nextDate; i++) {
+                calendar.innerHTML = calendar.innerHTML + '<div class="day current"><div class="dayStyle" onclick="calendarClick(' + i + ')" id="choice_'+i+'">' + i + '</div></div>'
+            }
+            // 다음달
+            for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
+                calendar.innerHTML = calendar.innerHTML + '<div class="day next disable">' + i + '</div>'
+            }
+
+            // 오늘 날짜 표기
+            if (today.getMonth() == currentMonth) {
+                todayDate = today.getDate();
+                var currentMonthDate = document.querySelectorAll('.dates .current');
+                currentMonthDate[todayDate -1].classList.add('today');
+            }
+        }
+
+        // 이전달로 이동
+        $('.go-prev').on('click', function() {
+            thisMonth = new Date(currentYear, currentMonth - 1, 1);
+            renderCalender(thisMonth);
+        });
+
+        // 다음달로 이동
+        $('.go-next').on('click', function() {
+            thisMonth = new Date(currentYear, currentMonth + 1, 1);
+            renderCalender(thisMonth); 
+        });
+    }
+    
+    function calendarClick(choiceDay) {
+    	console.log(choiceDay);
+    	$('div').not('div [id="choice_'+choiceDay+'"]').removeClass('choiceDay');
+    	$('div [id="choice_'+choiceDay+'"]').attr('class','dayStyle choiceDay');
+    	
+    	var res_day = choiceDay;
+    	var res_choiceDate = $('.year-month').text();
+    	var res_year = res_choiceDate.substr(0,4);
+    	var res_month = res_choiceDate.substr(5);
+    	
+    	if(res_day < 10){
+    		res_day = "0"+res_day;
+    	}
+    	if(res_month.length < 2){
+    		res_month = "0"+res_month;
+    	}
+    	
+    	var res_date = res_year+'.'+res_month + '.' + res_day;
+    	
+    	// 선택한 예약날짜 표기
+        $('.reservation_date').text(res_date);
+        $('input[name=res_visitDate]').val(res_date);
+    }
+</script>
+</body>
+</html>

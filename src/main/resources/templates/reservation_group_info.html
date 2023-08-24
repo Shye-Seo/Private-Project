@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/reservation.css">
+    <title>부산영화체험박물관 | 단체예약</title>
+    <script type="text/javascript" src="/js/reservation.js"></script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li><img src="/imgs/home_icon.svg"></li>
+        <li>관람정보</li>
+        <li>관람예약</li>
+        <li>단체</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>단체</h1></div>
+		</div>
+	</div>
+		<div class="reservation_wrap">
+		<form name="res_info" class="res_form" action="/reservation_ok" method="post" onsubmit="return false">
+			<input type="hidden" name="res_theaterCheck" th:value="${tempVo.res_theaterCheck}">
+			<input type="hidden" name="res_visitDate" th:value="${tempVo.res_visitDate}">
+			<input type="hidden" name="res_visitNum" th:value="${tempVo.res_visitNum}">
+			<input type="hidden" name="res_visitTime" th:value="${tempVo.res_visitTime}">
+			
+			<div class="info_area">
+				<div class="info_groupName">
+					<div>단체명</div>
+					<div><input type="text" name="res_groupName"></div>
+				</div>
+				<div class="info_leaderName">
+					<div>인솔자명</div>
+					<div><input type="text" name="res_name"></div>
+				</div>
+				<div class="info_leaderPhone">
+					<div>인솔자 연락처</div>
+					<div><input type="text" name="res_phone"></div>
+				</div>
+				<div class="info_groupNum">
+					<div>인원</div>
+					<div>
+						학생 <input type="text" name="res_studentNum" id="studentNum">
+						성인(인솔자 제외) <input type="text" name="res_adultNum" id="adultNum">
+						인솔자 <input type="text" name="res_leaderNum" id="leaderNum">
+					</div>
+				</div>
+				<div class="info_vehicle">
+					<div>차량</div>
+					<div>
+						<input type="radio" name="res_vehicleCheck" value="자가용">자가용
+						<input type="radio" name="res_vehicleCheck" value="관광버스">관광버스
+						<input type="radio" name="res_vehicleCheck" value="대중교통">대중교통
+					</div>
+				</div>
+				<div class="info_request">
+					<div>해설사 요청(한번에 최대 30명 해설 가능)</div>
+					<div>
+						<input type="radio" name="res_requestCheck" value="예">예
+						<input type="radio" name="res_requestCheck" value="아니오">아니오
+					</div>
+				</div>
+				<div class="info_message">
+					<div>그 외 특이사항이 있다면 메시지를 남겨주세요</div>
+					<div>
+						<input type="text" name="res_message">
+					</div>
+				</div>
+			</div>
+			<div class="result_area">
+				<div class="result_wrapper">
+					<div class="exhb_title">
+
+					</div>
+					<div class="date_check">
+						<div>날짜</div>
+						<div>[(${tempVo.res_visitDate})]</div>
+					</div>
+					<div class="time_check">
+						<div>시간</div>
+						<div>[(${tempVo.res_visitNum})]회차/[(${tempVo.res_visitTime})]</div>
+					</div>
+					<div class="number_check">
+						<div>인원</div>
+						<div class="num_price_table">
+							<table class="table-basic">
+               					<thead>
+					            	<tr>
+					                	<th scope="col">구분</th>
+					                	<th scope="col">인원수</th>
+					              	</tr>
+					            </thead>
+					          	<tbody>
+					                <tr>
+					                    <td>
+					                        학생
+					                    </td>
+					                    <td><span class="student_num"></span></td>
+					                </tr>
+					                <tr>
+					                    <td>
+					                        성인
+					                    </td>
+					                    <td><span class="adult_num"></span></td>
+					                </tr>
+					                <tr>
+					                    <td>
+					                        인솔자
+					                    </td>
+					                    <td><span class="leader_num"></span></td>
+					                </tr>
+					              </tbody>
+					            </tbody>
+					          </table>
+					          <input type="hidden" class="totalNum" name="res_totalNum">
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
+			<div class="button_area">
+				<div>
+					<input type="button" value="확인" class="submit_btn" onclick="submitTotal();">
+				</div>
+			</div>
+		</div>
+</div>
+<div></div>
+<div></div>
+<script>
+	$(document).ready(function() {
+        $('#studentNum').keyup(function() {
+			var studentNum = $('#studentNum').val();
+			studentNum = parseInt(studentNum);
+        	$('.student_num').text(studentNum);
+        });
+        $('#leaderNum').keyup(function() {
+        	var leaderNum = $('#leaderNum').val();
+        	leaderNum = parseInt(leaderNum);
+        	$('.leader_num').text(leaderNum);
+        });
+        $('#adultNum').keyup(function() {
+        	var adultNum = $('#adultNum').val();
+        	adultNum = parseInt(adultNum);
+        	$('.adult_num').text(adultNum);
+        });
+    });
+	
+	function submitTotal() {
+		var studentNum = $('#studentNum').val();
+		studentNum = parseInt(studentNum);
+		var adultNum = $('#adultNum').val();
+    	adultNum = parseInt(adultNum);
+    	var leaderNum = $('#leaderNum').val();
+    	leaderNum = parseInt(leaderNum);
+    	
+		var totalNum = studentNum+adultNum+leaderNum;
+        $('.totalNum').val(totalNum);
+        
+        var form = $('form[name="res_info"]');
+        $.ajax({
+			url : "/reservation_ok",
+			type : 'post',
+			data : form,
+			success : function (result) {
+                window.location.href= result;
+            }
+	});
+	}
+</script>
+</body>
+</html>

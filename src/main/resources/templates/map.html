@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/map.css">
+    <title>부산영화체험박물관 | 찾아오시는길</title>
+    <script src="/js/main.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li><img src="/imgs/home_icon.svg"></li>
+        <li>관람정보</li>
+        <li>이용안내</li>
+        <li>찾아오시는 길</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>찾아오시는 길</h1></div>
+		</div>
+	</div>
+		<div class="map_wrap">
+			<div class="map_area">
+				<div id="map"></div>
+			</div>
+			<div class="map_txtarea">
+				<div>
+					부산광역시 중구 대청로126번길 12<br>
+					(동광동3가 41-4)
+				</div>
+				<div>
+					051-715-4200
+				</div>
+			</div>
+		</div>
+		<div class="transport_wrap">
+			<div class="transport_title">
+				<h2>대중교통 이용</h2>
+			</div>
+			<div class="transport_contents">
+				<div class="transport_left">
+					<div>지하철</div>
+					<div>버스</div>
+				</div>
+				<div class="transport_right">
+					<div>1호선 중앙역 5번출구</div>
+					<div>백산기념관 : 15, 86, 126, 186</div>
+					<div>제일은행앞 : 86, 186</div>
+					<div>중앙동주민센터 : 66, 82, 85, 88A, 186, 190, 508</div>
+				</div>
+			</div>
+		</div>
+		<div class="parking_wrap">
+			<div class="parking_title">
+				<h2>주차 안내</h2>
+			</div>
+			<div class="parking_contents">
+				<div>
+					부산영화체험박물관 건물 내(지하2-3층) 주차 가능 <br>
+					부산영화체험박물관 단품 관람 : 1시간 무료
+					부산영화체험박물관+트릭아이뮤지엄 통합 관람 : 2시간 무료
+				</div>
+			</div>
+			<div class="parking_fee">
+				<div class="fee_table"></div>
+			</div>
+		</div>
+		<div class="ceo_wrap">
+			<div class="ceo_title">
+				<h2>사업자 정보</h2>
+			</div>
+			<div>
+			
+			</div>
+		</div>    
+</div>
+
+<section id="section_1" class="inwrap">
+    <div>
+
+    </div>
+
+</section>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=886ed342c277bc7b58703ea3a8c422c4&libraries=services"></script>
+<script type="text/javascript">
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('부산 중구 대청로126번길 12', function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+// 	        var infowindow = new kakao.maps.InfoWindow({
+// 	            content: ''
+// 	        });
+// 	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	        
+// 	        var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+// 	        imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+// 	        imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+	          
+// 		    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+// 		    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+// 		        markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
+	
+// 		    // 마커를 생성합니다
+// 		    var marker = new kakao.maps.Marker({
+// 		        position: markerPosition, 
+// 		        image: markerImage // 마커이미지 설정 
+// 		    });
+	
+		    // 마커가 지도 위에 표시되도록 설정합니다
+		    marker.setMap(map);  
+		    } 
+	});    
+</script>
+
+
+<div></div>
+<div></div>
+</body>
+</html>

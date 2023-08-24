@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/reservation.css">
+    <title>부산영화체험박물관 | 단체예약</title>
+    <script type="text/javascript" src="/js/reservation.js"></script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li><img src="/imgs/home_icon.svg"></li>
+        <li>관람정보</li>
+        <li>관람예약</li>
+        <li>단체</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>단체</h1></div>
+		</div>
+	</div>
+		<div class="reservation_wrap">
+			<div class="place_area">
+				<div class="img_1"><img src="" alt="전시관1"><input type="radio" name="res_theaterCheck" value="1"></div>
+				<div class="img_2"><img src="" alt="전시관2"><input type="radio" name="res_theaterCheck" value="2"></div>
+			</div>
+			<div class="agree_area">
+				<div class="agree_contents">
+					<input type="checkbox" id="agree_check" name="agree_check"> 개인정보의 수집 및 이용에 동의합니다
+				</div>
+			</div>
+			<div>
+				<div class="button_area">
+					<input type="button" value="확인" class="submit_btn" id="agree_btn">
+				</div>
+			</div>
+		</div>
+</div>
+<div></div>
+<div></div>
+</body>
+</html>
