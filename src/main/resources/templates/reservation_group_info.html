@@ -28,8 +28,8 @@
 			<div class="page_name_area"><h1>단체</h1></div>
 		</div>
 	</div>
-		<div class="reservation_wrap">
-		<form name="res_info" class="res_form" action="/reservation_ok" method="post" onsubmit="return false">
+		<div class="reservation_wrap" id="reservation">
+		<form name="res_info" enctype="multipart/form-data" class="res_form" action="/reservation_ok" method="post" onsubmit="return false">
 			<input type="hidden" name="res_theaterCheck" th:value="${tempVo.res_theaterCheck}">
 			<input type="hidden" name="res_visitDate" th:value="${tempVo.res_visitDate}">
 			<input type="hidden" name="res_visitNum" th:value="${tempVo.res_visitNum}">
@@ -46,14 +46,22 @@
 				</div>
 				<div class="info_leaderPhone">
 					<div>인솔자 연락처</div>
-					<div><input type="text" name="res_phone"></div>
+					<div><input type="text" name="res_phone" placeholder="예) 01012345678"></div>
+					<input type="button" id="certifinum_submit" value="인증">
 				</div>
+				<div class="certifinum_area">
+                    <p class="item">인증번호<sup>*</sup></p>
+                    <span id="certifi_time"></span>
+                    <input type="text" id="certifinum" placeholder="인증번호 입력" onkeyup="certifinum_checking($(this).val())">
+                    <div class="check_icon"></div>
+                    <input type="button" id="certifinum_check" value="✓" disabled>
+                </div>
 				<div class="info_groupNum">
 					<div>인원</div>
 					<div>
-						학생 <input type="text" name="res_studentNum" id="studentNum">
-						성인(인솔자 제외) <input type="text" name="res_adultNum" id="adultNum">
-						인솔자 <input type="text" name="res_leaderNum" id="leaderNum">
+						학생 <input type="text" name="res_studentNum" id="studentNum" defaultValue="0">
+						성인(인솔자 제외) <input type="text" name="res_adultNum" id="adultNum" defaultValue="0">
+						인솔자 <input type="text" name="res_leaderNum" id="leaderNum" defaultValue="0">
 					</div>
 				</div>
 				<div class="info_vehicle">
@@ -139,18 +147,22 @@
 <div></div>
 <div></div>
 <script>
+	var certifi_checked = "0"; // 인증번호 확인 여부
+	var certifinum = "1"; // 인증번호
+	var timer; //인증번호 타이머
+
 	$(document).ready(function() {
-        $('#studentNum').keyup(function() {
+        $('#studentNum').change(function() {
 			var studentNum = $('#studentNum').val();
 			studentNum = parseInt(studentNum);
         	$('.student_num').text(studentNum);
         });
-        $('#leaderNum').keyup(function() {
+        $('#leaderNum').change(function() {
         	var leaderNum = $('#leaderNum').val();
         	leaderNum = parseInt(leaderNum);
         	$('.leader_num').text(leaderNum);
         });
-        $('#adultNum').keyup(function() {
+        $('#adultNum').change(function() {
         	var adultNum = $('#adultNum').val();
         	adultNum = parseInt(adultNum);
         	$('.adult_num').text(adultNum);
@@ -169,15 +181,95 @@
         $('.totalNum').val(totalNum);
         
         var form = $('form[name="res_info"]');
+        var formData = new FormData(form[0]);
+
         $.ajax({
 			url : "/reservation_ok",
 			type : 'post',
-			data : form,
+			data : formData,
+			enctype : 'multipart/form-data',
+	        processData : false,
+	        contentType : false,
+	        cache : false,
 			success : function (result) {
                 window.location.href= result;
             }
-	});
+		});
 	}
+	
+	// 인증번호 발송
+    $('#certifinum_submit').click(function() {
+        $("#certifinum_check").attr("disabled", false);
+        clearInterval(timer);
+        $("#certifi_time").text("");
+        if($('#reservation input[name=res_phone]').val() == '' || $('#reservation input[name=res_phone]').val() == null) {
+            alert('휴대번호를 입력해주세요.');
+            $('#reservation input[name=res_phone]').focus();
+            return false;
+        }
+        else {
+            alert("인증번호가 발송되었습니다. 인증번호를 입력해주세요.");
+            setTimeout(function(){
+                $("#certifinum_submit").attr("disabled", false);
+            }, 60000);
+
+            // 인증버튼css
+            $('#certifinum_submit').val("재인증");
+            $('#certifinum_submit').css({ 'border': '0.5px solid #5B8FD2', 'background-color': '#5B8FD2',"color":"#ffffff"})
+
+            // 3분 타이머
+            certifi_checked = "0";
+            var time = 180;
+            timer = setInterval(function() {
+                var min = Math.floor(time / 60);
+                var sec = time % 60;
+                $("#certifi_time").text(min + "분 " + sec + "초");
+                time--;
+                if(time < 0) {
+                    alert("인증시간이 만료되었습니다. 다시 시도해주세요.");
+                    clearInterval(timer);
+                    $("#certifi_time").text("시간 초과");
+                    $("#certifinum_check").attr("disabled", true);
+                }
+            }, 1000);
+
+            // ajax를 이용하여 인증번호를 요청한다.
+            $.ajax({
+                url: "/phoneCheck",
+                type: "GET",
+                data: { user_phone: $("#reservation input[name=res_phone]").val() },
+                dataType: "text",
+            }).done(function(data){
+                certifinum = data;
+            });
+        }
+    });
+	
+ // 인증번호 비교
+    function certifinum_checking(input_num){
+        if(input_num.length >= 4){
+            if(certifinum == input_num){
+                $('#certifinum_check').css({'background':'#00DE3C'});
+                $('#certifinum_check').css({'font-size':'14px'});
+                clearInterval(timer);
+                $("#certifi_time").text("");
+                certifi_checked = "1";
+                $('#certifinum').attr('readonly','true');
+                $("#certifinum_submit").val("인증완료");
+                $("#certifinum_submit").attr("disabled", true);
+            }else{
+                $('#certifinum_check').css({'background':'#FF7E93'});
+                $('#certifinum_check').css({'font-size':'10px'});
+                $('#certifinum_check').attr('value','✕');
+                certifi_checked = "0";
+            }
+        }else{
+            $('#certifinum_check').css({'background':'#DDDDDD'});
+            $('#certifinum_check').css({'font-size':'14px'});
+            $('#certifinum_check').attr('value','✓');
+            certifi_checked = "0";
+        }
+    }
 </script>
 </body>
 </html>

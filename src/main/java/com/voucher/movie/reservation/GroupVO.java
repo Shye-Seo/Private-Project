@@ -15,8 +15,8 @@ public class GroupVO {
 	private int res_studentNum;
 	private int res_adultNum;
 	private int res_leaderNum;
-	private int res_vehicleCheck;
-	private int res_requestCheck;
+	private String res_vehicleCheck;
+	private String res_requestCheck;
 	private String res_message;
 	private int res_totalNum;
 	private int res_status;

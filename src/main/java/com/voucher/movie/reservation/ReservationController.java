@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
 public class ReservationController {
@@ -147,11 +150,22 @@ public class ReservationController {
 		//예약신청
 		@ResponseBody
 		@RequestMapping(value="/reservation_ok", method=RequestMethod.POST)
-		public String reservation_group_complete(@ModelAttribute GroupVO groupvo, ModelMap model) throws Exception {
+		public String reservation_group_register(@ModelAttribute GroupVO groupvo, ModelMap model) throws Exception {
 			
-			System.out.println(groupvo);//null로 들어옴->해결필요
+			System.out.println(groupvo);
 			groupService.insertReservation(groupvo);
 			
-			return "main";
+			return "/";
 		}
+		
+		// 휴대폰인증
+	    @RequestMapping(value = "phoneCheck", method = RequestMethod.GET)
+	    @ResponseBody
+	    public String sendSMS(@RequestParam("user_phone") String userPhoneNumber) throws CoolsmsException { // 휴대폰 문자보내기
+	        int randomNumber = (int)((Math.random() * (9999 - 1000 +1)) + 1000); // 난수 생성
+
+	        groupService.sendSms(userPhoneNumber, randomNumber);
+	        System.out.println(randomNumber);
+	        return Integer.toString(randomNumber);
+	    }
 }
