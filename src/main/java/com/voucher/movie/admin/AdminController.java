@@ -129,4 +129,17 @@ public class AdminController {
 	    
 		return "/admin_reservationSetting";
 	}
+	
+	//관리자 - 운영관리(set)
+	@RequestMapping(value="/reservation_setTime", method=RequestMethod.POST)
+	public String reservation_setting(@RequestParam("setting_date") String setting_date, @RequestParam("closed_status") int closed_status, ModelMap model) throws Exception {
+			
+		if(closed_status == 0) {
+			//휴관일 설정O -> reservation_closed 테이블에 insert
+		}else if(closed_status == 1) {
+			//휴관일 설정X
+		}
+		    
+		return "redirect:/admin_reservationSetting";
+	}
 }

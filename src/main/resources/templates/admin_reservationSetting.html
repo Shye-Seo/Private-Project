@@ -47,6 +47,44 @@
 				    	<div class="dates"></div>
 				  	</div>
 				</div>
+				<div class="setting_area">
+					<div class="setting_wrap">
+						<div><p>운영설정</p></div>
+						<div class="select_date">
+							<input type="text" name="setting_date">
+						</div>
+						<div>
+							<p>휴관일 지정</p>
+							<input type="checkbox" id="toggle"> 
+							<label for="toggle" class="toggleSwitch">
+							  <span class="toggleButton"></span>
+							</label>
+						</div>
+						<div>
+							<p>회차별 설정</p>
+							<select name="select_time" class="select_time">
+								<option value="" selected disabled hidden>선택</option>
+								<option value="1">1회차</option>
+								<option value="2">2회차</option>
+								<option value="3">3회차</option>
+								<option value="4">4회차</option>
+								<option value="5">5회차</option>
+								<option value="6">6회차</option>
+								<option value="7">7회차</option>
+								<option value="8">8회차</option>
+								<option value="9">9회차</option>
+								<option value="10">10회차</option>
+								<option value="11">11회차</option>
+								<option value="12">12회차</option>
+								<option value="13">13회차</option>
+								<option value="14">14회차</option>
+							</select>
+						</div>
+						<div class="button_area">
+							<input type="button" value="설정완료" onclick="setting_ok();">
+						</div>
+					</div>
+				</div>
 				</div>
                                     
                 </div>
@@ -118,7 +156,7 @@
             }
             // 이번달
             for (var i = 1; i <= nextDate; i++) {
-                calendar.innerHTML = calendar.innerHTML + '<div class="day current"><div class="dayStyle" onclick="calendarClick(' + i + ')" id="choice_'+i+'">' + i + '</div></div>'
+                calendar.innerHTML = calendar.innerHTML + '<div class="day current" onclick="calendarClick(' + i + ')"><div id="choice_'+i+'">' + i + '</div></div>'
             }
             // 다음달
             for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay-1); i++) {
@@ -145,6 +183,75 @@
             renderCalender(thisMonth); 
         });
     }
+    
+    function calendarClick(choiceDay) {
+    	console.log(choiceDay);
+    	$('div').not('div [id="choice_'+choiceDay+'"]').removeClass('choiceDay');
+    	$('div [id="choice_'+choiceDay+'"]').attr('class','choiceDay');
+    	
+    	var res_day = choiceDay;
+    	var res_choiceDate = $('.year-month').text();
+    	var res_year = res_choiceDate.substr(0,4);
+    	var res_month = res_choiceDate.substr(6,7);//'8월' 한 덩어리로 가져옴
+    	
+    	var month_choice = res_month.split('월');//'월' 문자 기준으로 잘라서
+    	res_month = month_choice[0];//변수에 담아
+    	
+    	if(res_day < 10){
+    		res_day = "0"+res_day;
+    	}
+    	if(res_month.length < 2){ //db에 날짜 '2023.08.01'형식으로 담기 위한 포맷
+    		res_month = "0"+res_month;
+    	}
+    	
+    	var res_date = res_year+'.'+res_month + '.' + res_day;
+    	var res_date2 = res_year+'-'+res_month + '-' + res_day;
+    	
+    	var dayOfWeek = new Date(res_date2).getDay();
+    	var dayOfWeek_str;
+    	
+    	if(dayOfWeek == 0){dayOfWeek_str = '일';}
+    	else if(dayOfWeek == 1){dayOfWeek_str = '월';}
+    	else if(dayOfWeek == 2){dayOfWeek_str = '화';}
+    	else if(dayOfWeek == 3){dayOfWeek_str = '수';}
+    	else if(dayOfWeek == 4){dayOfWeek_str = '목';}
+    	else if(dayOfWeek == 5){dayOfWeek_str = '금';}
+    	else if(dayOfWeek == 6){dayOfWeek_str = '토';}
+    	
+    	// 선택한 예약날짜 표기
+        if($('.setting_area').css("display") == "none"){
+        	$('.setting_area').show();
+        };
+        $('input[name=setting_date]').val(res_date+" ("+dayOfWeek_str+")");
+    }
+    
+    function setting_ok() {
+    	var date_str = $('input[name=setting_date]').val();
+    	var setting_date = date_str.substr(0,10);
+    	var closed_status;
+    	
+    	if ($("input:checkbox[id='toggle']").is(":checked") == true){
+    		closed_status = 0;
+    	}else{
+    		closed_status = 1;
+    	}
+    	
+    	$.ajax({
+			url : "/reservation_setTime",
+			type : 'post',
+			data : {
+					setting_date:setting_date,
+					closed_status:closed_status
+// 					time_num:time_num,
+// 					setting_time:setting_time,
+// 					limited_num:limited_num
+					},
+			success : function (result) {
+                window.location.href= result;
+            }
+		});
+    }
+    
 </script>
 </body>
 </html>
