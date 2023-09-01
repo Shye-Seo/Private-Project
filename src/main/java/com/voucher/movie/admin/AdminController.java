@@ -132,14 +132,38 @@ public class AdminController {
 	
 	//관리자 - 운영관리(set)
 	@RequestMapping(value="/reservation_setTime", method=RequestMethod.POST)
-	public String reservation_setting(@RequestParam("setting_date") String setting_date, @RequestParam("closed_status") int closed_status, ModelMap model) throws Exception {
+	public String reservation_setting(@RequestParam("setting_date") String setting_date, @RequestParam("closed_status") int closed_status, @RequestParam("time_num") int time_num,
+									  @RequestParam("setting_time") String setting_time, @RequestParam("limited_num") int limited_num, @RequestParam("time_status") int time_status, ModelMap model) throws Exception {
 			
-		if(closed_status == 0) {
-			//휴관일 설정O -> reservation_closed 테이블에 insert
-		}else if(closed_status == 1) {
-			//휴관일 설정X
+		System.out.println("setting_date : "+setting_date);
+		System.out.println("time_num : "+time_num);
+		System.out.println("setting_time : "+setting_time);
+		System.out.println("limited_num : "+limited_num);
+		System.out.println("time_status : "+time_status);
+		
+		if(closed_status == 1) { // 휴관일 설정 O -> reservation_closed 테이블에 insert
+			adminService.setClosed(setting_date);
+		}else if(closed_status == 0) { // 휴관일 설정 X
+			int compare = adminService.compareStatus(setting_date); //원래 휴관일인지 아닌지 비교
+			
+			if(compare == 1) { //원래 휴관일이면 휴관일 아닌상태로 set(설정취소)
+				adminService.setUnclosed(setting_date);
+			}
+			
+			//회차정보 변경
+			if(time_status == 1) { //해당회차 활성화 -> 정보만 변경
+				//데이터 있는지 확인
+				int check = adminService.checkTime(setting_date, time_num);
+				if(check == 1) { //있으면 update
+					adminService.update_resTime(setting_date, time_num, setting_time, limited_num, time_status);
+				}else { //없으면 insert
+					adminService.setting_resTime(setting_date, time_num, setting_time, limited_num, time_status);
+				}
+			}else if(time_status == 0) { //해당회차 비활성화 -> 사용자페이지에서 안보이게 set
+				adminService.setting_timeUnable(setting_date, time_num, time_status);
+			}
 		}
-		    
+		
 		return "redirect:/admin_reservationSetting";
 	}
 }

@@ -53,35 +53,42 @@
 						<div class="select_date">
 							<input type="text" name="setting_date">
 						</div>
-						<div>
+						<div class="setting_closed">
 							<p>휴관일 지정</p>
-							<input type="checkbox" id="toggle"> 
+							<input type="checkbox" id="toggle" hidden> 
 							<label for="toggle" class="toggleSwitch">
 							  <span class="toggleButton"></span>
 							</label>
 						</div>
-						<div>
+						<div class="setting_timeNnum">
 							<p>회차별 설정</p>
-							<select name="select_time" class="select_time">
-								<option value="" selected disabled hidden>선택</option>
-								<option value="1">1회차</option>
-								<option value="2">2회차</option>
-								<option value="3">3회차</option>
-								<option value="4">4회차</option>
-								<option value="5">5회차</option>
-								<option value="6">6회차</option>
-								<option value="7">7회차</option>
-								<option value="8">8회차</option>
-								<option value="9">9회차</option>
-								<option value="10">10회차</option>
-								<option value="11">11회차</option>
-								<option value="12">12회차</option>
-								<option value="13">13회차</option>
-								<option value="14">14회차</option>
-							</select>
-						</div>
-						<div class="button_area">
-							<input type="button" value="설정완료" onclick="setting_ok();">
+							<div class="time_limited">
+								<select name="select_time" class="select_time" onchange="changeSelect();" id="selectbox">
+									<option value="" selected disabled hidden>선택</option>
+									<option value="1">1회차</option>
+									<option value="2">2회차</option>
+									<option value="3">3회차</option>
+									<option value="4">4회차</option>
+									<option value="5">5회차</option>
+									<option value="6">6회차</option>
+									<option value="7">7회차</option>
+									<option value="8">8회차</option>
+									<option value="9">9회차</option>
+									<option value="10">10회차</option>
+									<option value="11">11회차</option>
+									<option value="12">12회차</option>
+									<option value="13">13회차</option>
+									<option value="14">14회차</option>
+								</select>
+								<input type="text" name="setting_time" class="time_input" placeholder="--:--">
+								<input type="text" name="limited_num" class="num_input" placeholder="인원수 입력">
+								<button class="able_btn" onclick="able_time();"><img src="/imgs/able_time.png">활성</button>
+								<button class="unable_btn" onclick="unable_time();"><img src="/imgs/unable_time.png">비활성</button>
+								<input type="hidden" name="time_status" id="time_status" value="1">
+							</div>
+							<div class="button_area">
+								<input type="button" value="설정완료" onclick="setting_ok();" class="setting_btn">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -218,11 +225,31 @@
     	else if(dayOfWeek == 5){dayOfWeek_str = '금';}
     	else if(dayOfWeek == 6){dayOfWeek_str = '토';}
     	
-    	// 선택한 예약날짜 표기
+    	// 날짜 선택 전에는 하단 설정부분 hide
         if($('.setting_area').css("display") == "none"){
         	$('.setting_area').show();
+        	$('.able_btn').hide();
+        	$('.unable_btn').hide();
         };
         $('input[name=setting_date]').val(res_date+" ("+dayOfWeek_str+")");
+    }
+    
+    function changeSelect() {
+    	$('.time_input').show();
+    	$('.num_input').show();
+    	$('.able_btn').show();
+    }
+    
+    function able_time(){ //활성버튼 누르면 비활성버튼으로 변경, status 0:비활성
+    	$('.able_btn').hide();
+    	$('.unable_btn').show();
+    	$('#time_status').val(0);
+    }
+    
+    function unable_time(){ //비활성버튼 누르면 활성버튼으로 변경, status 1:활성
+    	$('.able_btn').show();
+    	$('.unable_btn').hide();
+    	$('#time_status').val(1);
     }
     
     function setting_ok() {
@@ -230,10 +257,16 @@
     	var setting_date = date_str.substr(0,10);
     	var closed_status;
     	
+    	var timeSelect = document.getElementById("selectbox");
+    	var time_num = timeSelect.options[timeSelect.selectedIndex].value; //회차num
+    	var setting_time = $('input[name=setting_time]').val(); //회차시간
+    	var limited_num = $('input[name=limited_num]').val(); //회차 제한인원
+    	var time_status = $('input[name=time_status]').val(); //활성화여부
+    	
     	if ($("input:checkbox[id='toggle']").is(":checked") == true){
-    		closed_status = 0;
-    	}else{
     		closed_status = 1;
+    	}else{
+    		closed_status = 0;
     	}
     	
     	$.ajax({
@@ -241,10 +274,11 @@
 			type : 'post',
 			data : {
 					setting_date:setting_date,
-					closed_status:closed_status
-// 					time_num:time_num,
-// 					setting_time:setting_time,
-// 					limited_num:limited_num
+					closed_status:closed_status,
+					time_num:time_num,
+					setting_time:setting_time,
+					limited_num:limited_num,
+					time_status:time_status
 					},
 			success : function (result) {
                 window.location.href= result;

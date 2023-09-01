@@ -56,4 +56,39 @@ public class AdminService {
 		return adminDao.setStatus(id, i);
 	}
 
+	// 휴관일 설정
+	public boolean setClosed(String setting_date) {
+		return adminDao.setClosed(setting_date);
+		
+	}
+	
+	public boolean setUnclosed(String setting_date) {
+		return adminDao.setUnclosed(setting_date);
+		
+	}
+
+	// 휴관일 상태 check
+	public int compareStatus(String setting_date) {
+		return adminDao.compareStatus(setting_date);
+	}
+
+	//회차설정-정보변경
+	public boolean setting_resTime(String setting_date, int time_num, String setting_time, int limited_num, int time_status) {
+		return adminDao.setting_resTime(setting_date, time_num, setting_time, limited_num, time_status);
+	}
+	
+	//회차설정-비활성화
+	public boolean setting_timeUnable(String setting_date, int time_num, int time_status) {
+		return adminDao.setting_timeUnable(setting_date, time_num, time_status);
+	}
+
+	public int checkTime(String setting_date, int time_num) {
+		return adminDao.checkTime(setting_date, time_num);
+	}
+
+	public boolean update_resTime(String setting_date, int time_num, String setting_time, int limited_num, int time_status) {
+		return adminDao.update_resTime(setting_date, time_num, setting_time, limited_num, time_status);
+	}
+
+
 }
