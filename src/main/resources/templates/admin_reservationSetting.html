@@ -204,10 +204,20 @@
 	        currentMonth = thisMonth.getMonth();
 	        currentDate = thisMonth.getDate();
 	        
-	        var closed_date = $('input[name="closed_date"]').val();
-	        var closed_month = closed_date.substr(0,7);
-	        var closed_day = closed_date.substr(8);
+	        //var closed_date = $('input[name="closed_date"]').val();
+	        var date_arrayLength = $('input[name="closed_date"]').length;
+	        var date_array = new Array(date_arrayLength);
+	        // 이번 달의 마지막날 날짜와 요일 구하기
+	        var endDay = new Date(currentYear, currentMonth + 1, 0);
+	        var nextDate = endDay.getDate();
+	        
+	        for(i=0; i<date_arrayLength; i++){ //휴관일 배열 for문 돌리면서 표시
+				date_array[i] = $('input[name="closed_date"]').eq(i).val();
+				
+	        var closed_month = date_array[i].substr(0,7);
+	        var closed_day = date_array[i].substr(8);
 	        var this_month = currentMonth;
+			debugger;
 	        
 	        if((this_month+1) < 10){
 				var current_month = currentYear + ".0" + (this_month+1);
@@ -215,16 +225,13 @@
 		        var current_month = currentYear + "." + (this_month+1);
 			}
 	            	
-	        // 이번 달의 마지막날 날짜와 요일 구하기
-	        var endDay = new Date(currentYear, currentMonth + 1, 0);
-	        var nextDate = endDay.getDate();
-	        
 	        if(closed_month == current_month){ //해당 월에 휴관일 있으면 표시
-	        	for (var i = 1; i <= nextDate; i++) {
-		        	if(closed_day == i){ //휴관일날짜에 해당하는 div에 text
-			        	$("div[id='closed_"+i+"']").text("휴관일");
+	        	for (var j = 1; j <= nextDate; j++) {
+		        	if(closed_day == j){ //휴관일날짜에 해당하는 div에 text
+			        	$("div[id='closed_"+j+"']").text("휴관일");
 					}
 		        }
+			}
 			}
 		}
     }

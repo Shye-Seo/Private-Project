@@ -42,7 +42,7 @@ public interface AdminDao {
 	boolean setUnclosed(String setting_date); //휴관일 재설정(휴관->오픈)
 
 	@Insert("insert into reservation_time (res_date, res_num, res_time, res_limited, time_status, create_date)"
-			+ "values #{setting_date}, #{time_num}, #{setting_time}, #{limited_num}, #{time_status}, sysdate()")
+			+ "values (#{setting_date}, #{time_num}, #{setting_time}, #{limited_num}, #{time_status}, sysdate())")
 	boolean setting_resTime(String setting_date, int time_num, String setting_time, int limited_num, int time_status); //회차정보변경
 
 	@Insert("insert into reservation_time (res_date, res_num, res_time, res_limited, time_status, create_date)"
