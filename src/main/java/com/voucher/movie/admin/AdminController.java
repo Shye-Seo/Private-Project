@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.voucher.movie.ScriptUtils;
 import com.voucher.movie.config.PagingVO;
+import com.voucher.movie.reservation.ClosedVO;
 import com.voucher.movie.reservation.GroupService;
 import com.voucher.movie.reservation.GroupVO;
 
@@ -36,6 +37,8 @@ public class AdminController {
 	GroupService groupService;
 	
 	List<GroupVO> group_list;
+	
+	List<ClosedVO> closed_list;
 
 	//관리자 로그인
 	@RequestMapping(value = "admin_login")
@@ -125,7 +128,23 @@ public class AdminController {
 	    Calendar cal = Calendar.getInstance();
 	    String today = dateFormat.format(cal.getTime());
 	    
+	    //휴관일 정보 가져오기
+	    closed_list = adminService.getClosed();
+	    System.out.println(closed_list);
+	    
+	    for(ClosedVO vo : closed_list) {
+	    	 String closed_date = vo.getClosed_date();
+	    	 String year = closed_date.substring(0, 4);
+	    	 String month = closed_date.substring(5, 7);
+	    	 String day = closed_date.substring(8, 10);
+	    	 String date_str = year+month+day;
+	    	 
+	    	 //해당 월에 휴관일 있으면 setting
+	    	 
+	     }
+	    
 	    model.addAttribute("today", today);
+	    model.addAttribute("closed_list", closed_list);
 	    
 		return "/admin_reservationSetting";
 	}
@@ -145,14 +164,13 @@ public class AdminController {
 			adminService.setClosed(setting_date);
 		}else if(closed_status == 0) { // 휴관일 설정 X
 			int compare = adminService.compareStatus(setting_date); //원래 휴관일인지 아닌지 비교
-			
 			if(compare == 1) { //원래 휴관일이면 휴관일 아닌상태로 set(설정취소)
 				adminService.setUnclosed(setting_date);
 			}
 			
 			//회차정보 변경
 			if(time_status == 1) { //해당회차 활성화 -> 정보만 변경
-				//데이터 있는지 확인
+				//time table에 데이터 있는지 확인
 				int check = adminService.checkTime(setting_date, time_num);
 				if(check == 1) { //있으면 update
 					adminService.update_resTime(setting_date, time_num, setting_time, limited_num, time_status);

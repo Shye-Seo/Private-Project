@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/adminLogin.css">
+<title>부산영화체험박물관 | 관리자</title>
+</head>
+<body>
+	<div id="admin_login">
+	<div class="login_wrap_R">
+		<div class="login_word">
+			<p>로그인</p>
+		</div>
+		
+		<!-- 로그인 입력 -->
+		<div class="login_position">
+			<form action="admin_login" method="post" id="loginform">
+				<p>아이디</p>
+				<input type="text" name="login_id" id="user_id" placeholder="아이디를 입력해주세요." class="id_pw_text">
+				<p>비밀번호</p>
+				<input type="password" name="login_pw" placeholder="비밀번호를 입력해주세요." class="id_pw_text">
+				<div class="check_wrap">
+					<!-- 아이디 저장 체크박스 -->
+					<div class="idcheck">
+						<input type="checkbox" id="chk_id">
+						<label for="chk_id"><span>아이디 저장</span></label>
+					</div>
+				</div>
+				<input type="button" value="로그인" class="login_btn">
+			</form>
+		</div>
+	</div>
+	</div>
+	<script type="text/javascript" src="/js/adminLogin.js"></script>
+<script th:if="${msg=='failure'}">
+	alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+</script>
+</body>
+</html>

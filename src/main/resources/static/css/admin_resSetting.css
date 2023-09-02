@@ -80,17 +80,56 @@
     top: 368px;
 }
 
-.sec_cal .cal_wrap .day {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(100% / 7);
+.sec_cal .cal_wrap .dates .day {
+/*    display: flex;*/
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* width: calc(100% / 7); */
     text-align: left;
-    color: #999;
-    font-size: 12px;
     text-align: center;
     border-bottom: 1px solid #EAEAEA;
     cursor: pointer;
+    width: 145px;
+    height: 99px;
+    
+	color: #202020;
+	font-family: 'Pretendard';
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 122.222% */
+	letter-spacing: -1.26px;
+}
+
+.days .day {
+    text-align: center;
+    font-family: 'Pretendard';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 54px;
+    height: 54px;
+    letter-spacing: -1.4px;
+    width: calc(100% / 7);
+    justify-content: center;
+}
+
+.date_left {
+	width: 100%;
+    text-align: left;
+    margin: 10px;
+}
+
+.closed_text {
+	margin: 15px auto;
+	color: #F43F1F;
+	text-align: center;
+	font-family: 'Pretendard';
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 122.222% */
+	letter-spacing: -1.26px;
 }
 
 .current.today {background: rgb(242 242 242);}
@@ -108,17 +147,23 @@
     text-align: center;
 }
 
-.choiceDay{
-	border: 2px solid #F43F1F;
-	display: flex;
+.choiceDay {
+    border: 2px solid #F43F1F;
+    /* display: flex; */
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height:100%;
-/*     text-align: left; */
-/*     color: #999; */
-    font-size: 12px;
-    text-align: center;
+     width: 98%; 
+     height: 98%; 
+    /* text-align: left; */
+    /* color: #999; */
+    /* font-size: 12px; */
+    /* text-align: center; */
+/*    width: 141px;*/
+/*    height: 97px;*/
+}
+
+.choiceDay .date_left{
+	margin: 8px;
 }
 
 .sec_cal .cal_wrap .dates {
@@ -135,8 +180,14 @@
     color: #EB0202;
 }
 
-.sec_cal .cal_wrap .day.disable {
+.disable .date_left {
     color: #C7C7C7;
+	font-family: 'Pretendard';
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 122.222% */
+	letter-spacing: -1.26px;
 }
 
 /* -----운영설정------ */

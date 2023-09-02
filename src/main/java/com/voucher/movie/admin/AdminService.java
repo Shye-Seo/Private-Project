@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.voucher.movie.mappers.AdminDao;
 import com.voucher.movie.mappers.GroupDao;
+import com.voucher.movie.reservation.ClosedVO;
 import com.voucher.movie.reservation.GroupVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ public class AdminService {
 	// 관리자 로그인
     public int loginCheck(AdminVO adminVo, HttpSession session) {
         int result = adminDao.loginCheck(adminVo);
+        System.out.println(result);
 
         if(result==1) { // true일 경우 세션에 등록
             AdminVO adminVo1 = viewInfo(adminVo);
@@ -88,6 +90,10 @@ public class AdminService {
 
 	public boolean update_resTime(String setting_date, int time_num, String setting_time, int limited_num, int time_status) {
 		return adminDao.update_resTime(setting_date, time_num, setting_time, limited_num, time_status);
+	}
+
+	public List<ClosedVO> getClosed() {
+		return adminDao.getClosed();
 	}
 
 

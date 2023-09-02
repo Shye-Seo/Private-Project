@@ -25,8 +25,11 @@
                     </div>
                 </div>
 
+				<div th:each="closed : ${closed_list}" class="hidden">	<!-- 휴관일 가져오기-->
+					<input type="text" th:value="${closed.closed_date}" name="closed_date" >
+				</div>
+                
                 <div class="area">
-
                 <div class="calendar_area">
 				<div class="sec_cal">
 					<div class="cal_nav">
@@ -159,15 +162,17 @@
             
             // 지난달
             for (var i = prevDate - prevDay; i <= prevDate; i++) {
-                calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">' + i + '</div>'
+                calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable"><div class="date_left">' + i + '</div></div>'
             }
-            // 이번달
-            for (var i = 1; i <= nextDate; i++) {
-                calendar.innerHTML = calendar.innerHTML + '<div class="day current" onclick="calendarClick(' + i + ')"><div id="choice_'+i+'">' + i + '</div></div>'
-            }
+            
+	        // 이번달
+	        for (var i = 1; i <= nextDate; i++) {
+		        calendar.innerHTML = calendar.innerHTML + '<div class="day current" onclick="calendarClick(' + i + ')"><div id="choice_'+i+'"><div class="date_left">' + i + '</div><div class="closed_text" id="closed_'+i+'"></div></div></div>'
+	        }
+				
             // 다음달
             for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay-1); i++) {
-                calendar.innerHTML = calendar.innerHTML + '<div class="day next disable">' + i + '</div>'
+                calendar.innerHTML = calendar.innerHTML + '<div class="day next disable"><div class="date_left">' + i + '</div></div>'
             }
 
             // 오늘 날짜 표기
@@ -176,6 +181,9 @@
                 var currentMonthDate = document.querySelectorAll('.dates .current');
                 currentMonthDate[todayDate -1].classList.add('today');
             }
+            
+            closed_set();
+            
         }
 
         // 이전달로 이동
@@ -189,6 +197,36 @@
             thisMonth = new Date(currentYear, currentMonth + 1, 1);
             renderCalender(thisMonth); 
         });
+
+		function closed_set(){
+			
+	        currentYear = thisMonth.getFullYear();
+	        currentMonth = thisMonth.getMonth();
+	        currentDate = thisMonth.getDate();
+	        
+	        var closed_date = $('input[name="closed_date"]').val();
+	        var closed_month = closed_date.substr(0,7);
+	        var closed_day = closed_date.substr(8);
+	        var this_month = currentMonth;
+	        
+	        if((this_month+1) < 10){
+				var current_month = currentYear + ".0" + (this_month+1);
+			}else{
+		        var current_month = currentYear + "." + (this_month+1);
+			}
+	            	
+	        // 이번 달의 마지막날 날짜와 요일 구하기
+	        var endDay = new Date(currentYear, currentMonth + 1, 0);
+	        var nextDate = endDay.getDate();
+	        
+	        if(closed_month == current_month){ //해당 월에 휴관일 있으면 표시
+	        	for (var i = 1; i <= nextDate; i++) {
+		        	if(closed_day == i){ //휴관일날짜에 해당하는 div에 text
+			        	$("div[id='closed_"+i+"']").text("휴관일");
+					}
+		        }
+			}
+		}
     }
     
     function calendarClick(choiceDay) {
@@ -232,6 +270,18 @@
         	$('.unable_btn').hide();
         };
         $('input[name=setting_date]').val(res_date+" ("+dayOfWeek_str+")");
+        
+        var closed_date = $('input[name="closed_date"]').val();
+		var toggleBtn = document.getElementById('toggle');
+		
+        if(closed_date == res_date){
+			$("input:checkbox[id='toggle']").prop("checked", true); 	
+            $('#selectbox').attr('disabled',true);
+		}else{
+			$("input:checkbox[id='toggle']").prop("checked", false); 	
+            $('#selectbox').attr('disabled',false);
+		}
+        
     }
     
     function changeSelect() {
@@ -265,9 +315,20 @@
     	
     	if ($("input:checkbox[id='toggle']").is(":checked") == true){
     		closed_status = 1;
+    		time_num = 0;
+    		setting_time = 0;
+    		limited_num = 0;
     	}else{
     		closed_status = 0;
+    		
+			if(time_num == ""){
+				time_num = 0;
+	    		setting_time = 0;
+	    		limited_num = 0;
+	    		time_status = 2; //회차정보 변경X
+			}
     	}
+    	debugger;
     	
     	$.ajax({
 			url : "/reservation_setTime",
@@ -285,6 +346,16 @@
             }
 		});
     }
+    
+    $('#toggle').on('click', function(){
+        var toggleBtn = document.getElementById('toggle');
+        
+        if( toggleBtn.checked ){
+            $('#selectbox').attr('disabled',true)
+        } else{
+            $('#selectbox').removeAttr('disabled')
+        }
+    })
     
 </script>
 </body>

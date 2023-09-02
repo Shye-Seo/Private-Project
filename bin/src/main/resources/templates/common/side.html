@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>sidebar</title>
+
+</head>
+<body>
+	<!-- fixed menu -->
+    <!-- 어떤 메뉴를 쓸지 파라미터로 넘겨야 합니다 -->
+
+    <!-- 
+
+        사이드바가 올 자리에
+        <div th:replace="~{common/side :: sidebar_manage ('***')}"></div>
+
+        *** ↓↓↓
+        예약현황 = list
+        운영관리 = setting
+        게시글관리 - 박물관소식, 공고, 이벤트
+        박물관소식 = news
+        공고 = notice
+        이벤트 = event
+        Q&A관리 = qna
+        팝업설정 = popup
+
+     -->
+
+        <div class="sidebar Msidebar" th:fragment="sidebar_manage (thisLink)">
+            <a href="/admin_reservationList" class="logo">
+<!--                 <img src="/imgs/logo.svg" alt="busanbom"> -->
+            </a>
+            <ul class="menu-categories Mcategories">
+                <span th:if="${thisLink == 'list'}">
+                <li class="menu selected">
+                </span>
+                <span th:unless="${thisLink == 'list'}">
+                <li class="menu">
+                </span>
+                    <a href="/admin_reservationList">
+                        <div>
+                            <span>예약현황</span>
+                        </div>
+                    </a>
+                </li>
+                <span th:if="${thisLink == 'setting'}">
+                <li class="menu selected">
+                </span>
+                <span th:unless="${thisLink == 'setting'}">
+                <li class="menu">
+                </span>
+                    <a href="/admin_reservationSetting" >
+                        <div>
+                            <span>운영관리</span>
+                        </div>
+                    </a>
+                </li>
+                <span th:if="${thisLink == 'news'}">
+                <li class="menu selected">
+                </span>
+                <span th:unless="${thisLink == 'news'}">
+                <li class="menu">
+                </span>
+                    <a href="/admin_news">
+                        <div>
+                            <span>박물관 소식</span>
+                        </div>
+                    </a>
+                </li>
+                <span th:if="${thisLink == 'notice'}">
+                <li class="menu selected">
+                </span>
+                <span th:unless="${thisLink == 'notice'}">
+                <li class="menu">
+                </span>
+                    <a href="/admin_notice">
+                        <div>
+                            <span>공고</span>
+                        </div>
+                    </a>
+                </li>
+                <span th:if="${thisLink == 'event'}">
+                <li class="menu selected">
+                </span>
+                <span th:unless="${thisLink == 'event'}">
+                <li class="menu">
+                </span>
+                    <a href="/admin_event">
+                        <div>
+                            <span>이벤트</span>
+                        </div>
+                    </a>
+                </li>
+                <span th:if="${thisLink == 'qna'}">
+                <li class="menu selected">
+                </span>
+                <span th:unless="${thisLink == 'qna'}">
+                <li class="menu">
+                </span>
+                    <a href="/admin_qna">
+                        <div>
+                            <span>Q&A관리</span>
+                        </div>
+                    </a>
+                </li>
+                <span th:if="${thisLink == 'popup'}">
+                <li class="menu selected">
+                </span>
+                <span th:unless="${thisLink == 'popup'}">
+                <li class="menu">
+                </span>
+                    <a href="/admin_popup">
+                        <div>
+                            <span>팝업설정</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="side_info">
+                <button type="button" onclick="location.href='/admin_logout'">로그아웃</button>
+            </div>
+            
+
+        </div>
+
+
+
+
+</body>
+</html>

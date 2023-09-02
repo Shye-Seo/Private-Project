@@ -1,0 +1,194 @@
+*{
+	font: Pretendard;
+}
+
+button{
+	border:none;
+	background:none;
+}
+
+.content{
+	width: 1100px;
+	margin: 0 auto;	
+}
+
+.area{
+    padding-bottom: 40px;
+}
+
+.list {
+    margin-top:20px;
+    min-height: 618px;
+    overflow: hidden;
+}
+
+.list #top_ol {
+    font-weight: bold;
+    border-top: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+    display: flex;
+    flex-direction: row;
+    font-weight: 600;
+    box-shadow: 0px 3px 6px #0000000d;
+}
+
+#top_ol div li {
+    display:inline-block;
+    margin-top:17.5px;
+    margin-bottom:17.5px;
+    color: #666666;
+}
+
+.list_ol{
+	display: flex;
+	border-bottom: 1px solid #DDDDDD;
+	line-height: 55px;
+	height: 55px;
+	font-weight: 600;
+    font-size: 14px;
+}
+
+.list_ol:hover {
+    background-color: #5B8FD208;
+}
+
+.list_ol li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.title_area{
+	width: 15%;
+	text-align: center;
+}
+
+.date_area{
+	width: 15%;
+	text-align: center;
+}
+
+.status_area{
+	width: 15%;
+	text-align: center;
+}
+
+.vehicle_area, .request_area {
+    width: 15%;
+    text-align: center;
+}
+
+.message_area{
+	width: 17%;
+	text-align: center;
+}
+
+.confirm_area{
+	width: 13%;
+	text-align: center;
+}
+
+.confirm_area a {
+    background-color: #F43F1F;
+    color: white;
+    padding: 10px 18px;
+}
+
+.a_count{
+	border: 1px solid #DDDDDD;
+	border-radius: 20px;
+	width: 72px;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	margin-top: 8.5px;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 0px 3px 10px #99999929;
+	cursor: pointer;
+	background-color: #ffffff;
+}
+
+.red{
+	color: #DD5067;
+}
+.black{
+	color: #333333;
+}
+.gray{
+	color: #999999;
+}
+
+/* 사용자 페이지 */
+.index_area_s{
+	margin-left:4%;
+	width: 5%;
+}
+
+.title_area_s{
+	width: 35%;
+	text-align: center;
+}
+
+.date_area_s{
+	width: 45%;
+	text-align: center;
+}
+
+.status_area_s{
+	width: 10%;
+	text-align: center;
+}
+
+.null, .notnull_keyword, .notnull_date, .notnull_all{
+    width: 100%;
+    height: 80px;
+    position: relative;
+}
+.pagewrap{
+	display: flex;
+	position: absolute;
+	/* right: 40px;
+	margin-top: 57px; */
+    right: 0; bottom: 0;
+}
+
+.pagewrap li{
+	margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+/*     border: 1px solid #DDDDDD; */
+}
+
+.pagewrap .page_icon{
+	border: 1px solid #DDDDDD;
+}
+
+.pagewrap li a{
+	line-height: 30px;
+	color: #999999;
+}
+
+.pagewrap img{
+	width: 10px;
+	height: 10px;
+}
+
+.page-link{
+	display:block;
+}
+
+.icon_right{
+	padding-right:10px;
+}
+.icon_left{
+	padding-left:10px;
+}
+
+
+.page-item .thisPage{
+    color: #333;
+    border: 1px solid #DDDDDD;
+}
