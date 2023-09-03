@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/reservation.css">
+    <title>부산영화체험박물관 | 단체예약-전시관1</title>
+    <script type="text/javascript" src="/js/reservation.js"></script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li>
+        <li class="category_1">관람정보</li>
+        <li class="category_2">관람예약</li>
+        <li class="category_3">단체</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>단체관람예약</h1></div>
+		</div>
+	</div>
+		<div class="reservation_wrap">
+			<div class="agree_area">
+				<div class="agree_contents">
+					<input type="checkbox" id="agree_check" name="agree_check"> 개인정보의 수집 및 이용에 동의합니다
+				</div>
+			</div>
+		<form>
+			<input type="text" name="choice_date" th:value="${choice_date}">
+			<input type="hidden" name="res_visitDate">
+		<div class="place_area">
+				<div class="img_1"><img src="" alt="전시관1"><input type="radio" name="res_theaterCheck" value="1"></div>
+				<div class="img_2"><img src="" alt="전시관2"><input type="radio" name="res_theaterCheck" value="2"></div>
+			</div>
+			<div>
+				<div th:each="closed : ${closed_list}" class="hidden">	<!-- 휴관일 가져오기-->
+					<input type="hidden" th:value="${closed.closed_date}" name="closed_date" >
+				</div>
+				<div th:each="time : ${time_list}" class="hidden">	<!-- 설정된 회차정보 가져오기-->
+					<input type="text" th:value="${time.res_date}" name="time_date" th:class="'date_'+${time.id}">
+					<input type="text" th:value="${time.res_num}" name="time_num" th:class="'timeNum_'+${time.id}">
+					<input type="text" th:value="${time.res_time}" name="setting_time" th:class="'time_'+${time.id}">
+					<input type="text" th:value="${time.res_limited}" name="limited_num" th:class="'limitNum_'+${time.id}">
+				</div>
+			<div class="calendar_area">
+				<div class="sec_cal">
+					<div class="cal_nav">
+				    	<a href="javascript:;" class="nav-btn go-prev">prev</a>
+				    	<div class="year-month"></div>
+				    	<a href="javascript:;" class="nav-btn go-next">next</a>
+				    </div>
+				    <div class="cal_wrap">
+					    <div class="days">
+					      	<div class="day">일</div>
+					    	<div class="day">월</div>
+					      	<div class="day">화</div>
+					      	<div class="day">수</div>
+					      	<div class="day">목</div>
+					      	<div class="day">금</div>
+					      	<div class="day">토</div>
+					    </div>
+				    	<div class="dates"></div>
+				  	</div>
+				</div>
+			</div>
+			<div class="turnTable_area">
+				<div class="table_contents">
+					<table class="res_table">
+					<colgroup>
+						<col style="width:50px">
+						<col>
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col"></th>
+							<th scope="col">회차</th>
+							<th scope="col">시간</th>
+							<th scope="col">잔여인원</th>
+						</tr>
+					</thead>
+					<tbody id="reserve_time_tb">
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_1" name="res_visitNum" value="1">
+								</span>
+							</th>
+							<td>1회</td>
+							<td>10:00</td>
+							<td><div id="Rcnt_1">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_2" name="res_visitNum" value="2">
+								</span>
+							</th>
+							<td>2회</td>
+							<td>10:30</td>
+							<td><div id="Rcnt_2">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_3" name="res_visitNum" value="3">
+								</span>
+							</th>
+							<td>3회</td>
+							<td>11:00</td>
+							<td><div id="Rcnt_3">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_4" name="res_visitNum" value="4">
+								</span>
+							</th>
+							<td>4회</td>
+							<td>11:30</td>
+							<td><div id="Rcnt_4">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_5" name="res_visitNum" value="5">
+								</span>
+							</th>
+							<td>5회</td>
+							<td>12:00</td>
+							<td><div id="Rcnt_5">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_6" name="res_visitNum" value="6">
+								</span>
+							</th>
+							<td>6회</td>
+							<td>12:30</td>
+							<td><div id="Rcnt_6">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_7" name="res_visitNum" value="7">
+								</span>
+							</th>
+							<td>7회</td>
+							<td>13:00</td>
+							<td><div id="Rcnt_7">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_8" name="res_visitNum" value="8">
+								</span>
+							</th>
+							<td>8회</td>
+							<td>13:30</td>
+							<td><div id="Rcnt_8">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_9" name="res_visitNum" value="9">
+								</span>
+							</th>
+							<td>9회</td>
+							<td>14:00</td>
+							<td><div id="Rcnt_9">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_10" name="res_visitNum" value="10">
+								</span>
+							</th>
+							<td>10회</td>
+							<td>14:30</td>
+							<td><div id="Rcnt_10">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_11" name="res_visitNum" value="11">
+								</span>
+							</th>
+							<td>11회</td>
+							<td>15:00</td>
+							<td><div id="Rcnt_11">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_12" name="res_visitNum" value="12">
+								</span>
+							</th>
+							<td>12회</td>
+							<td>15:30</td>
+							<td><div id="Rcnt_12">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_13" name="res_visitNum" value="13">
+								</span>
+							</th>
+							<td>13회</td>
+							<td>16:00</td>
+							<td><div id="Rcnt_13">500 명</div></td>
+						</tr>
+						<tr class="off">
+							<th scope="row" style="padding:0;">
+								<span class="radio-type1">
+									<input type="radio" id="reserve_round_14" name="res_visitNum" value="14">
+								</span>
+							</th>
+							<td>14회</td>
+							<td>16:30</td>
+							<td><div id="Rcnt_14">500 명</div></td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+			</div>
+<!--			<div th:each="time : ${time_list}" class="list_ol">-->
+				
+<!--				<div class="time_num">-->
+<!--                	<li th:text="${time.res_num}+'회차'"></li>-->
+<!--				</div>-->
+<!--				<div class="setting_time">-->
+<!--                	<li th:text="${time.res_time}"></li>-->
+<!--				</div>-->
+<!--				<div class="limited_num">-->
+<!--                	<li th:text="${time.res_limited}+'명'"></li>-->
+<!--				</div>-->
+<!--			</div>-->
+			<div class="button_area">
+				<div>
+					<input type="button" value="확인" class="submit_btn" id="date_submit">
+				</div>
+			</div>
+			</form>
+		</div>
+</div>
+<div></div>
+<div></div>
+<script th:inline="javascript">
+    $(document).ready(function() {
+        calendarInit();
+    });
+    /*
+        달력 렌더링 할 때 필요한 정보 목록 
+
+        현재 월(초기값 : 현재 시간)
+        금월 마지막일 날짜와 요일
+        전월 마지막일 날짜와 요일
+    */
+
+    function calendarInit() {
+
+        // 날짜 정보 가져오기
+        var date = new Date(); // 현재 날짜(로컬 기준) 가져오기
+        var utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000); // uct 표준시 도출
+        var kstGap = 9 * 60 * 60 * 1000; // 한국 kst 기준시간 더하기
+        var today = new Date(utc + kstGap); // 한국 시간으로 date 객체 만들기(오늘)
+      
+        var thisMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        // 달력에서 표기하는 날짜 객체
+      
+        
+        var currentYear = thisMonth.getFullYear(); // 달력에서 표기하는 연
+        var currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
+        var currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
+
+        // kst 기준 현재시간
+        // console.log(thisMonth);
+
+        // 캘린더 렌더링
+        renderCalender(thisMonth);
+
+        function renderCalender(thisMonth) {
+
+            // 렌더링을 위한 데이터 정리
+            currentYear = thisMonth.getFullYear();
+            currentMonth = thisMonth.getMonth();
+            currentDate = thisMonth.getDate();
+
+            // 이전 달의 마지막 날 날짜와 요일 구하기
+            var startDay = new Date(currentYear, currentMonth, 0);
+            var prevDate = startDay.getDate();
+            var prevDay = startDay.getDay();
+
+            // 이번 달의 마지막날 날짜와 요일 구하기
+            var endDay = new Date(currentYear, currentMonth + 1, 0);
+            var nextDate = endDay.getDate();
+            var nextDay = endDay.getDay();
+
+            // console.log(prevDate, prevDay, nextDate, nextDay);
+
+            // 현재 월 표기
+            $('.year-month').text(currentYear + '년 ' + (currentMonth + 1) + '월');
+
+            // 렌더링 html 요소 생성
+            calendar = document.querySelector('.dates')
+            calendar.innerHTML = '';
+            
+            // 지난달
+            for (var i = prevDate - prevDay; i <= prevDate; i++) {
+                calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">' + i + '</div>'
+            }
+            // 이번달
+            for (var i = 1; i <= nextDate; i++) {
+                calendar.innerHTML = calendar.innerHTML + '<div class="day current"><div class="dayStyle" onclick="calendarClick(' + i + ')" id="choice_'+i+'">' + i + '</div></div>'
+            }
+            // 다음달
+            for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay-1); i++) {
+                calendar.innerHTML = calendar.innerHTML + '<div class="day next disable">' + i + '</div>'
+            }
+
+            // 오늘 날짜 표기
+            if (today.getMonth() == currentMonth) {
+                todayDate = today.getDate();
+                var currentMonthDate = document.querySelectorAll('.dates .current');
+                currentMonthDate[todayDate -1].classList.add('today');
+            }
+            
+            closed_set();
+        }
+
+        // 이전달로 이동
+        $('.go-prev').on('click', function() {
+            thisMonth = new Date(currentYear, currentMonth - 1, 1);
+            renderCalender(thisMonth);
+        });
+
+        // 다음달로 이동
+        $('.go-next').on('click', function() {
+            thisMonth = new Date(currentYear, currentMonth + 1, 1);
+            renderCalender(thisMonth); 
+        });
+        
+        function closed_set(){
+			
+	        currentYear = thisMonth.getFullYear();
+	        currentMonth = thisMonth.getMonth();
+	        currentDate = thisMonth.getDate();
+	        
+	        var date_arrayLength = $('input[name="closed_date"]').length;
+	        var date_array = new Array(date_arrayLength);
+	        // 이번 달의 마지막날 날짜와 요일 구하기
+	        var endDay = new Date(currentYear, currentMonth + 1, 0);
+	        var nextDate = endDay.getDate();
+	        
+	        for(i=0; i<date_arrayLength; i++){ //휴관일 배열 for문 돌리면서 표시
+				date_array[i] = $('input[name="closed_date"]').eq(i).val();
+				
+		        var closed_month = date_array[i].substr(0,7);
+		        var closed_day = date_array[i].substr(8);
+		        var this_month = currentMonth;
+		        debugger;
+		        
+		        if((this_month+1) < 10){
+					var current_month = currentYear + ".0" + (this_month+1);
+				}else{
+			        var current_month = currentYear + "." + (this_month+1);
+				}
+		            	
+		        if(closed_month == current_month){ //해당 월에 휴관일 있으면 표시
+		        	for (var j = 1; j <= nextDate; j++) {
+			        	if(closed_day == j){ //휴관일날짜에 해당하는 div에 text
+				        	$("div[id='choice_"+j+"']").attr('class','disable');
+				        	$("div[id='choice_"+j+"']").removeAttr("onclick");
+						}
+			        }
+				}
+				
+			}
+		}
+    }
+    
+    function calendarClick(choiceDay) {
+    	console.log(choiceDay);
+    	$('div').not('div [id="choice_'+choiceDay+'"]').removeClass('choiceDay');
+    	$('div [id="choice_'+choiceDay+'"]').attr('class','choiceDay');
+    	
+    	var res_day = choiceDay;
+    	var res_choiceDate = $('.year-month').text();
+    	var res_year = res_choiceDate.substr(0,4);
+    	var res_month = res_choiceDate.substr(6,7);//'8월' 한 덩어리로 가져옴
+    	
+    	var month_choice = res_month.split('월');//'월' 문자 기준으로 잘라서
+    	res_month = month_choice[0];//변수에 담아
+    	
+    	if(res_day < 10){
+    		res_day = "0"+res_day;
+    	}
+    	if(res_month.length < 2){ //db에 날짜 '2023.08.01'형식으로 담기 위한 포맷
+    		res_month = "0"+res_month;
+    	}
+    	
+    	var res_date = res_year+'.'+res_month + '.' + res_day;
+    	
+    	// 선택한 예약날짜 표기
+        $('input[name=res_visitDate]').val(res_date);
+        
+        	var time_arrayLength = $('input[name="time_date"]').length;
+	        var time_array = new Array(time_arrayLength);
+	        
+	        for(i=0; i<time_arrayLength; i++){ //회차 배열 for문 돌리면서 표시
+				time_array[i] = $('input[name="time_date"]').eq(i).val();
+				
+		        if(res_date == time_array[i]){ //해당 일자에 정보 있으면 회차정보 set
+		        	console.log(time_array[i]);
+				}
+			}
+    }
+</script>
+</body>
+</html>

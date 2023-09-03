@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.voucher.movie.admin.AdminVO;
 import com.voucher.movie.reservation.ClosedVO;
 import com.voucher.movie.reservation.GroupVO;
+import com.voucher.movie.reservation.TimeVO;
 
 @Mapper
 @Repository
@@ -46,7 +47,7 @@ public interface AdminDao {
 	boolean setting_resTime(String setting_date, int time_num, String setting_time, int limited_num, int time_status); //회차정보변경
 
 	@Insert("insert into reservation_time (res_date, res_num, res_time, res_limited, time_status, create_date)"
-			+ "values #{setting_date}, #{time_num}, '0', 0, #{time_status}, sysdate()")
+			+ "values (#{setting_date}, #{time_num}, '0', 0, #{time_status}, sysdate())")
 	boolean setting_timeUnable(String setting_date, int time_num, int time_status); //회차 비활성화
 
 	@Select("select count(*) from reservation_time where res_date = #{setting_date} and res_num = #{time_num} and time_status = 1")
@@ -57,4 +58,7 @@ public interface AdminDao {
 
 	@Select("select * from reservation_closed where setting_status = 1")
 	List<ClosedVO> getClosed(); //휴관일 정보 get
+
+	@Select("select * from reservation_time")
+	List<TimeVO> getTime(); //회차정보 get
 }

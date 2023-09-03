@@ -8,6 +8,7 @@ import com.voucher.movie.mappers.AdminDao;
 import com.voucher.movie.mappers.GroupDao;
 import com.voucher.movie.reservation.ClosedVO;
 import com.voucher.movie.reservation.GroupVO;
+import com.voucher.movie.reservation.TimeVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -94,6 +95,10 @@ public class AdminService {
 
 	public List<ClosedVO> getClosed() {
 		return adminDao.getClosed();
+	}
+
+	public List<TimeVO> getTime() {
+		return adminDao.getTime();
 	}
 
 

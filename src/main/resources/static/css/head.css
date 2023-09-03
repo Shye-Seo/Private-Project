@@ -105,3 +105,26 @@ a:active { /*클릭하는 순간*/
     border-bottom: 1px solid white;
     margin: 20px 0px 20px 0px;
 }
+
+.gnb_bar{
+	border-bottom: 1px solid #D2D2D2;
+    background: #F1F1F1;
+    width: 1760px;
+}
+
+.gnb_wrap {
+    margin: 0 auto;
+    align-items: center;
+    height: 50px;
+    width: 1510px;
+    color: black;
+}
+
+.gnb_wrap li{
+	list-style: none;
+}
+
+.home_btn img{
+	height: 14px;
+	width: 16px;
+}

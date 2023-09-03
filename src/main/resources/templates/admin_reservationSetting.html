@@ -26,7 +26,7 @@
                 </div>
 
 				<div th:each="closed : ${closed_list}" class="hidden">	<!-- 휴관일 가져오기-->
-					<input type="text" th:value="${closed.closed_date}" name="closed_date" >
+					<input type="hidden" th:value="${closed.closed_date}" name="closed_date" >
 				</div>
                 
                 <div class="area">
@@ -214,24 +214,23 @@
 	        for(i=0; i<date_arrayLength; i++){ //휴관일 배열 for문 돌리면서 표시
 				date_array[i] = $('input[name="closed_date"]').eq(i).val();
 				
-	        var closed_month = date_array[i].substr(0,7);
-	        var closed_day = date_array[i].substr(8);
-	        var this_month = currentMonth;
-			debugger;
-	        
-	        if((this_month+1) < 10){
-				var current_month = currentYear + ".0" + (this_month+1);
-			}else{
-		        var current_month = currentYear + "." + (this_month+1);
-			}
-	            	
-	        if(closed_month == current_month){ //해당 월에 휴관일 있으면 표시
-	        	for (var j = 1; j <= nextDate; j++) {
-		        	if(closed_day == j){ //휴관일날짜에 해당하는 div에 text
-			        	$("div[id='closed_"+j+"']").text("휴관일");
-					}
-		        }
-			}
+		        var closed_month = date_array[i].substr(0,7);
+		        var closed_day = date_array[i].substr(8);
+		        var this_month = currentMonth;
+		        
+		        if((this_month+1) < 10){
+					var current_month = currentYear + ".0" + (this_month+1);
+				}else{
+			        var current_month = currentYear + "." + (this_month+1);
+				}
+		            	
+		        if(closed_month == current_month){ //해당 월에 휴관일 있으면 표시
+		        	for (var j = 1; j <= nextDate; j++) {
+			        	if(closed_day == j){ //휴관일날짜에 해당하는 div에 text
+				        	$("div[id='closed_"+j+"']").text("휴관일");
+						}
+			        }
+				}
 			}
 		}
     }
@@ -277,18 +276,24 @@
         	$('.unable_btn').hide();
         };
         $('input[name=setting_date]').val(res_date+" ("+dayOfWeek_str+")");
+        $('#toggle').attr('class',res_date);
         
-        var closed_date = $('input[name="closed_date"]').val();
-		var toggleBtn = document.getElementById('toggle');
+        var date_arrayLength = $('input[name="closed_date"]').length;
+	    var date_array = new Array(date_arrayLength);
+	    
+		$("input:checkbox[id='toggle']").prop("checked",false);
+		$('#selectbox').attr('disabled',false);
 		
-        if(closed_date == res_date){
-			$("input:checkbox[id='toggle']").prop("checked", true); 	
-            $('#selectbox').attr('disabled',true);
-		}else{
-			$("input:checkbox[id='toggle']").prop("checked", false); 	
-            $('#selectbox').attr('disabled',false);
-		}
-        
+	    for(i=0; i<date_arrayLength; i++){ //휴관일 배열 for문 돌리면서 표시
+			date_array[i] = $('input[name="closed_date"]').eq(i).val();
+				
+			var toggleBtn = $("input:checkbox[class='"+res_date+"']");
+			
+	        if(date_array[i] == res_date){
+				toggleBtn.prop("checked", true); 	
+	            $('#selectbox').attr('disabled',true);
+			}
+	    }
     }
     
     function changeSelect() {
@@ -333,6 +338,9 @@
 	    		setting_time = 0;
 	    		limited_num = 0;
 	    		time_status = 2; //회차정보 변경X
+			}else{
+				setting_time = 0;
+				limited_num = 0;
 			}
     	}
     	debugger;
@@ -349,7 +357,7 @@
 					time_status:time_status
 					},
 			success : function (result) {
-                window.location.href= result;
+                window.location.reload();
             }
 		});
     }

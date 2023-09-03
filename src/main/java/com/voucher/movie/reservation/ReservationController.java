@@ -3,6 +3,7 @@ package com.voucher.movie.reservation;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.voucher.movie.admin.AdminService;
+
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
@@ -30,8 +33,14 @@ public class ReservationController {
 	@Inject
     private GroupService groupService;
 	
-	//날짜 및 회차선택-전시관1
-	@RequestMapping(value="/reservation_group_date_1", method=RequestMethod.GET)
+	@Inject
+	AdminService adminService;
+	
+	List<ClosedVO> closed_list;
+	List<TimeVO> time_list;
+	
+	//날짜 및 회차선택
+	@RequestMapping(value="/reservation_group_date", method=RequestMethod.GET)
 	public String reservation_group_date(ModelMap model) throws Exception {
 		
 		// 오늘 날짜
@@ -44,33 +53,77 @@ public class ReservationController {
 	    Calendar cal = Calendar.getInstance();
 	    String today = dateFormat.format(cal.getTime());
 	    
+	    //휴관일 정보 가져오기
+	    closed_list = adminService.getClosed();
+	    
+	    for(ClosedVO vo : closed_list) {
+	    	 String closed_date = vo.getClosed_date();
+	    	 String year = closed_date.substring(0, 4);
+	    	 String month = closed_date.substring(5, 7);
+	    	 String day = closed_date.substring(8, 10);
+	    	 String date_str = year+month+day;
+	    	 
+	    	 //해당 월에 휴관일 있으면 setting
+	     }
+	    
+	    //회차별 설정 정보 가져오기
+	    time_list = adminService.getTime();
+	    
 	    model.addAttribute("today", today);
-//	    model.addAttribute("check", check);
-//	    System.out.println(check);
+	    model.addAttribute("closed_list", closed_list);
+	    model.addAttribute("time_list", time_list);
 	      
-		return "reservation_group_date_1";
+		return "reservation_group_date";
 	}
 	
-	//날짜 및 회차선택-전시관2
-		@RequestMapping(value="/reservation_group_date_2", method=RequestMethod.GET)
-		public String reservation_group_date_2(ModelMap model) throws Exception {
-			
-			// 오늘 날짜
-		    LocalDate now = LocalDate.now();
-		    Calendar time = Calendar.getInstance();
-		    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-		    String nowTime = format.format(time.getTime());
-		    
-		    Calendar cal = Calendar.getInstance();
-		    String today = dateFormat.format(cal.getTime());
-		    
-		    model.addAttribute("today", today);
-//		    model.addAttribute("check", check);
-//		    System.out.println(check);
-		      
-			return "reservation_group_date_2";
-		}
+//	//날짜 및 회차선택
+//		@ResponseBody
+//		@RequestMapping(value="/reservation_choiceDay", method=RequestMethod.POST)
+//		public String reservation_choice(@RequestParam("choice_date") String choice_date, ModelMap model) throws Exception {
+//			
+//			// 오늘 날짜
+//		    LocalDate now = LocalDate.now();
+//		    Calendar time = Calendar.getInstance();
+//		    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+//		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+//		    String nowTime = format.format(time.getTime());
+//		    
+//		    Calendar cal = Calendar.getInstance();
+//		    String today = dateFormat.format(cal.getTime());
+//		    
+//		    //휴관일 정보 가져오기
+//		    closed_list = adminService.getClosed();
+//		    
+//		    for(ClosedVO vo : closed_list) {
+//		    	 String closed_date = vo.getClosed_date();
+//		    	 String year = closed_date.substring(0, 4);
+//		    	 String month = closed_date.substring(5, 7);
+//		    	 String day = closed_date.substring(8, 10);
+//		    	 String date_str = year+month+day;
+//		    	 
+//		    	 //해당 월에 휴관일 있으면 setting
+//		     }
+//		    
+//		    //회차별 설정 정보 가져오기
+//		    time_list = adminService.getTime();
+//		    System.out.println(time_list);
+//		    System.out.println(choice_date);
+//		    
+//		    for(TimeVO vo : time_list) {
+//		    	 String setting_date = vo.getRes_date();
+//		    	 if(choice_date == setting_date) {
+//		    		 System.out.println("date: "+setting_date);
+//		    	 }
+//		    	 //해당 일자에 설정된 회차정보 있으면 setting
+//		     }
+//		    
+//		    model.addAttribute("today", today);
+//		    model.addAttribute("closed_list", closed_list);
+//		    model.addAttribute("time_list", time_list);
+//		    model.addAttribute("choice_date", choice_date);
+//		      
+//			return "redirect:/reservation_group_date";
+//		}
 	
 		//예약날짜 및 회차선택 넘기기
 		@ResponseBody
