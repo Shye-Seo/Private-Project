@@ -28,7 +28,7 @@
 			<div class="page_name_area"><h1>단체관람예약</h1></div>
 		</div>
 	</div>
-	
+	<form>
 		<!-- 전시관 및 방문회차 선택 div -->
 		<div class="reservation_wrap">
 			<div class="agree_area">
@@ -54,9 +54,9 @@
 					</div>
 				</div>
 			</div>
-		<form>
 			<input type="hidden" name="choice_date" th:value="${choice_date}">
-			<input type="hidden" name="res_visitDate">
+			<input type="hidden" name="today_date" th:value="${today}">
+			<input type="hidden" name="res_visitDate" th:value="${choice_date}">
 		<div class="place_area">
 			<div class="place_title">
 				<div>2. 관람유형</div>
@@ -74,17 +74,20 @@
 					</div>
 				</div>
 			</div>
-			<div>
+			<div class="calendarTime_area">
 				<div th:each="closed : ${closed_list}" class="hidden">	<!-- 휴관일 가져오기-->
 					<input type="hidden" th:value="${closed.closed_date}" name="closed_date" >
 				</div>
+			<div class="time_title">
+				<div>3. 관람일시</div>
+			</div>
 			<div class="time_wrap">
 			<div class="calendar_area">
 				<div class="sec_cal">
 					<div class="cal_nav">
-				    	<a href="javascript:;" class="nav-btn go-prev">prev</a>
+				    	<a href="javascript:;" class="nav-btn go-prev"><img src="/imgs/prev.svg"></a>
 				    	<div class="year-month"></div>
-				    	<a href="javascript:;" class="nav-btn go-next">next</a>
+				    	<a href="javascript:;" class="nav-btn go-next"><img src="/imgs/next.svg"></a>
 				    </div>
 				    <div class="cal_wrap">
 					    <div class="days">
@@ -103,15 +106,16 @@
 			<div class="turnTable_area">
 				<div class="table_contents">
 					<div class="date_inform">
-						<div th:if="${choice_date != ''}" th:text="${choice_date}" class="choice_title"></div>
-						<div th:if="${choice_date == ''}" th:text="${today}" class="today_title"></div>
+						<div th:if="${choice_date != ''}" class="choice_title"></div>
+						<div th:if="${choice_date == ''}" class="today_title"></div>
+						<div class="date_inform_txt">예약현황</div>
 					</div>
 					<ul class="time_list">
 						<ol id="top_ol">
-						<div class="time_num"><li>회차</li></div>
-						<div class="visit_time"><li>시간</li></div>
-						<div class="limit_num"><li>잔여인원</li></div>
-						<div class="res_btn"><li>예약현황</li></div>
+						<div class="time_num_top"><li>회차</li></div>
+						<div class="visit_time_top"><li>시간</li></div>
+						<div class="limit_num_top"><li>잔여인원</li></div>
+						<div class="res_btn_top"><li>예약현황</li></div>
 						</ol>
 						
 						<ol id="time_data">
@@ -122,7 +126,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="1" id="time_1">
 									<label for="time_1" th:if="${limit_1 - total_1} != 0" class="res_able">예약하기</label>
-									<label for="time_1" th:if="${limit_1 - total_1} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_1 - total_1} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_2 == 1}">
@@ -132,7 +136,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="2" id="time_2">
 									<label for="time_2" th:if="${limit_2 - total_2} != 0" class="res_able">예약하기</label>
-									<label for="time_2" th:if="${limit_2 - total_2} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_2 - total_2} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_3 == 1}">
@@ -142,7 +146,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="3" id="time_3">
 									<label for="time_3" th:if="${limit_3 - total_3} != 0" class="res_able">예약하기</label>
-									<label for="time_3" th:if="${limit_3 - total_3} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_3 - total_3} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_4 == 1}">
@@ -152,7 +156,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="4" id="time_4">
 									<label for="time_4" th:if="${limit_4 - total_4} != 0" class="res_able">예약하기</label>
-									<label for="time_4" th:if="${limit_4 - total_4} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_4 - total_4} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_5 == 1}">
@@ -162,7 +166,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="5" id="time_5">
 									<label for="time_5" th:if="${limit_5 - total_5} != 0" class="res_able">예약하기</label>
-									<label for="time_5" th:if="${limit_5 - total_5} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_5 - total_5} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_6 == 1}">
@@ -172,7 +176,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="6" id="time_6">
 									<label for="time_6" th:if="${limit_6 - total_6} != 0" class="res_able">예약하기</label>
-									<label for="time_6" th:if="${limit_6 - total_6} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_6 - total_6} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_7 == 1}">
@@ -182,7 +186,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="7" id="time_7">
 									<label for="time_7" th:if="${limit_7 - total_7} != 0" class="res_able">예약하기</label>
-									<label for="time_7" th:if="${limit_7 - total_7} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_7 - total_7} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_8 == 1}">
@@ -192,7 +196,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="8" id="time_8">
 									<label for="time_8" th:if="${limit_8 - total_8} != 0" class="res_able">예약하기</label>
-									<label for="time_8" th:if="${limit_8 - total_8} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_8 - total_8} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_9 == 1}">
@@ -202,7 +206,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="9" id="time_9">
 									<label for="time_9" th:if="${limit_9 - total_9} != 0" class="res_able">예약하기</label>
-									<label for="time_9" th:if="${limit_9 - total_9} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_9 - total_9} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_10 == 1}">
@@ -212,7 +216,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="10" id="time_10">
 									<label for="time_10" th:if="${limit_10 - total_10} != 0" class="res_able">예약하기</label>
-									<label for="time_10" th:if="${limit_10 - total_10} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_10 - total_10} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_11 == 1}">
@@ -222,7 +226,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="11" id="time_11">
 									<label for="time_11" th:if="${limit_11 - total_11} != 0" class="res_able">예약하기</label>
-									<label for="time_11" th:if="${limit_11 - total_11} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_11 - total_11} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_12 == 1}">
@@ -232,7 +236,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="12" id="time_12">
 									<label for="time_12" th:if="${limit_12 - total_12} != 0" class="res_able">예약하기</label>
-									<label for="time_12" th:if="${limit_12 - total_12} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_12 - total_12} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_13 == 1}">
@@ -242,7 +246,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="13" id="time_13">
 									<label for="time_13" th:if="${limit_13 - total_13} != 0" class="res_able">예약하기</label>
-									<label for="time_13" th:if="${limit_13 - total_13} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_13 - total_13} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_14 == 1}">
@@ -252,7 +256,7 @@
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="14" id="time_14">
 									<label for="time_14" th:if="${limit_14 - total_14} != 0" class="res_able">예약하기</label>
-									<label for="time_14" th:if="${limit_14 - total_14} == 0" class="res_unable">매진</label>
+									<div th:if="${limit_14 - total_14} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 						</ol>
@@ -260,8 +264,10 @@
 				</div>
 			</div>
 			</div>
+		</div>
 			<div class="button_area">
-				<div>
+				<div class="button_wrap">
+					<input type="button" value="이전" class="info_btn">
 					<input type="button" value="확인" class="submit_btn" id="date_submit">
 				</div>
 			</div>
@@ -269,10 +275,168 @@
 		
 		<!-- info 작성 div -->
 		<div class="reservation_wrap_info">
-		
+			<div class="info_area">
+				<div class="info_title">
+					<div>4. 관람 및 개인정보 입력</div>
+				</div>
+				<div class="info_guide">
+					<li>학교 또는 여행사에서 오시는 경우 인솔자는 무료로 진행됩니다.</li>
+					<li>그 외의 단체의 경우 인솔자 무료 인원에 제한이 있을 수 있습니다.</li>
+					<li>부산영화체험박물관에서는 모바일 기반의 전시해설 서비스를 제공하고 있습니다.</li>
+					<li>해설사의 전시해설은 20명 이상, 30명 이하의 경우에 적합합니다. 그 이상의 인원은 모바일 기반의 전시해설 서비스를 권합니다.</li>
+					<li>접수된 신청서는 담당자 검토 후 연락드립니다. 예약취소는 예약일로부터 하루전 낮12시까지 가능합니다.</li>
+					<li>부산영화체험박물관의 원활한 운영을 위해 이용객 여러분께서는 사전예약을 하여 주시기 바라며, 인적사항 기재 시 정확히 작성부탁드립니다.</li>
+				</div>
+				<div class="info_table">
+					<div class="table_left">
+						<div class="group_name">
+							<div class="left_title">단체명</div>
+							<div class="right_title"><input type="text" name="res_groupName"></div>
+						</div>
+						<div class="group_num">
+							<div class="left_title">인원</div>
+							<div class="calc_wrapper">
+							<div class="studentNum">
+								<div>학생</div>
+								<div><input type="text" name="res_studentNum"></div>
+								<!-- (+- 버튼 추가) -->
+							</div>
+							<div class="adultNum">
+								<div>성인</div>
+								<div><input type="text" name="res_adultNum"></div>
+								<!-- (+- 버튼 추가) -->
+							</div>
+							<div class="leaderNum">
+								<div>인솔자</div>
+								<div><input type="text" name="res_leaderNum"></div>
+								<!-- (+- 버튼 추가) -->
+							</div>
+							</div>
+						</div>
+						<div class="leader_name">
+							<div class="left_title">인솔자명</div>
+							<div class="right_title"><input type="text" name="res_name"></div>
+						</div>
+						<div class="phone_num">
+							<div class="left_title">인솔자 연락처</div>
+							<div class="right_title"><input type="text" name="res_phone"></div>
+							<div><input type="button" id="certifinum_submit" value="본인인증"></div>
+						</div>
+						<div class="certifi_num">
+							<div class="left_title">인증번호</div>
+							<div  class="right_title"><input type="text" id="certifinum" placeholder="인증번호를 입력해주세요" onkeyup="certifinum_checking($(this).val())"></div>
+							<div class="check_icon"></div>
+                    		<input type="button" id="certifinum_check" value="인증완료" disabled>
+						</div>
+						<div class="vehicle_check">
+							<div class="left_title">차량</div>
+							<div class="vehicle_wrapper">
+								<div class="vehicle_1">
+									<input type="radio" name="res_vehicleCheck" id="vehicle_1" value="자가용">
+									<label for="vehicle_1"></label>
+									<div>자가용</div>
+								</div>
+								<div class="vehicle_2">
+									<input type="radio" name="res_vehicleCheck" id="vehicle_2" value="관광버스">
+									<label for="vehicle_2"></label>
+									<div>관광버스</div>
+								</div>
+								<div class="vehicle_3">
+									<input type="radio" name="res_vehicleCheck" id="vehicle_3" value="대중교통">
+									<label for="vehicle_3"></label>
+									<div>대중교통</div>
+								</div>
+							</div>
+						</div>
+						<div class="request_check">
+							<div class="left_title">
+								<div>해설자 요청<div>(한번에 최대 30명 해설 가능)</div></div>
+<!--								<div>(한번에 최대 30명 해설 가능)</div>-->
+							</div>
+							<div class="request_wrapper">
+								<div class="request_1">
+									<input type="radio" name="res_requestCheck" id="request_1" value="예">
+									<label for="request_1"></label>
+									<div>예</div>
+								</div>
+								<div class="request_2">
+									<input type="radio" name="res_requestCheck" id="request_2" value="아니오">
+									<label for="request_2"></label>
+									<div>아니오</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="table_right">
+						<div class="info_confirm">
+							<div class="place_confirm"></div>
+							<div class="date_confirm">
+								<div>날짜</div>
+								<div class="date_insert"></div>
+							</div>
+							<div class="time_confirm">
+								<div>시간</div>
+								<div class="time_insert"></div>
+							</div>
+							<div class="num_confirm">
+								<div>인원</div>
+								<div class="num_insert"></div>
+							</div>
+							<div class="table_area">
+								<div></div>
+								<div class="num_table">
+									<div id="top_th">
+										<div class="tb_div">구분</div>
+										<div class="tb_num">인원수</div>
+										<div class="total_num">총 인원</div>
+									</div>
+									<div class="student_total">
+										<div class="tb_div">학생</div>
+										<div class="tb_num"></div>
+										<div class="total_check"></div>
+									</div>
+									<div class="adult_total">
+										<div class="tb_div">성인</div>
+										<div class="tb_num"></div>
+									</div>
+									<div class="leader_total">
+										<div class="tb_div">인솔자</div>
+										<div class="tb_num"></div>
+									</div>
+								</div>
+							</div>
+							<div class="name_area">
+								<div>인솔자</div>
+								<div class="name_insert"></div>
+							</div>
+							<div class="phone_area">
+								<div>인솔자 연락처</div>
+								<div class="phone_insert"></div>
+							</div>
+							<div class="vehicle_area">
+								<div>방문차량</div>
+								<div class="vehicle_insert"></div>
+							</div>
+							<div class="request_area">
+								<div>해설자 요청</div>
+								<div class="request_insert"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="message_area">
+					<div class="message_title">그 외 특이사항이 있다면 메시지를 남겨주세요.</div>
+					<div><input type="text" placeholder="내용을 입력해주세요.(30자 이내로)" name="res_message" class="message_txtbox"></div>
+				</div>
+			</div>
+			<div class="button_area">
+				<div class="button_wrap">
+					<input type="button" value="이전" class="date_btn">
+					<input type="button" value="확인" class="submit_btn" id="info_submit">
+				</div>
+			</div>
 		</div>
 	</form>
-</div>
 <script>
     $(document).ready(function() {
         calendarInit();
@@ -335,7 +499,7 @@
             
             // 지난달
             for (var i = prevDate - prevDay; i <= prevDate; i++) {
-                calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">' + i + '</div>'
+                calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable"></div>'
             }
             // 이번달
             for (var i = 1; i <= nextDate; i++) {
@@ -349,7 +513,7 @@
             }
             // 다음달
             for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay-1); i++) {
-                calendar.innerHTML = calendar.innerHTML + '<div class="day next disable">' + i + '</div>'
+                calendar.innerHTML = calendar.innerHTML + '<div class="day next disable"></div>'
             }
 
             // 오늘 날짜 표기
@@ -363,9 +527,31 @@
             var getyear = today.getFullYear();
             var getmonth = today.getMonth() + 1;
             
-            if(currentYear < getyear){
-            	
-            }
+            var toDate = $('input[name=today_date]').val();
+            var toDate_year = toDate.substr(0,4)
+            var toDate_month = getmonth;
+		    var toDate_day = toDate.substr(8);
+		    debugger;
+		    
+		    if(toDate_month < 10){
+				var current_month = "0" + toDate_month;
+			}else{
+			    var current_month = toDate_month;
+			}
+		        
+			var res_date2 = toDate_year+'-'+toDate_month + '-' + toDate_day;
+	    	var dayOfWeek = new Date(res_date2).getDay();
+	    	var dayOfWeek_str;
+	    	
+	    	if(dayOfWeek == 0){dayOfWeek_str = '일';}
+	    	else if(dayOfWeek == 1){dayOfWeek_str = '월';}
+	    	else if(dayOfWeek == 2){dayOfWeek_str = '화';}
+	    	else if(dayOfWeek == 3){dayOfWeek_str = '수';}
+	    	else if(dayOfWeek == 4){dayOfWeek_str = '목';}
+	    	else if(dayOfWeek == 5){dayOfWeek_str = '금';}
+	    	else if(dayOfWeek == 6){dayOfWeek_str = '토';}
+	    	
+	    	$('div[class=today_title]').text(toDate_year+"년 "+current_month+"월 "+toDate_day+"일 "+" ("+dayOfWeek_str+") ");
             closed_set();
         }
 
@@ -459,7 +645,8 @@
     	else if(dayOfWeek == 5){dayOfWeek_str = '금';}
     	else if(dayOfWeek == 6){dayOfWeek_str = '토';}
     	
-    	$('div[class=choice_title]').text(choice_date+" ("+dayOfWeek_str+") 예약현황");
+    	$('div[class=choice_title]').text(choice_date+" ("+dayOfWeek_str+") ");
+    	$('div[class=date_insert]').text(choice_date+" ("+dayOfWeek_str+") ");
     }
     
     function calendarClick(choiceDay) {

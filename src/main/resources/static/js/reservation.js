@@ -1,4 +1,6 @@
 $(function() {
+	$('div[class=reservation_wrap]').show();
+	$('div[class=reservation_wrap_info]').hide();
         
     $("#date_submit").click(function() {
 		var res_theaterCheck = $('input[name=res_theaterCheck]').val();

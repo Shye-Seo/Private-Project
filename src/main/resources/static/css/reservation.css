@@ -28,17 +28,13 @@
 
 .place_area {
     width: 62.5%;
-    margin: 10px auto 80px auto;
+    margin: 10px auto 100px auto;
 }
 
 .agree_area {
     width: 62.5%;
     /* height: 300px; */
     margin: 70px auto;
-}
-
-.agree_contents{
-/* 	display: flex; */
 }
 
 .agree_title div{
@@ -177,8 +173,24 @@
 /* 달력 ui */
 .time_wrap{
 	display: flex;
-	width: 62.5%;
-	margin: 0 auto;	
+/*	width: 62.5%;*/
+	margin: 30px auto;	
+}
+
+.calendarTime_area {
+    width: 62.5%;
+    margin: 0 auto;
+}
+
+.time_title div{
+	color: #222;
+    font-family: 'Pretendard';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.84px;
+    margin-bottom: 30px;
 }
 
 .calendar_area{
@@ -186,24 +198,34 @@
 }
 
 .sec_cal {
-    width: 360px;
+/*    width: 360px;*/
     margin: 0 auto;
     font-family: "NotoSansR";
+    border: 1px solid #C7C7C7;
+    height: 662px;
+    margin-right: 12px;
 }
 
 .sec_cal .cal_nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #202020;
+    font-family: Pretendard;
+    font-size: 28px;
+    font-style: normal;
     font-weight: 700;
-    font-size: 48px;
-    line-height: 78px;
+    line-height: 104px;
+    height: 104px;
+    letter-spacing: -0.84px;
+    border-bottom: 1px solid #C7C7C7;
 }
 
 .sec_cal .cal_nav .year-month {
-    width: 300px;
+/*    width: 300px;*/
     text-align: center;
     line-height: 1;
+    margin: 0 45px;
 }
 
 .sec_cal .cal_nav .nav {
@@ -212,52 +234,30 @@
     border-radius: 5px;
 }
 
-.sec_cal .cal_nav .go-prev,
-.sec_cal .cal_nav .go-next {
-    display: block;
-    width: 50px;
-    height: 78px;
-    font-size: 0;
+.sec_cal .cal_nav .go-prev, .sec_cal .cal_nav .go-next {
+/*    display: block;*/
+    width: 40px;
+    height: 40px;
+    font-size: 0; 
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid #D9D9D9;
+    border-radius: 25px;
 }
 
-.sec_cal .cal_nav .go-prev::before,
-.sec_cal .cal_nav .go-next::before {
-    content: "";
-    display: block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid #000;
-    border-width: 3px 3px 0 0;
-    transition: border 0.1s;
-}
-
-.sec_cal .cal_nav .go-prev:hover::before,
-.sec_cal .cal_nav .go-next:hover::before {
-    border-color: #ed2a61;
-}
-
-.sec_cal .cal_nav .go-prev::before {
-    transform: rotate(-135deg);
-}
-
-.sec_cal .cal_nav .go-next::before {
-    transform: rotate(45deg);
-}
 
 .sec_cal .cal_wrap {
-    padding-top: 40px;
+/*    padding-top: 40px;*/
     position: relative;
     margin: 0 auto;
 }
 
 .sec_cal .cal_wrap .days {
     display: flex;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
+/*    margin-bottom: 20px;*/
+/*    padding-bottom: 20px;*/
+    border-bottom: 1px solid #EAEAEA;
 }
 
 .sec_cal .cal_wrap::after {
@@ -265,14 +265,18 @@
 }
 
 .sec_cal .cal_wrap .dates .day {
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(100% / 7);
-/*    text-align: left;*/
-/*    color: #999;*/
+     width: calc(100% / 7); 
+    /* text-align: left; */
+    /* color: #999; */
     font-size: 22px;
-/*    text-align: center;*/
+    /* text-align: center; */
+/*    width: 60px;*/
+/*    height: 60px;*/
+/*    margin: auto 0;*/
+    margin: 9px 0;
 }
 
 .days .day{
@@ -283,7 +287,7 @@
 	font-size: 24px;
 	font-style: normal;
 	font-weight: 600;
-	line-height: normal;
+	line-height: 95px;
 	letter-spacing: -1.68px;
 }
 
@@ -300,7 +304,7 @@
 /*	height: 60px;*/
 }
 
-.current.today {background: rgb(242 242 242);}
+.current.today {background-color: #E4E4E4;}
 
 .current.choice {border: 1px solid red; border-radius: 15px;}
 
@@ -328,20 +332,28 @@
     background: #F43F1F;
     height: 60px;
     width: 60px;
-    color: white;
-    /* vertical-align: middle; */
     align-items: center;
     justify-content: center;
-    text-align: center;
-    line-height: 60px;
-    font-size: 22px;
+/*    text-align: center;*/
+/*    line-height: 60px;*/
+/*    font-size: 22px;*/
     display: flex;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.54px;
 }
+
 
 .sec_cal .cal_wrap .dates {
     display: flex;
     flex-flow: wrap;
     height: 290px;
+/*    margin-top: 10px;*/
 }
 
 .sec_cal .cal_wrap .days .day:nth-child(7n) {
@@ -394,13 +406,49 @@
     height: 104px;
     line-height: 104px;
     text-align: center;
-    /* justify-content: center; */
+    justify-content: center;
+    display: flex;
+    border-bottom: 1px solid #C7C7C7;  
+}
+
+.today_title{
+	color: #F43F1F;
+	text-align: center;
+	font-family: Pretendard;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 104px;
+	letter-spacing: -0.84px;
+	margin-right: 10px;
+}
+
+.choice_title{
+	color: #F43F1F;
+	text-align: center;
+	font-family: Pretendard;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 104px;
+	letter-spacing: -0.84px;
+	margin-right: 10px;
+}
+
+.date_inform_txt{
+	color: #202020;
+	font-family: Pretendard;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 104px;
+	letter-spacing: -0.84px;
 }
 
 #top_ol {
     display: flex;
-    height: 104px;
-    line-height: 104px;
+    height: 95px;
+    line-height: 95px;
     list-style: none;
     color: #202020;
     text-align: center;
@@ -408,8 +456,20 @@
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
-    border-bottom: 1px solid #C7C7C7;
+    border-bottom: 1px solid #EAEAEA;
     padding-inline-start: 0px;
+}
+.time_num_top {
+    width: 20%;
+}
+.visit_time_top {
+    width: 18%;
+}
+.limit_num_top {
+    width: 30%;
+}
+.res_btn_top {
+    width: 28%;
 }
 
 .time_num{
@@ -425,19 +485,6 @@
 	width: 30%;
 }
 
-.choice_title {
-    color: #F43F1F;
-    text-align: center;
-    font-family: 'Pretendard';
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: -0.84px;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid #C7C7C7;
-}
-
 #time_data {
     color: #202020;
     text-align: center;
@@ -451,10 +498,13 @@
     height: 454px;
 }
 
-.time_info{
-	display: flex;
+.time_info {
+    display: flex;
     margin: 10px 0;
     justify-content: space-between;
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #EAEAEA;
 }
 
 .time_info li{
@@ -471,6 +521,7 @@
 .table_contents{
 	border: 1px solid #C7C7C7;
 	height: 662px;
+	margin-left: 12px;
 }
 
 .time_list ul{
@@ -485,7 +536,7 @@
 	display: inline-block;
 	width:106px; 
 	height: 45px; 
-	background: #F43F1F;
+	background: #202020;
 	cursor: pointer;
 	color: #FFF;
 	text-align: center;
@@ -501,7 +552,7 @@
 	display: inline-block;
 	width:106px; 
 	height: 45px; 
-	background: #202020;
+	background: #F43F1F;
 	cursor: pointer; 
 	color: #FFF;
 	text-align: center;
@@ -570,61 +621,197 @@
 /* 버튼 영역 */
 .button_area {
     width: 360px;
-    margin: 10px auto;
+    margin: 150px auto;
     text-align: center;
 }
 
-/* ---------INFO PAGE--------- */
-.res_form{
-	width: 100%;
-	display: flex;	
+.button_wrap .info_btn {
+    width: 163px;
+    height: 64px;
+    border: 1px solid #202020;
+    background: #FFF;
+    color: #202020;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.button_wrap .submit_btn {
+    width: 163px;
+    height: 64px;
+    background: #F43F1F;
+    color: #FFF;
+    border: 1px solid #F43F1F;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+/* ---------정보기입 PAGE--------- */
+.reservation_wrap_info {
+    width: 62.5%;
+    margin: 0 auto;
 }
 
 .info_area{
-	width: 50%;
-	border: 1px solid blue;
+	margin-top: 70px;
 }
 
-.result_area{
-	width: 50%;
-	border: 1px solid red;
+.info_title div{
+	color: #222;
+    font-family: 'Pretendard';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.84px;
+    margin-bottom: 30px;
 }
 
-/* 가격표 style */
-.num_price_table{
-	width: 70%;
-    margin: 15px auto;
+.info_guide {
+    border: 1px solid #D2D2D2;
+    padding: 30px;
+    margin-bottom: 30px;
 }
 
-table.table-basic {
+.info_guide li {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    /* margin: 30px; */
+}
+
+.info_table {
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    display: flex;
+    margin-bottom: 74px;
+}
+
+.table_left {
+    width: 60%;
+    margin-right: 12px;
+}
+
+.table_right {
+    width: 40%;
+    margin-left: 12px;
+}
+
+.group_name, .leader_name, .phone_num, .certifi_num, .vehicle_check {
+    display: flex;
+    height: 92px;
+    line-height: 92px;
+    border-bottom: 1px solid #D2D2D2;
+}
+
+.request_check{
+	display: flex;
+    height: 92px;
+    line-height: 92px;
+}
+
+.group_num {
+    display: flex;
+    border-bottom: 1px solid #D2D2D2;
+    height: 193px;
+    line-height: 193px;
+}
+
+.left_title {
+    background: #F5F5F5;
+    width: 180px;
+    padding-left: 30px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    /* line-height: normal; */
+    letter-spacing: -0.6px;
+}
+
+.right_title{
+	padding-left: 30px;
+}
+
+.studentNum, .adultNum, .leaderNum {
+    display: flex;
+    height: 64px;
+    line-height: 64px;
+    padding-left: 30px;
+}
+
+.vehicle_wrapper, .request_wrapper{
+	display: flex;
+	padding-left: 30px;
+}
+
+.vehicle_1, .vehicle_2, .vehicle_3, .request_1, .request_2{
+	display: flex;
+}
+
+.table_left input[type="text"] {
+    border-radius: 5px;
+    border: 1px solid #B0B0B0;
+    background: #FFF;
+    height: 52px;
+}
+
+.calc_wrapper input[type="text"] {
+    height: 42px;
+    margin-left: 30px;
+}
+
+.studentNum div:first-child {
+    width: 77px;
+}
+
+.adultNum div:first-child {
+    width: 77px;
+}
+
+.leaderNum div:first-child {
+    width: 77px;
+}
+
+.message_title {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+input.message_txtbox {
+    border-radius: 5px;
+    border: 1px solid #C7C7C7;
+    background: #FFF;
+    height: 180px;
     width: 100%;
+    margin-top: 23px;
+    color: #C8C8C8;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.6px;
+    padding: 15px 30px;
 }
 
-.table-basic th {
-    background: #f3f6fb;
-    color: #5e5e5e;
-    font-weight: 600;
-}
-
-.table-basic th, .table-basic td {
-    height: 48px;
-    padding: 10px 3px;
-    border: 1px solid #b8ceea;
-    font-size: 16px;
-    text-align: center;
-    word-break: keep-all;
-    word-wrap: break-word;
-}
-
-.table-basic td {
-    background: #fff;
-    color: #595959;
-}
-
-.total {
-    padding: 0.3em 0;
-    font-size: 1.3em;
-    font-weight: 600;
-    color: #ef2571;
-    text-align: center;
-}
