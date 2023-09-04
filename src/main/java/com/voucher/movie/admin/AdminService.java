@@ -101,5 +101,9 @@ public class AdminService {
 		return adminDao.getTime();
 	}
 
+	public List<GroupVO> getReservation_list(String date) {
+		return adminDao.getReservation_list(date);
+	}
+
 
 }

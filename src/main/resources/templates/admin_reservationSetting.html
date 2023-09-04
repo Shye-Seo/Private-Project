@@ -325,12 +325,12 @@
     	var limited_num = $('input[name=limited_num]').val(); //회차 제한인원
     	var time_status = $('input[name=time_status]').val(); //활성화여부
     	
-    	if ($("input:checkbox[id='toggle']").is(":checked") == true){
+    	if ($("input:checkbox[id='toggle']").is(":checked") == true){//휴관일 설정
     		closed_status = 1;
     		time_num = 0;
     		setting_time = 0;
     		limited_num = 0;
-    	}else{
+    	}else{//휴관일X
     		closed_status = 0;
     		
 			if(time_num == ""){
@@ -338,12 +338,11 @@
 	    		setting_time = 0;
 	    		limited_num = 0;
 	    		time_status = 2; //회차정보 변경X
-			}else{
+			}else if((time_num != "") && (time_status == 0)){//비활성화
 				setting_time = 0;
 				limited_num = 0;
 			}
     	}
-    	debugger;
     	
     	$.ajax({
 			url : "/reservation_setTime",

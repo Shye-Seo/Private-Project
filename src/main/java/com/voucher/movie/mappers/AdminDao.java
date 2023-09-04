@@ -61,4 +61,7 @@ public interface AdminDao {
 
 	@Select("select * from reservation_time")
 	List<TimeVO> getTime(); //회차정보 get
+
+	@Select("select * from reservation_group where res_visitDate = #{date} and res_status = 1")
+	List<GroupVO> getReservation_list(String date);//해당 날짜의 예약확정 리스트 get
 }

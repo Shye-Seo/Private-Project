@@ -6,25 +6,9 @@ ul{
 	display: flex;
 }
 
-li{
-	list-style: none;
-}
-
 .wrap{
 	width: 1760px;
     margin: 0 auto;
-}
-
-.gnb_bar{
-	background-color: #E94E24;	
-}
-
-.gnb_wrap{
-	margin: 0 auto;
-	align-items: center;
-	height: 50px;
-	width: 1760px;
-	color: white;
 }
 
 .contents_wrap{
@@ -145,16 +129,40 @@ li{
     top: 368px;
 }
 
-.sec_cal .cal_wrap .day {
+.sec_cal .cal_wrap .dates .day {
     display:flex;
     align-items: center;
     justify-content: center;
     width: calc(100% / 7);
-    text-align: left;
-    color: #999;
-    font-size: 12px;
-    text-align: center;
-    border-radius:5px
+/*    text-align: left;*/
+/*    color: #999;*/
+    font-size: 22px;
+/*    text-align: center;*/
+}
+
+.days .day{
+	color: #202020;
+	text-align: center;
+	width: calc(100% / 7);
+	font-family: 'Pretendard';
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	letter-spacing: -1.68px;
+}
+
+.disable{
+	color: #969696;
+	text-align: center;
+	font-family: 'Pretendard';
+	font-size: 22px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 60px;
+	letter-spacing: -1.54px;
+/*	width: 60px;*/
+/*	height: 60px;*/
 }
 
 .current.today {background: rgb(242 242 242);}
@@ -164,17 +172,35 @@ li{
 .dayStyle {
 /*     border: 1px solid red; */
 /*     border-radius: 15px; */
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    
+    color: #202020;
+	text-align: center;
+	font-family: 'Pretendard';
+	font-size: 22px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	letter-spacing: -1.54px;
 }
 
-.dayStyle.choiceDay{
-	border: 1px solid red;
-	border-radius: 15px;
+.choiceDay {
+    background: #F43F1F;
+    height: 60px;
+    width: 60px;
+    color: white;
+    /* vertical-align: middle; */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 60px;
+    font-size: 22px;
+    display: flex;
 }
 
 .sec_cal .cal_wrap .dates {
@@ -183,16 +209,23 @@ li{
     height: 290px;
 }
 
-.sec_cal .cal_wrap .day:nth-child(7n -1) {
+.sec_cal .cal_wrap .days .day:nth-child(7n) {
     color: #3c6ffa;
 }
 
-.sec_cal .cal_wrap .day:nth-child(7n) {
+.sec_cal .cal_wrap .days .day:nth-child(7n -6) {
     color: #ed2a61;
 }
 
-.sec_cal .cal_wrap .day.disable {
-    color: #ddd;
+.day current .day{
+	color: #202020;
+	text-align: center;
+	font-family: 'Pretendard';
+	font-size: 22px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	letter-spacing: -1.54px;
 }
 
 .resDate_check{
