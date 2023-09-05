@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.voucher.movie.ScriptUtils;
+import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.config.PagingVO;
 import com.voucher.movie.reservation.ClosedVO;
 import com.voucher.movie.reservation.GroupService;
@@ -39,6 +41,8 @@ public class AdminController {
 	List<GroupVO> group_list;
 	
 	List<ClosedVO> closed_list;
+	
+	List<NewsVO> news_list;
 
 	//관리자 로그인
 	@RequestMapping(value = "admin_login")
@@ -184,4 +188,45 @@ public class AdminController {
 		
 		return "redirect:/admin_reservationSetting";
 	}
+	
+	//관리자 - 박물관 소식 리스트
+	@RequestMapping(value="/admin_newsList", method=RequestMethod.GET)
+	public String admin_newsList(@ModelAttribute NewsVO newsVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+			
+		// 총 게시물 수 
+	    int totalListCnt = adminService.findAllNews();
+
+	    // 생성인자로  총 게시물 수, 현재 페이지를 전달
+	    PagingVO pagination = new PagingVO(totalListCnt, page);
+
+	    // DB select start index
+	    int startIndex = pagination.getStartIndex();
+	    // 페이지 당 보여지는 게시글의 최대 개수
+	    int pageSize = pagination.getPageSize();
+
+	    news_list = adminService.findNewsPaging(startIndex, pageSize);
+		    
+		model.addAttribute("news_list", news_list);
+		model.addAttribute("nowpage", page);
+			 
+		return "/admin_newsList";
+	}
+	
+	//관리자 - 박물관 소식 등록 페이지
+	@RequestMapping(value="/admin_newsInsert", method=RequestMethod.GET)
+	public String admin_newsInsert(ModelMap model) throws Exception {
+			
+		return "/admin_newsInsert";
+	}
+	
+	//박물관 소식 등록(post)
+	@ResponseBody
+	@RequestMapping(value="/newsInsert_ok", method=RequestMethod.POST)
+	public String reservation_news_register(@ModelAttribute NewsVO newsvo, ModelMap model) throws Exception {
+		
+		System.out.println(newsvo);
+		adminService.insertNews(newsvo);
+		
+		return "/admin_newsList";
+	}	
 }

@@ -26,13 +26,20 @@ button{
 }
 
 .list #top_ol {
-    font-weight: bold;
     border-top: 1px solid #BBBBBB;
     border-bottom: 1px solid #BBBBBB;
     display: flex;
     flex-direction: row;
-    font-weight: 600;
     box-shadow: 0px 3px 6px #0000000d;
+    align-items: center;
+    background: #FFE9E5;
+    color: #4B4B4B;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
 }
 
 #top_ol div li {
@@ -42,13 +49,17 @@ button{
     color: #666666;
 }
 
-.list_ol{
-	display: flex;
-	border-bottom: 1px solid #DDDDDD;
-	line-height: 55px;
-	height: 55px;
-	font-weight: 600;
+.list_ol {
+    display: flex;
+    border-bottom: 1px solid #DDDDDD;
+    /* line-height: 72px; */
+    height: 72px;
+    font-weight: 600;
     font-size: 14px;
+    padding: 15px 0;
+    /* margin: auto 0; */
+    box-sizing: border-box;
+    align-items: center;
 }
 
 .list_ol:hover {
@@ -62,29 +73,84 @@ button{
 }
 
 
-.title_area{
-	width: 15%;
-	text-align: center;
+.title_area {
+    width: 15%;
+    text-align: center;
+    color: #1A1A1A;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
 }
 
-.date_area{
-	width: 15%;
-	text-align: center;
+.date_area {
+    width: 15%;
+    text-align: center;
+    color: #1A1A1A;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 19px;
 }
 
-.status_area{
-	width: 15%;
+#top_ol .date_area{
+	color: #4B4B4B;
 	text-align: center;
+	font-family: Pretendard;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 19px;
+}
+
+#top_ol .status_area{
+	color: #4B4B4B;
+	text-align: center;
+	font-family: Pretendard;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 19px;
+}
+
+.status_area {
+    width: 15%;
+    text-align: center;
+    color: #1A1A1A;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 19px;
 }
 
 .vehicle_area, .request_area {
-    width: 15%;
+    width: 10%;
     text-align: center;
+    color: #1A1A1A;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
 }
 
-.message_area{
-	width: 17%;
-	text-align: center;
+.message_area {
+    width: 20%;
+    text-align: center;
+    color: #1A1A1A;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
 }
 
 .confirm_area{
@@ -96,6 +162,14 @@ button{
     background-color: #F43F1F;
     color: white;
     padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 8px;
+    border: 1px solid #F43F1F;
+    background: #F43F1F;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    display: inline-block;
 }
 
 .a_count{
@@ -119,8 +193,15 @@ button{
 .black{
 	color: #333333;
 }
-.gray{
-	color: #999999;
+.gray {
+    color: #999999;
+    color: #1A1A1A;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
 }
 
 /* 사용자 페이지 */
@@ -194,4 +275,12 @@ button{
 .page-item .thisPage{
     color: #333;
     border: 1px solid #DDDDDD;
+}
+
+/*------박물관 소식-------*/
+.check_area {
+    /* padding: 15px 40px; */
+    box-sizing: border-box;
+    height: 46px;
+    width: 10%;
 }

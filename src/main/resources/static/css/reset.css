@@ -34,8 +34,8 @@ body {background:#F8F9FB;}
 .logo{
     display: block;
     top: 0;
-    height: 105px;
-    line-height: 105px;
+    height: 10%;
+    line-height: 10%;
     text-align: center;
 }
 
@@ -151,7 +151,7 @@ body {background:#F8F9FB;}
 
 
 .side_info button{
-    width: 167px; height: 44px;
+    width: 85%; height: 44px;
     margin-top: 15px;
     border: 1px solid #ffffff;
     background-color: #F43F1F;
@@ -173,10 +173,10 @@ body {background:#F8F9FB;}
 	}
 	.menu-categories{
 		display: block;
-    	height: 55%;
+    	height: 60%;
 	}
 	.menu-categories .menu{
-		height: 25%;
+		height: 10%;
 	}
 	.menu-categories .menu a{
 		height: 100%;

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.voucher.movie.admin.AdminVO;
+import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.reservation.ClosedVO;
 import com.voucher.movie.reservation.GroupVO;
 import com.voucher.movie.reservation.TimeVO;
@@ -64,4 +65,14 @@ public interface AdminDao {
 
 	@Select("select * from reservation_group where res_visitDate = #{date} and res_status = 1")
 	List<GroupVO> getReservation_list(String date);//해당 날짜의 예약확정 리스트 get
+
+	@Select("select count(*) from museum_news")
+	int fintAllNews(); //박물관 소식 전체 count
+	
+	@Select("select * from museum_news order by id desc limit #{startIndex}, #{pageSize}")
+	List<NewsVO> findNewsPaging(int startIndex, int pageSize);
+
+	@Insert("insert into museum_news (news_title, news_content, news_image, news_link, news_date, news_writer)"
+			+ "values (#{news_title}, #{news_content}, #{news_image}, #{news_link}, #{news_date}, #{news_writer})")
+	boolean insertNews(NewsVO newsvo); //박물관 소식 등록
 }

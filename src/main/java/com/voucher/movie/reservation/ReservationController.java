@@ -609,17 +609,11 @@ public class ReservationController {
 			return "reservation_group_complete?id="+id;
 		}
 		
-		//예약정보 기입
-		@RequestMapping(value="/reservation_group_complete", method=RequestMethod.GET)
-		public ModelAndView reservation_group_complete(@RequestParam("id") int id, ModelMap model) throws Exception {
-			ModelAndView mav = new ModelAndView();
-			TemporaryVO tempVo = tempService.getTemp(id);
+		//단체예약 안내페이지
+		@RequestMapping(value="/reservation_group_info", method=RequestMethod.GET)
+		public String reservation_group_info(ModelMap model) throws Exception {
 			
-//			System.out.println("출력 : "+tempVo);
-			mav.addObject("tempVo", tempVo);
-			mav.setViewName("reservation_group_info");
-			
-			return mav;
+			return "reservation_group_info";
 		}
 		
 		//예약신청

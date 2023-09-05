@@ -32,11 +32,6 @@ public class MainController {
 		return "reservation_group";
 	}
 	
-//	@GetMapping(value="/reservation_group_date")
-//	public String reservation_group_date() {
-//		return "reservation_group_date";
-//	}
-
 	// 전시 페이지
 	@GetMapping(value="/exhibition")
 	public String exhibition() {

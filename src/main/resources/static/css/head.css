@@ -8,7 +8,7 @@ ul {
     padding-inline-start: 0px;
 }
 .inwrap {
-    width: 1760px;
+    width: 100%;
     margin: 0 auto;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -53,6 +53,7 @@ a:active { /*클릭하는 순간*/
 
 .gnb_bar ul{
 	display: flex;
+	align-items: center;
 }
 
 .gnb_wrap {
@@ -75,6 +76,7 @@ a:active { /*클릭하는 순간*/
 
 .gnb_wrap li{
 	margin-right: 20px;
+	line-height: 22px;
 }
 
 .gnb_wrap .div_bar {
@@ -88,7 +90,7 @@ a:active { /*클릭하는 순간*/
     justify-content: space-between;
     align-items: center;
     height: 100px;
-
+	border-bottom: 1px solid #D2D2D2;
 }
 
 .head_menu li{

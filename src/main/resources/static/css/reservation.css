@@ -6,26 +6,108 @@
 }
 
 .wrap{
-	width: 1760px;
+	width: 100%;
     margin: 0 auto;
 }
 
 .contents_wrap{
-	height: 170px;
+/*	height: 170px;*/
 }
 
 .page_title{
 	border-bottom: 2px solid black;
+    width: 62.5%;
+    margin: 0 auto;
 }
 
-.page_name_area{
-	text-align: center;
-	margin: 100px auto;
-	font-size: x-large;
+.page_name_area {
+    /* text-align: center; */
+    /* margin: 100px auto; */
+    font-size: x-large;
+    margin-top: 108px;
+    margin-bottom: 50px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    box-sizing: border-box;
+}
+
+/* ---------안내페이지---------*/
+.guide_area {
+    width: 62.5%;
+    margin: 0 auto;
+    border-bottom: 0.5px solid #A6A6A6;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.guide_area_last {
+    width: 62.5%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.guide_title {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.72px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.guide_content {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    margin-left: 10px;
+}
+
+#group_button {
+    background: #F43F1F;
+    display: inline-flex;
+    padding: 20px 30px;
+    align-items: center;
+    box-sizing: border-box;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.54px;
+    border: none;
+}
+
+.ticketButton_area {
+    width: 62.5%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 120px;
+}
+
+button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 
 /* ---------전시관선택 및 개인정보 동의 PAGE--------- */
-
+input[name=nowpage]{
+	display: none;
+}
 .place_area {
     width: 62.5%;
     margin: 10px auto 100px auto;
@@ -34,7 +116,7 @@
 .agree_area {
     width: 62.5%;
     /* height: 300px; */
-    margin: 70px auto;
+    margin: 50px auto 70px auto;
 }
 
 .agree_title div{
@@ -480,6 +562,15 @@
 }
 .limit_num{
 	width: 30%;
+	display: flex;
+}
+.gray_num{
+	color: #767676;
+	font-family: Pretendard;
+/*	font-size: 18px;*/
+	font-style: normal;
+	font-weight: 400;
+/*	line-height: normal;*/
 }
 .res_btn{
 	width: 30%;
@@ -940,6 +1031,10 @@
     width: 25%;
 }
 
+#certifinum_submit{
+	cursor: pointer;
+}
+
 /* -------라디오버튼 css-----  */
 #vehicle_1, #vehicle_2, #vehicle_3, #request_1, #request_2{
 	display: none;
@@ -1280,3 +1375,17 @@ input.message_txtbox {
     box-sizing: border-box;
 }
 
+.button_wrap .date_btn {
+    width: 163px;
+    height: 64px;
+    border: 1px solid #202020;
+    background: #FFF;
+    color: #202020;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-right: 12px;
+    cursor: pointer;
+}

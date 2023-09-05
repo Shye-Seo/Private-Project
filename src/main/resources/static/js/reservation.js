@@ -1,13 +1,27 @@
 $(function() {
-	$('div[class=reservation_wrap]').css('display','block');
-//	$('div[class=reservation_wrap_info]').css('display','none');
+	var nowpage = $('input[id=nowpage]').val();
+	if(nowpage == 1){
+		$('div[class=reservation_wrap]').css('display','block');
+		$('div[class=reservation_wrap_info]').css('display','none');
+	}else if(nowpage == 2){
+		$('div[class=reservation_wrap]').css('display','none');
+		$('div[class=reservation_wrap_info]').css('display','block');
+	}
+	
+	if($('.agree_check_yes').val() == 1){
+		$('#agree_check').prop('checked',true);
+	}
+	if($('.theater_check_yes').val() == 1){
+		$('#radio_1').prop('checked',true);
+	}else if($('.theater_check_yes').val() == 2){
+		$('#radio_2').prop('checked',true);
+	}
         
     $("#date_submit").click(function() {
 		var res_theaterCheck = $('input[name=res_theaterCheck]:checked').val();
 		var res_visitDate = $('input[name=res_visitDate]').val();
 		var res_visitNum = $('input[name=res_visitNum]:checked').val();
 		var res_visitTime = '';
-		debugger;
 		
 			//전시관 체크 & 개인정보 동의 & 날짜 및 회차선택 -> 다음페이지
 			if($('input[name=agree_check]').is(":checked")){
@@ -30,11 +44,23 @@ $(function() {
 							res_visitTime = $('li[class=res_visitTime_'+i+']').text();
 						}
 					}
+					$('input[id=nowpage]').val(2);
+					var nowpage = $('input[id=nowpage]').val();
+					debugger;
+					
+					if(nowpage == 1){
+						$('div[class=reservation_wrap]').css('display','block');
+						$('div[class=reservation_wrap_info]').css('display','none');
+					}else if(nowpage == 2){
+						$('div[class=reservation_wrap]').css('display','none');
+						$('div[class=reservation_wrap_info]').css('display','block');
+					}
+					
 					$('div[class=time_insert]').text(res_visitNum+'회차 / '+res_visitTime);
 					$('#visitTime').val(res_visitTime);
 					
-					$('div[class=reservation_wrap]').css('display','none');
-					$('div[class=reservation_wrap_info]').css('display','block');
+//					$('div[class=reservation_wrap]').css('display','none');
+//					$('div[class=reservation_wrap_info]').css('display','block');
 				}
 	        }
 			//개인정보 수집동의 X
@@ -57,11 +83,9 @@ $(function() {
             return false;
         }
         else {
-            alert("인증번호가 발송되었습니다. 인증번호를 입력해주세요.");
 
             // 인증버튼css
-            $('#certifinum_submit').val("재인증");
-            $('#certifinum_submit').css({ 'border': '0.5px solid #5B8FD2', 'background-color': '#5B8FD2',"color":"#ffffff"})
+//            $('#certifinum_submit').css({ 'border': '0.5px solid #5B8FD2', 'background-color': '#5B8FD2',"color":"#ffffff"})
 
             // ajax를 이용하여 인증번호를 요청한다.
             $.ajax({
@@ -70,38 +94,26 @@ $(function() {
                 data: { user_phone: $("input[name=res_phone]").val() },
                 dataType: "text",
             }).done(function(data){
-                certifinum = data;
+                certinum = data;
+	            alert("인증번호가 발송되었습니다. 인증번호를 입력해주세요.");
+	            $('#certifinum_submit').val("재인증");
             });
         }
     });
     
-});
-    // 인증번호 비교
-    function certifinum_checking(){
-		var input_num = parseInt($('#certifinum').val());
-        if(input_num.length >= 4){
-            if(certifinum == input_num){
-                certifi_checked = "1";
-                $('#certifinum').attr('readonly','true');
-                $("#certifinum_submit").val("인증완료");
-                $("#certifinum_submit").attr("disabled", true);
+    // 인증번호 일치하면 '재인증'을 '변경'으로
+    $('#certifinum').keyup(function() {
+        if($('#certifinum').val() == certinum && certinum!=0) {
+			$('#certifinum_check').css({'background':'#6E6E6E'});
+                $('#certifinum_check').css({'color':'#FFF'});
+                $('#certifinum_check').attr('value','인증완료');
+                certifi_checked=="1"
                 var phoneNum = $('.input_phone').val();
                 $('.phone_insert').text(phoneNum);
-                debugger;
-            }else{
-                $('#certifinum_check').css({'background':'#FF7E93'});
-                $('#certifinum_check').css({'font-size':'10px'});
-                $('#certifinum_check').attr('value','✕');
-                certifi_checked = "0";
-                debugger;
-            }
-        }else{
-            $('#certifinum_check').css({'background':'#DDDDDD'});
-            $('#certifinum_check').css({'font-size':'14px'});
-            $('#certifinum_check').attr('value','✓');
-            certifi_checked = "0";
         }
-    }
+    })
+    
+});
 
 	$(document).ready(function() {
 		
@@ -113,19 +125,19 @@ $(function() {
         	var groupName = $('.input_groupName').val();
         	$('.groupName_insert').text(' '+groupName);
         });
-        $('#studentNum').change(function() { //학생 수
+        $('#studentNum').keyup(function() { //학생 수
 			var studentNum = $('#studentNum').val();
 			studentNum = parseInt(studentNum);
         	$('.student_total .tb_num').text(studentNum);
         	gettotal();
         });
-        $('#leaderNum').change(function() { //인솔자 수
+        $('#leaderNum').keyup(function() { //인솔자 수
         	var leaderNum = $('#leaderNum').val();
         	leaderNum = parseInt(leaderNum);
         	$('.leader_total .tb_num').text(leaderNum);
         	gettotal();
         });
-        $('#adultNum').change(function() { //성인 수
+        $('#adultNum').keyup(function() { //성인 수
         	var adultNum = $('#adultNum').val();
         	adultNum = parseInt(adultNum);
         	$('.adult_total .tb_num').text(adultNum);
@@ -149,6 +161,7 @@ $(function() {
         	$('.request_insert').text(request);
         });
         
+    });
 		function gettotal() {
 		        var studentNum = $('#studentNum').val();
 				studentNum = parseInt(studentNum);
@@ -158,12 +171,12 @@ $(function() {
 		    	leaderNum = parseInt(leaderNum);
 		    	
 //				var groupName = $('.input_groupName').val();
+				
 				var totalNum = studentNum+adultNum+leaderNum;
 			    $('.total_check').text(totalNum+'명');
-			    $('.totalNum_insert').text('총 '+totalNum+'명 /'+'&nbsp;');
+			    $('.totalNum_insert').text('총 '+totalNum+'명 / ');
 			    $('#totalNum').val(totalNum);
 		}
-    });
     
     function submitReservation() {
         
@@ -184,5 +197,62 @@ $(function() {
 		});
 	}
 
-	
+function prevPage(){
+	$('div[class=reservation_wrap]').css('display','block');
+	$('div[class=reservation_wrap_info]').css('display','none');
+	$('input[id=nowpage]').val(1);
+}
 
+function countStudent(type){
+	// 결과를 표시할 element
+  var student = $('input[name=res_studentNum]').val();
+  
+  // 더하기/빼기
+  if(type === 'plus') {
+    student = parseInt(student) + 1;
+  }else if(type === 'minus')  {
+    student = parseInt(student) - 1;
+    if(student < 0){
+		student = 0;
+	}
+  }
+  $('input[name=res_studentNum]').val(student);
+  $('.student_total .tb_num').text(student);
+  gettotal();
+}
+
+function countAdult(type){
+	// 결과를 표시할 element
+  var adult = $('input[name=res_adultNum]').val();
+  
+  // 더하기/빼기
+  if(type === 'plus') {
+    adult = parseInt(adult) + 1;
+  }else if(type === 'minus')  {
+    adult = parseInt(adult) - 1;
+    if(adult < 0){
+		adult = 0;
+	}
+  }
+  $('input[name=res_adultNum]').val(adult);
+  $('.adult_total .tb_num').text(adult);
+  gettotal();
+}
+
+function countLeader(type){
+	// 결과를 표시할 element
+  var leader = $('input[name=res_leaderNum]').val();
+  
+  // 더하기/빼기
+  if(type === 'plus') {
+    leader = parseInt(leader) + 1;
+  }else if(type === 'minus')  {
+    leader = parseInt(leader) - 1;
+    if(leader < 0){
+		leader = 0;
+	}
+  }
+  $('input[name=res_leaderNum]').val(leader);
+  $('.leader_total .tb_num').text(leader);
+  gettotal();
+}

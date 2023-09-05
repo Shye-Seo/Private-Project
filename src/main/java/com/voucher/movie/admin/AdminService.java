@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.mappers.AdminDao;
 import com.voucher.movie.mappers.GroupDao;
 import com.voucher.movie.reservation.ClosedVO;
@@ -103,6 +104,18 @@ public class AdminService {
 
 	public List<GroupVO> getReservation_list(String date) {
 		return adminDao.getReservation_list(date);
+	}
+
+	public int findAllNews() {
+		return adminDao.fintAllNews();
+	}
+
+	public List<NewsVO> findNewsPaging(int startIndex, int pageSize) {
+		return adminDao.findNewsPaging(startIndex, pageSize);
+	}
+
+	public boolean insertNews(NewsVO newsvo) {
+		return adminDao.insertNews(newsvo);
 	}
 
 
