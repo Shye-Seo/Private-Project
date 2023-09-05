@@ -5,13 +5,6 @@
     margin: 0;
 }
 
-.inwrap {
-    width: 1760px;
-    margin: 0 auto;
-    overflow-x: hidden;
-    /*background-color: #333333;*/
-}
-
 .slide_box{
     height: 660px;
     position:relative;

@@ -1,4 +1,6 @@
 $(function() {
+	$('div[class=reservation_wrap]').show();
+	$('div[class=reservation_wrap_info]').hide();
         
     $("#date_submit").click(function() {
 		var res_theaterCheck = $('input[name=res_theaterCheck]').val();
@@ -15,18 +17,8 @@ $(function() {
 					alert("시간을 선택해주세요.");
 				}else{ //다음버튼 -> div 숨기고 info div 보여주기
 				
-					$.ajax({
-							url : "/reservation_group_date_register",
-							type : 'post',
-							data : {
-									res_theaterCheck:res_theaterCheck,
-									res_visitDate:res_visitDate,
-									res_visitNum:res_visitNum
-									},
-							success : function (result) {
-		                        window.location.href= result;
-		                    }
-					});
+					$('div[class=reservation_wrap]').hide();
+					$('div[class=reservation_wrap_info]').show();
 				}
 	        }
 			//개인정보 수집동의 X

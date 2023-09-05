@@ -660,6 +660,7 @@
 .reservation_wrap_info {
     width: 62.5%;
     margin: 0 auto;
+    display: none;
 }
 
 .info_area{
@@ -699,6 +700,7 @@
     border-bottom: 2px solid #000;
     display: flex;
     margin-bottom: 74px;
+    width: 100%;
 }
 
 .table_left {
@@ -709,6 +711,8 @@
 .table_right {
     width: 40%;
     margin-left: 12px;
+    height: 100%;
+    margin: auto;
 }
 
 .group_name, .leader_name, .phone_num, .certifi_num, .vehicle_check {
@@ -716,6 +720,12 @@
     height: 92px;
     line-height: 92px;
     border-bottom: 1px solid #D2D2D2;
+    width: 100%;
+}
+
+.num_input_area {
+    width: 33%;
+    margin-right: 30px;
 }
 
 .request_check{
@@ -729,11 +739,12 @@
     border-bottom: 1px solid #D2D2D2;
     height: 193px;
     line-height: 193px;
+    width: 100%;
 }
 
 .left_title {
     background: #F5F5F5;
-    width: 180px;
+/*     width: 180px; */
     padding-left: 30px;
     color: #222;
     font-family: Pretendard;
@@ -742,50 +753,503 @@
     font-weight: 500;
     /* line-height: normal; */
     letter-spacing: -0.6px;
+    width:27%;
 }
 
 .right_title{
 	padding-left: 30px;
+	width: 73%;
+}
+
+.input_groupName, .input_leaderName {
+    width: 92%;
 }
 
 .studentNum, .adultNum, .leaderNum {
     display: flex;
     height: 64px;
     line-height: 64px;
+}
+
+.calc_wrapper {
+    width: 73%;
     padding-left: 30px;
 }
 
-.vehicle_wrapper, .request_wrapper{
-	display: flex;
-	padding-left: 30px;
+.vehicle_wrapper, .request_wrapper {
+    display: flex;
+    padding-left: 30px;
+    width: 73%;
+    align-items: center;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.6px;
 }
 
 .vehicle_1, .vehicle_2, .vehicle_3, .request_1, .request_2{
 	display: flex;
+	align-items: center;
+}
+
+.vehicle_1 div, .vehicle_2 div {
+    margin-right: 50px;
+}
+
+.request_1 div {
+    margin-right: 82px;
 }
 
 .table_left input[type="text"] {
     border-radius: 5px;
     border: 1px solid #B0B0B0;
     background: #FFF;
-    height: 52px;
+    height: 47px;
+    padding-left: 30px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.6px;
 }
 
 .calc_wrapper input[type="text"] {
     height: 42px;
     margin-left: 30px;
+    width: 100%;
+    padding-left: 0;
+    text-align: center;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.6px;
 }
 
-.studentNum div:first-child {
-    width: 77px;
+.studentNum .num_txt {
+/*     width: 57px; */
+    color: #222;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 64px;
+    letter-spacing: -0.66px;
+    margin-right: 19px;
 }
 
-.adultNum div:first-child {
-    width: 77px;
+.adultNum .num_txt {
+/*     width: 56px; */
+    color: #222;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 64px;
+    letter-spacing: -0.66px;
+    margin-right: 19px;
 }
 
-.leaderNum div:first-child {
-    width: 77px;
+.leaderNum .num_txt {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 64px;
+    letter-spacing: -0.66px;
+}
+
+.icon_box {
+    padding-left: 30px;
+    display: flex;
+}
+
+#icon_wrap {
+    border-radius: 50px;
+    border: 1px solid #B0B0B0;
+    background: #F5F5F5;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    position: relative;
+}
+
+.plus_icon, .minus_icon{
+	margin: auto;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.plus_icon{
+	margin-right: 15px;
+}
+
+.plus_icon img {
+    position: absolute;
+    left: 7px;
+    top: 6.5px;
+}
+
+.minus_icon img {
+    position: absolute;
+    left: 7px;
+    top: 6.5px;
+}
+
+.adultNum p {
+    color: #767676;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: normal; */
+    letter-spacing: -0.6px;
+    margin-left: 10px;
+}
+
+#right_flex {
+    display: flex;
+    align-items: center;
+}
+
+.input_certifinum, .input_phone {
+    width: 62%;
+}
+
+#certifinum_submit, #certifinum_check {
+    margin-left: 20px;
+    border-radius: 5px;
+    border: 1px solid #B0B0B0;
+    background: #F5F5F5;
+    height: 42px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.6px;
+    width: 25%;
+}
+
+/* -------라디오버튼 css-----  */
+#vehicle_1, #vehicle_2, #vehicle_3, #request_1, #request_2{
+	display: none;
+}
+
+.vehicle_wrapper input[type="radio"] + label {
+	display: inline-block;
+	width:25px; 
+	height: 25px; 
+	background: #FFF;
+	cursor: pointer; 
+	border-radius: 50%;
+	border: 1px solid #DFDFDF;
+    margin-right: 10px;
+}
+
+.vehicle_wrapper input[type="radio"]:checked + label {
+	background:url(../imgs/check_icon.png) no-repeat center/25px 25px; 
+	float: right;
+	border: 1px solid rgba(244, 63, 31, 1);
+}
+
+.request_wrapper input[type="radio"] + label {
+	display: inline-block;
+	width:25px; 
+	height: 25px; 
+	background: #FFF;
+	cursor: pointer; 
+	border-radius: 50%;
+	border: 1px solid #DFDFDF;
+    margin-right: 10px;
+}
+
+.request_wrapper input[type="radio"]:checked + label {
+	background:url(../imgs/check_icon.png) no-repeat center/25px 25px; 
+	float: right;
+	border: 1px solid rgba(244, 63, 31, 1);
+}
+
+.one_block {
+    height: 55%;
+    line-height: 80px;
+}
+
+.sub_block {
+    color: #767676;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.45px;
+    margin-bottom: 23px;
+    /* height: 35%; */
+}
+
+.info_confirm {
+    background: #F5F5F5;
+    width: 86%;
+    height: 82%;
+    /* margin: 20px auto; */
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+    padding: 39px 30px;
+}
+
+.place_confirm {
+    text-align: center;
+    /* margin: 24px auto; */
+    color: #F43F1F;
+    font-family: Pretendard;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 170.02%;
+    letter-spacing: -0.9px;
+    border-bottom: 1px solid #D2D2D2;
+    padding-bottom: 24px;
+    height: 50px;
+}
+
+.date_confirm, .time_confirm, .num_confirm {
+    height: 57px;
+    align-items: center;
+    display: flex;
+    border-bottom: 1px solid #D2D2D2;
+}
+
+.div_sticker {
+    border-radius: 12.5px;
+    background: #6F6F6F;
+    width: 60px;
+    height: 25px;
+    text-align: center;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: -0.48px;
+    margin-right: 20px;
+}
+
+.date_insert, .time_insert, .num_insert {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 170.02%;
+    letter-spacing: -0.66px;
+}
+
+.num_insert{
+	display: flex;
+}
+
+.table_area {
+    margin: 20px auto;
+}
+
+.num_table {
+    text-align: center;
+    margin-left: 80px;
+    padding-bottom: 20px;
+}
+
+#top_th {
+    display: flex;
+    background: #EDEDED;
+    width: 100%;
+    height: 36px;
+    /* align-items: center; */
+    line-height: 36px;
+    color: #222;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: normal; */
+    letter-spacing: -0.48px;
+}
+
+.tb_div {
+    width: 30%;
+    border-right: 1px solid #D2D2D2;
+    border-bottom: 1px solid #D2D2D2;
+    /* height: 36px; */
+    /* line-height: 36px; */
+}
+
+.tb_num {
+    width: 35%;
+    border-right: 1px solid #D2D2D2;
+    border-bottom: 1px solid #D2D2D2;
+}
+
+.total_num {
+    width: 34%;
+    border-bottom: 1px solid #D2D2D2;
+}
+
+.student_total, .adult_total, .leader_total {
+    height: 36px;
+    line-height: 36px;
+    display: flex;
+    background: #FFF;
+    /* align-items: center; */
+}
+
+.student_total .tb_div {
+    color: #222;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: normal; */
+    letter-spacing: -0.48px;
+}
+
+.adult_total .tb_div {
+    color: #222;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: normal; */
+    letter-spacing: -0.48px;
+}
+
+.leader_total .tb_div {
+    color: #222;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: normal; */
+    letter-spacing: -0.48px;
+}
+
+.student_total .tb_num {
+    color: #F43F1F;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    /* line-height: normal; */
+    letter-spacing: -0.6px;
+}
+
+.adult_total .tb_num {
+    color: #F43F1F;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    /* line-height: normal; */
+    letter-spacing: -0.6px;
+}
+
+.leader_total .tb_num {
+    color: #F43F1F;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    /* line-height: normal; */
+    letter-spacing: -0.6px;
+}
+
+.total_check {
+    width: 34%;
+    /* height: 100%; */
+    height: 107px;
+    line-height: 107px;
+    border-bottom: 1px solid #D2D2D2;
+    color: #F43F1F;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    /* line-height: normal; */
+    letter-spacing: -0.6px;
+}
+
+.name_area, .phone_area, .vehicle_area {
+    display: flex;
+    height: 34px;
+    align-items: center;
+    margin: 16px auto;
+}
+
+.request_area {
+    margin-top: 16px;
+    display: flex;
+    height: 34px;
+    align-items: center;
+}
+
+.confirm_bottom_title {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 170.02%;
+    letter-spacing: -0.6px;
+    margin-right: 10px;
+}
+
+.div_bar {
+    color: #D2D2D2;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 170.02%;
+    letter-spacing: -0.6px;
+    margin-right: 10px;
+}
+
+.name_insert, .phone_insert, .vehicle_insert {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170.02%;
+    letter-spacing: -0.6px;
+}
+
+.request_insert{
+	color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 170.02%;
+    letter-spacing: -0.6px;
 }
 
 .message_title {
@@ -813,5 +1277,6 @@ input.message_txtbox {
     line-height: normal;
     letter-spacing: -0.6px;
     padding: 15px 30px;
+    box-sizing: border-box;
 }
 
