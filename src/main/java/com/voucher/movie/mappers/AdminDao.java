@@ -2,6 +2,7 @@ package com.voucher.movie.mappers;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -87,6 +88,13 @@ public interface AdminDao {
 	NewsVO viewNewsDetail(int news_id); //박물관 소식 상세-관리자
 
 	@Select("select * from news_files where news_id = #{news_id}")
-	List<NewsFileVo> viewFileFileDetail(int news_id);
+	List<NewsFileVo> viewNewsFileDetail(int news_id);
+
+	@Update("update museum_news set news_title = #{news_title}, news_content = #{news_content}, news_link = #{news_link}, update_date = sysdate() where id = #{id}")
+	boolean updateNews(NewsVO newsVo);
+
+	@Delete("delete from news_files where news_id = #{news_id} and file_name = #{file_name}")
+	boolean deleteFile(int news_id, String file_name);
+
 
 }

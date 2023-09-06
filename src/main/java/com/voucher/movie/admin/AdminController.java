@@ -11,14 +11,17 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.voucher.movie.ScriptUtils;
@@ -246,11 +249,11 @@ public class AdminController {
 	
 	//박물관 소식 등록(post)
 	@ResponseBody
-	@RequestMapping(value="/newsInsert_ok", method=RequestMethod.POST)
+	@RequestMapping(value="/newsAdd", method=RequestMethod.POST)
 	public String reservation_news_register(HttpServletRequest request, @ModelAttribute NewsVO newsvo, ModelMap model, List<MultipartFile> news_file) throws Exception {
 		
 		System.out.println(newsvo);
-		
+		adminService.insertNews(newsvo);
 		int news_id = adminService.get_news_Id(newsvo.getId());
 	    
 	    Calendar cal = Calendar.getInstance();
@@ -276,11 +279,70 @@ public class AdminController {
 			ModelAndView mav = new ModelAndView();
 			NewsVO detailVo = adminService.viewNewsDetail(news_id);
 			
-			List<NewsFileVo> newsFileList = adminService.viewFileFileDetail(news_id);
+			List<NewsFileVo> newsFileList = adminService.viewNewsFileDetail(news_id);
+			String news_date = detailVo.getCreate_date();
+	    	news_date = news_date.substring(0, 4) + "." + news_date.substring(5, 7) +"." + news_date.substring(8, 10);
+	    	detailVo.setCreate_date(news_date);
 			
 			mav.addObject("news", detailVo);
 			mav.addObject("newsFileList", newsFileList);
 			mav.setViewName("admin_newsDetail");
 			return mav;
+		}
+		
+		//박물관 소식 파일 다운로드
+		@RequestMapping({"/news_download"})
+		@ResponseBody
+		public ResponseEntity<byte[]> download(@RequestParam String filename) throws IOException {
+			return s3Service.getObject_news(filename);
+		}
+		
+		//박물관 소식 수정 페이지
+		@RequestMapping(value="/admin_news_update", method=RequestMethod.GET)
+		public ModelAndView admin_news_update(@RequestParam("id") int news_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			NewsVO detailVo = adminService.viewNewsDetail(news_id);
+			
+			List<NewsFileVo> newsFileList = adminService.viewNewsFileDetail(news_id);
+			
+			mav.addObject("news", detailVo);
+			mav.addObject("newsFileList", newsFileList);
+
+			mav.setViewName("admin_newsUpdate");
+			return mav;
+		}
+		
+		//박물관 소식 수정
+		@ResponseBody
+		@RequestMapping(value="/newsUpdate", method=RequestMethod.POST)
+		public String newsUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute NewsVO newsVo, @RequestAttribute("news_file") List<MultipartFile> news_file) throws Exception{
+				
+			//지울 파일 리스트
+			String[] deleteFileNameList = multipartRequest.getParameterValues("deleteFileNameList");
+			System.out.println("deletefile = "+deleteFileNameList);
+			
+			//수정 시 지운파일 삭제
+			if(deleteFileNameList != null) {
+				for( String name : deleteFileNameList ) {
+					s3Service.delete_s3News(name);
+					adminService.deleteFile(newsVo.getId(), name);
+					System.out.println("OK");
+				}
+			}
+			//행사 내용 수정
+			adminService.updateNews(newsVo);
+				
+			//수정 시 추가한 파일 추가
+			if(news_file != null) {
+				List<String> filenames = s3Service.upload_news(news_file);
+				for(String name : filenames) {
+					NewsFileVo newsFileVo = new NewsFileVo();
+					newsFileVo.setNews_id(newsVo.getId());
+					newsFileVo.setFile_name(name);
+					adminService.insertNewsFile(newsFileVo);
+				}
+			}
+				
+			return "admin_newsDetail?id="+newsVo.getId();
 		}
 }

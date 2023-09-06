@@ -44,7 +44,7 @@
 							</div>
 							
 							<div class="newsTitle_area">
-								<li>[[${news.news_title}]]</li>
+								<a th:href="@{admin_newsDetail(id=${news.id})}"><li>[[${news.news_title}]]</li></a>
 							</div>
 							
 							<div class="newsDate_area">

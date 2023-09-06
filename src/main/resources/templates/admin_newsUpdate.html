@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/admin_boardInsert.css">
     <script src="/js/common.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+	
 	<script src="js/board_register.js"></script>
 </head>
 <body>
@@ -30,21 +30,28 @@
                 	<form name="newsAddForm" action="/newsAdd" enctype="multipart/form-data" method="post" onsubmit="return false">
                     <div class="area1">
                         <span>제목</span>
-                        <input type="text" name="news_title" class="required" placeholder="제목을 입력해주세요." maxlength="50" >
+                        <input type="text" name="news_title" class="required" placeholder="제목을 입력해주세요." th:value="${news.news_title}" >
                     </div>
-                    <div class="area3">
+					<div class="area3">
                         <span>동영상 링크</span>
-                        <input type="text" name="news_link">
+                        <input type="text" name="news_link" th:value="${news.news_link}" >
                     </div>
                     <div class="area2">
                         <span>내용</span>
-                        <textarea placeholder="700자 이내로 입력" name="news_content" class="required" maxlength="700" onkeydown="resize(15,100,this)" ></textarea>
+                        <textarea placeholder="700자 이내로 입력" name="news_content" class="required" maxlength="700" th:value="${news.news_content}" th:text="${news.news_content}" onkeydown="resize(15,100,this)" ></textarea>
                     </div>
                     <div class="area3">
                         <span>이미지/파일첨부<p>(최대 5개)</p></span>
                         <div class="file_area">
                             <div id="file_names">
                                 <!-- 파일 이름 -->
+                                <div th:each="FileList : ${newsFileList}"  th:id="'fileTr_' + ${FileListStat.index}">
+                                    <div class='file_con'>
+                                        <div class="filename" th:text="${FileList.file_name}"></div>
+                                        <img src="/imgs/close_btn_black.svg" th:data-fileName="${FileList.file_name}" th:data-index="${FileListStat.index}" 
+                                        th:onclick="deleteFile_for_update(this.getAttribute('data-index'),this.getAttribute('data-fileName'))">
+                                    </div>
+                                </div>
                             </div>
                             <label for="input_file" id="file_upload">  </label>
                         </div>
@@ -53,9 +60,29 @@
                     </div>
                     <div class="btn_wrap">
                         <button type="button" onclick="location.href='admin_newsList'">취소</button>
-                        <button type="button" id="submit_bt">저장</button>
+                        <button type="button" id="update_bt">저장</button>
                     </div>
+
+                    <!-- update -->
+                        <input type="text" name="id" hidden th:value="${news.id}">
+                        
                     </form>
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        $(function(){
+                            let newsFileList = /*[[${newsFileList}]]*/
+
+                            fileIndex=newsFileList.length;
+                            
+                            if($('#file_names').children().length >=maxFileNum){
+                                $('#input_file').attr("disabled","disabled");
+                                $('.area3 label').css({'background-color':'#eee', 'cursor':'unset'});
+                            }
+
+                            $('textarea').height((15 + $('textarea').prop('scrollHeight')));
+                        })
+                        /*]]>*/
+                    </script>
                 </div>
 
 

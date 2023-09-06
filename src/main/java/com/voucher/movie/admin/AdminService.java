@@ -132,8 +132,18 @@ public class AdminService {
 		return adminDao.viewNewsDetail(news_id);
 	}
 
-	public List<NewsFileVo> viewFileFileDetail(int news_id) {
-		return adminDao.viewFileFileDetail(news_id);
+	public List<NewsFileVo> viewNewsFileDetail(int news_id) {
+		return adminDao.viewNewsFileDetail(news_id);
+	}
+	
+	//박물관 소식 수정
+	public boolean updateNews (NewsVO newsVo) throws Exception {
+		return adminDao.updateNews(newsVo);
+	}
+			
+	//박물관 소식 파일 삭제
+	public boolean deleteFile (int news_id, String file_name) throws Exception {
+		return adminDao.deleteFile(news_id, file_name);
 	}
 
 
