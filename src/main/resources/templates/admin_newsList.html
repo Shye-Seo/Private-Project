@@ -30,29 +30,39 @@
                     <ul class="list">
                         <ol id="top_ol">
 							<div class="check_area"><li><input type="checkbox" class="all_check"></li></div>
-                            <div class="title_area"><li>NO</li></div>
-                            <div class="date_area"><li>제목</li></div>
-                            <div class="status_area"><li>등록일</li></div>
+                            <div class="num_area"><li>NO</li></div>
+                            <div class="newsTitle_area"><li>제목</li></div>
+                            <div class="newsDate_area"><li>등록일</li></div>
                         </ol>
 						<ol th:each="news : ${news_list}" class="list_ol">
 							<div class="check_area">
 								<li><input type="checkbox" class="'check_'+${new.id}"></li>
 							</div>
 							
-							<div class="title_area">
+							<div class="num_area">
 								<li>[[${news.id}]]</li>
 							</div>
 							
-							<div class="date_area">
+							<div class="newsTitle_area">
 								<li>[[${news.news_title}]]</li>
 							</div>
 							
-							<div class="status_area">
-								<li>[[${news.news_date}]]</li>
+							<div class="newsDate_area">
+								<li>[[${news.create_date}]]</li>
 							</div>
 							
 						</ol>
                     </ul>
+                    
+                    <div class="newsbtn_area">
+                    	<div class="btn_left">
+                    			<input type="button" value="삭제" id="delete_btn">
+                    			<input type="button" value="수정" id="modify_btn">
+                    	</div>
+                    	<div class="btn_right">
+                    			<input type="button" value="등록" id="insert_btn" onclick="location.href='/admin_newsInsert'">
+                    	</div>
+                    </div>
                                     
                     <!-- 페이징 -->
                     

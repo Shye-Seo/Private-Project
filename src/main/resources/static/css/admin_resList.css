@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 *{
 	font: 'Pretendard';
@@ -283,4 +284,120 @@ button{
     box-sizing: border-box;
     height: 46px;
     width: 10%;
+}
+
+.check_area {
+    box-sizing: border-box;
+    height: 46px;
+    width: 8%;
+    height: 46px;
+    padding: 15px 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.num_area {
+    width: 10%;
+    display: flex;
+    /* width: 100px; */
+    height: 46px;
+    padding: 15px 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.newsTitle_area {
+    height: 46px;
+    padding: 15px 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    width: 67.5%;
+}
+
+.newsDate_area {
+    height: 46px;
+    padding: 15px 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    width: 13.5%;
+}
+
+.newsbtn_area {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#delete_btn {
+    /* display: flex; */
+    width: 60px;
+    height: 40px;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #F43F1F;
+    background: #FFF;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    color: #F43F1F;
+    font-family: 'Noto Sans KR', sans-serif;;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#modify_btn {
+    /* display: flex; */
+    width: 60px;
+    height: 40px;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #F43F1F;
+    background: #FFF;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    color: #F43F1F;
+    font-family: 'Noto Sans KR', sans-serif;;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#insert_btn {
+    display: flex;
+    width: 60px;
+    height: 40px;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #F43F1F;
+    background: #F43F1F;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    color: #FFF;
+    font-family: 'Noto Sans KR', sans-serif;;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    box-sizing: border-box;
+    cursor: pointer;
 }

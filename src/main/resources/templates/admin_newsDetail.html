@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>모여모여</title>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/common.js"></script>
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/newsDetail.css">
+	<script>
+// 		$(function(){
+// 			$('#event_content').height( $('#event_content').prop('scrollHeight') );
+// 			$('.position_pay').each(function() {
+// 				costText(this);
+// 			});
+// 		})
+	</script>
+</head>
+<body>
+	
+<!-- 	<div th:replace="~{common/side :: sidebar_manage('news')}"></div> -->
+
+	<div class="content">
+		<div class="container">
+			<div class="page-header">
+				<div class="page-title">
+					<span>행사목록</span>
+				</div>
+			</div>
+<!-- 			<div class="detail_bar"> -->
+<!-- 				<div class="detail1 this_bar" onclick="location.href='manage_event'"> -->
+<!-- 					<img src="imgs/material-view-list.svg"> -->
+<!-- 					<p>행사현황</p> -->
+<!-- 				</div> -->
+<!-- 				<div class="detail2" onclick="location.href='manage_event_register'"> -->
+<!-- 					<img src="imgs/pen_gray.svg"> -->
+<!-- 					<p>행사등록</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+			<div class="area">
+<!-- 				<span th:fragment="event_detail"> -->
+<!-- 					<div class="event_table event_table_L"> -->
+<!-- 						<p class="con_title">행사 정보</p> -->
+<!-- 						<div class="event_con event_info"> -->
+<!-- 							<div class="event_line"> -->
+<!-- 								<div class="li_title">행사명:</div> -->
+<!-- 								<div id="event_title" th:text="${event.event_title}"></div> -->
+<!-- 							</div> -->
+<!-- 							<div class="event_line"> -->
+<!-- 								<div class="li_title">행사기간:</div> -->
+<!-- 								<div>[(${event.event_startDate})] ~ [(${event.event_endDate})]</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="event_line"> -->
+<!-- 								<div class="li_title">접수마감:</div> -->
+<!-- 								<div>[(${event.event_deadline})]</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="event_line"> -->
+<!-- 								<div class="li_title">행사장소:</div> -->
+<!-- 								<div>[(${event.event_venue})]</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="event_line"> -->
+<!-- 								<div class="li_title">첨부파일:</div> -->
+<!-- 								<div class="event_file"> -->
+<!-- 									<div th:each="FileList : ${eventFileList}" > -->
+<!-- 										<a th:href="@{event_download(filename=${FileList.file_name})}"> -->
+<!-- 											<div><img src="imgs/event_download.svg" alt="event_download"></div> -->
+<!-- 											<div class="file_name" th:text="${FileList.file_name}"></div> -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<p class="con_title">담당업무</p> -->
+<!-- 						<div class="event_con event_position"> -->
+<!-- 							<div class="table_line"> -->
+<!-- 								<div>모집부분</div> -->
+<!-- 								<div>모집인원</div> -->
+<!-- 								<div>임금</div> -->
+<!-- 								<div>근무시간</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="table_line" th:each="position : ${positions}"> -->
+<!-- 								<div th:text="${position}">포지션명</div> -->
+<!-- 								<div th:text="${positions_conut[positionStat.index]} + '명'">00명</div> -->
+<!-- 								<div class="position_pay" th:text="${position_pay[positionStat.index]} + '원/시간'">0원/시간</div> -->
+<!-- 								<div th:text="${position_startTime[positionStat.index]} + ' ~ ' + ${position_endTime[positionStat.index]}" >00:00 ~ 00:00</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="event_table event_table_R"> -->
+<!-- 						<p class="con_title">행사 상세내용</p> -->
+<!-- 						<div class="event_con event_content"> -->
+<!-- 							<textarea name="event_content" id="event_content" spellcheck="false" disabled>[(${event.event_content})]</textarea> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</span> -->
+
+				<div class="btn_wrap">
+<!-- 					<button type="button" onclick="location.href='manage_event'">목록으로</button> -->
+<!-- 					<button type="button" th:onclick="|location.href='@{manage_event_update(id=${event.id})}'|">수정하기</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

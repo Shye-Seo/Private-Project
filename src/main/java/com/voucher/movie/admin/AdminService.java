@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.mappers.AdminDao;
 import com.voucher.movie.mappers.GroupDao;
@@ -117,6 +118,24 @@ public class AdminService {
 	public boolean insertNews(NewsVO newsvo) {
 		return adminDao.insertNews(newsvo);
 	}
+
+	public int get_news_Id(int id) {
+		return adminDao.get_news_Id(id);
+	}
+
+	public boolean insertNewsFile(NewsFileVo newsFileVo) {
+		return adminDao.insertNewsFile(newsFileVo);
+	}
+
+	//박물관 소식 상세-관리자
+	public NewsVO viewNewsDetail(int news_id) {
+		return adminDao.viewNewsDetail(news_id);
+	}
+
+	public List<NewsFileVo> viewFileFileDetail(int news_id) {
+		return adminDao.viewFileFileDetail(news_id);
+	}
+
 
 
 }

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.voucher.movie.admin.AdminVO;
+import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.reservation.ClosedVO;
 import com.voucher.movie.reservation.GroupVO;
@@ -72,7 +73,20 @@ public interface AdminDao {
 	@Select("select * from museum_news order by id desc limit #{startIndex}, #{pageSize}")
 	List<NewsVO> findNewsPaging(int startIndex, int pageSize);
 
-	@Insert("insert into museum_news (news_title, news_content, news_image, news_link, news_date, news_writer)"
-			+ "values (#{news_title}, #{news_content}, #{news_image}, #{news_link}, #{news_date}, #{news_writer})")
+	@Insert("insert into museum_news (news_title, news_content, news_link, create_date)"
+			+ "values (#{news_title}, #{news_content}, #{news_link}, sysdate())")
 	boolean insertNews(NewsVO newsvo); //박물관 소식 등록
+
+	@Select("select id from museum_news order by id desc limit 1")
+	int get_news_Id(int id);
+
+	@Insert("insert into news_files (news_id, file_name, create_date) value (#{news_id}, #{file_name}, sysdate())")
+	boolean insertNewsFile(NewsFileVo newsFileVo); //박물관 소식 파일 추가
+
+	@Select("select * from museum_news where id = #{news_id}")
+	NewsVO viewNewsDetail(int news_id); //박물관 소식 상세-관리자
+
+	@Select("select * from news_files where news_id = #{news_id}")
+	List<NewsFileVo> viewFileFileDetail(int news_id);
+
 }

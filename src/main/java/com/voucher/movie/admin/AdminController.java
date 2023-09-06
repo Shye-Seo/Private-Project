@@ -3,7 +3,9 @@ package com.voucher.movie.admin;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -16,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.voucher.movie.ScriptUtils;
+import com.voucher.movie.aws.AwsS3Service;
+import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.config.PagingVO;
 import com.voucher.movie.reservation.ClosedVO;
@@ -26,6 +31,8 @@ import com.voucher.movie.reservation.GroupService;
 import com.voucher.movie.reservation.GroupVO;
 
 import java.util.List;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
@@ -38,11 +45,21 @@ public class AdminController {
 	@Inject
 	GroupService groupService;
 	
+	@Autowired
+	AwsS3Service s3Service;
+	
 	List<GroupVO> group_list;
 	
 	List<ClosedVO> closed_list;
 	
 	List<NewsVO> news_list;
+	
+	String bucketName = "busanbom"; //변경필요
+	String folderName_news = "news-folder/";
+	String folderName_event = "event-folder/";
+	String folderName_notice = "notice-folder/";
+	String folderName_partner = "partner-folder/";
+	String folderName_edu = "edu-folder/";
 
 	//관리자 로그인
 	@RequestMapping(value = "admin_login")
@@ -205,6 +222,14 @@ public class AdminController {
 	    int pageSize = pagination.getPageSize();
 
 	    news_list = adminService.findNewsPaging(startIndex, pageSize);
+	    
+	    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+	    
+	    for(NewsVO news : news_list) {
+	    	String news_date = news.getCreate_date();
+	    	news_date = news_date.substring(0, 4) + "." + news_date.substring(5, 7) +"." + news_date.substring(8, 10);
+	    	news.setCreate_date(news_date);
+	    }
 		    
 		model.addAttribute("news_list", news_list);
 		model.addAttribute("nowpage", page);
@@ -222,11 +247,40 @@ public class AdminController {
 	//박물관 소식 등록(post)
 	@ResponseBody
 	@RequestMapping(value="/newsInsert_ok", method=RequestMethod.POST)
-	public String reservation_news_register(@ModelAttribute NewsVO newsvo, ModelMap model) throws Exception {
+	public String reservation_news_register(HttpServletRequest request, @ModelAttribute NewsVO newsvo, ModelMap model, List<MultipartFile> news_file) throws Exception {
 		
 		System.out.println(newsvo);
-		adminService.insertNews(newsvo);
 		
+		int news_id = adminService.get_news_Id(newsvo.getId());
+	    
+	    Calendar cal = Calendar.getInstance();
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+	    String time = dateFormat.format(cal.getTime());
+	    
+	    if(news_file != null) {
+			List<String> filenames = s3Service.upload_news(news_file);
+			for(String name : filenames) {
+				NewsFileVo newsFileVo = new NewsFileVo();
+				newsFileVo.setNews_id(news_id);
+				newsFileVo.setFile_name(name);
+				adminService.insertNewsFile(newsFileVo);
+			}
+		}
+	    
 		return "/admin_newsList";
 	}	
+	
+	//박물관 소식 조회_관리자
+		@RequestMapping(value="/admin_newsDetail", method=RequestMethod.GET)
+		public ModelAndView eventDetail(@RequestParam("id") int news_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			NewsVO detailVo = adminService.viewNewsDetail(news_id);
+			
+			List<NewsFileVo> newsFileList = adminService.viewFileFileDetail(news_id);
+			
+			mav.addObject("news", detailVo);
+			mav.addObject("newsFileList", newsFileList);
+			mav.setViewName("admin_newsDetail");
+			return mav;
+		}
 }
