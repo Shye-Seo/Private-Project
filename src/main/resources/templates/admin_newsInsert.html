@@ -57,46 +57,6 @@
                         <span>내용</span>
                         <textarea placeholder="1000자 이내로 입력" name="news_content" maxlength="1000" onkeydown="resize(15,100,this)" ></textarea>
                     </div>
-<!--                     <div class="right_2"> -->
-<!-- 						<div id="file_name"> -->
-<!-- 							<label for="symbol_image" class="symbol_image_btn">첨부 파일</label> -->
-<!-- 						</div> -->
-<!-- 						<input type="file" id="symbol_image" accept="image/*" name="news_poster" /> -->
-						<script>
-// 							$(function () {
-// 								$('input[name=news_poster]').off().on('change', function(){
-// 									if (this.files && this.files[0]) {
-// 										var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
-// 										var imgFile = $(this).val();
-// 										var maxSize = 5 * 1024 * 1024;
-// 										var fileSize = this.files[0].size;
-										
-// 										var fileName = $('input[name=news_poster]').val();
-// 							               var fileNameArr = fileName.split("\.");
-// 							               // 확장자
-// 							               var ext = fileNameArr[fileNameArr.length - 1];
-							               
-// 							               var special_pattern = /[\{\}\[\]|<>\"]/gi;
-
-// 							               if(special_pattern.test($("input[name=news_poster]").val())){
-// 							                   alert('파일명에 특수문자를 제거해주세요.');
-// 							                   return false;
-// 							               }
-										
-// 										if(!imgFile.match(fileForm)) {
-// 									    	alert("이미지 파일만 업로드 가능합니다.");
-// 									    	$(this).val('');
-// 									        return false;
-// 									    } else if(fileSize > maxSize){
-// 											alert("이미지 크기는 5MB 이내로 등록 가능합니다.");
-// 											$(this).val('');
-// 											return false;
-// 										}
-// 									}
-// 								});
-// 							});
-						</script>
-<!-- 					</div> -->
                     <div class="area3">
                         <span>대표이미지첨부</span> <!-- vo에 포함시키지 않고 따로 controller에 전송 -->
                         <div class="file_area">

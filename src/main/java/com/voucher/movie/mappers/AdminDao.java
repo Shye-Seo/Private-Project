@@ -113,5 +113,8 @@ public interface AdminDao {
 	@Select("select * from news_files where news_id = #{c}")
 	String[] getNewsFile(String c);
 
+	@Select("select news_poster from museum_news where id = #{id}")
+	String getOldNewsPoster(int id);
+
 
 }

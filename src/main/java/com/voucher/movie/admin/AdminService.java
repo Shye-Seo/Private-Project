@@ -161,6 +161,10 @@ public class AdminService {
 		return adminDao.getNewsFile(c);
 	}
 
+	public String getOldNewsPoster(int id) {
+		return adminDao.getOldNewsPoster(id);
+	}
+
 
 
 }

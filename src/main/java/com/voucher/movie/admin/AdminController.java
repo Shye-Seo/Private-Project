@@ -251,11 +251,20 @@ public class AdminController {
 	//박물관 소식 등록(post)
 	@ResponseBody
 	@RequestMapping(value="/newsAdd", method=RequestMethod.POST)
-	public String reservation_news_register(HttpServletRequest request, @ModelAttribute NewsVO newsvo, ModelMap model,@RequestAttribute List<MultipartFile> news_file) throws Exception {
+	public String admin_news_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute NewsVO newsvo, ModelMap model,@RequestAttribute List<MultipartFile> news_file) throws Exception {
 		
 		System.out.println(news_file);
 		
+		MultipartFile newsPoster = multipartRequest.getFile("thumbnail_file");
+		System.out.println(newsPoster);
+		
+		if(newsPoster.getOriginalFilename() != "") {
+			String filename = s3Service.upload_Newsposter(newsPoster);
+			System.out.println("s3 insert ok => "+filename);
+			newsvo.setNews_poster(filename);
+		}
 		adminService.insertNews(newsvo);
+		
 		int news_id = adminService.get_news_Id(newsvo.getId());
 	    
 	    Calendar cal = Calendar.getInstance();
@@ -326,9 +335,11 @@ public class AdminController {
 		@RequestMapping(value="/newsUpdate", method=RequestMethod.POST)
 		public String newsUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute NewsVO newsVo, @RequestAttribute("news_file") List<MultipartFile> news_file) throws Exception{
 				
+			String oldFilename = adminService.getOldNewsPoster(newsVo.getId());
 			//지울 파일 리스트
 			String[] deleteFileNameList = multipartRequest.getParameterValues("deleteFileNameList");
-			System.out.println("deletefile = "+deleteFileNameList);
+			String[] deleteFileNameList_thumbnail = multipartRequest.getParameterValues("deleteFileNameList_thumbnail");
+			System.out.println("deletefile = "+deleteFileNameList_thumbnail);
 			
 			//수정 시 지운파일 삭제
 			if(deleteFileNameList != null) {
@@ -337,6 +348,24 @@ public class AdminController {
 					adminService.deleteFile(newsVo.getId(), name);
 				}
 			}
+			
+			if(deleteFileNameList_thumbnail != null) {
+				for( String name : deleteFileNameList_thumbnail ) {
+					s3Service.delete_s3News(name);
+				}
+			}
+			
+			MultipartFile newsPoster = multipartRequest.getFile("thumbnail_file");
+			if(newsPoster.getOriginalFilename() != "") {
+				String filename = s3Service.upload_Newsposter(newsPoster);
+				System.out.println("s3 insert ok => "+filename);
+				newsVo.setNews_poster(filename);
+				
+				newsVo.setNews_poster(filename);
+			}
+			
+			newsVo.setNews_poster(oldFilename);
+			
 			//행사 내용 수정
 			adminService.updateNews(newsVo);
 				

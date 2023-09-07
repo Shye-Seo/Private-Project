@@ -59,12 +59,20 @@
  					</div> 
  					<div class="event_table event_table_R"> 
  						<p class="con_title">행사 상세내용</p>
- 						<div class="youtube">
- 						
- 						</div> 
+ 						<div class="youtube" th:if="${news.news_link1 != null}">
+							[(${news.news_link1})]
+ 						</div>
+ 						<div class="youtube" th:if="${news.news_link2 != null}">
+							[(${news.news_link2})]
+ 						</div>
  						<div class="event_con event_content"> 
- 							<textarea name="event_content" id="event_content" spellcheck="false" disabled>[(${news.news_content})]</textarea> 
- 						</div> 
+ 							<textarea name="event_content" id="event_content" spellcheck="false" disabled>
+								 	[(${news.news_content})]
+							</textarea> 
+ 						</div>
+ 						<div class="poster_area">
+							  <img id="preview" class="in_profile" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${news.news_poster}}" alt="poster_img">
+						</div>
  					</div> 
  				</span> 
 

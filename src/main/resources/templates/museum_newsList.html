@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/cardList.css">
+    <title>부산영화체험박물관 | 박물관소식</title>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
+        <li class="category_1">소통</li></li><li class="div_bar">|</li>
+        <li class="category_2">공지사항</li></li><li class="div_bar">|</li>
+        <li class="category_3">박물관 소식</li></li><li class="div_bar">|</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>박물관 소식</h1></div>
+		</div>
+	</div>
+		<!-- 전시관 및 방문회차 선택 div -->
+		<div class="reservation_wrap">
+			<div class="list_wrap">
+				<ul class="list">
+					<li th:each="news : ${news_list}" class="news_div">
+						<div class="news_poster">
+							<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${news.news_poster}}" alt="poster_img">
+						</div>
+						<div class="news_info">
+							<div class="news_title"><p>[(${news.news_title})]</p></div>
+							<div class="news_detail">
+								<p>일시 : [(${news.news_date})]</p>
+								<p>장소 : [(${news.news_place})]</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+</body>
+</html>
