@@ -33,6 +33,8 @@ public interface AdminDao {
 	@Select("select * from reservation_group order by res_status asc, id desc limit #{startIndex}, #{pageSize}")
 	List<GroupVO> findListPaging(int startIndex, int pageSize);
 	
+	// ----------------- 예약 관련 -------------/
+	
 	@Update("update reservation_group set res_status = #{i} where id = #{id}")
 	boolean setStatus(int id, int i); // 예약상태 set
 
@@ -68,14 +70,18 @@ public interface AdminDao {
 	@Select("select * from reservation_group where res_visitDate = #{date} and res_status = 1")
 	List<GroupVO> getReservation_list(String date);//해당 날짜의 예약확정 리스트 get
 
+	// ----------------- 게시판 관련 -------------
+	
 	@Select("select count(*) from museum_news")
 	int fintAllNews(); //박물관 소식 전체 count
 	
 	@Select("select * from museum_news order by id desc limit #{startIndex}, #{pageSize}")
 	List<NewsVO> findNewsPaging(int startIndex, int pageSize);
 
-	@Insert("insert into museum_news (news_title, news_content, news_link, create_date)"
-			+ "values (#{news_title}, #{news_content}, #{news_link}, sysdate())")
+	@Insert("insert into museum_news (news_title, news_date, news_place, news_method, news_contact, "
+			+ "news_content, news_screeningCheck, news_poster, news_link1, news_link2,  create_date)"
+			+ "values (#{news_title}, #{news_date}, #{news_place}, #{news_method}, #{news_contact}, "
+			+ "#{news_content}, #{news_screeningCheck}, #{news_poster}, #{news_link1}, #{news_link2}, sysdate())")
 	boolean insertNews(NewsVO newsvo); //박물관 소식 등록
 
 	@Select("select id from museum_news order by id desc limit 1")
@@ -90,11 +96,22 @@ public interface AdminDao {
 	@Select("select * from news_files where news_id = #{news_id}")
 	List<NewsFileVo> viewNewsFileDetail(int news_id);
 
-	@Update("update museum_news set news_title = #{news_title}, news_content = #{news_content}, news_link = #{news_link}, update_date = sysdate() where id = #{id}")
+	@Update("update museum_news set news_title = #{news_title}, news_date = #{news_date}, news_place = #{news_place},"
+			+ " news_method = #{news_method}, news_contact = #{news_contact}, news_content = #{news_content}, news_screeningCheck = #{news_screeningCheck},"
+			+ " news_poster = #{news_poster}, news_link1 = #{news_link1}, news_link2 = #{news_link2}, update_date = sysdate() where id = #{id}")
 	boolean updateNews(NewsVO newsVo);
 
 	@Delete("delete from news_files where news_id = #{news_id} and file_name = #{file_name}")
 	boolean deleteFile(int news_id, String file_name);
+
+	@Delete("delete from museum_news where id = #{c}")
+	boolean news_delete(String c); //박물관 소식 삭제
+
+	@Delete("delete from news_files where news_id = #{c}")
+	boolean newsFile_delete(String c);
+
+	@Select("select * from news_files where news_id = #{c}")
+	String[] getNewsFile(String c);
 
 
 }

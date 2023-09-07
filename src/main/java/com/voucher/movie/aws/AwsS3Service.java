@@ -110,7 +110,7 @@ public class AwsS3Service {
             try(InputStream inputStream = file.getInputStream()) {
                 s3Client.putObject(new PutObjectRequest(bucket+"/"+newsFolder, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
-                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+//                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
             } catch(IOException e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
             }
@@ -140,7 +140,7 @@ public class AwsS3Service {
             try(InputStream inputStream = file.getInputStream()) {
                 s3Client.putObject(new PutObjectRequest(bucket+"/"+eventFolder, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
-                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+//                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
             } catch(IOException e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
             }
@@ -170,7 +170,7 @@ public class AwsS3Service {
             try(InputStream inputStream = file.getInputStream()) {
                 s3Client.putObject(new PutObjectRequest(bucket+"/"+noticeFolder, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
-                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+//                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
             } catch(IOException e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
             }
@@ -200,7 +200,7 @@ public class AwsS3Service {
             try(InputStream inputStream = file.getInputStream()) {
                 s3Client.putObject(new PutObjectRequest(bucket+"/"+partnerFolder, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
-                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+//                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
             } catch(IOException e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
             }
@@ -230,7 +230,7 @@ public class AwsS3Service {
             try(InputStream inputStream = file.getInputStream()) {
                 s3Client.putObject(new PutObjectRequest(bucket+"/"+eduFolder, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
-                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+//                fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
             } catch(IOException e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
             }

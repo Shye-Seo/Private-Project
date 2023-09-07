@@ -1,5 +1,6 @@
 package com.voucher.movie.admin;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -250,9 +251,10 @@ public class AdminController {
 	//박물관 소식 등록(post)
 	@ResponseBody
 	@RequestMapping(value="/newsAdd", method=RequestMethod.POST)
-	public String reservation_news_register(HttpServletRequest request, @ModelAttribute NewsVO newsvo, ModelMap model, List<MultipartFile> news_file) throws Exception {
+	public String reservation_news_register(HttpServletRequest request, @ModelAttribute NewsVO newsvo, ModelMap model,@RequestAttribute List<MultipartFile> news_file) throws Exception {
 		
-		System.out.println(newsvo);
+		System.out.println(news_file);
+		
 		adminService.insertNews(newsvo);
 		int news_id = adminService.get_news_Id(newsvo.getId());
 	    
@@ -261,7 +263,7 @@ public class AdminController {
 	    String time = dateFormat.format(cal.getTime());
 	    
 	    if(news_file != null) {
-			List<String> filenames = s3Service.upload_news(news_file);
+	    	List<String> filenames = s3Service.upload_news(news_file);
 			for(String name : filenames) {
 				NewsFileVo newsFileVo = new NewsFileVo();
 				newsFileVo.setNews_id(news_id);
@@ -283,7 +285,14 @@ public class AdminController {
 			String news_date = detailVo.getCreate_date();
 	    	news_date = news_date.substring(0, 4) + "." + news_date.substring(5, 7) +"." + news_date.substring(8, 10);
 	    	detailVo.setCreate_date(news_date);
-			
+	    	
+	    	if(detailVo.getNews_link1() != null) {
+	    		mav.addObject("news_link1", detailVo.getNews_link1());
+	    	}
+	    	if(detailVo.getNews_link2() != null) {
+	    		mav.addObject("news_link2", detailVo.getNews_link2());
+	    	}
+	    	
 			mav.addObject("news", detailVo);
 			mav.addObject("newsFileList", newsFileList);
 			mav.setViewName("admin_newsDetail");
@@ -326,7 +335,6 @@ public class AdminController {
 				for( String name : deleteFileNameList ) {
 					s3Service.delete_s3News(name);
 					adminService.deleteFile(newsVo.getId(), name);
-					System.out.println("OK");
 				}
 			}
 			//행사 내용 수정
@@ -344,5 +352,27 @@ public class AdminController {
 			}
 				
 			return "admin_newsDetail?id="+newsVo.getId();
+		}
+		
+		//박물관 소식 삭제
+		@ResponseBody
+		@RequestMapping(value = "news_delete", method = RequestMethod.POST)
+		public String news_delete(HttpServletRequest request, ModelMap modelMap,
+				@RequestParam(value = "check[]", defaultValue = "") List<String> check) {
+
+			int cnt = 0;
+
+			for (String c : check) {
+				adminService.news_delete(c);
+				String[] deleteFileNameList = adminService.getNewsFile(c);
+				
+				if(deleteFileNameList != null) {
+					for( String name : deleteFileNameList ) {
+						s3Service.delete_s3News(name);
+					}
+					adminService.newsFile_delete(c);
+				}
+			}
+			return String.valueOf(cnt);
 		}
 }

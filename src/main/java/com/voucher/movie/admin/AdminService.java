@@ -146,6 +146,21 @@ public class AdminService {
 		return adminDao.deleteFile(news_id, file_name);
 	}
 
+	//박물관 소식 삭제
+	public boolean news_delete(String c) {
+		return adminDao.news_delete(c);
+	}
+	
+	//박물관 소식 삭제 시, 해당 게시글의 모든 첨부파일 삭제
+	public boolean newsFile_delete(String c) {
+		return adminDao.newsFile_delete(c);
+	}
+
+	//박물관 소식 삭제 시, s3에서 해당 게시글의 모든 첨부파일 삭제를 위해 파일리스트 get
+	public String[] getNewsFile(String c) {
+		return adminDao.getNewsFile(c);
+	}
+
 
 
 }

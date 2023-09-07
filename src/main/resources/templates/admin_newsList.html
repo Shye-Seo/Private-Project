@@ -36,7 +36,7 @@
                         </ol>
 						<ol th:each="news : ${news_list}" class="list_ol">
 							<div class="check_area">
-								<li><input type="checkbox" class="'check_'+${new.id}"></li>
+								<li><input type="checkbox" th:class="'check_'+${news.id}" name="check" th:value="${news.id}"></li>
 							</div>
 							
 							<div class="num_area">
@@ -56,7 +56,7 @@
                     
                     <div class="newsbtn_area">
                     	<div class="btn_left">
-                    			<input type="button" value="삭제" id="delete_btn">
+                    			<input type="button" value="삭제" id="delete_btn" onclick="news_delete()">
                     			<input type="button" value="수정" id="modify_btn">
                     	</div>
                     	<div class="btn_right">
@@ -100,6 +100,42 @@
                 </div>
             </div>
         </div>
+<script>
+function news_delete() {
+	var check = [];
 
+	if($('input[name="check"]:checked').length == 0){
+		alert("선택된 항목이 없습니다.");
+		return false;
+	}else{
+		$('input[name="check"]:checked').each(function(e) {
+			check.push($(this).val());
+		})
+
+		var list = {
+			'check' : check
+		}
+
+		$.ajax({
+			url : 'news_delete',
+			type : 'post',
+			data : list,
+			success : function(data) {
+
+				if ($.trim(data) == 0) {
+					alert('삭제되었습니다.');
+					location.href = 'admin_newsList';
+				} else {
+					alert('삭제 실패');
+
+				}
+			},
+			error : function() {
+				alert("에러입니다");
+			}
+		});
+	}
+};
+</script>
 </body>
 </html>
