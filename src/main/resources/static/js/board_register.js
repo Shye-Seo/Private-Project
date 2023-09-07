@@ -11,11 +11,11 @@ $(function () {
             });
             
             $("#thumbnail").bind('change', function() {
-                selectFile_thumbnail(this.files);
+                selectFile_thumbnail(this.file);
 
                 //파일 1개 이상일 시 버튼 비활성화
-                if($('#file_names').children().length >=1){
-                    $('#input_file').attr("disabled","disabled");
+                if($('#file_names_thumbnail').children().length >=1){
+                    $('#thumbnail').attr("disabled","disabled");
                     $('.area3 .thumbnail_label').css({'background-color':'#eee', 'cursor':'unset'});
                 }
             });
@@ -188,7 +188,7 @@ $(function () {
            
            for (var i = 0; i < thumbnail_file.length; i++) {
                // 파일 이름
-               var fileName = files[i].name; /*----오류 발생-----*/
+               var fileName = thumbnail_file[i].name; /*----오류 발생-----*/
                var fileNameArr = fileName.split("\.");
                // 확장자
                var ext = fileNameArr[fileNameArr.length - 1];
@@ -200,7 +200,7 @@ $(function () {
                    return false;
                }
                
-               var fileSize = files[i].size; // 파일 사이즈(단위 :byte)
+               var fileSize = thumbnail_file[i].size; // 파일 사이즈(단위 :byte)
                console.log("fileSize="+fileSize);
                if (fileSize <= 0) {
                    console.log("0kb file return");
@@ -225,7 +225,7 @@ $(function () {
                    // 전체 파일 사이즈
                    totalFileSize += fileSizeMb;
                    // 파일 배열에 넣기
-                   fileList[fileIndex] = files[i];
+                   fileList[fileIndex] = thumbnail_file[i];
                    // 파일 사이즈 배열에 넣기
                    fileSizeList[fileIndex] = fileSizeMb;
                    // 업로드 파일 목록 생성
