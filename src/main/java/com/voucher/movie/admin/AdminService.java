@@ -186,6 +186,18 @@ public class AdminService {
 		return adminDao.get_popup_FileName(c);
 	}
 
+	//팝업 상세
+	public PopupVO viewPopupDetail(int popup_id) {
+		return adminDao.viewPopupDetail(popup_id);
+	}
 
+	//팝업 수정
+	public boolean updatePopup (PopupVO popupVo) throws Exception {
+		return adminDao.updatePopup(popupVo);
+	}
+
+	public String getOldPopupImage(int id) {
+		return adminDao.getOldPopupImage(id);
+	}	
 
 }

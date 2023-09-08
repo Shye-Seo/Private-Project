@@ -285,7 +285,7 @@ public class AdminController {
 	
 	//박물관 소식 조회_관리자
 		@RequestMapping(value="/admin_newsDetail", method=RequestMethod.GET)
-		public ModelAndView eventDetail(@RequestParam("id") int news_id) throws Exception{
+		public ModelAndView newsDetail(@RequestParam("id") int news_id) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			NewsVO detailVo = adminService.viewNewsDetail(news_id);
 			
@@ -359,11 +359,9 @@ public class AdminController {
 				String filename = s3Service.upload_Newsposter(newsPoster);
 				System.out.println("s3 insert ok => "+filename);
 				newsVo.setNews_poster(filename);
-				
-				newsVo.setNews_poster(filename);
+			}else {
+				newsVo.setNews_poster(oldFilename);
 			}
-			
-			newsVo.setNews_poster(oldFilename);
 			
 			//행사 내용 수정
 			adminService.updateNews(newsVo);
@@ -429,6 +427,21 @@ public class AdminController {
 			return "/admin_popupList";
 		}
 		
+		//팝업 조회_관리자
+		@RequestMapping(value="/admin_popupDetail", method=RequestMethod.GET)
+		public ModelAndView popupDetail(@RequestParam("id") int popup_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			PopupVO detailVo = adminService.viewPopupDetail(popup_id);
+			
+	    	if(detailVo.getClick_link() != null) {
+	    		mav.addObject("click_link", detailVo.getClick_link());
+	    	}
+	    	
+			mav.addObject("popup", detailVo);
+			mav.setViewName("admin_popupDetail");
+			return mav;
+		}
+		
 		//관리자 - 팝업 등록 페이지
 		@RequestMapping(value="/admin_popupInsert", method=RequestMethod.GET)
 		public String admin_popupInsert(ModelMap model) throws Exception {
@@ -458,7 +471,7 @@ public class AdminController {
 			return "/admin_popupList";
 		}	
 		
-		//박물관 소식 삭제
+		//팝업 삭제
 		@ResponseBody
 		@RequestMapping(value = "popup_delete", method = RequestMethod.POST)
 		public String popup_delete(HttpServletRequest request, ModelMap modelMap, @RequestParam(value = "check[]", defaultValue = "") List<String> check) {
@@ -471,5 +484,50 @@ public class AdminController {
 				adminService.popup_delete(c);
 			}
 			return String.valueOf(cnt);
-		}		
+		}
+		
+		//팝업 수정 페이지
+		@RequestMapping(value="/admin_popup_update", method=RequestMethod.GET)
+		public ModelAndView admin_popup_update(@RequestParam("id") int popup_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			PopupVO detailVo = adminService.viewPopupDetail(popup_id);
+			
+			mav.addObject("popup", detailVo);
+
+			mav.setViewName("admin_popupUpdate");
+			return mav;
+		}
+		
+		//팝업 소식 수정
+		@ResponseBody
+		@RequestMapping(value="/popupUpdate", method=RequestMethod.POST)
+		public String popupUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute PopupVO popupVo) throws Exception{
+				
+			String oldFilename = adminService.getOldPopupImage(popupVo.getId());
+			//지울 파일 리스트
+			String[] deleteFileNameList_thumbnail = multipartRequest.getParameterValues("deleteFileNameList_thumbnail");
+			System.out.println("deletefile = "+deleteFileNameList_thumbnail);
+			
+			//수정 시 지운파일 삭제
+			if(deleteFileNameList_thumbnail != null) {
+				for( String name : deleteFileNameList_thumbnail ) {
+					s3Service.delete_s3Popup(name);
+				}
+			}
+			
+			MultipartFile PopupImage = multipartRequest.getFile("thumbnail_file");
+			if(PopupImage.getOriginalFilename() != "") {
+				String filename = s3Service.upload_PopupImg(PopupImage);
+				System.out.println("s3 insert ok => "+filename);
+				popupVo.setFile_name(filename);
+			}else {
+				popupVo.setFile_name(oldFilename);
+			}
+			
+			
+			//행사 내용 수정
+			adminService.updatePopup(popupVo);
+				
+			return "admin_popupDetail?id="+popupVo.getId();
+		}
 }

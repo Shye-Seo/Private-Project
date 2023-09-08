@@ -12,5 +12,5 @@ public class PopupVO {
 	private int status;
 	private String file_name;
 	private String click_link;
-
+	private String update_date;
 }

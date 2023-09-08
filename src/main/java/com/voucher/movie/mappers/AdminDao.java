@@ -134,5 +134,15 @@ public interface AdminDao {
 	@Select("select file_name from popup where id = #{c}")
 	String get_popup_FileName(String c);
 
+	@Select("select * from popup where id = #{popup_id}")
+	PopupVO viewPopupDetail(int popup_id); //팝업 상세
+
+	@Update("update popup set popup_title = #{popup_title}, start_date = #{start_date}, end_date = #{end_date},"
+			+ " status = #{status}, file_name = #{file_name}, click_link = #{click_link}, update_date = sysdate() where id = #{id}")
+	boolean updatePopup(PopupVO popupVo); //팝업 수정
+
+	@Select("select file_name from popup where id = #{id}")
+	String getOldPopupImage(int id);
+
 
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부산영화체험박물관 | 관리자</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="/css/admin_popupInsert.css">
+    <script src="/js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+	<script src="js/popup_register.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="~{common/side :: sidebar_manage ('popup')}"></div>
+
+        <!-- main -->
+        <div class="content">
+            <div class="container">
+                <div class="page-header">
+                    <div class="page-title">
+                        <span>팝업설정</span>
+                    </div>
+                </div>
+
+                <div class="area">
+                	<form name="popupAddForm" action="/popupAdd" enctype="multipart/form-data" method="post" onsubmit="return false">
+                    <div class="area1">
+                        <span>제목</span>
+                        <input type="text" name="popup_title" class="required" placeholder="제목을 입력해주세요." th:value="${popup.popup_title}" >
+                    </div>
+                    <div class="area2">
+                        <span>게시기간</span>
+                        <input type="text" name="start_date" class="required" maxlength="45" th:value="${popup.start_date}"> ~
+                        <input type="text" name="end_date" class="required" maxlength="45" th:value="${popup.end_date}">
+                    </div>
+                    <div class="area2">
+                        <span>링크</span>
+                        <input type="text" name="click_link" maxlength="1000" th:value="${popup.click_link}">
+                    </div>
+                    <div class="area3">
+                        <span>이미지첨부</span> <!-- vo에 포함시키지 않고 따로 controller에 전송 -->
+                        <div class="file_area">
+                            <div id="file_names_thumbnail">
+                                <!-- 파일 이름 -->
+                                    <div class='file_con'>
+                                        <div class="filename" th:text="${popup.file_name}" th:if="${popup.file_name != ''}"></div>
+                                        <img src="/imgs/close_btn_black.svg" th:data-fileName="${popup.file_name}"
+                                        th:onclick="deleteFile_for_update_thumbnail(this.getAttribute('data-fileName'))">
+                                    </div>
+                            </div>
+                            <label for="thumbnail" id="file_upload" class="thumbnail_label">  </label>
+                        </div>
+                        <input type="file" id="thumbnail" multiple="multiple" name="thumbnail_file" class="required"/>
+                        <input type="text" id="input_thumbnail" class="required" name="file_name">
+                        <!-- ... -->
+                    </div>
+                    <div class="btn_wrap">
+                        <button type="button" onclick="location.href='admin_popupList'">취소</button>
+                        <button type="button" id="update_bt">저장</button>
+                    </div>
+
+                    <!-- update -->
+                        <input type="text" name="id" hidden th:value="${popup.id}">
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
