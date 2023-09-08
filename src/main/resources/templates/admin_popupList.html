@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부산영화체험박물관 | 관리자</title>
+    
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.12/jsrender.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="/css/admin_resList.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="~{common/side :: sidebar_manage ('popup')}"></div>
+        <!-- main -->
+        <div class="content">
+            <div class="container">
+                <div class="page-header">
+                    <div class="page-title">
+                        <span>팝업설정</span>
+                    </div>
+                </div>
+
+                <div class="area">
+
+                    <ul class="list">
+                        <ol id="top_ol">
+							<div class="check_area"><li><input type="checkbox" class="all_check"></li></div>
+                            <div class="num_area"><li>NO</li></div>
+                            <div class="popupTitle_area"><li>제목</li></div>
+                            <div class="newsDate_area"><li>게시기간</li></div>
+                        </ol>
+						<ol th:each="popup : ${popup_list}" class="list_ol">
+							<div class="check_area">
+								<li><input type="checkbox" th:class="'check_'+${popup.id}" name="check" th:value="${popup.id}"></li>
+							</div>
+							
+							<div class="num_area">
+								<li>[[${popup.id}]]</li>
+							</div>
+							
+							<div class="popupTitle_area">
+								<a th:href="@{admin_popupDetail(id=${popup.id})}"><li>[[${popup.popup_title}]]</li></a>
+							</div>
+							
+							<div class="newsDate_area">
+								<li>[[${popup.start_date}]] ~ [[${popup.end_date}]]</li>
+							</div>
+							
+						</ol>
+                    </ul>
+                    
+                    <div class="newsbtn_area">
+                    	<div class="btn_left">
+                    			<input type="button" value="삭제" id="delete_btn" onclick="popup_delete()">
+                    	</div>
+                    	<div class="btn_right">
+                    			<input type="button" value="등록" id="insert_btn" onclick="location.href='/admin_popupInsert'">
+                    	</div>
+                    </div>
+                                    
+                    <!-- 페이징 -->
+                    
+                    <!-- 검색 안했을 때  -->
+<!--                     <div class="null">  -->
+<!--                         <ul class="pagewrap"> -->
+<!--                             <li> -->
+<!--                             	<a class="page-link page_icon" th:href="@{admin_reservationList?page=1}"><img src="imgs/page_start_btn.svg"></a> -->
+<!--                             </li> -->
+<!--                             <li class="icon_right"> -->
+<!--                             	<a class="page-link page_icon" th:if="${nowpage == 1}" th:href="@{admin_reservationList?page={page} (page = ${nowpage})}"><img src="imgs/page_back_btn.svg"></a> -->
+<!--                             	<a class="page-link page_icon" th:if="${nowpage != 1}" th:href="@{admin_reservationList?page={page} (page = ${nowpage}-1)}"><img src="imgs/page_back_btn.svg"></a> -->
+<!--                             </li> -->
+<!--                              <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"> -->
+<!-- 							    <li class="page-item"  -->
+<!-- 							    		 th:with="start = ${pagination.startPage}, end = ${pagination.endPage}" -->
+<!-- 							    		th:each="pageButton : ${#numbers.sequence(start, end)}"> -->
+<!-- 							    		<a class="page-link"  th:id="'page_num'+${pageButton}" th:href="@{admin_reservationList?page={page} (page = ${pageButton})}" th:text=${pageButton}></a> -->
+<!-- 							    </li> -->
+<!-- 						    </th:block> -->
+<!--                             <li class="icon_left"> -->
+<!--                             	<a class="page-link page_icon" th:if="${nowpage == pagination.totalPageCnt}" th:href="@{admin_reservationList?page={page} (page = ${nowpage})}"><img src="imgs/page_next_btn.svg"></a> -->
+<!--                             	<a class="page-link page_icon" th:if="${nowpage != pagination.totalPageCnt}" th:href="@{admin_reservationList?page={page} (page = ${nowpage}+1)}"><img src="imgs/page_next_btn.svg"></a> -->
+<!--                             </li> -->
+<!--                             <li> -->
+<!--                             	<a class="page-link page_icon" th:href="@{admin_reservationList?page={page} (page = ${pagination.totalPageCnt})}"><img src="imgs/page_end_btn.svg"></a> -->
+<!--                             </li> -->
+<!--                         </ul> -->
+<!--                     </div> -->
+                    
+                    <script th:inline="javascript">
+// 						$('#page_num'+[[${nowpage}]]).addClass("thisPage");
+//                     	var nowpage = /*[[${nowpage}]]*/
+                    </script>
+                </div>
+            </div>
+        </div>
+<script>
+function popup_delete() {
+	var check = [];
+
+	if($('input[name="check"]:checked').length == 0){
+		alert("선택된 항목이 없습니다.");
+		return false;
+	}else{
+		$('input[name="check"]:checked').each(function(e) {
+			check.push($(this).val());
+		})
+
+		var list = {
+			'check' : check
+		}
+
+		$.ajax({
+			url : 'popup_delete',
+			type : 'post',
+			data : list,
+			success : function(data) {
+
+				if ($.trim(data) == 0) {
+					alert('삭제되었습니다.');
+					location.href = 'admin_popupList';
+				} else {
+					alert('삭제 실패');
+
+				}
+			},
+			error : function() {
+				alert("에러입니다");
+			}
+		});
+	}
+};
+</script>
+</body>
+</html>

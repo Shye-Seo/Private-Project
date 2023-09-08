@@ -27,11 +27,12 @@
 			<div class="page_name_area"><h1>박물관 소식</h1></div>
 		</div>
 	</div>
-		<!-- 전시관 및 방문회차 선택 div -->
-		<div class="reservation_wrap">
+		<!-- 카드보기 형식 리스트 div -->
+		<div class="cardList_wrap">
 			<div class="list_wrap">
 				<ul class="list">
 					<li th:each="news : ${news_list}" class="news_div">
+					<a th:href="@{museum_newsDetail(id=${news.id})}">
 						<div class="news_poster">
 							<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${news.news_poster}}" alt="poster_img">
 						</div>
@@ -42,6 +43,7 @@
 								<p>장소 : [(${news.news_place})]</p>
 							</div>
 						</div>
+					</a>
 					</li>
 				</ul>
 			</div>

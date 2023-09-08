@@ -1,0 +1,251 @@
+@charset "utf-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* main */
+.area span {
+    width: 20%; height:21px;
+    /* max-width: 285px; */
+    padding-left:20px;
+    border-left:3px solid #5B8FD2;
+    font-size: 18px;
+    font-weight: 600;
+}
+.area input, .file_area{
+    height: 60px;
+    border: 0.5px solid #DDDDDD;
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: 15px;
+}
+.area input:focus-visible,.area textarea:focus-visible {
+    border: 0.5px solid #5B8FD2 !important;
+}
+
+.area1,.area2,.area3,.area4,.area5{
+    margin-bottom: 30px;
+    display: flex;
+}
+.area1{
+    height: 60px;
+    align-items: center;
+}
+
+.area1 input[name="event_title"], .area5 input[name="event_venue"]{
+    width: 40%;
+    /* max-width: 530px; */
+    margin-right: 5%;
+}
+.date_wrap {
+    width: 30%; 
+    /* max-width: 400px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.date_wrap span{
+    width: auto;
+    border: 0;
+    padding: 0;
+    width: 40%;
+    height: 60px;
+    position: relative;
+}
+
+.date_wrap .date_input{
+    width: 60%; min-width : 210px;
+    padding-right: 10px;
+    padding-top: 15px;
+    cursor: pointer;
+    background: url(../imgs/register-calendar.svg) no-repeat;
+    background-origin: content-box;
+    background-position-x: right;
+    background-position-y: 13px;
+}
+/* date 기본글 */
+/* .date_wrap input[type="date"]::before{
+    content: attr(data-placeholder);
+    width: 100%;
+}
+.date_wrap input[type="date"]:focus::before, .date_wrap input[type="date"]:valid::before{
+    display: none;
+} */
+.area2{
+    align-items: center;
+}
+.area .area2 textarea {
+    padding:10px;
+    resize:none;
+    width: 75%; 
+    /* max-width: 1000px; */
+    min-height:100px;
+    border: 0.5px solid #DDDDDD;
+    box-sizing: border-box;
+    font-size: 15px;
+    overflow: hidden;
+}
+.area5 input[name="event_deadline"]{
+    width: 60%;
+}
+.area3 p{
+    font-size: 13px;
+    font-weight: 500;
+}
+.area3 .file_area{
+    width: 75%; 
+    display: flex;
+    justify-content: space-between;
+}
+.area3 #file_names{
+    width: calc(100% - 61px); height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+
+}
+#file_names >div{
+    max-width: 19%; height: 20px;
+    font-size: 15px;
+}
+.area3 .file_con{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+.file_con .filename{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.file_con img{
+    width: 15px; height: 15px;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+.area3 label{
+    width: 60px;
+    border: 0;
+    border-left: 0.5px solid #DDDDDD;
+    background: url("../imgs/register_upload.svg") no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.area4 span:first-child,.area5 span:first-child{
+    margin-top: 10px;
+}
+
+.area4 .area4_pn {
+    /* position:relative; */
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.area4_pn input{
+    width: 250px;
+}
+
+.area4 .area4_pn span {
+    border-left:0;
+    position: relative;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin-left: 10px;
+}
+.area4_pn span:nth-child(3){
+    margin-right: 10px;
+}
+.area4 .area4_pn p, .date_wrap p{
+    position: absolute;
+}
+
+.area4 .area4_pn p:nth-child(1), .date_wrap p{
+    color: #999999;
+    font-size: 11px;
+    font-weight: 300;
+    top: 10px; left: 10px;
+}
+.area4 .area4_pn p:nth-child(2){
+    font-size: 15px;
+    font-weight: 500;
+    bottom: 13px; right: 20px;
+}
+
+.area4_pn .input_pn {
+    padding-top: 15px;
+    width:110px;
+}
+.area4_pn .input_pp{
+    padding-top: 15px;
+    width:110px;
+}
+.area4_pn .input_st, .area4_pn .input_et{
+    padding-top: 15px;
+    width: 80px;
+}
+.position_wrap{
+    position: relative;
+    margin-bottom: 50px;
+}
+.position_btn{
+    width: 70px; height: 30px;
+    position: absolute;
+    bottom: 25px; right: -100px;
+    display: flex;
+}
+
+#add_position{
+    width: 30px; height: 30px;
+    background: url("../imgs/register-add-circle.svg") no-repeat;
+    background-size: cover;
+    cursor: pointer;
+
+    position: absolute;
+    bottom: 25px;
+    right: -50px;
+}
+
+.remove_position{
+    width: 30px;
+    height: 30px;
+    background: url("../imgs/register-minus-circle.svg") no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    margin-right: 10px;
+    transform: translateX(20px);
+}
+
+.btn_wrap{
+    width: 220px; height: 50px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    left: calc(50% - 110px); bottom: 0;
+}
+
+.btn_wrap button{
+    width: 100px; height: auto;
+    background-color: #ffffff;
+    border: 0.5px solid #99999999;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.btn_wrap button:last-child{
+    background-color: #5B8FD2;
+    border: 0.5px solid #5B8FD2;
+    color: #ffffff;
+}
+
+
+
+@media all and (min-width:768px) and (max-width:1023px){}
+@media all and (min-width:320px) and (max-width:767px){}

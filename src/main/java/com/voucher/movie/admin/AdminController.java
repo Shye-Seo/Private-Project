@@ -53,10 +53,9 @@ public class AdminController {
 	AwsS3Service s3Service;
 	
 	List<GroupVO> group_list;
-	
 	List<ClosedVO> closed_list;
-	
 	List<NewsVO> news_list;
+	List<PopupVO> popup_list;
 	
 	String bucketName = "busanbom"; //변경필요
 	String folderName_news = "news-folder/";
@@ -404,4 +403,73 @@ public class AdminController {
 			}
 			return String.valueOf(cnt);
 		}
+		
+		//관리자 - 팝업설정 리스트
+		@RequestMapping(value="/admin_popupList", method=RequestMethod.GET)
+		public String admin_popupList(@ModelAttribute PopupVO popupVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+				
+			// 총 게시물 수 
+		    int totalListCnt = adminService.findAllPopup();
+
+		    // 생성인자로  총 게시물 수, 현재 페이지를 전달
+		    PagingVO pagination = new PagingVO(totalListCnt, page);
+
+		    // DB select start index
+		    int startIndex = pagination.getStartIndex();
+		    // 페이지 당 보여지는 게시글의 최대 개수
+		    int pageSize = pagination.getPageSize();
+
+		    popup_list = adminService.findPopupPaging(startIndex, pageSize);
+		    
+		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    
+			model.addAttribute("popup_list", popup_list);
+			model.addAttribute("nowpage", page);
+				 
+			return "/admin_popupList";
+		}
+		
+		//관리자 - 팝업 등록 페이지
+		@RequestMapping(value="/admin_popupInsert", method=RequestMethod.GET)
+		public String admin_popupInsert(ModelMap model) throws Exception {
+				
+			return "/admin_popupInsert";
+		}
+		
+		//팝업 등록(post)
+		@ResponseBody
+		@RequestMapping(value="/popupAdd", method=RequestMethod.POST)
+		public String admin_popup_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute PopupVO popupVo, ModelMap model) throws Exception {
+			
+			MultipartFile popup_img = multipartRequest.getFile("thumbnail_file");
+			System.out.println(popup_img);
+			
+			if(popup_img.getOriginalFilename() != "") {
+				String filename = s3Service.upload_PopupImg(popup_img);
+				System.out.println("s3 insert ok => "+filename);
+				popupVo.setFile_name(filename);
+			}
+			adminService.insertPopup(popupVo);
+			
+		    Calendar cal = Calendar.getInstance();
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+		    String time = dateFormat.format(cal.getTime());
+		    
+			return "/admin_popupList";
+		}	
+		
+		//박물관 소식 삭제
+		@ResponseBody
+		@RequestMapping(value = "popup_delete", method = RequestMethod.POST)
+		public String popup_delete(HttpServletRequest request, ModelMap modelMap, @RequestParam(value = "check[]", defaultValue = "") List<String> check) {
+
+			int cnt = 0;
+
+			for (String c : check) {
+				String file_name = adminService.get_popup_FileName(c);
+				s3Service.delete_s3Popup(file_name);
+				adminService.popup_delete(c);
+			}
+			return String.valueOf(cnt);
+		}		
 }

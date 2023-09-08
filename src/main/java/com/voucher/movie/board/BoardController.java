@@ -67,6 +67,7 @@ public class BoardController {
 		    	
 		mav.addObject("news", detailVo);
 		mav.addObject("newsFileList", newsFileList);
+		mav.addObject("key", "Co91hljxoTM");
 		mav.setViewName("museum_newsDetail");
 		return mav;
 	}

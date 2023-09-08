@@ -75,6 +75,9 @@ public class AwsS3Service {
     
     @Value("edu-folder")
     private String eduFolder;
+    
+    @Value("popup-folder")
+    private String popupFolder;
 
     private final AmazonS3 s3Client;
     
@@ -351,5 +354,34 @@ public class AwsS3Service {
     public void delete_s3Edu(String fileName) {
     	s3Client.deleteObject(new DeleteObjectRequest(bucket+"/"+eduFolder, fileName));
     }
+
+	public String upload_PopupImg(MultipartFile file) {
+		Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        String time = dateFormat.format(cal.getTime());
+        
+        String fileName = time + "-" +file.getOriginalFilename();
+        System.out.println("-----------");
+        System.out.println("오리지날파일명 : " + file.getOriginalFilename());
+        System.out.println("현재파일명 : " + fileName);
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentLength(file.getSize());
+        objectMetadata.setContentType(file.getContentType());
+
+        try(InputStream inputStream = file.getInputStream()) {
+            s3Client.putObject(new PutObjectRequest(bucket+"/"+popupFolder, fileName, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+            //fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+        } catch(IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+        }
+
+        return fileName;
+	}
+
+	public void delete_s3Popup(String fileName) {
+		s3Client.deleteObject(new DeleteObjectRequest(bucket+"/"+popupFolder, fileName));
+	}
 
 }

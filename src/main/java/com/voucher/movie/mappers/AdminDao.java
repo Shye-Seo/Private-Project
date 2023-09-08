@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.voucher.movie.admin.AdminVO;
+import com.voucher.movie.admin.PopupVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.reservation.ClosedVO;
@@ -115,6 +116,23 @@ public interface AdminDao {
 
 	@Select("select news_poster from museum_news where id = #{id}")
 	String getOldNewsPoster(int id);
+
+	// ----------------- 팝업 설정 -------------
+	@Select("select count(*) from popup")
+	int findAllPopup();
+
+	@Select("select * from popup order by id desc limit #{startIndex}, #{pageSize}")
+	List<PopupVO> findPopupPaging(int startIndex, int pageSize);
+
+	@Insert("insert into popup (popup_title, start_date, end_date, status, file_name, click_link, create_date)"
+			+ " value (#{popup_title}, #{start_date}, #{end_date}, 0, #{file_name}, #{click_link}, sysdate())")
+	boolean insertPopup(PopupVO popupVo);
+
+	@Delete("delete from popup where id = #{c}")
+	boolean popup_delete(String c);
+
+	@Select("select file_name from popup where id = #{c}")
+	String get_popup_FileName(String c);
 
 
 }

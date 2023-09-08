@@ -165,6 +165,27 @@ public class AdminService {
 		return adminDao.getOldNewsPoster(id);
 	}
 
+	//---------- 팝업설정 ------------
+	public int findAllPopup() {
+		return adminDao.findAllPopup();
+	}
+
+	public List<PopupVO> findPopupPaging(int startIndex, int pageSize) {
+		return adminDao.findPopupPaging(startIndex, pageSize);
+	}
+
+	public boolean insertPopup(PopupVO popupVo) {
+		return adminDao.insertPopup(popupVo);
+	}
+
+	public boolean popup_delete(String c) {
+		return adminDao.popup_delete(c);
+	}
+
+	public String get_popup_FileName(String c) {
+		return adminDao.get_popup_FileName(c);
+	}
+
 
 
 }
