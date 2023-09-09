@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -26,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.voucher.movie.ScriptUtils;
+import com.voucher.movie.WebService;
 import com.voucher.movie.aws.AwsS3Service;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
@@ -51,6 +53,9 @@ public class AdminController {
 	
 	@Autowired
 	AwsS3Service s3Service;
+	
+	@Inject
+	WebService webService;
 	
 	List<GroupVO> group_list;
 	List<ClosedVO> closed_list;
@@ -445,6 +450,45 @@ public class AdminController {
 		//관리자 - 팝업 등록 페이지
 		@RequestMapping(value="/admin_popupInsert", method=RequestMethod.GET)
 		public String admin_popupInsert(ModelMap model) throws Exception {
+			
+			int popup_cnt = webService.get_popup_cnt();
+			ArrayList<String> dates = new ArrayList<String>();
+			//팝업 설정 최대 2개 -> 더 이상 설정못하도록 setting
+			if(popup_cnt != 0) {
+				popup_list = webService.getAllPopup();
+				
+				for(PopupVO vo : popup_list) { 
+					String start_date = vo.getStart_date();
+			    	String end_date = vo.getEnd_date();
+			    	
+			    	// 포맷터
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+			        // 문자열 -> Date
+			        Date StartDate = formatter.parse(start_date);
+			        Date EndDate = formatter.parse(end_date);
+			        
+			 		Date currentDate = StartDate;
+			 		//팝업 설정된 기간 dates 배열에 담기
+			 		while (currentDate.compareTo(EndDate) <= 0) {
+			 			dates.add(formatter.format(currentDate));
+			 			Calendar c = Calendar.getInstance();
+			 			c.setTime(currentDate);
+			 			c.add(Calendar.DAY_OF_MONTH, 1);
+			 			currentDate = c.getTime();
+			 		}
+			     }
+			}
+			//stream으로 중복요소 찾아서 datepicker에 해당일자 popup 설정 불가 반영
+			List<String> list = dates;
+			List<String> distinctList = list.stream()
+			                            .distinct()
+			                            .collect(Collectors.toList());
+
+			for (String el : distinctList) {
+			  list.remove(el);
+			}
+			
+			model.addAttribute("disable_dates", list);
 				
 			return "/admin_popupInsert";
 		}
