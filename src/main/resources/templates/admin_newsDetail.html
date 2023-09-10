@@ -9,14 +9,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/common.js"></script>
 	<link rel="stylesheet" href="/css/reset.css">
-	<link rel="stylesheet" href="/css/newsDetail.css">
+	<link rel="stylesheet" href="css/admin_boardDetail.css">
+	
 	<script>
-// 		$(function(){
-// 			$('#event_content').height( $('#event_content').prop('scrollHeight') );
-// 			$('.position_pay').each(function() {
-// 				costText(this);
-// 			});
-// 		})
+		$(function(){
+			$('#news_content').height( $('#news_content').prop('scrollHeight') );
+		})
 	</script>
 </head>
 <body>
@@ -33,53 +31,69 @@
 
 			<div class="area">
 				
- 				<span th:fragment="event_detail"> 
- 					<div class="event_table event_table_L"> 
- 						<p class="con_title">행사 정보</p> 
- 						<div class="event_con event_info"> 
- 							<div class="event_line"> 
- 								<div class="li_title">행사명:</div> 
- 								<div id="event_title" th:text="${news.news_title}"></div> 
- 							</div> 
- 							<div class="event_line"> 
- 								<div>[(${news.create_date})]</div> 
- 							</div> 
- 							<div class="event_line"> 
- 								<div class="li_title">첨부파일:</div> 
- 								<div class="event_file"> 
- 									<div th:each="FileList : ${newsFileList}" > 
- 										<a th:href="@{news_download(filename=${FileList.file_name})}"> 
- 											<div><img src="/imgs/download_icon.png" alt="event_download"></div> 
- 											<div class="file_name" th:text="${FileList.file_name}"></div> 
- 										</a> 
- 									</div> 
- 								</div> 
- 							</div> 
- 						</div> 
- 					</div> 
- 					<div class="event_table event_table_R"> 
- 						<p class="con_title">행사 상세내용</p>
- 						<div class="youtube" th:if="${news.news_link1 != null}">
-							[(${news.news_link1})]
- 						</div>
- 						<div class="youtube" th:if="${news.news_link2 != null}">
-							[(${news.news_link2})]
- 						</div>
- 						<div class="event_con event_content"> 
- 							<textarea name="event_content" id="event_content" spellcheck="false" disabled>
-								 	[(${news.news_content})]
-							</textarea> 
- 						</div>
- 						<div class="poster_area">
-							  <img id="preview" class="in_profile" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${news.news_poster}}" alt="poster_img">
+ 				<!-- 게시글(카드보기) div -->
+		<div class="cardList_wrap">
+			<div class="detail_wrap">
+				<!-- 요약내용  -->
+				<div class="detail_summary">
+					<div class="summary_poster">
+						<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${news.news_poster}}" alt="poster_img">
+					</div>
+					<div class="summary_info">
+						<div class="summary_title">
+							<p>[(${news.news_title})]</p>
 						</div>
- 					</div> 
- 				</span> 
-
-				<div class="btn_wrap">
- 					<button type="button" onclick="location.href='admin_newsList'">목록으로</button> 
- 					<button type="button" th:onclick="|location.href='@{admin_news_update(id=${news.id})}'|">수정하기</button> 
+						<div class="summary_content">
+							<div class="content_left">
+								<li>일시</li>
+								<li>장소</li>
+								<li>관람방법</li>
+								<li>문의</li>
+							</div>
+							<div class="content_right">
+								<li>[(${news.news_date})]</li>
+								<li>[(${news.news_place})]</li>
+								<li>[(${news.news_method})]</li>
+								<li>[(${news.news_contact})]</li>
+							</div>
+						</div>
+						<div class="screening_comment">
+							<div th:if="${news.news_screeningCheck != 0}">
+								상영은 정시에 시작되며 시작 10분 후에는 입장이 제한됩니다. <br>
+								영상홀 내부 음식물 반입은 금지입니다. <br>
+								주차 50% 할인권을 제공합니다. <br>
+								(주차요금: 2시간 이내 500원/10분, 2시간 초과 이후 750원/10분)
+							</div>
+						</div>
+					</div>
 				</div>
+				<!-- 하단 상세내용(상단 요약내용과 width 다름) -->
+				<div class="detail_content">
+					<div class="bottom_wrap">
+						<div class="content_area">
+							<textarea name="news_content" id="news_content" spellcheck="false" disabled>[(${news.news_content})]</textarea>
+						</div>
+						<div class="poster_area">
+							<img id="poster_big" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${news.news_poster}}" alt="poster_img">
+						</div>
+						<div class="image_area" th:if="${newsFileList != ''}">
+							<li th:each="img : ${newsFileList}" class="img_div">
+								<img id="img_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${img.file_name}}" alt="img_file">
+							</li>
+						</div>
+						<div class="video_area" th:if="${news.news_link1 != '' || news.news_link2 != ''}">
+							<div th:if="${news.news_link1 != ''}" id="video">[(${news.news_link1})]</div>
+							<div th:if="${news.news_link2 != ''}" id="video">[(${news.news_link2})]</div>
+						</div>
+					</div>
+				</div>
+				<div class="button_area">
+					<input type="button" class="list_btn" value="목록" onclick="location.href='admin_newsList'">
+					<button type="button" class="update_btn" th:onclick="|location.href='@{admin_news_update(id=${news.id})}'|">수정</button> 
+				</div>
+			</div>
+		</div>
+
 			</div>
 		</div>
 	</div>

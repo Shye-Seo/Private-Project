@@ -1,12 +1,4 @@
 $(function() {
-	var nowpage = $('input[id=nowpage]').val();
-	if(nowpage == 1){
-		$('div[class=reservation_wrap]').css('display','block');
-		$('div[class=reservation_wrap_info]').css('display','none');
-	}else if(nowpage == 2){
-		$('div[class=reservation_wrap]').css('display','none');
-		$('div[class=reservation_wrap_info]').css('display','block');
-	}
 	
 	if($('.agree_check_yes').val() == 1){
 		$('#agree_check').prop('checked',true);
@@ -17,59 +9,6 @@ $(function() {
 		$('#radio_2').prop('checked',true);
 	}
         
-    $("#date_submit").click(function() {
-		var res_theaterCheck = $('input[name=res_theaterCheck]:checked').val();
-		var res_visitDate = $('input[name=res_visitDate]').val();
-		var res_visitNum = $('input[name=res_visitNum]:checked').val();
-		var res_visitTime = '';
-		
-			//전시관 체크 & 개인정보 동의 & 날짜 및 회차선택 -> 다음페이지
-			if($('input[name=agree_check]').is(":checked")){
-	        	if(!$('input[name=res_theaterCheck]').is(":checked")) {
-					alert("전시관을 선택해주세요.");
-				}else if(!$('input[name=res_visitDate]').val()) {
-					alert("날짜를 선택해주세요.");
-				}else if(!$('input[name=res_visitNum]').is(":checked")){
-					alert("시간을 선택해주세요.");
-				}else{ //다음버튼 -> div 숨기고 info div 보여주기
-				
-					if(res_theaterCheck == 1){
-						$('div[class=place_confirm]').text('부산영화체험박물관+트릭아이뮤지엄');
-					}else if(res_theaterCheck == 2){
-						$('div[class=place_confirm]').text('부산영화체험박물관');
-					}
-					
-					for(i=1; i<15; i++){
-						if(i == res_visitNum){
-							res_visitTime = $('li[class=res_visitTime_'+i+']').text();
-						}
-					}
-					$('input[id=nowpage]').val(2);
-					var nowpage = $('input[id=nowpage]').val();
-					debugger;
-					
-					if(nowpage == 1){
-						$('div[class=reservation_wrap]').css('display','block');
-						$('div[class=reservation_wrap_info]').css('display','none');
-					}else if(nowpage == 2){
-						$('div[class=reservation_wrap]').css('display','none');
-						$('div[class=reservation_wrap_info]').css('display','block');
-					}
-					
-					$('div[class=time_insert]').text(res_visitNum+'회차 / '+res_visitTime);
-					$('#visitTime').val(res_visitTime);
-					
-//					$('div[class=reservation_wrap]').css('display','none');
-//					$('div[class=reservation_wrap_info]').css('display','block');
-				}
-	        }
-			//개인정보 수집동의 X
-	        else{
-				alert("이용약관 및 개인정보 처리 및 이용에 동의해주세요.");
-	        }
-		
-    });
-    
     var certifi_checked = "0"; // 인증번호 확인 여부
 	var certifinum = "1"; // 인증번호
 	
@@ -83,9 +22,6 @@ $(function() {
             return false;
         }
         else {
-
-            // 인증버튼css
-//            $('#certifinum_submit').css({ 'border': '0.5px solid #5B8FD2', 'background-color': '#5B8FD2',"color":"#ffffff"})
 
             // ajax를 이용하여 인증번호를 요청한다.
             $.ajax({
@@ -107,9 +43,10 @@ $(function() {
 			$('#certifinum_check').css({'background':'#6E6E6E'});
                 $('#certifinum_check').css({'color':'#FFF'});
                 $('#certifinum_check').attr('value','인증완료');
-                certifi_checked=="1"
+                certifi_checked=="1";
                 var phoneNum = $('.input_phone').val();
                 $('.phone_insert').text(phoneNum);
+                $('input[name=certifi_ok]').val(1);
         }
     })
     
@@ -120,7 +57,26 @@ $(function() {
 		var studentNum = 0;
 		var adultNum = 0;
 		var leaderNum = 0;
-        
+		
+        $('input[name=res_theaterCheck]').change(function() { //전시관
+        	var res_theaterCheck = $('input[name=res_theaterCheck]:checked').val();
+        	if(res_theaterCheck == 1){
+				$('div[class=place_confirm]').text('부산영화체험박물관+트릭아이뮤지엄');
+			}else if(res_theaterCheck == 2){
+				$('div[class=place_confirm]').text('부산영화체험박물관');
+			}
+        });
+        $('input[name=res_visitNum]').change(function() { //회차
+        	var res_visitNum = $('input[name=res_visitNum]:checked').val();
+        	var res_visitTime = '';
+        	for(i=1; i<15; i++){
+				if(i == res_visitNum){
+					res_visitTime = $('li[class=res_visitTime_'+i+']').text();
+				}
+			}
+			$('div[class=time_insert]').text(res_visitNum+'회차 / '+res_visitTime);
+			$('#visitTime').val(res_visitTime);
+        });
         $('.input_groupName').change(function() { //인솔자명
         	var groupName = $('.input_groupName').val();
         	$('.groupName_insert').text(' '+groupName);
@@ -180,28 +136,62 @@ $(function() {
     
     function submitReservation() {
         
-        var form = $('form[name="res_info"]');
-        var formData = new FormData(form[0]);
-
-        $.ajax({
-			url : "/reservation_ok",
-			type : 'post',
-			data : formData,
-			enctype : 'multipart/form-data',
-	        processData : false,
-	        contentType : false,
-	        cache : false,
-			success : function (result) {
-                window.location.href= result;
-            }
-		});
+			//전시관 체크 & 개인정보 동의 & 날짜 및 회차선택 -> 다음페이지
+			if($('input[name=agree_check]').is(":checked")){
+	        	if(!$('input[name=res_theaterCheck]').is(":checked")) {
+					alert("전시관을 선택해주세요.");
+					return false;
+				}else if(!$('input[name=res_visitDate]').val()) {
+					alert("날짜를 선택해주세요.");
+					return false;
+				}else if(!$('input[name=res_visitNum]').is(":checked")){
+					alert("시간을 선택해주세요.");
+					return false;
+				}else if(!$('input[name=res_groupName]').val()){
+					alert("단체명을 입력해주세요.");
+					return false;
+				}else if(!$('input[name=res_name]').val()){
+					alert("인솔자명을 입력해주세요.");
+					return false;
+				}else if(!$('input[name=res_totalNum]').val()){
+					alert("인원수를 입력해주세요.");
+					return false;
+				}else if(!$('input[name=certifi_ok]').val()){
+					alert("본인인증 후 예약이 가능합니다.");
+					return false;
+				}else if(!$('input[name=res_vehicleCheck]').is(":checked")){
+					alert("방문차량을 선택해주세요.");
+					return false;
+				}else if(!$('input[name=res_requestCheck]').is(":checked")){
+					alert("해설자 요청여부를 선택해주세요.");
+					return false;
+				}else { //form 제출
+				
+			        var form = $('form[name="res_info"]');
+			        var formData = new FormData(form[0]);
+			
+			        $.ajax({
+						url : "/reservation_ok",
+						type : 'post',
+						data : formData,
+						enctype : 'multipart/form-data',
+				        processData : false,
+				        contentType : false,
+				        cache : false,
+						success : function (result) {
+			                window.location.href= result;
+			            }
+					});
+					
+				}
+	        }
+			//개인정보 수집동의 X
+	        else{
+				alert("이용약관 및 개인정보 처리 및 이용에 동의해주세요.");
+				return false;
+	        }
+	        
 	}
-
-function prevPage(){
-	$('div[class=reservation_wrap]').css('display','block');
-	$('div[class=reservation_wrap_info]').css('display','none');
-	$('input[id=nowpage]').val(1);
-}
 
 function countStudent(type){
 	// 결과를 표시할 element

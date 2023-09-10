@@ -35,6 +35,7 @@ $(function () {
                 $('.required').each(function(){
                     if($(this).val() == ""){
                         $(this).focus();
+		                debugger;
                         result = false;
                         return false;
                     }

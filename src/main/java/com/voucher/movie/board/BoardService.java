@@ -30,4 +30,12 @@ public class BoardService {
 		return boardDao.viewNewsFileDetail(news_id);
 	}
 
+	public int searchNewsCnt(String searchKeyword) {
+		return boardDao.searchNewsCnt(searchKeyword);
+	}
+
+	public List<NewsVO> news_searchList(String searchKeyword, int startIndex, int pageSize) {
+		return boardDao.news_searchList(searchKeyword, startIndex, pageSize);
+	}
+
 }

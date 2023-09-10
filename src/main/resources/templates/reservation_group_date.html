@@ -265,12 +265,6 @@
 			</div>
 			</div>
 		</div>
-			<div class="button_area">
-				<div class="button_wrap">
-					<input type="button" value="이전" class="info_btn">
-					<input type="button" value="확인" class="submit_btn" id="date_submit">
-				</div>
-			</div>
 		</div>
 		
 		<!-- info 작성 div -->
@@ -300,16 +294,16 @@
 								<div class="num_txt">학생</div>
 								<div class="num_input_area"><input type="text" name="res_studentNum" id="studentNum" value="0"></div>
 								<div class="icon_box">
-								<div class="plus_icon"><div id="icon_wrap"><img src="/imgs/plus_icon.svg"></div></div>
-								<div class="minus_icon"><div id="icon_wrap"><img src="/imgs/minus_icon.svg"></div></div>
+								<div class="plus_icon" onclick="countStudent('plus')"><div id="icon_wrap"><img src="/imgs/plus_icon.svg"></div></div>
+								<div class="minus_icon" onclick="countStudent('minus')"><div id="icon_wrap"><img src="/imgs/minus_icon.svg"></div></div>
 								</div>
 							</div>
 							<div class="adultNum">
 								<div class="num_txt">성인</div>
 								<div class="num_input_area"><input type="text" name="res_adultNum" id="adultNum" value="0"></div>
 								<div class="icon_box">
-								<div class="plus_icon"><div id="icon_wrap"><img src="/imgs/plus_icon.svg"></div></div>
-								<div class="minus_icon"><div id="icon_wrap"><img src="/imgs/minus_icon.svg"></div></div>
+								<div class="plus_icon" onclick="countAdult('plus')"><div id="icon_wrap"><img src="/imgs/plus_icon.svg"></div></div>
+								<div class="minus_icon" onclick="countAdult('minus')"><div id="icon_wrap"><img src="/imgs/minus_icon.svg"></div></div>
 								</div>
 								<p>(인솔자 제외)</p>
 							</div>
@@ -317,8 +311,8 @@
 								<div class="num_txt">인솔자</div>
 								<div class="num_input_area"><input type="text" name="res_leaderNum" id="leaderNum" value="0"></div>
 								<div class="icon_box">
-								<div class="plus_icon"><div id="icon_wrap"><img src="/imgs/plus_icon.svg"></div></div>
-								<div class="minus_icon"><div id="icon_wrap"><img src="/imgs/minus_icon.svg"></div></div>
+								<div class="plus_icon" onclick="countLeader('plus')"><div id="icon_wrap"><img src="/imgs/plus_icon.svg"></div></div>
+								<div class="minus_icon" onclick="countLeader('minus')"><div id="icon_wrap"><img src="/imgs/minus_icon.svg"></div></div>
 								</div>
 							</div>
 							</div>
@@ -340,6 +334,7 @@
 								<input type="text" id="certifinum" placeholder="인증번호를 입력해주세요" onkeyup="certifinum_checking();" class="input_certifinum">
 								<div class="check_icon"></div>
 	                    		<input type="button" id="certifinum_check" value="인증완료" disabled>
+	                    		<input type="hidden" id="certifi_ok" name="certifi_ok">
 							</div>
 						</div>
 						<div class="vehicle_check">
@@ -442,8 +437,8 @@
 								<div class="div_bar">|</div>
 								<div class="request_insert"></div>
 							</div>
-							<input type="hidden" name="res_totalNum" id="totalNum">
-							<input type="hidden" name="res_visitTime" id="visitTime">
+							<input type="text" name="res_totalNum" id="totalNum">
+							<input type="text" name="res_visitTime" id="visitTime">
 						</div>
 					</div>
 				</div>
@@ -454,8 +449,8 @@
 			</div>
 			<div class="button_area">
 				<div class="button_wrap">
-					<input type="button" value="이전" class="date_btn">
-					<input type="button" value="확인" class="submit_btn" id="info_submit" onclick="submitReservation();">
+					<input type="button" value="취소" class="prev_btn" onclick="location.href='/reservation_group'">
+					<input type="button" value="신청하기" class="submit_btn" id="info_submit" onclick="submitReservation();">
 				</div>
 			</div>
 		</div>
@@ -554,7 +549,6 @@
             var toDate_year = toDate.substr(0,4)
             var toDate_month = getmonth;
 		    var toDate_day = toDate.substr(8);
-		    debugger;
 		    
 		    if(toDate_month < 10){
 				var current_month = "0" + toDate_month;

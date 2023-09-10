@@ -241,6 +241,7 @@ public class AdminController {
 		    
 		model.addAttribute("news_list", news_list);
 		model.addAttribute("nowpage", page);
+		model.addAttribute("pagination", pagination);
 			 
 		return "/admin_newsList";
 	}
@@ -428,6 +429,7 @@ public class AdminController {
 		    
 			model.addAttribute("popup_list", popup_list);
 			model.addAttribute("nowpage", page);
+			model.addAttribute("pagination", pagination);
 				 
 			return "/admin_popupList";
 		}
@@ -536,6 +538,44 @@ public class AdminController {
 			ModelAndView mav = new ModelAndView();
 			PopupVO detailVo = adminService.viewPopupDetail(popup_id);
 			
+			int popup_cnt = webService.get_popup_cnt();
+			ArrayList<String> dates = new ArrayList<String>();
+			//팝업 설정 최대 2개 -> 더 이상 설정못하도록 setting
+			if(popup_cnt != 0) {
+				popup_list = webService.getAllPopup();
+				
+				for(PopupVO vo : popup_list) { 
+					String start_date = vo.getStart_date();
+			    	String end_date = vo.getEnd_date();
+			    	
+			    	// 포맷터
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+			        // 문자열 -> Date
+			        Date StartDate = formatter.parse(start_date);
+			        Date EndDate = formatter.parse(end_date);
+			        
+			 		Date currentDate = StartDate;
+			 		//팝업 설정된 기간 dates 배열에 담기
+			 		while (currentDate.compareTo(EndDate) <= 0) {
+			 			dates.add(formatter.format(currentDate));
+			 			Calendar c = Calendar.getInstance();
+			 			c.setTime(currentDate);
+			 			c.add(Calendar.DAY_OF_MONTH, 1);
+			 			currentDate = c.getTime();
+			 		}
+			     }
+			}
+			//stream으로 중복요소 찾아서 datepicker에 해당일자 popup 설정 불가 반영
+			List<String> list = dates;
+			List<String> distinctList = list.stream()
+			                            .distinct()
+			                            .collect(Collectors.toList());
+
+			for (String el : distinctList) {
+			  list.remove(el);
+			}
+			
+			mav.addObject("disable_dates", list);
 			mav.addObject("popup", detailVo);
 
 			mav.setViewName("admin_popupUpdate");
@@ -569,7 +609,7 @@ public class AdminController {
 			}
 			
 			
-			//행사 내용 수정
+			//팝업 수정
 			adminService.updatePopup(popupVo);
 				
 			return "admin_popupDetail?id="+popupVo.getId();

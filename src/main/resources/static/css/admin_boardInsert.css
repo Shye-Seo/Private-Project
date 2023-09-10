@@ -36,6 +36,42 @@
     /* max-width: 530px; */
     margin-right: 5%;
 }
+#radio_1, #radio_2{
+	display: none;
+}
+
+.screening_area{
+	display: flex;
+	margin-bottom: 12px;
+	margin-right: 20px;
+}
+
+.screening_area div {
+    color: #222;
+    font-family: 'Pretendard';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: 170.02%; */
+    letter-spacing: -0.6px;
+}
+
+.screening_area input[type="radio"] + label {
+	display: inline-block;
+	width:25px; 
+	height: 25px; 
+	background: #FFF;
+	cursor: pointer; 
+	border-radius: 50%;
+	border: 1px solid #DFDFDF;
+    margin-right: 10px;
+}
+
+.screening_area input[type="radio"]:checked + label {
+	background:url(../imgs/check_icon.png) no-repeat center/25px 25px; 
+	float: right;
+	border: 1px solid rgba(244, 63, 31, 1);
+}
 .date_wrap {
     width: 30%; 
     /* max-width: 400px; */

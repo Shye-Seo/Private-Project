@@ -105,9 +105,6 @@ button img {
 }
 
 /* ---------전시관선택 및 개인정보 동의 PAGE--------- */
-input[name=nowpage]{
-	display: none;
-}
 .place_area {
     width: 62.5%;
     margin: 10px auto 100px auto;
@@ -751,7 +748,6 @@ input[name=nowpage]{
 .reservation_wrap_info {
     width: 62.5%;
     margin: 0 auto;
-    display: none;
 }
 
 .info_area{
@@ -1375,7 +1371,7 @@ input.message_txtbox {
     box-sizing: border-box;
 }
 
-.button_wrap .date_btn {
+.button_wrap .prev_btn {
     width: 163px;
     height: 64px;
     border: 1px solid #202020;

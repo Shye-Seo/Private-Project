@@ -16,10 +16,31 @@
 	height: 100%;
 }
 
-span#check {
-    /* margin-top: 15px; */
-    margin-right: 100px;
-    margin-left: 30px;
+#popup_1, #popup_2{
+	display: none;
+	margin-left: 13.5%;
+	background-color: #000;
+    z-index: 100;
+    color: #FFF;
+    position: absolute;
+    margin-top: 5.05%;
+}
+
+#popup_2 {
+     margin-top: 38%; 
+}
+
+.close {
+    justify-content: space-between;
+    display: flex;
+    height: 30px;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.btnClose{
+	cursor: pointer;
 }
 
 .slide_box{

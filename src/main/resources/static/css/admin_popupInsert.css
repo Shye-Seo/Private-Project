@@ -3,25 +3,163 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* main */
-.area span {
-    width: 20%; height:21px;
+*{
+	font-family: Pretendard;
+}
+.content_area{
+    position:relative;
+    width: 100%; height: auto;
+    max-width: 1440px; min-height: 600px;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px #0000000D;
+    padding: 60px;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    
+}
+/* ------------datepicker ----------*/
+.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all {
+		    background: #FFF;
+		    border: none;
+		}
+		/* 일요일 */
+		.ui-datepicker th:first-child span {
+		    color: red;
+		}
+		/* 토요일 */
+		.ui-datepicker th:last-child span {
+		    color: blue;
+		}
+		/* 각 날짜 div style*/
+		.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+		    border: none !important;
+		    background: #FFF !important;
+		    text-align: center !important;
+		}
+		/* 오늘 날짜 */
+		.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+		    background: #E4E4E4 !important;
+		    color: #000 !important;
+		}
+		button.ui-datepicker-trigger {
+		    display: none;
+		}
+		a.ui-state-default:hover{
+			background: rgba(244, 63, 31, 0.2);
+		}
+		.ui-datepicker select.ui-datepicker-year {
+		    width: 40% !important;
+		    margin-right: 10px !important;
+		}
+		.ui-datepicker select.ui-datepicker-month {
+		    width: 40% !important;
+		}
+/*----------datepicker end-------------*/	
+
+.dates_test{
+	width: 62.5%;
+	margin: 0 auto;	
+}
+
+.date_area {
+    display: flex;
+    align-items: center;
+}
+
+.calendar_button{
+	margin-left: 20px;
+}
+
+.calendar_icon{
+	width: 24px;
+	height: 24px;
+	background: #FFF;
+	border: none;
+	cursor: pointer;
+}
+
+.content_area span {
+    width: 15%;
+    height: 21px;
     /* max-width: 285px; */
-    padding-left:20px;
-    border-left:3px solid #5B8FD2;
+    padding-left: 20px;
+    /* border-left: 3px solid #5B8FD2; */
     font-size: 18px;
     font-weight: 600;
+    color: #4B4B4B;
+    text-align: left;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
 }
-.area input, .file_area{
+.content_area input, .file_area{
     height: 60px;
     border: 0.5px solid #DDDDDD;
     box-sizing: border-box;
     padding-left: 10px;
     font-size: 15px;
 }
-.area input:focus-visible,.area textarea:focus-visible {
-    border: 0.5px solid #5B8FD2 !important;
+.title_area {
+    width: 70%;
 }
-
+.title_area input {
+    width: 100%;
+}
+.date_area {
+    display: flex;
+    align-items: center;
+}
+.startDate_area {
+    border: 0.5px solid #DDDDDD;
+    display: flex;
+    box-sizing: border-box;
+}
+.endDate_area {
+    border: 0.5px solid #DDDDDD;
+    display: flex;
+    box-sizing: border-box;
+}
+.date_area input {
+    border: none;
+    width: 85%;
+}
+.link_area {
+    width: 70%;
+}
+.link_area input {
+    width: 100%;
+}
+.calendar_icon {
+    width: 13%;
+    height: 60px;
+    background: #FFF;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    justify-content: center;
+    line-height: 70px;
+}
+.date_area img {
+    width: 24px;
+    height: 24px;
+}
+.date_area p {
+    margin: 0 20px;
+    font-size: 20px;
+}
+.content_area input:focus-visible,.contet_area textarea:focus-visible {
+    border: 0.5px solid #F43F1F !important;
+}
+.area2 {
+    align-items: center;
+}
+.area3 span {
+    height: 60px;
+    line-height: 60px;
+}
 .area1,.area2,.area3,.area4,.area5{
     margin-bottom: 30px;
     display: flex;
@@ -63,18 +201,10 @@
     background-position-x: right;
     background-position-y: 13px;
 }
-/* date 기본글 */
-/* .date_wrap input[type="date"]::before{
-    content: attr(data-placeholder);
-    width: 100%;
-}
-.date_wrap input[type="date"]:focus::before, .date_wrap input[type="date"]:valid::before{
-    display: none;
-} */
 .area2{
     align-items: center;
 }
-.area .area2 textarea {
+.content_area .area2 textarea {
     padding:10px;
     resize:none;
     width: 75%; 
@@ -93,7 +223,7 @@
     font-weight: 500;
 }
 .area3 .file_area{
-    width: 75%; 
+    width: 70%; 
     display: flex;
     justify-content: space-between;
 }
@@ -133,6 +263,13 @@
     background: url("../imgs/register_upload.svg") no-repeat;
     background-position: center;
     cursor: pointer;
+    text-align: center;
+    line-height: 70px;
+}
+
+.file_area img {
+    width: 24px;
+    height: 24px;
 }
 
 .area4 span:first-child,.area5 span:first-child{

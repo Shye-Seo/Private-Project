@@ -9,68 +9,52 @@
     <title>부산영화체험박물관</title>
     <script src="/js/main.js"></script>
 </head>
-    <!-- 팝업 css 시작 부분 -->
-    <style>
-    .pop {margin:0 auto; max-width:800px;}
-    .pop .title {margin:10px 0; font-size:25px; font-weight:600; text-align:center;}
-    .pop p {line-height:20px; font-size:14px;}
-
-    .pop {display:none;}
-    .pop:before {display:block; content:""; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,.5);}
-    .pop .layerBox {position:fixed; left:50%; top:50%; transform:translate(-50%, -50%); padding:30px; background:#fff; border-radius:6px;}
-    .pop .layerBox .title {margin-bottom:10px; padding-bottom:10px; font-weight:600; border-bottom:1px solid #d9d9d9; text-align: left;}
-    .pop .layerBox .cont {margin-bottom:40px;}
-    .pop .layerBox p {line-height:20px; font-size:13px;}
-    .pop .layerBox .btnClose {display:inline-block; padding:6px 12px; color:#444; font-size:12px; text-decoration:underline;}
-    .pop .layerBox .btnTodayHide {font-size:13px; font-weight:600; text-decoration:underline;}
-    </style>
-    <!-- 팝업 css 끝 부분 -->
 <body>
-<div th:replace="/head :: head"></div>
-
-<!-- 팝업 창 작성 시작 부분 -->
-<div th:each="popup : ${popup_list}" class="popup_modal">
-	<div th:id="'popup_'+${popupStat.count}" class="popup">
-	    <div class="layerBox">
-	        <div class="cont">
-				<img id="popup"  th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/popup-folder/' +${popup.file_name}}" alt="poster_img">
-	        </div>
-	        <div class="close">
-	            <span id="check" class="btnTodayHide"><input type="checkbox" value="checkbox" name="chkbox" th:id="'chkday'+${popupStat.count}"/><label for="chkday">오늘 하루동안 보지 않기</label></span>
-	            <span th:id="'close'+${popupStat.count}" class="btnClose"> <a href="#0">닫기</a></span>
-	        </div>
-	    </div>
+	<div th:replace="/head :: head"></div>
+	
+	<!-- 팝업 창 작성 시작 부분 -->
+	<div th:each="popup : ${popup_list}" class="popup_modal">
+		<div th:id="'popup_'+${popupStat.count}" class="popup">
+		    <div class="layerBox">
+		        <div class="cont" th:if="${popup.click_link == ''}">
+					<img id="popup" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/popup-folder/' +${popup.file_name}}" alt="poster_img">
+		        </div>
+		        <div class="cont" th:if="${popup.click_link != ''}">
+					<a th:href="@{(${popup.click_link})}">
+					<img id="popup" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/popup-folder/' +${popup.file_name}}" alt="poster_img">
+					</a>
+		        </div>
+		        <div class="close">
+		            <span id="check" class="btnTodayHide">
+						<input type="checkbox" value="checkbox" name="chkbox" th:id="'chkday_'+${popupStat.count}"/>
+						<label for="chkday">오늘은 그만보기</label>
+					</span>
+		            <span th:id="'close_'+${popupStat.count}" class="btnClose" th:onclick="'closeWin('+${popupStat.count}+')'">
+						close <img src="/imgs/popup_close.svg">
+					</span>
+		        </div>
+		    </div>
+		</div>
 	</div>
-</div>
+	
+	<div class="slide_box">
+	    <ul class="slide">
+	        <li><img src="/imgs/bg.jpg" alt="슬라이드1"></li>
+	        <li><img src="/imgs/bg2.jpg" alt="슬라이드2"></li>
+	        <li><img src="/imgs/bg3.jpg" alt="슬라이드3"></li>
+	    </ul>
+	    <div class="inwrap">
+	        <h1>영화체험박물관</h1>
+	        <h1>영화체험박물관</h1>
+	        <h1>영화체험박물관</h1>
+	    </div>
+	    <span class="prev">&lang;</span>
+	    <span class="next">&rang;</span>
+	</div>
+	
+	<div></div>
+	<div></div>
 
-<div class="slide_box">
-    <ul class="slide">
-        <li><img src="/imgs/bg.jpg" alt="슬라이드1"></li>
-        <li><img src="/imgs/bg2.jpg" alt="슬라이드2"></li>
-        <li><img src="/imgs/bg3.jpg" alt="슬라이드3"></li>
-    </ul>
-    <div class="inwrap">
-        <h1>영화체험박물관</h1>
-        <h1>영화체험박물관</h1>
-        <h1>영화체험박물관</h1>
-    </div>
-    <span class="prev">&lang;</span>
-    <span class="next">&rang;</span>
-</div>
-
-<section id="section_1" class="inwrap">
-    <div>
-
-    </div>
-
-</section>
-
-
-<div></div>
-<div></div>
-
-     
-  </div>
 <!-- 팝업 JS 부분 -->
 <script>
 	// popup //
@@ -78,12 +62,13 @@
 	var noticeCookie2 = getCookie("name_2");  // 쿠키 가져오기
 	
 	if (noticeCookie1 != "value"){                
-	    // 팝업창 띄우기
-	    $('#popup_1').css('display', 'block');
+	    $('#popup_1').attr('style', 'display:block');
 	}
-	if (noticeCookie2 != "value"){                
-	    // 팝업창 띄우기
-	    $('#popup_2').css('display', 'block');
+	if(noticeCookie2 != "value"){
+	    $('#popup_2').attr('style', 'display:block');
+	}
+	if (noticeCookie1 == "value" && noticeCookie2 != "value"){
+		$('#popup_2').attr('style', 'display:block; margin-top: 5.05%;');                
 	}
 	
 	function setCookie(name, value){ 
@@ -92,42 +77,48 @@
 	    document.cookie = name+ "=" + escape( value ) + "; path=/; expires=" +   todayDate.toGMTString() + ";";
 	} 
 	 
-	function closeWin(){ 
-	    if ($("#chkday_1").is(":checked") ){
-	        setCookie("name_1", "value"); 
-	        window.close();
-	    }
-	    if ($("#chkday_2").is(":checked") ){
-	        setCookie("name_2", "value"); 
-	        window.close();
-	    }
+	function closeWin(number){
+		debugger;
+		if(number == 1){
+		    if ($("#chkday_1").is(":checked") ){
+		        setCookie("name_1", "value"); 
+		    }
+		    $('#popup_1').css('display', 'none');
+		    $('#popup_2').css('margin-top', '5.05%');
+		} 
+	    if(number == 2){
+		    if ($("#chkday_2").is(":checked") ){
+		        setCookie("name_2", "value"); 
+		    }
+		    $('#popup_2').css('display', 'none');
+		}
 	}
 
     function getCookie(name) {
-    var Found = false
-    var start, end
-    var i = 0
+    var Found = false;
+    var start, end;
+    var i = 0;
     
     while(i <= document.cookie.length) {
-        start = i
-        end = start + name.length
+        start = i;
+        end = start + name.length;
         
         if(document.cookie.substring(start, end) == name) {
-          Found = true
-          break 
+          Found = true;
+          break;
         }
-        i++
+        i++;
     }
     
     if(Found == true) {
-    start = end + 1
-    end = document.cookie.indexOf(";", start)
+    start = end + 1;
+    end = document.cookie.indexOf(";", start);
       if(end < start){
-        end = document.cookie.length
+        end = document.cookie.length;
 	  }
-    	return document.cookie.substring(start, end)
+    	return document.cookie.substring(start, end);
     }
-    return ""
+    return "";
 } 
 </script>
 </body>

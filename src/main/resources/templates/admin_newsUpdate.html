@@ -48,6 +48,20 @@
                         <span>문의</span>
                         <input type="text" name="news_contact" class="required" maxlength="45" th:value="${news.news_contact}">
                     </div>
+                    <div class="area2">
+						<span>영화상영여부</span>
+						<input type="hidden" name="screen_value" th:value="${news.news_screeningCheck}">
+						<div class="screening_area">
+							<input type="radio" name="news_screeningCheck" value="1" id="radio_1">
+							<label for="radio_1"></label>
+							<div>O</div>
+						</div>
+						<div class="screening_area">
+							<input type="radio" name="news_screeningCheck" value="0" id="radio_2">
+							<label for="radio_2"></label>
+							<div>X</div>
+						</div>
+					</div>
                     <div class="area3">
                         <span>동영상 링크</span>
                         <input type="text" name="news_link1" th:value="${news.news_link1}">
@@ -119,7 +133,14 @@
                     </script>
                 </div>
 
-
+			<script>
+				var screen_value = $('input[name=screen_value]').val();
+				if(screen_value == 1){
+					$('#radio_1').prop('checked',true);
+				}else if(screen_value == 0){
+					$('#radio_2').prop('checked',true);
+				}
+			</script>
             </div>
         </div>
     </div>

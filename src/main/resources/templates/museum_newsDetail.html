@@ -60,12 +60,11 @@
 								<li>[(${news.news_contact})]</li>
 							</div>
 						</div>
-						<div class="screening_comment">
-							<div th:if="${news.news_screeningCheck != 0}">
+						<div class="screening_comment" th:if="${news.news_screeningCheck != 0}">
 								상영은 정시에 시작되며 시작 10분 후에는 입장이 제한됩니다. <br>
 								영상홀 내부 음식물 반입은 금지입니다. <br>
-								주차 50% 할인권을 제공합니다.(주차요금: 2시간 이내 500원/10분, 2시간 초과 이후 750원/10분)
-							</div>
+								주차 50% 할인권을 제공합니다. <br>
+								(주차요금: 2시간 이내 500원/10분, 2시간 초과 이후 750원/10분)
 						</div>
 					</div>
 				</div>

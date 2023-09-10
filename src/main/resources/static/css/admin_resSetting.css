@@ -206,13 +206,32 @@
 	margin: 50px 35px;
 }
 
+.bottom_title {
+    color: #202020;
+    font-family: Pretendard;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.84px;
+    margin-bottom: 40px;
+}
+
 .select_date input {
+    color: #202020;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.54px;
+    border: 1px solid #202020;
+    background: #FFF;
     display: flex;
-    width: 340px;
-    height: 20px;
+    width: 380px;
+    height: 60px;
     padding: 20px;
-    justify-content: space-between;
-    align-items: center;
+    box-sizing: border-box;
 }
 
 .setting_closed{
@@ -223,8 +242,15 @@
     margin-bottom: 25px;
 }
 
-.setting_closed p{
-	margin-right: 77px;
+.setting_closed p {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.54px;
+    margin-right: 77px;
 }
 
 /* 토글버튼  */
@@ -244,7 +270,7 @@
   height: 27.08px;
   position: absolute;
   top: 50%;
-  left: 3px;
+  left: 2.5px;
   transform: translateY(-50%);
   border-radius: 50%;
   background: #FFFFFF;
@@ -265,6 +291,17 @@
 }
 
 /* select box ui  */
+.setting_timeNnum p {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.54px;
+    margin-bottom: 20px;
+}
+
 .time_limited{
 	display: flex;
 }
@@ -276,15 +313,15 @@ select{
 }
 select::-ms-expand{ display: none; } /* 익스플로러용 */
 
-.select_time{
-	display: flex;
-	width: 256px;
-	height: 60px;
-	padding: 20px;
-	justify-content: space-between;
-	align-items: center;
-	border: 1px solid #202020;
-	margin-right: 20px;
+.select_time {
+    display: flex;
+    width: 256px;
+    height: 60px;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #202020;
+    margin-right: 20px;
 }
 
 .time_limited .time_input{

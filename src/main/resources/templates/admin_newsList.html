@@ -34,7 +34,7 @@
                             <div class="newsTitle_area"><li>제목</li></div>
                             <div class="newsDate_area"><li>등록일</li></div>
                         </ol>
-						<ol th:each="news : ${news_list}" class="list_ol">
+						<ol th:each="news : ${news_list}" class="list_board">
 							<div class="check_area">
 								<li><input type="checkbox" th:class="'check_'+${news.id}" name="check" th:value="${news.id}"></li>
 							</div>
@@ -64,37 +64,36 @@
                     </div>
                                     
                     <!-- 페이징 -->
-                    
-                    <!-- 검색 안했을 때  -->
-<!--                     <div class="null">  -->
-<!--                         <ul class="pagewrap"> -->
-<!--                             <li> -->
-<!--                             	<a class="page-link page_icon" th:href="@{admin_reservationList?page=1}"><img src="imgs/page_start_btn.svg"></a> -->
-<!--                             </li> -->
-<!--                             <li class="icon_right"> -->
-<!--                             	<a class="page-link page_icon" th:if="${nowpage == 1}" th:href="@{admin_reservationList?page={page} (page = ${nowpage})}"><img src="imgs/page_back_btn.svg"></a> -->
-<!--                             	<a class="page-link page_icon" th:if="${nowpage != 1}" th:href="@{admin_reservationList?page={page} (page = ${nowpage}-1)}"><img src="imgs/page_back_btn.svg"></a> -->
-<!--                             </li> -->
-<!--                              <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"> -->
-<!-- 							    <li class="page-item"  -->
-<!-- 							    		 th:with="start = ${pagination.startPage}, end = ${pagination.endPage}" -->
-<!-- 							    		th:each="pageButton : ${#numbers.sequence(start, end)}"> -->
-<!-- 							    		<a class="page-link"  th:id="'page_num'+${pageButton}" th:href="@{admin_reservationList?page={page} (page = ${pageButton})}" th:text=${pageButton}></a> -->
-<!-- 							    </li> -->
-<!-- 						    </th:block> -->
-<!--                             <li class="icon_left"> -->
-<!--                             	<a class="page-link page_icon" th:if="${nowpage == pagination.totalPageCnt}" th:href="@{admin_reservationList?page={page} (page = ${nowpage})}"><img src="imgs/page_next_btn.svg"></a> -->
-<!--                             	<a class="page-link page_icon" th:if="${nowpage != pagination.totalPageCnt}" th:href="@{admin_reservationList?page={page} (page = ${nowpage}+1)}"><img src="imgs/page_next_btn.svg"></a> -->
-<!--                             </li> -->
-<!--                             <li> -->
-<!--                             	<a class="page-link page_icon" th:href="@{admin_reservationList?page={page} (page = ${pagination.totalPageCnt})}"><img src="imgs/page_end_btn.svg"></a> -->
-<!--                             </li> -->
-<!--                         </ul> -->
-<!--                     </div> -->
+                    <div class="null">
+                         <ul class="pagewrap"> 
+                             <li> 
+                             	<a class="page_icon" th:href="@{admin_newsList?page=1}"><img src="/imgs/page_start_btn.svg" id="pg_btn_sizing"></a> 
+                             </li> 
+                             <li class="icon_right"> 
+                             	<a class="page_icon" th:if="${nowpage == 1}" th:href="@{admin_newsList?page={page} (page = ${nowpage})}"><img src="/imgs/page_prev_btn.svg"></a> 
+                             	<a class="page_icon" th:if="${nowpage != 1}" th:href="@{admin_newsList?page={page} (page = ${nowpage}-1)}"><img src="/imgs/page_prev_btn.svg"></a> 
+                             </li> 
+                              <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"> 
+ 							    <li class="page-item"  
+ 							    		 th:with="start = ${pagination.startPage}, end = ${pagination.endPage}" 
+ 							    		th:each="pageButton : ${#numbers.sequence(start, end)}"> 
+ 							    		<a class="page-link"  th:id="'page_num'+${pageButton}" th:href="@{admin_newsList?page={page} (page = ${pageButton})}" th:text=${pageButton}></a> 
+ 							    </li> 
+ 						    </th:block> 
+                             <li class="icon_left"> 
+                             	<a class="page_icon" th:if="${nowpage == pagination.totalPageCnt}" th:href="@{admin_newsList?page={page} (page = ${nowpage})}"><img src="/imgs/page_next_btn.svg"></a> 
+                             	<a class="page_icon" th:if="${nowpage != pagination.totalPageCnt}" th:href="@{admin_newsList?page={page} (page = ${nowpage}+1)}"><img src="/imgs/page_next_btn.svg"></a> 
+                             </li> 
+                             <li> 
+                             	<a class="page_icon" th:href="@{admin_newsList?page={page} (page = ${pagination.totalPageCnt})}"><img src="imgs/page_end_btn.svg" id="pg_btn_sizing"></a> 
+                             </li> 
+                         </ul>
+                    </div>
                     
                     <script th:inline="javascript">
-// 						$('#page_num'+[[${nowpage}]]).addClass("thisPage");
-//                     	var nowpage = /*[[${nowpage}]]*/
+                    	var nowpage = /*[[${nowpage}]]*/
+                    	
+						$('#page_num'+nowpage).addClass("thisPage");
                     </script>
                 </div>
             </div>

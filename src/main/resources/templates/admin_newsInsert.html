@@ -48,6 +48,19 @@
                         <span>문의</span>
                         <input type="text" name="news_contact" class="required" maxlength="45">
                     </div>
+                    <div class="area2">
+						<span>영화상영여부</span>
+						<div class="screening_area">
+							<input type="radio" name="news_screeningCheck" value="1" id="radio_1">
+							<label for="radio_1"></label>
+							<div>O</div>
+						</div>
+						<div class="screening_area">
+							<input type="radio" name="news_screeningCheck" value="0" id="radio_2">
+							<label for="radio_2"></label>
+							<div>X</div>
+						</div>
+					</div>
                     <div class="area3">
                         <span>동영상 링크</span>
                         <input type="text" name="news_link1">
@@ -66,7 +79,7 @@
                             <label for="thumbnail" id="file_upload" class="thumbnail_label">  </label>
                         </div>
                         <input type="file" id="thumbnail" multiple="multiple" name="thumbnail_file" hidden />
-                        <input type="text" id="input_thumbnail" name="news_poster">
+                        <input type="hidden" id="input_thumbnail" name="news_poster">
                         <!-- ... -->
                     </div>
                     <div class="area3">

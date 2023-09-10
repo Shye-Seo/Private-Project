@@ -25,4 +25,10 @@ public interface BoardDao {
 	@Select("select * from news_files where news_id = #{news_id}")
 	List<NewsFileVo> viewNewsFileDetail(int news_id);
 
+	@Select("select count(*) from museum_news where news_title like concat('%','${searchKeyword}','%')")
+	int searchNewsCnt(String searchKeyword); //박물관 소식 검색
+
+	@Select("select * from museum_news where news_title like concat('%','${searchKeyword}','%') order by id desc limit #{startIndex}, #{pageSize}")
+	List<NewsVO> news_searchList(String searchKeyword, int startIndex, int pageSize);
+
 }

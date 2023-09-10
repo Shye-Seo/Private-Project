@@ -25,7 +25,7 @@ public class BoardController {
 	
 	//메인 - 박물관 소식 리스트
 	@RequestMapping(value="/museum_newsList", method=RequestMethod.GET)
-	public String museum_newsList(@ModelAttribute NewsVO newsVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+	public String museum_newsList(@ModelAttribute NewsVO newsVo, ModelMap model, @RequestParam(defaultValue = "1") int page, String searchKeyword) throws Exception {
 				
 		// 총 게시물 수 
 		int totalListCnt = boardService.findAllNews();
@@ -38,7 +38,20 @@ public class BoardController {
 		// 페이지 당 보여지는 게시글의 최대 개수
 		int pageSize = pagination.getPageSize();
 
-		news_list = boardService.findNewsPaging(startIndex, pageSize);
+		if(searchKeyword == null) { //키워드 null (기본상태)
+			news_list = boardService.findNewsPaging(startIndex, pageSize);
+	    	model.addAttribute("pagination", pagination);
+	    	model.addAttribute("total_cnt", totalListCnt);
+	    }else if(searchKeyword != null) { //키워드검색
+    		totalListCnt = boardService.searchNewsCnt(searchKeyword);
+    		pagination = new CardPagingVO(totalListCnt, page);
+    		startIndex = pagination.getStartIndex();
+    		pageSize = pagination.getPageSize();
+    		news_list = boardService.news_searchList(searchKeyword, startIndex, pageSize);
+    		model.addAttribute("pagination", pagination);
+    		model.addAttribute("searchKeyword", searchKeyword);
+    		model.addAttribute("total_cnt", totalListCnt);
+    	}
 		    
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 		    
@@ -50,6 +63,8 @@ public class BoardController {
 			    
 		model.addAttribute("news_list", news_list);
 		model.addAttribute("nowpage", page);
+//		model.addAttribute("pagination", pagination);
+//		model.addAttribute("total_cnt", totalListCnt);
 				 
 		return "/museum_newsList";
 	}
