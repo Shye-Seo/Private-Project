@@ -40,6 +40,18 @@ public class ReservationController {
 	List<TimeVO> time_list;
 	List<GroupVO> res_list;
 	
+	// 예약-개인(안내페이지)
+	@GetMapping(value="/reservation_personal")
+	public String reservation_personal() {
+		return "reservation_personal";
+	}
+		
+	// 예약-단체(안내페이지)
+	@GetMapping(value="/reservation_group")
+	public String reservation_group() {
+		return "reservation_group";
+	}
+	
 	//날짜 및 회차선택
 	@RequestMapping(value="/reservation_group_date", method=RequestMethod.GET)
 	public String reservation_group_date(ModelMap model, @RequestParam(defaultValue="") String choice_date) throws Exception {
@@ -548,73 +560,66 @@ public class ReservationController {
 	}
 	
 		//예약날짜 및 회차선택 넘기기
-		@ResponseBody
-		@RequestMapping(value="/reservation_group_date_register", method=RequestMethod.POST)
-		public String reservation_date_register(@RequestParam("res_theaterCheck") int res_theaterCheck, @RequestParam("res_visitDate") String res_visitDate, 
-				 								@RequestParam("res_visitNum") int res_visitNum, TemporaryVO tempvo, ModelMap model) throws Exception {
-			
-			String res_visitTime = "";
-			
-			if(res_visitNum == 1) {
-				res_visitTime = "10:00";
-			}else if(res_visitNum == 2) {
-				res_visitTime = "10:30";
-			}else if(res_visitNum == 3) {
-				res_visitTime = "11:00";
-			}else if(res_visitNum == 4) {
-				res_visitTime = "11:30";
-			}else if(res_visitNum == 5) {
-				res_visitTime = "12:00";
-			}else if(res_visitNum == 6) {
-				res_visitTime = "12:30";
-			}else if(res_visitNum == 7) {
-				res_visitTime = "13:00";
-			}else if(res_visitNum == 8) {
-				res_visitTime = "13:30";
-			}else if(res_visitNum == 9) {
-				res_visitTime = "14:00";
-			}else if(res_visitNum == 10) {
-				res_visitTime = "14:30";
-			}else if(res_visitNum == 11) {
-				res_visitTime = "15:00";
-			}else if(res_visitNum == 12) {
-				res_visitTime = "15:30";
-			}else if(res_visitNum == 13) {
-				res_visitTime = "16:00";
-			}else if(res_visitNum == 14) {
-				res_visitTime = "16:30";
-			}
-			
-			//전시관, 날짜 및 시간 저장해서 다음 페이지 전달 시, 키값이 될 임시랜덤키
-			int random_idx = (int)(Math.random() * 8999) + 1000;
-//			System.out.println(random_idx);
-			tempvo.setRandom_idx(random_idx);
-			tempvo.setRes_theaterCheck(res_theaterCheck);
-			tempvo.setRes_visitDate(res_visitDate);
-			tempvo.setRes_visitNum(res_visitNum);
-			tempvo.setRes_visitTime(res_visitTime);
-			
-			System.out.println(tempvo);
-			int id = tempService.insertTemp(tempvo);
-			System.out.println(id);
-			
-			model.addAttribute("res_theaterCheck", res_theaterCheck);
-			model.addAttribute("res_visitDate", res_visitDate);
-			model.addAttribute("res_visitNum", res_visitNum);
-			
-//			System.out.println("res_theaterCheck : " + res_theaterCheck);
-//			System.out.println("res_visitNum : " + res_visitNum);
-//			System.out.println(res_visitDate);
-			
-			return "reservation_group_complete?id="+id;
-		}
-		
-		//단체예약 안내페이지
-		@RequestMapping(value="/reservation_group_info", method=RequestMethod.GET)
-		public String reservation_group_info(ModelMap model) throws Exception {
-			
-			return "reservation_group_info";
-		}
+//		@ResponseBody
+//		@RequestMapping(value="/reservation_group_date_register", method=RequestMethod.POST)
+//		public String reservation_date_register(@RequestParam("res_theaterCheck") int res_theaterCheck, @RequestParam("res_visitDate") String res_visitDate, 
+//				 								@RequestParam("res_visitNum") int res_visitNum, TemporaryVO tempvo, ModelMap model) throws Exception {
+//			
+//			String res_visitTime = "";
+//			
+//			if(res_visitNum == 1) {
+//				res_visitTime = "10:00";
+//			}else if(res_visitNum == 2) {
+//				res_visitTime = "10:30";
+//			}else if(res_visitNum == 3) {
+//				res_visitTime = "11:00";
+//			}else if(res_visitNum == 4) {
+//				res_visitTime = "11:30";
+//			}else if(res_visitNum == 5) {
+//				res_visitTime = "12:00";
+//			}else if(res_visitNum == 6) {
+//				res_visitTime = "12:30";
+//			}else if(res_visitNum == 7) {
+//				res_visitTime = "13:00";
+//			}else if(res_visitNum == 8) {
+//				res_visitTime = "13:30";
+//			}else if(res_visitNum == 9) {
+//				res_visitTime = "14:00";
+//			}else if(res_visitNum == 10) {
+//				res_visitTime = "14:30";
+//			}else if(res_visitNum == 11) {
+//				res_visitTime = "15:00";
+//			}else if(res_visitNum == 12) {
+//				res_visitTime = "15:30";
+//			}else if(res_visitNum == 13) {
+//				res_visitTime = "16:00";
+//			}else if(res_visitNum == 14) {
+//				res_visitTime = "16:30";
+//			}
+//			
+//			//전시관, 날짜 및 시간 저장해서 다음 페이지 전달 시, 키값이 될 임시랜덤키
+//			int random_idx = (int)(Math.random() * 8999) + 1000;
+////			System.out.println(random_idx);
+//			tempvo.setRandom_idx(random_idx);
+//			tempvo.setRes_theaterCheck(res_theaterCheck);
+//			tempvo.setRes_visitDate(res_visitDate);
+//			tempvo.setRes_visitNum(res_visitNum);
+//			tempvo.setRes_visitTime(res_visitTime);
+//			
+//			System.out.println(tempvo);
+//			int id = tempService.insertTemp(tempvo);
+//			System.out.println(id);
+//			
+//			model.addAttribute("res_theaterCheck", res_theaterCheck);
+//			model.addAttribute("res_visitDate", res_visitDate);
+//			model.addAttribute("res_visitNum", res_visitNum);
+//			
+////			System.out.println("res_theaterCheck : " + res_theaterCheck);
+////			System.out.println("res_visitNum : " + res_visitNum);
+////			System.out.println(res_visitDate);
+//			
+//			return "reservation_group_complete?id="+id;
+//		}
 		
 		//예약신청
 		@ResponseBody

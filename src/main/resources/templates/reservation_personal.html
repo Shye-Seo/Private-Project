@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/reservation.css">
+    <title>부산영화체험박물관 | 개인예약</title>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
+        <li class="category_1">관람정보</li></li><li class="div_bar">|</li>
+        <li class="category_2">관람예약</li></li><li class="div_bar">|</li>
+        <li class="category_3">개인</li></li><li class="div_bar">|</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>개인예약</h1></div>
+		</div>
+	</div>
+		<!-- 개인예약 안내 -->
+		<div class="reservation_wrap">
+			<div class="personal_area">
+					<div class="personal_title">
+						<div>언제 어디서나, 편리한 전시체험권 예약</div>
+					</div>
+					<div class="personal_content">
+						부산영화체험박물관 전시체험권 예약은 네이버 아이디로 편리하게, 네이버페이로 안전하게 이용하세요.
+					</div>
+			</div>
+			<div class="personal_area">
+				<div class="personal_title">
+					<div>네이버 예약 - 부산영화체험박물관</div>
+				</div>
+				<div class="personal_content">
+					"안심하고 예매하는 그린티켓!" 언제 취소해도, 이용하지 못했어도 전액 환불됩니다. <br>
+					네이버 예약 최대 38% 할인 <br>
+					바로 사용 가능+네이버 페이 적립 1% <br>
+				</div>
+			</div>
+			<div class="ticketButton_area">
+				<div class="button_wrap_personal">
+					<button id="group_button" onclick="location.href='https://booking.naver.com/booking/5/bizes/225783?area=ple'">
+						<img src="/imgs/ticket_icon.png">
+						네이버 예약으로 온라인 예매하기
+					</button>
+				</div>
+			</div>
+			<div class="personal_img_area">
+				<img src="/imgs/personal_reservation_1.jpg" id="personal_img_1">
+				<img src="/imgs/personal_reservation_2.jpg" id="personal_img_2">
+			</div>
+</body>
+</html>

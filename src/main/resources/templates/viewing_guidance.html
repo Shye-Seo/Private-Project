@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <link rel="stylesheet" href="css/viewing_guidance.css">
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/reservation.css">
     <title>부산영화체험박물관 | 관람안내</title>
-    <script src="/js/main.js"></script>
 </head>
 <body>
 <div th:replace="/head :: head">
@@ -15,24 +15,197 @@
 </div>
 <div class="gnb_bar">
     <ul class="gnb_wrap">
-        <li><img src="/imgs/home_icon.svg"></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
+        <li class="category_1">관람정보</li></li><li class="div_bar">|</li>
+        <li class="category_2">이용안내</li></li><li class="div_bar">|</li>
+        <li class="category_3">관람안내</li></li><li class="div_bar">|</li>
     </ul>
 </div>
-    <div class="inwrap">
-    </div>
-
-<section id="section_1" class="inwrap">
-    <div>
-
-    </div>
-
-</section>
-
-
-<div></div>
-<div></div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>관람안내</h1></div>
+		</div>
+	</div>
+		<!-- 단체예약 안내 -->
+		<div class="reservation_wrap">
+			<div class="guide_area">
+				<div class="guide_title">
+					<div>관람시간</div>
+				</div>
+				<div class="time_guide_wrap">
+					<div class="time_left">
+						<div class="left_text_timeInfo">
+							화-일
+						</div>
+						<div class="right_text_timeInfo">
+							<div class="time_big_text">10:00~18:00</div>
+							<div class="time_small_text">입장 및 발권마감 시간은 17:00입니다.<br>통합 관람은 16:30 이전 입장을 권장합니다.</div>
+						</div>
+					</div>
+					<div class="time_right">
+						<div class="left_text_timeInfo">
+							휴관일
+						</div>
+						<div class="right_text_timeInfo">
+							<div class="flex_right">
+								<div class="time_big_text">매주 월요일</div>
+								<div class="time_small_text">(단, 공휴일과 겹치는 경우에는 그 다음 날)</div>
+							</div>
+							<div class="time_big_text">1월 1일, 설날,추석 당일</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="guide_area">
+				<div class="guide_title">
+					<div>관람요금</div>
+				</div>
+				<div class="price_table_guide">
+						<table class="guidance_price_tb">
+						    <tr class="priceTable_top">
+								<td colspan="2" class="tb_first">구분</td>
+								<td class="tb_second">부산영화체험박물관</td>
+								<td class="tb_third">트릭아이뮤지엄</td>
+								<td class="tb_last">부산영화체험박물관+트릭아이뮤지엄<br><p>(통합 관람시 할인 적용)</p></td>
+						    </tr>
+						    <tr class="priceTable_bottom">
+								<td rowspan="2" class="first_left">개인</td>
+								<td class="first_right">성인</td>
+								<td class="tb_second">10,000원</td>
+								<td class="tb_third">8,000원</td>
+								<td id="sale_area" class="tb_last">
+									<div class="before_sale">18,000원</div>
+									<div class="sale_icon"><img src="/imgs/price_sale.svg"></div>
+									<div class="after_sale">12,000원</div>
+								</td>
+						    </tr>
+						    <tr class="priceTable_bottom">
+								<td class="first_right">어린이/청소년</td>
+								<td class="tb_second">7,000원</td>
+								<td class="tb_third">6,000원</td>
+								<td id="sale_area" class="tb_last">
+									<div class="before_sale">13,000원</div>
+									<div class="sale_icon"><img src="/imgs/price_sale.svg"></div>
+									<div class="after_sale">9,000원</div>
+								</td>
+						    </tr>
+						    <tr class="priceTable_bottom">
+								<td rowspan="2" class="first_left">부산시민<br><p>(30%할인)</p></td>
+								<td class="first_right">성인</td>
+								<td class="tb_second">7,000원</td>
+								<td class="tb_third">5,600원</td>
+								<td id="sale_area" class="tb_last">
+									<div class="before_sale">12,600원</div>
+									<div class="sale_icon"><img src="/imgs/price_sale.svg"></div>
+									<div class="after_sale">12,000원</div>
+								</td>
+						    </tr>
+						    <tr class="priceTable_bottom">
+								<td class="first_right">어린이/청소년</td>
+								<td class="tb_second">4,900원</td>
+								<td class="tb_third">4,200원</td>
+								<td id="sale_area" class="tb_last">
+									<div class="before_sale">9,100원</div>
+									<div class="sale_icon"><img src="/imgs/price_sale.svg"></div>
+									<div class="after_sale">9,000원</div>
+								</td>
+						    </tr>
+						    <tr class="priceTable_bottom">
+								<td rowspan="2" class="first_left">단체</td>
+								<td class="first_right">성인</td>
+								<td class="tb_second">5,000원</td>
+								<td class="tb_third">4,000원</td>
+								<td id="sale_area" class="tb_last">
+									<div class="before_sale">9,000원</div>
+									<div class="sale_icon"><img src="/imgs/price_sale.svg"></div>
+									<div class="after_sale">8,000원</div>
+								</td>
+						    </tr>
+						    <tr class="priceTable_bottom">
+								<td class="first_right">어린이/청소년</td>
+								<td class="tb_second">3,500원</td>
+								<td class="tb_third">3,000원</td>
+								<td id="sale_area" class="tb_last">
+									<div class="before_sale">6,500원</div>
+									<div class="sale_icon"><img src="/imgs/price_sale.svg"></div>
+									<div class="after_sale">6,000원</div>
+								</td>
+						    </tr>
+						</table>
+				</div>
+			</div>
+			<div class="guide_area">
+				<div class="guide_title">
+					<div>관람료 면제대상</div>
+				</div>
+				<div class="guide_content">
+					<li>36개월 미만의 영·유아, 만 65세 이상의 노인</li>
+					<li>장애인복지법에 따라 등록된 장애인과 그와 동행하는 보호자 1명(복지카드 지참 필수)</li>
+					<li>국가유공자증 및 국가유공자 유족증 소지자</li>
+					<li>다자녀가정에 속하는 자로 가족사랑카드 소지자(부산시민에 한함, 주민등록등본 및 신분증 지참 필수)</li>
+				</div>
+			</div>
+			<div class="guide_area">
+				<div class="guide_title">
+					<div>유의사항</div>
+				</div>
+				<div class="guide_content">
+					<li>부산영화체험박물관 관람권은 현장판매 관람요금(표준 정가)에 준합니다.</li>
+					<li>부산영화체험박물관+트릭아이뮤지엄 통합 관람권은 추가할인(중복할인)이 적용되지 않습니다.</li>
+					<li>부산영화체험박물관+트릭아이뮤지엄 통합 관람권은 개별 환불이 불가합니다.</li>
+					<li>당일 관람권 소지자에 한하여 박물관 입장이 가능하며, 퇴장 이후 재입장은 불가합니다.</li>
+					<li>박물관 입장 이후 관람객 사정에 의한 환불은 불가합니다.</li>
+					<li>부산영화체험박물관+트릭아이뮤지엄 통합 관람 시 16:30 이전 입장을 권장합니다.</li>
+				</div>
+			</div>
+			<div class="guide_area">
+				<div class="guide_title">
+					<div>모바일 오디오 가이드</div>
+				</div>
+				<div class="personal_content">
+					"스마트한 박물관. 내 손안의 전시해설 모바일 가이드" <br>
+					국내 최초로 사물인터넷 인식기술(비콘, NFC, 이미지, 사운드)을 적용하여 부산영화체험박물관의 전시 및 체험 시설에 대한 음성해설 모바일 서비스를 제공합니다. <br> 
+					한국어, 영어, 중국어, 일본어 음성해설로 외국인과 시청각장애인이 함께 전시해설을 즐길 수 있습니다. <br>
+				</div>
+				<div class="audio_guide">
+					<div class="audio_img"><img src="/imgs/mobile_audio_guide.png"></div>
+					<div class="audio_text">
+						<p>1. 구글플레이스토어 또는 애플앱스토어에서 '부산영화체험박물관' 앱을 다운로드하세요.</p>
+						<p>2. 전시 및 체험물에 부착되어 있는 스티커를 찾아</p>
+						<div class="detail_text">
+							- 스마트폰을 가져다 대거나(NFC 인식), <br>
+							- 이미지 인식 메뉴 선택 후 QR코드를 인식하거나, <br>
+							- 번호 입력 메뉴 선택 후 번호를 입력하면 해당 전시 콘텐츠가 재생됩니다.
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="guide_area">
+				<div class="guide_title">
+					<div>박물관입장(행위)제한</div>
+				</div>
+				<div class="guide_content">
+					<li>음주상태로 관람이 불가능 하다고 판단되는 사람</li>
+					<li>음주상태로 관람이 불가능 하다고 판단되는 사람</li>
+					<li>음주·흡연하거나 음식물을 먹는 행위</li>
+					<li>전시물 또는 시설물을 훼손하는 행위</li>
+					<li>큰 소리로 떠드는 등 다른 관람자에게 지장을 주는 행위</li>
+					<li>반려 동물과 동반 입장 불가</li>
+					<li>그 밖에 전시물의 보호, 시설물의 안전관리 및 질서유지 등을 위하여 제한하는 행위</li>
+				</div>
+			</div>
+			<div class="preview_area">
+				<div class="guide_title">
+					<div>관람절차 미리보기</div>
+				</div>
+				<div class="guide_preview">
+					<img>
+				</div>
+				<div class="guide_content">
+					<li>부산영화체험박물관 전시체험의 관람절차를 슬라이드쇼로 확인하세요.</li>
+					<li>부산영화체험박물관 전시체험 관람으로 다채로운 9개의 체험테마에 녹아든 30개의 체험코너를 맘껏 즐겨보세요.</li>
+				</div>
+			</div>
 </body>
 </html>

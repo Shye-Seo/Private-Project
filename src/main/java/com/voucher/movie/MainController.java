@@ -73,12 +73,6 @@ public class MainController {
 		return "map";
 	}
 	
-	// 예약-단체
-	@GetMapping(value="/reservation_group")
-	public String reservation_group() {
-		return "reservation_group";
-	}
-	
 	// 전시 페이지
 	@GetMapping(value="/exhibition")
 	public String exhibition() {
