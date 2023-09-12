@@ -172,6 +172,17 @@
     border-right: 0.5px solid #D2D2D2;
 }
 
+.first_right p {
+    color: #595959;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.42px;
+}
+
 .priceTable_bottom .tb_second, .tb_third {
     width: 24.6%;
     border-right: 0.5px solid #FFF;
@@ -313,6 +324,65 @@
     line-height: 24px;
     letter-spacing: -0.48px;
     margin-top: 16px;
+    margin-left: 20px;
+}
+
+.mobile_button_area {
+    width: 100%;
+    display: flex;
+    height: 62px;
+    margin-top: 46px;
+    justify-content: flex-end;
+}
+
+.android_btn, .iOS_btn {
+    display: flex;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.20);
+    background: #242534;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.20);
+    /* color: #FFF; */
+    width: 21%;
+/*     justify-content: center; */
+    align-items: center;
+    margin-right: 17px;
+    padding: 14px 16px;
+    box-sizing: border-box;
+}
+
+.mobile_icon {
+    width: 34px;
+    height: 34px;
+    background: #FFF;
+    border-radius: 50%;
+    justify-content: center;
+    display: flex;
+}
+
+.mobile_icon img {
+    width: 20px;
+}
+
+.android_btn p {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.42px;
+    margin-left: 20px;
+}
+
+.iOS_btn p {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.42px;
     margin-left: 20px;
 }
 
@@ -497,14 +567,14 @@ button img {
 }
 
 .agree_title div{
-	color: #222;
-    font-family: 'Pretendard';
-    font-size: 28px;
+	margin-bottom: 30px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 28px;
-    letter-spacing: -0.84px;
-    margin-bottom: 30px;
+    line-height: normal;
+    letter-spacing: -0.72px;
 }
 
 .agree_txtbox{
@@ -513,24 +583,24 @@ button img {
 }
 
 .text_top {
+    margin-bottom: 30px;
     color: #222;
-    font-family: 'Pretendard';
-    font-size: 20px;
+    font-family: Pretendard;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: 30px;
-    letter-spacing: -0.6px;
-    margin-bottom: 30px;
+    letter-spacing: -0.54px;
 }
 
 .text_content {
     color: #222;
-    font-family: 'Pretendard';
-    font-size: 20px;
+    font-family: Pretendard;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 30px;
-    letter-spacing: -0.6px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
 }
 
 #agree_check{
@@ -585,12 +655,12 @@ button img {
 
 .place_btnArea div {
     color: #222;
-    font-family: 'Pretendard';
-    font-size: 20px;
+    font-family: Pretendard;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    /* line-height: 170.02%; */
-    letter-spacing: -0.6px;
+    line-height: 170.02%;
+    letter-spacing: -0.54px;
 }
 
 .place_btnArea input[type="radio"] + label {
@@ -611,14 +681,14 @@ button img {
 }
 
 .place_title div{
-	color: #222;
-    font-family: 'Pretendard';
-    font-size: 28px;
+	margin-bottom: 30px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 28px;
-    letter-spacing: -0.84px;
-    margin-bottom: 30px;
+    line-height: normal;
+    letter-spacing: -0.72px;
 }
 
 .place_txtbox{
@@ -642,14 +712,14 @@ button img {
 }
 
 .time_title div{
-	color: #222;
-    font-family: 'Pretendard';
-    font-size: 28px;
+	margin-bottom: 30px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 28px;
-    letter-spacing: -0.84px;
-    margin-bottom: 30px;
+    line-height: normal;
+    letter-spacing: -0.72px;
 }
 
 .calendar_area{
@@ -661,7 +731,7 @@ button img {
     margin: 0 auto;
     font-family: "NotoSansR";
     border: 1px solid #C7C7C7;
-    height: 662px;
+    height: 595px;
     margin-right: 12px;
 }
 
@@ -669,15 +739,15 @@ button img {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 90px;
+    border-bottom: 1px solid #C7C7C7;
     color: #202020;
     font-family: Pretendard;
-    font-size: 28px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 700;
-    line-height: 104px;
-    height: 104px;
-    letter-spacing: -0.84px;
-    border-bottom: 1px solid #C7C7C7;
+    line-height: normal;
+    letter-spacing: -0.66px;
 }
 
 .sec_cal .cal_nav .year-month {
@@ -727,40 +797,38 @@ button img {
     display: flex;
     align-items: center;
     justify-content: center;
-     width: calc(100% / 7); 
-    /* text-align: left; */
-    /* color: #999; */
+    width: calc(100% / 7);
     font-size: 22px;
-    /* text-align: center; */
-/*    width: 60px;*/
-/*    height: 60px;*/
-/*    margin: auto 0;*/
     margin: 9px 0;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.26px;
 }
 
-.days .day{
-	color: #202020;
-	text-align: center;
-	width: calc(100% / 7);
-	font-family: 'Pretendard';
-	font-size: 24px;
-	font-style: normal;
-	font-weight: 600;
-	line-height: 95px;
-	letter-spacing: -1.68px;
+.days .day {
+    width: calc(100% / 7);
+    line-height: 60px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: -1.26px;
 }
 
-.disable{
-	color: #969696;
-	text-align: center;
-	font-family: 'Pretendard';
-	font-size: 22px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 60px;
-	letter-spacing: -1.54px;
-/*	width: 60px;*/
-/*	height: 60px;*/
+.disable {
+    color: #969696;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.26px;
 }
 
 .current.today {background-color: #E4E4E4;}
@@ -768,23 +836,20 @@ button img {
 .current.choice {border: 1px solid red; border-radius: 15px;}
 
 .dayStyle {
-/*     border: 1px solid red; */
-/*     border-radius: 15px; */
     width: 60px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    
     color: #202020;
-	text-align: center;
-	font-family: 'Pretendard';
-	font-size: 22px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
-	letter-spacing: -1.54px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.26px;
 }
 
 .choiceDay {
@@ -793,18 +858,15 @@ button img {
     width: 60px;
     align-items: center;
     justify-content: center;
-/*    text-align: center;*/
-/*    line-height: 60px;*/
-/*    font-size: 22px;*/
     display: flex;
     color: #FFF;
     text-align: center;
     font-family: Pretendard;
-    font-size: 22px;
+    font-size: 18px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
-    letter-spacing: -1.54px;
+    letter-spacing: -1.26px;
 }
 
 
@@ -862,8 +924,8 @@ button img {
 
 /* 회차별 시간표 */
 .date_inform {
-    height: 104px;
-    line-height: 104px;
+    height: 90px;
+    line-height: 90px;
     text-align: center;
     justify-content: center;
     display: flex;
@@ -882,26 +944,27 @@ button img {
 	margin-right: 10px;
 }
 
-.choice_title{
-	color: #F43F1F;
-	text-align: center;
-	font-family: Pretendard;
-	font-size: 28px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 104px;
-	letter-spacing: -0.84px;
-	margin-right: 10px;
+.choice_title {
+    color: #F43F1F;
+    line-height: 90px;
+    margin-right: 10px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -0.66px;
 }
 
-.date_inform_txt{
-	color: #202020;
-	font-family: Pretendard;
-	font-size: 28px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 104px;
-	letter-spacing: -0.84px;
+.date_inform_txt {
+    color: #202020;
+    line-height: 90px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -0.66px;
 }
 
 #top_ol {
@@ -988,7 +1051,7 @@ button img {
 
 .table_contents{
 	border: 1px solid #C7C7C7;
-	height: 662px;
+	height: 595px;
 	margin-left: 12px;
 }
 
@@ -1182,7 +1245,7 @@ button img {
     margin: auto;
 }
 
-.group_name, .leader_name, .phone_num, .certifi_num, .vehicle_check {
+.group_name, .leader_name, .phone_num, .certifi_num, .vehicle_check, .email, .rental_check, .agree_facility_check {
     display: flex;
     height: 92px;
     line-height: 92px;
@@ -1228,7 +1291,7 @@ button img {
 	width: 73%;
 }
 
-.input_groupName, .input_leaderName {
+.input_groupName, .input_leaderName, .input_email {
     width: 92%;
 }
 
@@ -1243,7 +1306,7 @@ button img {
     padding-left: 30px;
 }
 
-.vehicle_wrapper, .request_wrapper {
+.vehicle_wrapper, .request_wrapper, .rental_wrapper {
     display: flex;
     padding-left: 30px;
     width: 73%;
@@ -1260,6 +1323,15 @@ button img {
 .vehicle_1, .vehicle_2, .vehicle_3, .request_1, .request_2{
 	display: flex;
 	align-items: center;
+}
+
+.rental_1, .rental_2, .rental_3, .check_1{
+	display: flex;
+	align-items: center;
+}
+
+.rental_1 div, .rental_2 div {
+    margin-right: 34px;
 }
 
 .vehicle_1 div, .vehicle_2 div {
@@ -1413,6 +1485,10 @@ button img {
 
 /* -------라디오버튼 css-----  */
 #vehicle_1, #vehicle_2, #vehicle_3, #request_1, #request_2{
+	display: none;
+}
+
+#rental_1, #rental_2, #rental_3, #agree_facility{
 	display: none;
 }
 
@@ -1674,6 +1750,13 @@ button img {
     margin: 16px auto;
 }
 
+.name_area_f{
+	display: flex;
+    height: 34px;
+    align-items: center;
+    margin: 55px auto 16px auto;
+}
+
 .request_area {
     margin-top: 16px;
     display: flex;
@@ -1768,4 +1851,479 @@ input.message_txtbox {
     line-height: normal;
     margin-right: 12px;
     cursor: pointer;
+}
+
+/* ---------안내페이지(대관)---------*/
+.facility_img_area {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.left_videohall, .right_lectureroom {
+    width: 49%;
+    display: grid;
+}
+
+.facility_img_area img {
+    width: 100%;
+    height: 318px;
+}
+
+.videohall_text, .lectureroom_text {
+    display: flex;
+    border: 0.5px solid #D2D2D2;
+    padding: 17px 0;
+    box-sizing: border-box;
+}
+
+.area_name {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.54px;
+}
+
+.videohall_text .area_name {
+    margin-right: 56px;
+    margin-left: 50px;
+}
+
+.lectureroom_text .area_name {
+    margin-right: 69px;
+    margin-left: 52px;
+}
+
+.area_info {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: -0.48px;
+}
+
+.method_content {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    margin-left: 10px;
+    width: 100%;
+    display: flex;
+}
+
+.method_list_wrap{
+	width: 60%;
+}
+
+.download_btn_area{
+	width: 40%;
+}
+
+#download_button {
+    background: #F43F1F;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+    padding: 6px 16px;
+    box-sizing: border-box;
+    margin-left: 50px;
+    border: none;
+    display: flex;
+    cursor: pointer;
+}
+
+.num_list {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.num_list:last-child{
+	margin-bottom: 0;
+}
+
+.num_div {
+    background: #222;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -0.72px;
+    color: #FFF;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.gray_text {
+    color: #767676;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+}
+
+.rule_content {
+    border-top: 0.5px solid #D2D2D2;
+    background: #F9F9F9;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    padding: 28px 30px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+.rule_bottom {
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+}
+
+.rule_btn {
+    margin-left: 35px;
+    border: 1px solid #222;
+    background: #FFF;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+    padding: 6px 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.rule_content li p {
+    margin-left: 22px;
+}
+
+.rule_check_area {
+    display: flex;
+    align-items: center;
+}
+
+.rule_text {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.54px;
+}
+
+.rule_small_text {
+    color: #767676;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    margin-left: 30px;
+}
+
+#rule_check{
+	display: none;
+}
+
+.rule_check_area input[type="checkbox"] + label {
+	display: inline-block;
+	width:25px; 
+	height: 25px; 
+	background: #FFF;
+	cursor: pointer; 
+	border-radius: 50%;
+	border: 1px solid #DFDFDF;
+    margin-right: 10px;
+}
+
+.rule_check_area input[type="checkbox"]:checked + label {
+	background:url(../imgs/check_icon.png) no-repeat center/25px 25px; 
+	float: right;
+	border: 1px solid rgba(244, 63, 31, 1);
+}
+
+.facility_btn_area{
+	width: 62.5%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 30px;
+}
+
+#facility_button_disable{
+	display: inline-flex;
+    padding: 20px 30px;
+    align-items: center;
+    box-sizing: border-box;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.54px;
+    border: none;
+    background: #BEBEBE;
+    margin: 0 auto;
+}
+
+#facility_button_able{
+	display: none;
+    padding: 20px 30px;
+    align-items: center;
+    box-sizing: border-box;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.54px;
+    border: none;
+    cursor: pointer;
+    background: #F43F1F;
+    margin: 0 auto;
+}
+
+/*---------대관예약 신청페이지------------*/
+.rental_check input[type="checkbox"] + label {
+	display: inline-block;
+	width:25px; 
+	height: 25px; 
+	background: #FFF;
+	cursor: pointer; 
+	border-radius: 50%;
+	border: 1px solid #DFDFDF;
+    margin-right: 10px;
+}
+
+
+.rental_check input[type="checkbox"]:checked + label {
+	background:url(../imgs/check_icon.png) no-repeat center/25px 25px; 
+	float: right;
+	border: 1px solid rgba(244, 63, 31, 1);
+}
+
+.agree_facility_check input[type="checkbox"] + label {
+	display: inline-block;
+	width:25px; 
+	height: 25px; 
+	background: #FFF;
+	cursor: pointer; 
+	border-radius: 50%;
+	border: 1px solid #DFDFDF;
+    margin-right: 10px;
+}
+
+
+.agree_facility_check input[type="checkbox"]:checked + label {
+	background:url(../imgs/check_icon.png) no-repeat center/25px 25px; 
+	float: right;
+	border: 1px solid rgba(244, 63, 31, 1);
+}
+
+#time_data_f {
+    color: #202020;
+    padding-inline-start: 0px;
+    height: 445px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#top_ol_f {
+    display: flex;
+    height: 60px;
+    line-height: 60px;
+    list-style: none;
+    color: #202020;
+    border-bottom: 1px solid #EAEAEA;
+    padding-inline-start: 0px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+#top_ol_f .time_num_top {
+    width: 25%;
+}
+#top_ol_f .visit_time_top {
+    width: 45%;
+}
+#top_ol_f .res_btn_top {
+    width: 30%;
+}
+
+.time_info_f {
+    display: flex;
+    margin: 10px 0;
+    justify-content: space-between;
+    height: 75px;
+    line-height: 60px;
+    border-bottom: 1px solid #EAEAEA;
+    align-items: center;
+}
+
+.time_info_f:last-child{
+	border-bottom: none;
+}
+
+.time_info_f .time_num{
+	width: 25%;
+}
+.time_info_f .visit_time{
+	width: 45%;
+}
+.time_info_f .res_btn{
+	width: 30%;
+}
+
+.time_info_f li{
+    list-style: none;
+}
+
+.time_info_f input[type="radio"]{
+	display: none;	
+}
+
+.time_info_f input[type="radio"] + label {
+    display: inline-block;
+    width: 106px;
+    height: 38px;
+    background: #202020;
+    cursor: pointer;
+    line-height: 38px;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.time_info_f input[type="radio"]:checked + label {
+	display: inline-block;
+	width:106px; 
+	height: 38px; 
+	background: #F43F1F;
+	cursor: pointer; 
+	color: #FFF;
+	text-align: center;
+	font-family: Pretendard;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 38px;
+}
+
+.time_info_f .res_unable{
+	display: inline-block;
+	width:106px; 
+	height: 38px;
+	background: #E4E4E4;
+	color: #202020;
+	text-align: center;
+	font-family: Pretendard;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 38px;
+}
+
+.file_wrap {
+    margin-top: 100px;
+}
+
+.file_title{
+	color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.file_label {
+    display: inline-flex;
+    padding: 6px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #222;
+    background: #F5F5F5;
+    box-sizing: border-box;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.file_label img {
+    width: 20px;
+    height: 20px;
+}
+
+.file_area {
+    margin-top: 30px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+#file_names {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+}
+
+.file_con {
+    display: flex;
+}
+
+.filename {
+    margin-right: 10px;
 }

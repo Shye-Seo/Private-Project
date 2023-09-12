@@ -63,8 +63,6 @@ public class BoardController {
 			    
 		model.addAttribute("news_list", news_list);
 		model.addAttribute("nowpage", page);
-//		model.addAttribute("pagination", pagination);
-//		model.addAttribute("total_cnt", totalListCnt);
 				 
 		return "/museum_newsList";
 	}

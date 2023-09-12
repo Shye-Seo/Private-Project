@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/reservation.css">
+    <title>부산영화체험박물관 | 대관예약</title>
+    <script type="text/javascript" src="/js/reservation.js"></script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
+        <li class="category_1">관람정보</li></li><li class="div_bar">|</li>
+        <li class="category_2">대관안내</li></li><li class="div_bar">|</li>
+        <li class="category_3">대관예약</li></li><li class="div_bar">|</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>대관예약</h1></div>
+		</div>
+	</div>
+		<!-- 대관예약 안내 -->
+		<div class="reservation_wrap">
+			<div class="guide_area">
+				<div class="guide_title">
+					<div>대관시설</div>
+				</div>
+				<div class="facility_img_area">
+					<div class="left_videohall">
+						<img src="/imgs/video_hall.jpeg">
+						<div class="videohall_text">
+							<p class="area_name">다목적영상홀</p>
+							<p class="area_info">면적 : 308㎡  /  좌석수 : 210석(장애인석 3석 포함)</p>
+						</div>
+					</div>
+					<div class="right_lectureroom">
+						<img src="/imgs/lecture_room.JPG">
+						<div class="lectureroom_text">
+							<p class="area_name">강의실</p>
+							<p class="area_info">면적 : 96㎡ / 좌석수 : 30석</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="guide_area">
+				<div class="guide_title">
+					<div>대관현황</div>
+				</div>
+				<div class="facility_calendar">
+					<!-- 대관현황 캘린더 -->
+				</div>
+				<div class="guide_content">
+					<li>대관문의 : 051-715-4201 (문의 가능 시간 : 화~토 10:00-18:00)</li>
+					<li>대관을 희망하는 일로부터 일주일(7일)전에 신청 및 승인 절차가 완료되어야 합니다.</li>
+					<li>박물관 정기 휴관일 대관 불가</li>
+					<li>정기휴관일 : 월요일(단, 월요일이 공휴일일 경우 그 다음날), 1월 1일, 설·추석 당일</li>
+				</div>
+			</div>
+			<div class="guide_area">
+				<div class="guide_title">
+					<div>대관신청방법</div>
+				</div>
+				<div class="method_content">
+					<div class="method_list_wrap">
+						<div class="num_list">
+							<div class="num_div">1</div>
+							<div class="method_text">
+								<p>대관현황에서 대관을 희망하는 날짜 가능 여부 확인 후 신청서를 다운로드 받아 작성해주시기 바랍니다.</p>
+								<p class="gray_text">* 대관현황은 실시간 업데이트됩니다.</p>
+							</div>
+						</div>
+						<div class="num_list">
+							<div class="num_div">2</div>
+							<div class="method_text">
+								<p>대관신청서 검토 후 절차 진행을 위해 담당자가 연락드립니다.</p>
+								<p class="gray_text">※ 대관신청서 작성이 미비할 시 대관진행이 어려울 수 있습니다.</p>
+							</div>
+						</div>
+						<div class="num_list">
+							<div class="num_div">3</div>
+							<p>대관 승인이 결정되면 대관승인서를 발송해드립니다.</p>
+						</div>
+						<div class="num_list">
+							<div class="num_div">4</div>
+							<div class="method_text">
+								<p>대관 결제는 대관 당일 사용 전 매표소에서 결제를 완료바랍니다.</p>
+								<p class="gray_text">* 2층 매표소 운영시간 10:00-18:00</p>
+							</div>
+						</div>
+					</div>
+					<div class="download_btn_area">
+						<button id="download_button" onclick="location.href='/download_facility_document'">
+							<img src="/imgs/download_btn_white.png">
+							대관신청서 양식 다운로드
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="guide_area_last">
+				<div class="guide_title">
+					<div>대관 유의사항</div>
+				</div>
+				<div class="rule_content">
+					<li>대관신청의 시기는 대관을 희망하는 일시로부터 일주일(7일)전까지 가능합니다.</li>
+					<li>사용시간의 기산은 박물관 대관규정 「제16조 4항」 에 의거하여 인원출입 또는 시설물 반입이 최초로 이루어진 때로 하며,<br><p>사용 종료시점은 사용 후 원상복구가 종료되는 때로 정합니다.</p></li>
+					<li>대관시설에 대한 공공요금은 실비로 정산하며, 발생한 폐기물은 모두 수거하여 직접 처리하셔야 합니다.</li>
+					<li>관계자용 무료주차권은 3매까지만 제공 가능하며, 그 외 대관시설 이용객 차량은 50% 주차할인권을 제공합니다.<br><p>또한, 부산영화체험박물관 운영시간(10:00~18:00)을 초과하는 야간(18:00~21:00) 대관 시 주차장 사용에 별도 협의가 필요합니다.</p></li>
+					<li>문서 출력, 소모품 등 대관 계약 이외의 기타 지원은 불가합니다.</li>
+					<div class="rule_bottom">
+						<p>※ 대관에 대한 보다 자세한 사항은 우측 [대관규정 확인하기]버튼을 클릭하여 참고해주시기 바랍니다.</p>
+						<button class="rule_btn" onclick="rule_modal()">대관규정 확인하기</button>
+					</div>
+				</div>
+				<div class="rule_check_area">
+						<input type="checkbox" id="rule_check" name="rule_check">
+						<label for="rule_check"></label>
+						<div class="rule_text">대관 유의사항을 확인하였습니다.</div>
+						<div class="rule_small_text">*유의사항 확인 후 동의함에 체크를 해야 대관 신청이 가능합니다.</div>
+					</div>
+			</div>
+			<div class="facility_btn_area">
+				<div class="button_wrap">
+					<button id="facility_button_disable">
+						대관 신청하기
+					</button>
+					<button id="facility_button_able" onclick="location.href='/reservation_facilities_date'">
+						대관 신청하기
+					</button>
+				</div>
+			</div>
+			
+			<script>
+				$('input[name=rule_check]').change(function() {
+					if($('input[name=rule_check]').is(":checked")) {
+						$('#facility_button_disable').attr('style', 'display:none');
+						$('#facility_button_able').attr('style', 'display:block');
+					}else{
+						$('#facility_button_disable').attr('style', 'display:block');
+						$('#facility_button_able').attr('style', 'display:none');
+					}
+		        });
+			</script>
+</body>
+</html>

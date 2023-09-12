@@ -9,6 +9,7 @@ import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.mappers.AdminDao;
 import com.voucher.movie.mappers.GroupDao;
 import com.voucher.movie.reservation.ClosedVO;
+import com.voucher.movie.reservation.FacilitiesVO;
 import com.voucher.movie.reservation.GroupVO;
 import com.voucher.movie.reservation.TimeVO;
 
@@ -198,6 +199,11 @@ public class AdminService {
 
 	public String getOldPopupImage(int id) {
 		return adminDao.getOldPopupImage(id);
+	}
+
+	//대관예약 리스트 get
+	public List<FacilitiesVO> getFacility_list(String date) {
+		return adminDao.getFacility_list(date);
 	}	
 
 }

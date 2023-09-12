@@ -190,7 +190,6 @@ $(function() {
 				alert("이용약관 및 개인정보 처리 및 이용에 동의해주세요.");
 				return false;
 	        }
-	        
 	}
 
 function countStudent(type){

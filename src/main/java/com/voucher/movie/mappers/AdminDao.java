@@ -14,6 +14,7 @@ import com.voucher.movie.admin.PopupVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.reservation.ClosedVO;
+import com.voucher.movie.reservation.FacilitiesVO;
 import com.voucher.movie.reservation.GroupVO;
 import com.voucher.movie.reservation.TimeVO;
 
@@ -143,6 +144,9 @@ public interface AdminDao {
 
 	@Select("select file_name from popup where id = #{id}")
 	String getOldPopupImage(int id);
+
+	@Select("select * from reservation_facilities where res_visitDate = #{date} and res_status = 1")
+	List<FacilitiesVO> getFacility_list(String date); //해당 날짜의 예약확정 리스트 get
 
 
 }

@@ -78,6 +78,9 @@ public class AwsS3Service {
     
     @Value("popup-folder")
     private String popupFolder;
+    
+    @Value("application-folder")
+    private String applicationFolder;
 
     private final AmazonS3 s3Client;
     
@@ -379,9 +382,64 @@ public class AwsS3Service {
 
         return fileName;
 	}
+	
+	public ResponseEntity<byte[]> getObject_popup(String storedFileName) throws IOException {
+        S3Object o = s3Client.getObject(new GetObjectRequest(bucket+"/"+popupFolder, storedFileName));
+        S3ObjectInputStream objectInputStream = ((S3Object) o).getObjectContent();
+        byte[] bytes = IOUtils.toByteArray(objectInputStream);
+        String fileName = URLEncoder.encode(storedFileName, "UTF-8").replaceAll("\\+", "%20").replaceAll("\\[", "%5B").replaceAll("\\]", "%5D");
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        httpHeaders.setContentLength(bytes.length);
+        httpHeaders.setContentDispositionFormData("attachment", fileName);
+ 
+        return new ResponseEntity<>(bytes, httpHeaders, HttpStatus.OK);
+    }
 
 	public void delete_s3Popup(String fileName) {
 		s3Client.deleteObject(new DeleteObjectRequest(bucket+"/"+popupFolder, fileName));
+	}
+
+	public String upload_applicationFile(MultipartFile file) {
+		Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        String time = dateFormat.format(cal.getTime());
+        
+        String fileName = time + "-" +file.getOriginalFilename();
+        System.out.println("-----------");
+        System.out.println("오리지날파일명 : " + file.getOriginalFilename());
+        System.out.println("현재파일명 : " + fileName);
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentLength(file.getSize());
+        objectMetadata.setContentType(file.getContentType());
+
+        try(InputStream inputStream = file.getInputStream()) {
+            s3Client.putObject(new PutObjectRequest(bucket+"/"+applicationFolder, fileName, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+            //fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+        } catch(IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+        }
+
+        return fileName;
+	}
+	
+	public ResponseEntity<byte[]> getObject_application(String storedFileName) throws IOException {
+        S3Object o = s3Client.getObject(new GetObjectRequest(bucket+"/"+applicationFolder, storedFileName));
+        S3ObjectInputStream objectInputStream = ((S3Object) o).getObjectContent();
+        byte[] bytes = IOUtils.toByteArray(objectInputStream);
+        String fileName = URLEncoder.encode(storedFileName, "UTF-8").replaceAll("\\+", "%20").replaceAll("\\[", "%5B").replaceAll("\\]", "%5D");
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        httpHeaders.setContentLength(bytes.length);
+        httpHeaders.setContentDispositionFormData("attachment", fileName);
+ 
+        return new ResponseEntity<>(bytes, httpHeaders, HttpStatus.OK);
+    }
+	
+	public void delete_s3Application(String fileName) {
+		s3Client.deleteObject(new DeleteObjectRequest(bucket+"/"+applicationFolder, fileName));
 	}
 
 }

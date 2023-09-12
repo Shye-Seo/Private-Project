@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.voucher.movie.admin.AdminService;
+import com.voucher.movie.aws.AwsS3Service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
@@ -36,9 +40,13 @@ public class ReservationController {
 	@Inject
 	AdminService adminService;
 	
+	@Autowired
+	AwsS3Service s3Service;
+	
 	List<ClosedVO> closed_list;
 	List<TimeVO> time_list;
-	List<GroupVO> res_list;
+	List<GroupVO> res_list; //단체예약
+	List<FacilitiesVO> res_f_list; //대관예약
 	
 	// 예약-개인(안내페이지)
 	@GetMapping(value="/reservation_personal")
@@ -52,7 +60,13 @@ public class ReservationController {
 		return "reservation_group";
 	}
 	
-	//날짜 및 회차선택
+	// 대관안내-예약안내 페이지
+	@GetMapping(value="/reservation_facilities")
+	public String reservation_facilities() {
+		return "reservation_facilities";
+	}
+	
+	// 단체예약-날짜 및 회차선택
 	@RequestMapping(value="/reservation_group_date", method=RequestMethod.GET)
 	public String reservation_group_date(ModelMap model, @RequestParam(defaultValue="") String choice_date) throws Exception {
 		
@@ -559,68 +573,6 @@ public class ReservationController {
 		return "reservation_group_date";
 	}
 	
-		//예약날짜 및 회차선택 넘기기
-//		@ResponseBody
-//		@RequestMapping(value="/reservation_group_date_register", method=RequestMethod.POST)
-//		public String reservation_date_register(@RequestParam("res_theaterCheck") int res_theaterCheck, @RequestParam("res_visitDate") String res_visitDate, 
-//				 								@RequestParam("res_visitNum") int res_visitNum, TemporaryVO tempvo, ModelMap model) throws Exception {
-//			
-//			String res_visitTime = "";
-//			
-//			if(res_visitNum == 1) {
-//				res_visitTime = "10:00";
-//			}else if(res_visitNum == 2) {
-//				res_visitTime = "10:30";
-//			}else if(res_visitNum == 3) {
-//				res_visitTime = "11:00";
-//			}else if(res_visitNum == 4) {
-//				res_visitTime = "11:30";
-//			}else if(res_visitNum == 5) {
-//				res_visitTime = "12:00";
-//			}else if(res_visitNum == 6) {
-//				res_visitTime = "12:30";
-//			}else if(res_visitNum == 7) {
-//				res_visitTime = "13:00";
-//			}else if(res_visitNum == 8) {
-//				res_visitTime = "13:30";
-//			}else if(res_visitNum == 9) {
-//				res_visitTime = "14:00";
-//			}else if(res_visitNum == 10) {
-//				res_visitTime = "14:30";
-//			}else if(res_visitNum == 11) {
-//				res_visitTime = "15:00";
-//			}else if(res_visitNum == 12) {
-//				res_visitTime = "15:30";
-//			}else if(res_visitNum == 13) {
-//				res_visitTime = "16:00";
-//			}else if(res_visitNum == 14) {
-//				res_visitTime = "16:30";
-//			}
-//			
-//			//전시관, 날짜 및 시간 저장해서 다음 페이지 전달 시, 키값이 될 임시랜덤키
-//			int random_idx = (int)(Math.random() * 8999) + 1000;
-////			System.out.println(random_idx);
-//			tempvo.setRandom_idx(random_idx);
-//			tempvo.setRes_theaterCheck(res_theaterCheck);
-//			tempvo.setRes_visitDate(res_visitDate);
-//			tempvo.setRes_visitNum(res_visitNum);
-//			tempvo.setRes_visitTime(res_visitTime);
-//			
-//			System.out.println(tempvo);
-//			int id = tempService.insertTemp(tempvo);
-//			System.out.println(id);
-//			
-//			model.addAttribute("res_theaterCheck", res_theaterCheck);
-//			model.addAttribute("res_visitDate", res_visitDate);
-//			model.addAttribute("res_visitNum", res_visitNum);
-//			
-////			System.out.println("res_theaterCheck : " + res_theaterCheck);
-////			System.out.println("res_visitNum : " + res_visitNum);
-////			System.out.println(res_visitDate);
-//			
-//			return "reservation_group_complete?id="+id;
-//		}
-		
 		//예약신청
 		@ResponseBody
 		@RequestMapping(value="/reservation_ok", method=RequestMethod.POST)
@@ -642,4 +594,88 @@ public class ReservationController {
 	        System.out.println(randomNumber);
 	        return Integer.toString(randomNumber);
 	    }
+	    
+		// 대관예약-날짜 및 회차선택
+		@RequestMapping(value="/reservation_facilities_date", method=RequestMethod.GET)
+		public String reservation_facilities_date(ModelMap model, @RequestParam(defaultValue="") String choice_date) throws Exception {
+			
+			// 오늘 날짜
+		    LocalDate now = LocalDate.now();
+		    Calendar time = Calendar.getInstance();
+		    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    String nowTime = format.format(time.getTime());
+		    
+		    Calendar cal = Calendar.getInstance();
+		    String today = dateFormat.format(cal.getTime());
+		    
+		    //휴관일 정보 가져오기
+		    closed_list = adminService.getClosed();
+		    
+		    for(ClosedVO vo : closed_list) {
+		    	 String closed_date = vo.getClosed_date();
+		    	 String year = closed_date.substring(0, 4);
+		    	 String month = closed_date.substring(5, 7);
+		    	 String day = closed_date.substring(8, 10);
+		    	 String date_str = year+month+day;
+		    	 
+		    	 //해당 월에 휴관일 있으면 setting
+		     }
+		    
+		    //확정된 예약정보 가져오기 -> 해당회차 예약되어있으면 '매진' 처리
+		    //대관 : 같은 일자에 회차별로 1팀만 예약 가능
+		    int total = 0;
+		    //기본값 설정 -> total값 0
+		    model.addAttribute("total_1", total);
+		    model.addAttribute("total_2", total);
+		    model.addAttribute("total_3", total);
+		    
+		    if(choice_date == "") {
+		    	res_f_list = adminService.getFacility_list(today);
+		    	for(FacilitiesVO vo : res_f_list) {
+		    		if(vo.getRes_visitNum() == 1) {
+		    			model.addAttribute("total_1", 1);
+		    		}else if(vo.getRes_visitNum() == 2) {
+		    			model.addAttribute("total_2", 1);
+		    		}else if(vo.getRes_visitNum() == 3) {
+		    			model.addAttribute("total_3", 1);
+		    		}
+		    	}
+		    }else if(choice_date != "") {
+		    	res_f_list = adminService.getFacility_list(choice_date);
+		    	for(FacilitiesVO vo : res_f_list) {
+		    		if(vo.getRes_visitNum() == 1) {
+		    			model.addAttribute("total_1", 1);
+		    		}else if(vo.getRes_visitNum() == 2) {
+		    			model.addAttribute("total_2", 1);
+		    		}else if(vo.getRes_visitNum() == 3) {
+		    			model.addAttribute("total_3", 1);
+		    		}
+		    	}
+		    }
+		    
+		    model.addAttribute("today", today);
+		    model.addAttribute("closed_list", closed_list);
+		    model.addAttribute("choice_date", choice_date);
+		      
+			return "reservation_facilities_date";
+		}
+		
+		//대관예약신청(post)
+		@ResponseBody
+		@RequestMapping(value="/reservation_facilities_ok", method=RequestMethod.POST)
+		public String reservation_facilities_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute FacilitiesVO vo, ModelMap model) throws Exception {
+					
+			MultipartFile application = multipartRequest.getFile("thumbnail_file");
+			System.out.println(application);
+			
+			if(application.getOriginalFilename() != "") {
+				String filename = s3Service.upload_applicationFile(application);
+				System.out.println("s3 insert ok => "+filename);
+				vo.setRes_file(filename);
+			}
+			groupService.insertFacilityReservation(vo);
+					
+			return "/";
+		}
 }

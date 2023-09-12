@@ -17,9 +17,14 @@ public class GroupService {
 	@Autowired
 	private GroupDao groupDao;
 	
-	//예약신청 insert
+	//단체 - 예약신청 insert
 	public boolean insertReservation(GroupVO groupVo) throws Exception {
 		return groupDao.insertReservation(groupVo);
+	}
+	
+	//대관 - 예약신청 insert
+	public boolean insertFacilityReservation(FacilitiesVO vo) {
+		return groupDao.insertFacilityReservation(vo);
 	}
 
 	// coolsms에 정보를 보내 회원가입시 인증번호를 보낸 후, 인증번호를 return 한다.
@@ -47,4 +52,5 @@ public class GroupService {
             System.out.println(e.getCode());
         }
     }
+
 }

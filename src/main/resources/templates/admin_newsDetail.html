@@ -78,7 +78,9 @@
 						</div>
 						<div class="image_area" th:if="${newsFileList != ''}">
 							<li th:each="img : ${newsFileList}" class="img_div">
+								<!-- 컨트롤러에서 newsFileList for문 돌려서 파일 확장자 구분하여 view에서 보여줌 -->
 								<img id="img_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${img.file_name}}" alt="img_file">
+								<video id="img_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${img.file_name}}" alt="img_file" controls></video>
 							</li>
 						</div>
 						<div class="video_area" th:if="${news.news_link1 != '' || news.news_link2 != ''}">

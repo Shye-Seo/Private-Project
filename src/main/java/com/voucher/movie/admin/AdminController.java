@@ -62,7 +62,7 @@ public class AdminController {
 	List<NewsVO> news_list;
 	List<PopupVO> popup_list;
 	
-	String bucketName = "busanbom"; //변경필요
+	String bucketName = "busanbom";
 	String folderName_news = "news-folder/";
 	String folderName_event = "event-folder/";
 	String folderName_notice = "notice-folder/";
