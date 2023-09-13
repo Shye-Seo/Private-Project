@@ -118,16 +118,24 @@ $(function() {
 				}else if(!$('input[name=certifi_ok]').val()){
 					alert("본인인증 후 예약이 가능합니다.");
 					return false;
+				}else if($('#file_names').children().length < 1){
+					alert('대관신청서를 첨부해주세요.');
+                    return false;
+				}else if($('#file_names').children().length > 1){
+					alert('대관신청서는 하나만 첨부해주세요.');
+                    return false;
 				}else if(!$('input[name=agree_facility]').is(":checked")){
 					alert("냉/난방시설 이용안내에 동의해주세요.");
-					return false;
-				}else if(!$('input[name=application_file]').val()){
-					alert("대관신청서를 첨부해주세요.");
 					return false;
 				}else { //form 제출
 				
 			        var form = $('form[name="res_info"]');
 			        var formData = new FormData(form[0]);
+			        for (var i = 0; i < fileList.length; i++) {
+	                    formData.append('application_file', fileList[i]);
+	                    console.log(formData.get('application_file')) 
+	                    console.log(fileList[i]) 
+                	}
 			
 			        $.ajax({
 						url : "/reservation_facilities_ok",
@@ -164,7 +172,7 @@ $(function() {
             // 등록 가능한 총 파일 사이즈 MB
             //    var maxUploadSize = 500;
             
-            var maxFileNum = 5;
+            var maxFileNum = 1;
             // 파일 최대갯수
 
             //행사수정 시 지울 파일 목록
@@ -237,10 +245,11 @@ $(function() {
        html += "<div id='fileTr_" + fIndex + "'>";
        html += "    <div class='file_con'>";
        html += "		<div class='filename'>"+fileName + "</div>" 
-               + "<img src='/imgs/close_btn_black.svg' href='#' onclick='deleteFile(" + fIndex + "); return false;'/>"
+               + "<img src='/imgs/close_btn_black.svg' href='#' onclick='deleteFile("+fIndex+"); return false;'/>"
        html += "    </div>"
        html += "</div>"
        
+       $('#file_names').empty();
        $('#file_names').append(html);
        $('input[name=res_file]').val(fileName);
    }
@@ -263,7 +272,8 @@ $(function() {
         $('.file_area label').css({'background-color':'#fff', 'cursor':'pointer'});
        }
 
-        console.log("totalFileSize="+totalFileSize);
+		$('input[name=res_file]').val('');
+	    $('input[name=application_file]').val('');
     }
     
     function deleteFile_for_update(fIndex, fileName){
@@ -286,7 +296,13 @@ $(function() {
        delete fileSizeList[i];
 		
        // 업로드 파일 테이블 목록에서 삭제
-       $("#fileTr_" + i).remove();
+       $("#fileTr_" + i).empty();
 	   }
 	   
+	   if($('#input_file').attr("disabled")=='disabled'){
+            $('#input_file').removeAttr("disabled");
+            $('.file_area label').css({'background-color':'#fff', 'cursor':'pointer'});
+        }
+        $('input[name=res_file]').val('');
+	    $('input[name=application_file]').val('');
 	}

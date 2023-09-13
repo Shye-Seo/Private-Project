@@ -231,25 +231,29 @@ body {background:#F8F9FB;}
 .detail_bar {
     display:flex;
     width:100%;
-    border-bottom:1px solid #DDDDDD;
     max-width: 1440px;
 }
 
-.detail_bar .detail1, .detail_bar .detail2{
+.detail_bar .detail1, .detail_bar .detail2 {
     width: auto;
-    display: flex; gap: 10px;
+    display: flex;
+    gap: 8px;
     align-items: center;
-    height: 30px;
+    height: 38px;
     cursor: pointer;
-    border-bottom: 3px solid #00000000;
     margin-right: 40px;
 }
 
 .detail_bar .this_bar, .detail_bar>div:hover{
-    border-bottom: 3px solid #5B8FD2;
+    border-bottom: 1px solid #F43F1F;
 }
 .detail_bar .this_bar p, .detail_bar .this_bar button{
-    color:#333333;
+    color: #F43F1F;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
 }
 
 .detail_bar img {
@@ -257,11 +261,14 @@ body {background:#F8F9FB;}
 }
 
 .detail_bar p, .detail_bar button {
-    font-size: 16px;
-    font-weight: 500;
-    color: #999999;
     background: none;
     border: 0;
+    color: #888;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
 }
 
 
@@ -269,10 +276,9 @@ body {background:#F8F9FB;}
     position:relative;
     width: 100%; height: auto;
     max-width: 1440px; min-height: 720px;
-    margin-top: 20px;
     background-color: #fff;
     box-shadow: 0px 0px 10px #0000000D;
-    padding: 60px;
+    padding: 40px 35px;
     box-sizing: border-box;
     margin-bottom: 40px;
     

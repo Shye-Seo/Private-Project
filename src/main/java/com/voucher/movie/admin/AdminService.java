@@ -57,9 +57,18 @@ public class AdminService {
 		return adminDao.findListPaging(startIndex, pageSize);
 	}
 	
-	// 예약상태 set
+	public int findAllFacilityCnt() {
+		return adminDao.findAllFacilityCnt();
+	}
+	
+	// 예약상태 set(단체)
 	public boolean setStatus(int id, int i) throws Exception {
 		return adminDao.setStatus(id, i);
+	}
+	
+	// 예약상태 set(대관)
+	public boolean setFacilityStatus(int id, int i) throws Exception {
+		return adminDao.setFacilityStatus(id, i);
 	}
 
 	// 휴관일 설정
@@ -204,6 +213,15 @@ public class AdminService {
 	//대관예약 리스트 get
 	public List<FacilitiesVO> getFacility_list(String date) {
 		return adminDao.getFacility_list(date);
+	}
+
+	public List<FacilitiesVO> findFacilityListPaging(int startIndex, int pageSize) {
+		return adminDao.findFacilityListPaging(startIndex, pageSize);
+	}
+
+	//대관예약 확정리스트 get
+	public List<FacilitiesVO> getFacility_Reslist() {
+		return adminDao.getFacility_Reslist();
 	}	
 
 }

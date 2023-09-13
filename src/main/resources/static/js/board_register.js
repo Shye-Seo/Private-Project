@@ -333,7 +333,8 @@ $(function () {
 //        $('.area3 label').css({'background-color':'#fff', 'cursor':'pointer'});
 //       }
 
-        console.log("totalFileSize="+totalFileSize_thumbnail);
+        $('input[name=news_poster]').val('');
+	    $('input[name=thumbnail_file]').val('');
     }
 
     function deleteFile_for_update(fIndex, fileName){

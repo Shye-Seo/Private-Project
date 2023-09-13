@@ -342,13 +342,12 @@
     border: 1px solid rgba(0, 0, 0, 0.20);
     background: #242534;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.20);
-    /* color: #FFF; */
     width: 21%;
-/*     justify-content: center; */
     align-items: center;
     margin-right: 17px;
     padding: 14px 16px;
     box-sizing: border-box;
+    justify-content: space-around;
 }
 
 .mobile_icon {
@@ -372,7 +371,6 @@
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.42px;
-    margin-left: 20px;
 }
 
 .iOS_btn p {
@@ -383,7 +381,6 @@
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.42px;
-    margin-left: 20px;
 }
 
 /* ---------안내페이지(개인)---------*/
@@ -932,16 +929,16 @@ button img {
     border-bottom: 1px solid #C7C7C7;  
 }
 
-.today_title{
-	color: #F43F1F;
-	text-align: center;
-	font-family: Pretendard;
-	font-size: 28px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 104px;
-	letter-spacing: -0.84px;
-	margin-right: 10px;
+.today_title {
+    color: #F43F1F;
+    line-height: 90px;
+    margin-right: 10px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -0.66px;
 }
 
 .choice_title {
@@ -2112,6 +2109,241 @@ input.message_txtbox {
     cursor: pointer;
     background: #F43F1F;
     margin: 0 auto;
+}
+
+/* ----------------대관안내 예약현황 캘린더------------  */
+.calendar_title{
+	color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.72px;
+    margin-top: 50px;
+}
+
+.facility_calendar {
+    margin-bottom: 30px;
+}
+
+.sec_cal_f {
+    /* width: 360px; */
+    margin: 0 auto;
+    font-family: "NotoSansR";
+}
+
+.sec_cal_f .cal_nav .go-prev, .sec_cal_f .cal_nav .go-next {
+/*    display: block;*/
+    width: 40px;
+    height: 40px;
+    font-size: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #D9D9D9;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.sec_cal_f .cal_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    color: #202020;
+    font-family: Pretendard;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.84px;
+    margin-bottom: 20px;
+}
+
+.sec_cal_f .cal_wrap {
+    position: relative;
+    margin: 0 auto;
+    border-top: 1px solid #222;
+}
+
+.sec_cal_f .cal_wrap .days {
+    display: flex;
+    border-bottom: 1px solid #D2D2D2;
+    background: #F5F5F5;
+    border-top: 1px solid #D2D2D2;
+    height: 56px;
+}
+
+.sec_cal_f .cal_wrap .days .day {
+    width: calc(100% / 7);
+    line-height: 56px;
+    letter-spacing: -1.26px;
+    border-right: 1px solid #D2D2D2;
+    color: #222;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.sec_cal_f .cal_wrap .days .day:last-child{
+	border-right: none;
+}
+
+.dayStyle_f{
+    display: flex;
+    line-height: normal;
+    color: #222;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -1.12px;
+    margin: 8.5px 9px;
+}
+
+.sec_cal_f .cal_wrap .dates {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.sec_cal_f .cal_wrap .dates .day {
+    width: calc((100% / 7) - 0.8px);
+    font-size: 22px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.26px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -1.12px;
+    height: 118px;
+    border-bottom: 1px solid #D2D2D2;
+    border-right: 1px solid #D2D2D2;
+}
+
+.sec_cal_f .cal_wrap .dates .day:nth-child(7n){
+	border-right: none;
+}
+
+.sec_cal_f .cal_nav .year-month {
+/*    width: 300px;*/
+    text-align: center;
+    line-height: 1;
+    margin: 0 45px;
+}
+
+.sec_cal_f .cal_wrap::after {
+    top: 368px;
+}
+
+.sec_cal_f .current.today {
+    background: #F5F5F5;
+}
+
+.closed{
+	color: #F00;
+	text-align: center;
+	font-family: Pretendard;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 22px; /* 137.5% */
+	letter-spacing: -1.12px;
+}
+
+.res_con {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+    width: 95%;
+}
+
+.resNum_1 {
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.98px;
+    border-radius: 10.5px;
+    background: #FEA236;
+    display: flex;
+    padding: 0px 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-left: 8px;
+}
+
+.resNum_2 {
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.98px;
+    border-radius: 10.5px;
+    background: #2FB3FE;
+    display: flex;
+    padding: 0px 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-left: 8px;
+}
+
+.resNum_3 {
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.98px;
+    border-radius: 10.5px;
+    background: #5041BC;
+    display: flex;
+    padding: 0px 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-left: 8px;
+}
+
+.resTime {
+    color: #202020;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.resPlace {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.42px;
 }
 
 /*---------대관예약 신청페이지------------*/

@@ -1,5 +1,6 @@
 package com.voucher.movie.reservation;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -9,6 +10,7 @@ import java.util.Random;
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,7 +64,35 @@ public class ReservationController {
 	
 	// 대관안내-예약안내 페이지
 	@GetMapping(value="/reservation_facilities")
-	public String reservation_facilities() {
+	public String reservation_facilities(ModelMap model) {
+		// 오늘 날짜
+	    LocalDate now = LocalDate.now();
+	    Calendar time = Calendar.getInstance();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+	    String nowTime = format.format(time.getTime());
+	    
+	    Calendar cal = Calendar.getInstance();
+	    String today = dateFormat.format(cal.getTime());
+	    
+	    //휴관일 정보 가져오기
+	    closed_list = adminService.getClosed();
+	    
+	    for(ClosedVO vo : closed_list) {
+	    	 String closed_date = vo.getClosed_date();
+	    	 String year = closed_date.substring(0, 4);
+	    	 String month = closed_date.substring(5, 7);
+	    	 String day = closed_date.substring(8, 10);
+	    	 String date_str = year+month+day;
+	    	 
+	    	 //해당 월에 휴관일 있으면 setting
+	     }
+	    // 예약확정 정보 가져오기 --- 날짜순, 회차순
+	    res_f_list = adminService.getFacility_Reslist();
+	    
+	    model.addAttribute("facility_list", res_f_list);
+	    model.addAttribute("today", today);
+	    
 		return "reservation_facilities";
 	}
 	
@@ -666,7 +696,7 @@ public class ReservationController {
 		@RequestMapping(value="/reservation_facilities_ok", method=RequestMethod.POST)
 		public String reservation_facilities_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute FacilitiesVO vo, ModelMap model) throws Exception {
 					
-			MultipartFile application = multipartRequest.getFile("thumbnail_file");
+			MultipartFile application = multipartRequest.getFile("application_file");
 			System.out.println(application);
 			
 			if(application.getOriginalFilename() != "") {
@@ -677,5 +707,13 @@ public class ReservationController {
 			groupService.insertFacilityReservation(vo);
 					
 			return "/";
+		}
+		
+		//대관신청서 양식파일 다운로드
+		@RequestMapping({"/download_facility_document"})
+		@ResponseBody
+		public ResponseEntity<byte[]> application_form_download() throws IOException {
+			String filename = "[별지제1호]대관신청서.hwp";
+			return s3Service.getObject_application(filename);
 		}
 }

@@ -52,11 +52,41 @@
 				</div>
 			</div>
 			<div class="guide_area">
-				<div class="guide_title">
+				<div class="calendar_title">
 					<div>대관현황</div>
 				</div>
 				<div class="facility_calendar">
 					<!-- 대관현황 캘린더 -->
+					<input type="hidden" name="today_date" th:value="${today}">
+					<div th:each="closed : ${closed_list}" class="hidden">	<!-- 휴관일 가져오기-->
+						<input type="hidden" th:value="${closed.closed_date}" name="closed_date" >
+					</div>
+					<div th:each="facility : ${facility_list}" class="hidden">	<!-- 예약확정 리스트 가져오기-->
+						<input type="hidden" th:value="${facility.res_visitDate}" name="facility_date" th:class="'date_'+${facility.id}">
+						<input type="hidden" th:value="${facility.res_visitNum}" name="facility_num" th:class="'num_'+${facility.id}">
+						<input type="hidden" th:value="${facility.res_placeCheck}" name="facility_place" th:class="'place_'+${facility.id}">
+					</div>
+					<div class="calendar_area_f">
+						<div class="sec_cal_f">
+							<div class="cal_nav">
+						    	<a href="javascript:;" class="nav-btn go-prev"><img src="/imgs/calendar_prev.svg"></a>
+						    	<div class="year-month"></div>
+						    	<a href="javascript:;" class="nav-btn go-next"><img src="/imgs/calendar_next.svg"></a>
+						    </div>
+						    <div class="cal_wrap">
+							    <div class="days">
+							      	<div class="day">일요일</div>
+							    	<div class="day">월요일</div>
+							      	<div class="day">화요일</div>
+							      	<div class="day">수요일</div>
+							      	<div class="day">목요일</div>
+							      	<div class="day">금요일</div>
+							      	<div class="day">토요일</div>
+							    </div>
+						    	<div class="dates"></div>
+						  	</div>
+						</div>
+					</div>
 				</div>
 				<div class="guide_content">
 					<li>대관문의 : 051-715-4201 (문의 가능 시간 : 화~토 10:00-18:00)</li>
@@ -67,7 +97,7 @@
 			</div>
 			<div class="guide_area">
 				<div class="guide_title">
-					<div>대관신청방법</div>
+					<div>대관 신청방법</div>
 				</div>
 				<div class="method_content">
 					<div class="method_list_wrap">
@@ -149,5 +179,251 @@
 					}
 		        });
 			</script>
+			<script>
+    $(document).ready(function() {
+        calendarInit();
+    });
+    /*
+        달력 렌더링 할 때 필요한 정보 목록 
+
+        현재 월(초기값 : 현재 시간)
+        금월 마지막일 날짜와 요일
+        전월 마지막일 날짜와 요일
+    */
+
+    function calendarInit() {
+
+        // 날짜 정보 가져오기
+        var date = new Date(); // 현재 날짜(로컬 기준) 가져오기
+        var utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000); // uct 표준시 도출
+        var kstGap = 9 * 60 * 60 * 1000; // 한국 kst 기준시간 더하기
+        var today = new Date(utc + kstGap); // 한국 시간으로 date 객체 만들기(오늘)
+      
+        var thisMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        // 달력에서 표기하는 날짜 객체
+      
+        
+        var currentYear = thisMonth.getFullYear(); // 달력에서 표기하는 연
+        var currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
+        var currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
+
+        // kst 기준 현재시간
+        // console.log(thisMonth);
+
+        // 캘린더 렌더링
+        renderCalender(thisMonth);
+
+        function renderCalender(thisMonth) {
+
+            // 렌더링을 위한 데이터 정리
+            currentYear = thisMonth.getFullYear();
+            currentMonth = thisMonth.getMonth();
+            currentDate = thisMonth.getDate();
+
+            // 이전 달의 마지막 날 날짜와 요일 구하기
+            var startDay = new Date(currentYear, currentMonth, 0);
+            var prevDate = startDay.getDate();
+            var prevDay = startDay.getDay();
+
+            // 이번 달의 마지막날 날짜와 요일 구하기
+            var endDay = new Date(currentYear, currentMonth + 1, 0);
+            var nextDate = endDay.getDate();
+            var nextDay = endDay.getDay();
+
+            // console.log(prevDate, prevDay, nextDate, nextDay);
+
+            // 현재 월 표기
+            $('.year-month').text(currentYear + '년 ' + (currentMonth + 1) + '월');
+
+            // 렌더링 html 요소 생성
+            calendar = document.querySelector('.dates')
+            calendar.innerHTML = '';
+            
+            // 지난달
+            for (var i = prevDate - prevDay; i <= prevDate; i++) {
+                calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable"></div>'
+            }
+            // 이번달
+            for (var i = 1; i <= nextDate; i++) {
+            	if(currentYear < today.getFullYear()){
+	                calendar.innerHTML = calendar.innerHTML + '<div class="day disable"><div class="dayStyle_f" id="choice_'+i+'">' + i + '</div><div class="res_list_'+i+'"></div></div>'
+            	}else if((currentYear == today.getFullYear()) && (currentMonth < today.getMonth())){
+            		calendar.innerHTML = calendar.innerHTML + '<div class="day disable"><div class="dayStyle_f" id="choice_'+i+'">' + i + '</div><div class="res_list_'+i+'"></div></div>'
+            	}else{
+            		calendar.innerHTML = calendar.innerHTML + '<div class="day current"><div class="dayStyle_f" id="choice_'+i+'">' + i + '</div><div class="res_list_'+i+'"></div></div>'
+            	}
+            }
+            // 다음달
+            for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay-1); i++) {
+                calendar.innerHTML = calendar.innerHTML + '<div class="day next disable"></div>'
+            }
+
+            // 오늘 날짜 표기
+            if (today.getMonth() == currentMonth) {
+                todayDate = today.getDate();
+                var currentMonthDate = document.querySelectorAll('.dates .current');
+                currentMonthDate[todayDate -1].classList.add('today');
+            }
+            
+            //지나간 날짜 disable
+            var getyear = today.getFullYear();
+            var getmonth = today.getMonth() + 1;
+            
+            var toDate = $('input[name=today_date]').val();
+            var toDate_year = toDate.substr(0,4)
+            var toDate_month = getmonth;
+		    var toDate_day = toDate.substr(8);
+		    
+		    if(toDate_month < 10){
+				var current_month = "0" + toDate_month;
+			}else{
+			    var current_month = toDate_month;
+			}
+		        
+            closed_set();
+        }
+
+        // 이전달로 이동
+        $('.go-prev').on('click', function() {
+            thisMonth = new Date(currentYear, currentMonth - 1, 1);
+            renderCalender(thisMonth);
+        });
+
+        // 다음달로 이동
+        $('.go-next').on('click', function() {
+            thisMonth = new Date(currentYear, currentMonth + 1, 1);
+            renderCalender(thisMonth); 
+        });
+        
+        function closed_set(){ //휴관일 및 예약확정 set
+			
+	        currentYear = thisMonth.getFullYear();
+	        currentMonth = thisMonth.getMonth();
+	        currentDate = thisMonth.getDate();
+	        
+	        //휴관일 set
+	        var date_arrayLength = $('input[name="closed_date"]').length;
+	        var date_array = new Array(date_arrayLength);
+	        // 이번 달의 마지막날 날짜와 요일 구하기
+	        var endDay = new Date(currentYear, currentMonth + 1, 0);
+	        var nextDate = endDay.getDate();
+	        
+	        for(i=0; i<date_arrayLength; i++){ //휴관일 배열 for문 돌리면서 표시
+				date_array[i] = $('input[name="closed_date"]').eq(i).val();
+				
+		        var closed_month = date_array[i].substr(0,7);
+		        var closed_day = date_array[i].substr(8);
+		        var this_month = currentMonth;
+		        
+		        if((this_month+1) < 10){
+					var current_month = currentYear + ".0" + (this_month+1);
+				}else{
+			        var current_month = currentYear + "." + (this_month+1);
+				}
+		            	
+		        if(closed_month == current_month){ //해당 월에 휴관일 있으면 표시
+		        	for (var j = 1; j <= nextDate; j++) {
+			        	if(closed_day == j){ //휴관일날짜에 해당하는 div에 text
+				        	$("div[id='choice_"+j+"']").attr('class','closed');
+						}
+			        }
+				}
+		        
+			}
+	        
+	        //예약확정 set
+	        var res_arrayLength = $('input[name="facility_date"]').length;
+	        var res_array = new Array(res_arrayLength); //예약날짜
+	        var num_array = new Array(res_arrayLength); //예약회차
+	        var place_array = new Array(res_arrayLength); //예약장소
+	        // 이번 달의 마지막날 날짜와 요일 구하기
+	        var endDay = new Date(currentYear, currentMonth + 1, 0);
+	        var nextDate = endDay.getDate();
+	        
+	        for(i=0; i<res_arrayLength; i++){ //예약확정 리스트 배열 for문 돌리면서 표시
+	        	res_array[i] = $('input[name="facility_date"]').eq(i).val();
+	        	num_array[i] = $('input[name="facility_num"]').eq(i).val();
+	        	place_array[i] = $('input[name="facility_place"]').eq(i).val();
+	        	debugger;
+				
+		        var res_month = res_array[i].substr(0,7);
+		        var res_day = res_array[i].substr(8);
+		        var this_month = currentMonth;
+		        
+		        if((this_month+1) < 10){
+					var current_month = currentYear + ".0" + (this_month+1);
+				}else{
+			        var current_month = currentYear + "." + (this_month+1);
+				}
+		            	
+		        if(res_month == current_month){ //해당 월에 예약정보 있으면 표시
+		        	for (var j = 1; j <= nextDate; j++) {
+			        	if(res_day == j){ //예약날짜에 해당하는 div에 text
+			        		
+			        		//예약시간 set
+			        		var res_number = "";
+			        		var res_time = ""; 
+			        		if(num_array[i] == 1){
+			        			res_number = "오전";
+			        			res_time = "09:00-12:00";
+			        		}else if(num_array[i] == 2){
+			        			res_number = "오후";
+			        			res_time = "13:00-17:00";
+			        		}else if(num_array[i] == 3){
+			        			res_number = "야간";
+			        			res_time = "18:00-21:00";
+			        		}
+			        		
+			        		var res_place = "";
+			        		if(place_array[i] == 1){
+			        			res_place = "강의실";
+			        		}else if(place_array[i] == 2){
+			        			res_place = "영상홀";
+			        		}
+			        		
+			        		var html_1 = ""; //1:오전
+			        	       html_1 += "<div id='resTr_" + j + "'>";
+			        	       html_1 += "    <div class='res_con'>";
+			        	       html_1 += "		<div class='resNum_1'>"+res_number + "</div>" 
+			        	               + "		<div class='resTime'>"+res_time + "</div>"
+			        	               + "		<div class='resPlace'>"+res_place + "</div>"
+			        	       html_1 += "    </div>"
+			        	       html_1 += "</div>"
+			        	       
+			        	       
+			        	     var html_2 = ""; //2:오후
+			        	       html_2 += "<div id='resTr_" + j + "'>";
+			        	       html_2 += "    <div class='res_con'>";
+			        	       html_2 += "		<div class='resNum_2'>"+res_number + "</div>" 
+			        	               + "		<div class='resTime'>"+res_time + "</div>"
+			        	               + "		<div class='resPlace'>"+res_place + "</div>"
+			        	       html_2 += "    </div>"
+			        	       html_2 += "</div>" 
+			        	       
+			        	     var html_3 = ""; //3:야간
+			        	       html_3 += "<div id='resTr_" + j + "'>";
+			        	       html_3 += "    <div class='res_con'>";
+			        	       html_3 += "		<div class='resNum_3'>"+res_number + "</div>" 
+			        	               + "		<div class='resTime'>"+res_time + "</div>"
+			        	               + "		<div class='resPlace'>"+res_place + "</div>"
+			        	       html_3 += "    </div>"
+			        	       html_3 += "</div>"  
+			        	    
+			        	    
+			        	     if(num_array[i] == 1){
+			        	    	$("div[class='res_list_"+j+"']").append(html_1);
+					         }else if(num_array[i] == 2){
+					        	$("div[class='res_list_"+j+"']").append(html_2);
+					         }else if(num_array[i] == 3){
+					        	$("div[class='res_list_"+j+"']").append(html_3);
+					         }    
+						}
+			        }
+				}
+		        
+			}
+		}
+    }
+</script>
 </body>
 </html>

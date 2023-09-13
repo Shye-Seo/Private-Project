@@ -148,5 +148,17 @@ public interface AdminDao {
 	@Select("select * from reservation_facilities where res_visitDate = #{date} and res_status = 1")
 	List<FacilitiesVO> getFacility_list(String date); //해당 날짜의 예약확정 리스트 get
 
+	// --------------- 대관예약 --------------
+	@Select("select count(*) from reservation_facilities")
+	int findAllFacilityCnt();
+
+	@Select("select * from reservation_facilities order by res_status asc, id desc limit #{startIndex}, #{pageSize}")
+	List<FacilitiesVO> findFacilityListPaging(int startIndex, int pageSize);
+
+	@Update("update reservation_facilities set res_status = #{i} where id = #{id}")
+	boolean setFacilityStatus(int id, int i);
+
+	@Select("select * from reservation_facilities where res_status = 1 order by res_visitDate desc, res_visitNum asc")
+	List<FacilitiesVO> getFacility_Reslist();
 
 }

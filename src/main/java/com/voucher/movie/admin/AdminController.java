@@ -33,6 +33,7 @@ import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.config.PagingVO;
 import com.voucher.movie.reservation.ClosedVO;
+import com.voucher.movie.reservation.FacilitiesVO;
 import com.voucher.movie.reservation.GroupService;
 import com.voucher.movie.reservation.GroupVO;
 
@@ -59,6 +60,7 @@ public class AdminController {
 	
 	List<GroupVO> group_list;
 	List<ClosedVO> closed_list;
+	List<FacilitiesVO> facility_list;
 	List<NewsVO> news_list;
 	List<PopupVO> popup_list;
 	
@@ -95,7 +97,7 @@ public class AdminController {
     	return "/admin";
 	}
 	
-	//관리자 - 예약현황 리스트
+	//관리자 - 예약현황 리스트(단체)
 	@RequestMapping(value="/admin_reservationList", method=RequestMethod.GET)
 	public String admin_resList(@ModelAttribute GroupVO groupVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
 		
@@ -141,6 +143,61 @@ public class AdminController {
 		model.addAttribute("nowpage", page);
 			 
 		return "/admin_reservationList";
+	}
+	
+	//관리자 - 예약현황 리스트(대관)
+	@RequestMapping(value="/admin_facilityList", method=RequestMethod.GET)
+	public String admin_facilityList(@ModelAttribute FacilitiesVO facilityVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+			
+		// 총 게시물 수 
+	    int totalListCnt = adminService.findAllFacilityCnt();
+
+	    // 생성인자로  총 게시물 수, 현재 페이지를 전달
+	    PagingVO pagination = new PagingVO(totalListCnt, page);
+
+	    // DB select start index
+	    int startIndex = pagination.getStartIndex();
+	    // 페이지 당 보여지는 게시글의 최대 개수
+	    int pageSize = pagination.getPageSize();
+
+	    facility_list = adminService.findFacilityListPaging(startIndex, pageSize);
+	    
+		model.addAttribute("facility_list", facility_list);
+		model.addAttribute("nowpage", page);
+			 
+		return "/admin_facilityList";
+	}
+	
+	//관리자 - 예약확정(대관)
+	@RequestMapping(value="/facility_confirm", method=RequestMethod.GET)
+	public String admin_facConfirm(@RequestParam("id") int id, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+			
+	    adminService.setFacilityStatus(id, 1);
+	    
+	    // 총 게시물 수 
+	    int totalListCnt = adminService.findAllFacilityCnt();
+
+	    // 생성인자로  총 게시물 수, 현재 페이지를 전달
+	    PagingVO pagination = new PagingVO(totalListCnt, page);
+
+	    // DB select start index
+	    int startIndex = pagination.getStartIndex();
+	    // 페이지 당 보여지는 게시글의 최대 개수
+	    int pageSize = pagination.getPageSize();
+
+	    facility_list = adminService.findFacilityListPaging(startIndex, pageSize);
+		    
+	    model.addAttribute("facility_list", facility_list);
+		model.addAttribute("nowpage", page);
+			 
+		return "/admin_facilityList";
+	}
+	
+	//대관신청서 파일 다운로드
+	@RequestMapping({"/application_download"})
+	@ResponseBody
+	public ResponseEntity<byte[]> application_download(@RequestParam String filename) throws IOException {
+		return s3Service.getObject_application(filename);
 	}
 	
 	//관리자 - 운영관리
