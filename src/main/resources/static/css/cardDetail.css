@@ -176,6 +176,11 @@
     width: 100%;
 }
 
+#video_file{
+	width: 100%;
+	margin-bottom: 50px;
+}
+
 /*---상세페이지 동영상 크기 조절---  */
 iframe {
     width: 100%;

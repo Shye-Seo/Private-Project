@@ -79,7 +79,8 @@
 						</div>
 						<div class="image_area" th:if="${newsFileList != ''}">
 							<li th:each="img : ${newsFileList}" class="img_div">
-								<img id="img_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${img.file_name}}" alt="img_file">
+								<img id="img_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${img.file_name}}" alt="img_file" th:if="${#strings.substringAfter(img.file_name, '.')} != 'mp4'">
+								<video id="video_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${img.file_name}}" alt="video_file" controls th:if="${#strings.substringAfter(img.file_name, '.')} == 'mp4'"></video>
 							</li>
 						</div>
 						<div class="video_area" th:if="${news.news_link1 != '' || news.news_link2 != ''}">

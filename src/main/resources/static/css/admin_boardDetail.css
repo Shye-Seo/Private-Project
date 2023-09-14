@@ -173,6 +173,10 @@
     width: 100%;
 }
 
+#video_file {
+    width: 100%;
+}
+
 /*---상세페이지 동영상 크기 조절---  */
 iframe {
     width: 100%;
