@@ -64,8 +64,10 @@
 					</div>
                     <div class="area3">
                         <span>동영상 링크</span>
-                        <input type="text" name="news_link1" th:value="${news.news_link1}">
-                        <input type="text" name="news_link2" th:value="${news.news_link2}">
+                        <div class="link_wrap">
+	                        <input type="text" name="news_link1" th:value="${news.news_link1}">
+	                        <input type="text" name="news_link2" th:value="${news.news_link2}">
+                        </div>
                     </div>
                     <div class="area2">
                         <span>내용</span>
@@ -82,14 +84,14 @@
                                         th:onclick="deleteFile_for_update_thumbnail(this.getAttribute('data-fileName'))">
                                     </div>
                             </div>
-                            <label for="thumbnail" id="file_upload" class="thumbnail_label">  </label>
+                            <label for="thumbnail" id="file_upload" class="thumbnail_label"><img src="/imgs/board_upload_icon.svg"></label>
                         </div>
-                        <input type="file" id="thumbnail" multiple="multiple" name="thumbnail_file"/>
-                        <input type="text" id="input_thumbnail" name="news_poster">
+                        <input type="file" id="thumbnail" multiple="multiple" name="thumbnail_file" hidden/>
+                        <input type="hidden" id="input_thumbnail" name="news_poster">
                         <!-- ... -->
                     </div>
                     <div class="area3">
-                        <span>이미지/파일첨부<p>(최대 5개)</p></span>
+                        <span>이미지/동영상첨부<p>(최대 5개)</p></span>
                         <div class="file_area">
                             <div id="file_names">
                                 <!-- 파일 이름 -->
@@ -101,14 +103,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <label for="input_file" id="file_upload">  </label>
+                            <label for="input_file" id="file_upload"><img src="/imgs/board_upload_icon.svg"></label>
                         </div>
                         <input type="file" id="input_file" multiple="multiple" name="file" hidden />
                         <!-- ... -->
                     </div>
                     <div class="btn_wrap">
-                        <button type="button" onclick="location.href='admin_newsList'">취소</button>
-                        <button type="button" id="update_bt">저장</button>
+                        <button type="button" id="cancel_btn" onclick="location.href='admin_newsList'">취소</button>
+                        <button type="button" id="update_btn">저장</button>
                     </div>
 
                     <!-- update -->

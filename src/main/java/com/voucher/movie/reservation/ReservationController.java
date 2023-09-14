@@ -91,6 +91,7 @@ public class ReservationController {
 	    res_f_list = adminService.getFacility_Reslist();
 	    
 	    model.addAttribute("facility_list", res_f_list);
+	    model.addAttribute("closed_list", closed_list);
 	    model.addAttribute("today", today);
 	    
 		return "reservation_facilities";

@@ -4,19 +4,24 @@
 
 /* main */
 .area span {
-    width: 20%; height:21px;
-    /* max-width: 285px; */
-    padding-left:20px;
-    border-left:3px solid #5B8FD2;
-    font-size: 18px;
-    font-weight: 600;
+    width: 7%;
+    height: 21px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #4B4B4B;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
 }
-.area input, .file_area{
-    height: 60px;
+.area input, .file_area {
+    height: 40px;
     border: 0.5px solid #DDDDDD;
     box-sizing: border-box;
     padding-left: 10px;
-    font-size: 15px;
+    font-size: 13px;
+    width: 47%;
 }
 .area input:focus-visible,.area textarea:focus-visible {
     border: 0.5px solid #5B8FD2 !important;
@@ -25,6 +30,16 @@
 .area1,.area2,.area3,.area4,.area5{
     margin-bottom: 30px;
     display: flex;
+}
+.area3 {
+    align-items: center;
+    width: 100%;
+}
+.link_wrap {
+    width: 93%;
+}
+.link_wrap input {
+    width: 52.16%;
 }
 .area1{
     height: 60px;
@@ -47,12 +62,12 @@
 }
 
 .screening_area div {
-    color: #222;
+    color: #4B4B4B;
     font-family: 'Pretendard';
-    font-size: 20px;
+    font-size: 13px;
     font-style: normal;
     font-weight: 400;
-    /* line-height: 170.02%; */
+    line-height: 25px;
     letter-spacing: -0.6px;
 }
 
@@ -155,6 +170,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 13px;
 }
 .file_con img{
     width: 15px; height: 15px;
@@ -162,13 +178,23 @@
     margin-top: 2px;
 }
 
-.area3 label{
+.area3 label {
     width: 60px;
     border: 0;
-    border-left: 0.5px solid #DDDDDD;
-    background: url("../imgs/register_upload.svg") no-repeat;
     background-position: center;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file_area label img {
+    width: 24px;
+    height: 24px;
+}
+
+.link_wrap input:last-child {
+    margin-top: 8px;
 }
 
 .area4 span:first-child,.area5 span:first-child{
@@ -257,31 +283,49 @@
     transform: translateX(20px);
 }
 
-.btn_wrap{
-    width: 220px; height: 50px;
-    margin-bottom: 40px;
+.btn_wrap {
+    width: 100%;
+    margin-bottom: 30px;
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    position: absolute;
-    left: calc(50% - 110px); bottom: 0;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
-.btn_wrap button{
-    width: 100px; height: auto;
-    background-color: #ffffff;
-    border: 0.5px solid #99999999;
-    border-radius: 5px;
-    font-size: 16px;
+#cancel_btn {
+    display: flex;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #F43F1F;
+    background: #FFF;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    color: #F43F1F;
+    font-family: 'PRETENDARD';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    box-sizing: border-box;
     cursor: pointer;
 }
-.btn_wrap button:last-child{
-    background-color: #5B8FD2;
-    border: 0.5px solid #5B8FD2;
-    color: #ffffff;
+
+#submit_btn, #update_btn {
+    display: flex;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: #FFF;
+    font-family: 'PRETENDARD';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    border: 1px solid #F43F1F;
+    background: #F43F1F;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    cursor: pointer;
 }
-
-
-
 @media all and (min-width:768px) and (max-width:1023px){}
 @media all and (min-width:320px) and (max-width:767px){}

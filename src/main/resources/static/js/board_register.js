@@ -21,7 +21,7 @@ $(function () {
             });
 
             //필수값 체크
-            $('#submit_bt').click(function(){
+            $('#submit_btn').click(function(){
                 let result = true;
                 $('.required').each(function(){
                     if($(this).val() == ""){
@@ -40,7 +40,7 @@ $(function () {
                 if(!result) return false;
                 submitDate('/newsAdd');
             })
-            $('#update_bt').click(function(){
+            $('#update_btn').click(function(){
                 let result = true;
                 $('.required').each(function(){
                     if($(this).val() == ""){

@@ -403,6 +403,12 @@ button{
     width: 67.5%;
 }
 
+.list_board .newsTitle_area {
+    align-items: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .newsDate_area {
     height: 46px;
     padding: 15px 40px;

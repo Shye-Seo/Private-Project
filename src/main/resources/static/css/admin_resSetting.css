@@ -3,6 +3,9 @@
 
 /* ---------DATE PAGE--------- */
 /* 달력 ui */
+.calendar_area {
+    min-height: 795px;
+}
 
 .sec_cal {
     width: 1015px;

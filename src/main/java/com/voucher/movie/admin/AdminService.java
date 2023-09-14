@@ -222,6 +222,11 @@ public class AdminService {
 	//대관예약 확정리스트 get
 	public List<FacilitiesVO> getFacility_Reslist() {
 		return adminDao.getFacility_Reslist();
+	}
+
+	//월요일 휴관일 지정(매년 1월1일 00:00 작동)
+	public boolean closed_scheduler(String date_str) {
+		return adminDao.closed_scheduler(date_str);
 	}	
 
 }

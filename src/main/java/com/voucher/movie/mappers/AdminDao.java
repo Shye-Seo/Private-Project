@@ -161,4 +161,7 @@ public interface AdminDao {
 	@Select("select * from reservation_facilities where res_status = 1 order by res_visitDate desc, res_visitNum asc")
 	List<FacilitiesVO> getFacility_Reslist();
 
+	@Insert("insert into reservation_closed (closed_date, setting_status, create_date) value (#{date_str}, 1, sysdate())")
+	boolean closed_scheduler(String date_str); //월요일 휴관설정
+
 }
