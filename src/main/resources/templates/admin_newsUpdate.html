@@ -22,7 +22,7 @@
             <div class="container">
                 <div class="page-header">
                     <div class="page-title">
-                        <span>박물관 소식</span>
+                        <span>게시판 관리</span>
                     </div>
                 </div>
 
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <label for="input_file" id="file_upload"><img src="/imgs/board_upload_icon.svg"></label>
+                            <label for="input_file" id="file_upload" class="files_label"><img src="/imgs/board_upload_icon.svg"></label>
                         </div>
                         <input type="file" id="input_file" multiple="multiple" name="file" hidden />
                         <!-- ... -->
@@ -124,11 +124,11 @@
 
                             fileIndex=newsFileList.length;
                             
-                            if($('#file_names').children().length >=maxFileNum){
+                            if($('#file_names').children().length >=5){
                                 $('#input_file').attr("disabled","disabled");
-                                $('.area3 label').css({'background-color':'#eee', 'cursor':'unset'});
+                                $('.area3 .files_label').css({'background-color':'#eee', 'cursor':'unset'});
                             }
-
+                            
                             $('textarea').height((15 + $('textarea').prop('scrollHeight')));
                         })
                         /*]]>*/

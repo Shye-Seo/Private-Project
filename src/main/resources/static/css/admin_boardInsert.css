@@ -2,6 +2,26 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 /* main */
 .area span {
     width: 10%;
@@ -24,7 +44,7 @@
     width: 47%;
 }
 .area input:focus-visible,.area textarea:focus-visible {
-    border: 0.5px solid #5B8FD2 !important;
+    border: 0.5px solid #F43F1F !important;
 }
 
 .area1,.area2,.area3,.area4,.area5{
@@ -36,21 +56,16 @@
     width: 100%;
 }
 .link_wrap {
-    width: 93%;
+    width: 47%;
 }
 .link_wrap input {
-    width: 52.16%;
+    width: 100%;
 }
 .area1{
     height: 60px;
     align-items: center;
 }
 
-.area1 input[name="event_title"], .area5 input[name="event_venue"]{
-    width: 40%;
-    /* max-width: 530px; */
-    margin-right: 5%;
-}
 #radio_1, #radio_2{
 	display: none;
 }
@@ -251,41 +266,9 @@
     padding-top: 15px;
     width: 80px;
 }
-.position_wrap{
-    position: relative;
-    margin-bottom: 50px;
-}
-.position_btn{
-    width: 70px; height: 30px;
-    position: absolute;
-    bottom: 25px; right: -100px;
-    display: flex;
-}
-
-#add_position{
-    width: 30px; height: 30px;
-    background: url("../imgs/register-add-circle.svg") no-repeat;
-    background-size: cover;
-    cursor: pointer;
-
-    position: absolute;
-    bottom: 25px;
-    right: -50px;
-}
-
-.remove_position{
-    width: 30px;
-    height: 30px;
-    background: url("../imgs/register-minus-circle.svg") no-repeat;
-    background-size: cover;
-    cursor: pointer;
-    margin-right: 10px;
-    transform: translateX(20px);
-}
 
 .btn_wrap {
     width: 100%;
-    margin-bottom: 30px;
     display: flex;
     justify-content: flex-end;
     gap: 10px;

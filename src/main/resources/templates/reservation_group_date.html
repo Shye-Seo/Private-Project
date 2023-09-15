@@ -122,7 +122,7 @@
 							<div class="time_info" th:if="${status_1 == 1}">
 								<div class="time_num"><li>1회차</li></div>
 								<div class="visit_time"><li th:text="${time_1}" class="res_visitTime_1"></li></div>
-								<div class="limit_num"><li th:text="${limit_1 - total_1}+'/'+${limit_1}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_1 - total_1}"></li><li class="gray_limit" th:text="'/'+${limit_1}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="1" id="time_1">
 									<label for="time_1" th:if="${limit_1 - total_1} != 0" class="res_able">예약하기</label>
@@ -132,7 +132,7 @@
 							<div class="time_info" th:if="${status_2 == 1}">
 								<div class="time_num"><li>2회차</li></div>
 								<div class="visit_time"><li th:text="${time_2}" class="res_visitTime_2"></li></div>
-								<div class="limit_num"><li th:text="${limit_2 - total_2}+'/'+${limit_2}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_2 - total_2}"></li><li class="gray_limit" th:text="'/'+${limit_2}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="2" id="time_2">
 									<label for="time_2" th:if="${limit_2 - total_2} != 0" class="res_able">예약하기</label>
@@ -142,7 +142,7 @@
 							<div class="time_info" th:if="${status_3 == 1}">
 								<div class="time_num"><li>3회차</li></div>
 								<div class="visit_time"><li th:text="${time_3}" class="res_visitTime_3"></li></div>
-								<div class="limit_num"><li th:text="${limit_3 - total_3}+'/'+${limit_3}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_3 - total_3}"></li><li class="gray_limit" th:text="'/'+${limit_3}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="3" id="time_3">
 									<label for="time_3" th:if="${limit_3 - total_3} != 0" class="res_able">예약하기</label>
@@ -152,7 +152,7 @@
 							<div class="time_info" th:if="${status_4 == 1}">
 								<div class="time_num"><li>4회차</li></div>
 								<div class="visit_time"><li th:text="${time_4}" class="res_visitTime_4"></li></div>
-								<div class="limit_num"><li th:text="${limit_4 - total_4}+'/'+${limit_4}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_4 - total_4}"></li><li class="gray_limit" th:text="'/'+${limit_4}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="4" id="time_4">
 									<label for="time_4" th:if="${limit_4 - total_4} != 0" class="res_able">예약하기</label>
@@ -162,7 +162,7 @@
 							<div class="time_info" th:if="${status_5 == 1}">
 								<div class="time_num"><li>5회차</li></div>
 								<div class="visit_time"><li th:text="${time_5}" class="res_visitTime_5"></li></div>
-								<div class="limit_num"><li th:text="${limit_5 - total_5}+'/'+${limit_5}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_5 - total_5}"></li><li class="gray_limit" th:text="'/'+${limit_5}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="5" id="time_5">
 									<label for="time_5" th:if="${limit_5 - total_5} != 0" class="res_able">예약하기</label>
@@ -172,7 +172,7 @@
 							<div class="time_info" th:if="${status_6 == 1}">
 								<div class="time_num"><li>6회차</li></div>
 								<div class="visit_time"><li th:text="${time_6}" class="res_visitTime_6"></li></div>
-								<div class="limit_num"><li th:text="${limit_6 - total_6}+'/'+${limit_6}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_6 - total_6}"></li><li class="gray_limit" th:text="'/'+${limit_6}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="6" id="time_6">
 									<label for="time_6" th:if="${limit_6 - total_6} != 0" class="res_able">예약하기</label>
@@ -182,7 +182,7 @@
 							<div class="time_info" th:if="${status_7 == 1}">
 								<div class="time_num"><li>7회차</li></div>
 								<div class="visit_time"><li th:text="${time_7}" class="res_visitTime_7"></li></div>
-								<div class="limit_num"><li th:text="${limit_7 - total_7}+'/'+${limit_7}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_7 - total_7}"></li><li class="gray_limit" th:text="'/'+${limit_7}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="7" id="time_7">
 									<label for="time_7" th:if="${limit_7 - total_7} != 0" class="res_able">예약하기</label>
@@ -192,7 +192,7 @@
 							<div class="time_info" th:if="${status_8 == 1}">
 								<div class="time_num"><li>8회차</li></div>
 								<div class="visit_time"><li th:text="${time_8}" class="res_visitTime_8"></li></div>
-								<div class="limit_num"><li th:text="${limit_8 - total_8}+'/'+${limit_8}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_8 - total_8}"></li><li class="gray_limit" th:text="'/'+${limit_8}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="8" id="time_8">
 									<label for="time_8" th:if="${limit_8 - total_8} != 0" class="res_able">예약하기</label>
@@ -202,7 +202,7 @@
 							<div class="time_info" th:if="${status_9 == 1}">
 								<div class="time_num"><li>9회차</li></div>
 								<div class="visit_time"><li th:text="${time_9}" class="res_visitTime_9"></li></div>
-								<div class="limit_num"><li th:text="${limit_9 - total_9}+'/'+${limit_9}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_9 - total_9}"></li><li class="gray_limit" th:text="'/'+${limit_9}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="9" id="time_9">
 									<label for="time_9" th:if="${limit_9 - total_9} != 0" class="res_able">예약하기</label>
@@ -212,17 +212,17 @@
 							<div class="time_info" th:if="${status_10 == 1}">
 								<div class="time_num"><li>10회차</li></div>
 								<div class="visit_time"><li th:text="${time_10}" class="res_visitTime_10"></li></div>
-								<div class="limit_num"><li th:text="${limit_10 - total_10}+'/'+${limit_10}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_10 - total_10}"></li><li class="gray_limit" th:text="'/'+${limit_10}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="10" id="time_10">
-									<label for="time_10" th:if="${limit_10 - total_10} != 0" class="res_able">예약하기</label>z
+									<label for="time_10" th:if="${limit_10 - total_10} != 0" class="res_able">예약하기</label>
 									<div th:if="${limit_10 - total_10} == 0" class="res_unable">매진</div>
 								</div>
 							</div>
 							<div class="time_info" th:if="${status_11 == 1}">
 								<div class="time_num"><li>11회차</li></div>
 								<div class="visit_time"><li th:text="${time_11}" class="res_visitTime_11"></li></div>
-								<div class="limit_num"><li th:text="${limit_11 - total_11}+'/'+${limit_11}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_11 - total_11}"></li><li class="gray_limit" th:text="'/'+${limit_11}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="11" id="time_11">
 									<label for="time_11" th:if="${limit_11 - total_11} != 0" class="res_able">예약하기</label>
@@ -232,7 +232,7 @@
 							<div class="time_info" th:if="${status_12 == 1}">
 								<div class="time_num"><li>12회차</li></div>
 								<div class="visit_time"><li th:text="${time_12}" class="res_visitTime_12"></li></div>
-								<div class="limit_num"><li th:text="${limit_12 - total_12}+'/'+${limit_12}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_12 - total_12}"></li><li class="gray_limit" th:text="'/'+${limit_12}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="12" id="time_12">
 									<label for="time_12" th:if="${limit_12 - total_12} != 0" class="res_able">예약하기</label>
@@ -242,7 +242,7 @@
 							<div class="time_info" th:if="${status_13 == 1}">
 								<div class="time_num"><li>13회차</li></div>
 								<div class="visit_time"><li th:text="${time_13}" class="res_visitTime_13"></li></div>
-								<div class="limit_num"><li th:text="${limit_13 - total_13}+'/'+${limit_13}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_13 - total_13}"></li><li class="gray_limit" th:text="'/'+${limit_13}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="13" id="time_13">
 									<label for="time_13" th:if="${limit_13 - total_13} != 0" class="res_able">예약하기</label>
@@ -252,7 +252,7 @@
 							<div class="time_info" th:if="${status_14 == 1}">
 								<div class="time_num"><li>14회차</li></div>
 								<div class="visit_time"><li th:text="${time_14}" class="res_visitTime_14"></li></div>
-								<div class="limit_num"><li th:text="${limit_14 - total_14}+'/'+${limit_14}+'명'"></li></div>
+								<div class="limit_num"><li th:text="${limit_14 - total_14}"></li><li class="gray_limit" th:text="'/'+${limit_14}+'명'"></li></div>
 								<div class="res_btn">
 									<input type="radio" name="res_visitNum" value="14" id="time_14">
 									<label for="time_14" th:if="${limit_14 - total_14} != 0" class="res_able">예약하기</label>
@@ -455,7 +455,34 @@
 			</div>
 		</div>
 	</form>
+	
+				<!-- 예약신청 완료 모달 -->
+                <div id="res_modal">
+				    <div class="res_modal_content">
+				        <div id="res_modal_content_wrap">
+					        <img src="/imgs/reservation_ok_img.svg" id="res_modal_img">
+						    <div id="modal_content_text">
+						    	<p class="res_title">단체관람 예약신청이 완료되었습니다.</p>
+						        <p class="res_detail">접수된 신청서는 담당자 검토 후 연락드립니다.</p>
+						    </div>
+						    <div id="modal_btn_div">
+						    	<button type="button" id="res_modal_ok_btn">확인</button>
+						    </div>
+				        </div>
+				    </div>
+			   		<div class="res_modal_layer"></div>
+				</div>
 <script>
+/* 모달창 띄우기 */
+//예약완료 모달
+function reservation_ok_modal(){
+	document.getElementById("res_modal").style.display="block";
+}
+document.getElementById("res_modal_ok_btn").onclick = function() {
+ document.getElementById("res_modal").style.display="none";
+ window.location.href="/reservation_group";
+}
+
     $(document).ready(function() {
         calendarInit();
     });
@@ -537,7 +564,7 @@
             // 오늘 날짜 표기
             if (today.getMonth() == currentMonth) {
                 todayDate = today.getDate();
-                var currentMonthDate = document.querySelectorAll('.dates .current');
+                var currentMonthDate = document.querySelectorAll('.dates .dayStyle');
                 currentMonthDate[todayDate -1].classList.add('today');
             }
             

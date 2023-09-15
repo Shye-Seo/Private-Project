@@ -145,10 +145,12 @@ $(function() {
 				        processData : false,
 				        contentType : false,
 				        cache : false,
-						success : function (result) {
-			                window.location.href= result;
-			            }
+				        success: function(result){
+							console.log(result);
+						}
 					});
+					
+					reservation_ok_modal();
 					
 				}
 	        }

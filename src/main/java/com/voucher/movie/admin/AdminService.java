@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.voucher.movie.board.EventFileVo;
+import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.mappers.AdminDao;
@@ -209,7 +211,9 @@ public class AdminService {
 	public String getOldPopupImage(int id) {
 		return adminDao.getOldPopupImage(id);
 	}
-
+	
+	
+	/*-------------대관--------*/
 	//대관예약 리스트 get
 	public List<FacilitiesVO> getFacility_list(String date) {
 		return adminDao.getFacility_list(date);
@@ -224,9 +228,63 @@ public class AdminService {
 		return adminDao.getFacility_Reslist();
 	}
 
+	/*-------------스케쥴러--------*/
 	//월요일 휴관일 지정(매년 1월1일 00:00 작동)
 	public boolean closed_scheduler(String date_str) {
 		return adminDao.closed_scheduler(date_str);
+	}
+	
+	/*-------------박물관 이벤트--------*/
+	public int findAllEvents() {
+		return adminDao.findAllEvents();
+	}
+
+	public List<EventVO> findEventPaging(int startIndex, int pageSize) {
+		return adminDao.findEventPaging(startIndex, pageSize);
+	}
+
+	public boolean insertEvent(EventVO eventvo) {
+		return adminDao.insertEvent(eventvo);
+	}
+
+	public int get_event_Id(int id) {
+		return adminDao.get_event_Id(id);
+	}
+
+	public boolean insertEventFile(EventFileVo eventFileVo) {
+		return adminDao.insertEventFile(eventFileVo);
+	}
+
+	public EventVO viewEventDetail(int event_id) {
+		return adminDao.viewEventDetail(event_id);
+	}
+
+	public List<EventFileVo> viewEventFileDetail(int event_id) {
+		return adminDao.viewEventFileDetail(event_id);
+	}
+
+	public String getOldEventPoster(int id) {
+		return adminDao.getOldEventPoster(id);
+	}
+
+	public boolean deleteEventFile(int id, String name) {
+		return adminDao.deleteEventFile(id, name);
+	}
+
+	public boolean updateEvent(EventVO eventVo) {
+		return adminDao.updateEvent(eventVo);
+	}
+
+	public boolean event_delete(String c) {
+		return adminDao.event_delete(c);
+	}
+
+	public String[] getEventFile(String c) {
+		return adminDao.getEventFile(c);
+	}
+
+	public boolean eventFile_delete(String c) {
+		return adminDao.eventFile_delete(c);
 	}	
 
 }

@@ -1,6 +1,26 @@
 @charset "utf-8";
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 * {
     margin: 0;
 }
@@ -391,6 +411,7 @@
 
 .choice_img_area img {
     width: 9%;
+    cursor: pointer;
 }
 
 .slides li{
@@ -404,9 +425,6 @@
   position: relative;
   margin: 50px auto;
   overflow: hidden;   
-  /*리스트 형식으로 이미지를 일렬로 
-  정렬할 것이기 때문에, 500px 밖으로 튀어 나간 이미지들은
-  hidden으로 숨겨줘야됨*/
 }
 
 
@@ -414,21 +432,8 @@
   position: absolute;
   left: 0;
   top: 0;
-/*   width: 2500px; 슬라이드할 사진과 마진 총 넓이 */
-  transition: left 0.5s ease-out; 
-  /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
-}
-
-/* 첫 번째 슬라이드 가운데에 정렬하기위해
-첫번째 슬라이드만 margin-left조정 */
-.slides li:first-child{
-/*   margin-left: 100px; */
-}
-
-/* 슬라이드들 옆으로 정렬 */
-.slides li:not(:last-child){
-/*   float: left; */
-/*   margin-right: 100px; */
+/*   transition: left 0.5s ease-out;  */
+  transition: left;
 }
 
 .slides li{
@@ -437,6 +442,8 @@
 
 .slides img {
     width: 1200px;
+    height: 426px;
+    object-fit: contain;
 }
 
 .controller span {
@@ -904,7 +911,7 @@ button img {
     letter-spacing: -1.26px;
 }
 
-.current.today {background-color: #E4E4E4;}
+.dayStyle.today {background-color: #E4E4E4;}
 
 .current.choice {border: 1px solid red; border-radius: 15px;}
 
@@ -1042,17 +1049,17 @@ button img {
 
 #top_ol {
     display: flex;
-    height: 95px;
-    line-height: 95px;
+    height: 60px;
+    line-height: 60px;
     list-style: none;
+    border-bottom: 1px solid #EAEAEA;
+    padding-inline-start: 0px;
     color: #202020;
     text-align: center;
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 600;
-    border-bottom: 1px solid #EAEAEA;
-    padding-inline-start: 0px;
 }
 .time_num_top {
     width: 20%;
@@ -1076,6 +1083,7 @@ button img {
 .limit_num{
 	width: 30%;
 	display: flex;
+	justify-content: center;
 }
 .gray_num{
 	color: #767676;
@@ -1090,16 +1098,16 @@ button img {
 }
 
 #time_data {
+    padding-inline-start: 0px;
+    overflow: auto;
+    height: 445px;
     color: #202020;
     text-align: center;
     font-family: Pretendard;
-    font-size: 22px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding-inline-start: 0px;
-    overflow: scroll;
-    height: 454px;
 }
 
 .time_info {
@@ -1113,6 +1121,10 @@ button img {
 
 .time_info li{
     list-style: none;
+}
+
+.time_info:last-child {
+    border-bottom: none;
 }
 
 .turnTable_area{
@@ -1132,24 +1144,31 @@ button img {
 	display: block;
 }
 
+.gray_limit {
+    color: #767676;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+}
+
 .time_info input[type="radio"]{
 	display: none;	
 }
 
 .time_info input[type="radio"] + label {
-	display: inline-block;
-	width:106px; 
-	height: 45px; 
-	background: #202020;
-	cursor: pointer;
-	color: #FFF;
-	text-align: center;
-	font-family: Pretendard;
-	font-size: 20px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 45px;
-/*     margin-right: 10px; */
+	width: 106px;
+    height: 38px;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    display: inline-block;
+    background: #202020;
+    cursor: pointer;
+    line-height: 38px;
 }
 
 .time_info input[type="radio"]:checked + label {
@@ -1271,14 +1290,14 @@ button img {
 }
 
 .info_title div{
-	color: #222;
-    font-family: 'Pretendard';
-    font-size: 28px;
+	margin-bottom: 30px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 28px;
-    letter-spacing: -0.84px;
-    margin-bottom: 30px;
+    line-height: normal;
+    letter-spacing: -0.72px;
 }
 
 .info_guide {
@@ -1290,19 +1309,18 @@ button img {
 .info_guide li {
     color: #222;
     font-family: Pretendard;
-    font-size: 19px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 30px;
-    letter-spacing: -0.6px;
-    /* margin: 30px; */
+    line-height: 24px;
+    letter-spacing: -0.48px;
 }
 
 .info_table {
     border-top: 2px solid #000;
     border-bottom: 2px solid #000;
     display: flex;
-    margin-bottom: 74px;
+    margin-bottom: 50px;
     width: 100%;
 }
 
@@ -1347,16 +1365,14 @@ button img {
 
 .left_title {
     background: #F5F5F5;
-/*     width: 180px; */
     padding-left: 30px;
+    width: 27%;
     color: #222;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    /* line-height: normal; */
-    letter-spacing: -0.6px;
-    width:27%;
+    letter-spacing: -0.48px;
 }
 
 .right_title{
@@ -1386,11 +1402,11 @@ button img {
     align-items: center;
     color: #222;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    letter-spacing: -0.6px;
+    letter-spacing: -0.48px;
 }
 
 .vehicle_1, .vehicle_2, .vehicle_3, .request_1, .request_2{
@@ -1414,6 +1430,9 @@ button img {
 .request_1 div {
     margin-right: 82px;
 }
+.groupName_insert {
+    margin-left: 5px;
+}
 
 .table_left input[type="text"] {
     border-radius: 5px;
@@ -1421,66 +1440,64 @@ button img {
     background: #FFF;
     height: 47px;
     padding-left: 30px;
-    color: #222;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.6px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
 }
 
 .calc_wrapper input[type="text"] {
     height: 42px;
     margin-left: 30px;
-    width: 100%;
+    width: 67%;
     padding-left: 0;
-    text-align: center;
     color: #222;
+    text-align: center;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.6px;
+    line-height: 24px;
+    letter-spacing: -0.48px;
 }
 
 .studentNum .num_txt {
-/*     width: 57px; */
+    width: 57px;
+    margin-right: 19px;
     color: #222;
     font-family: Pretendard;
-    font-size: 22px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 64px;
-    letter-spacing: -0.66px;
-    margin-right: 19px;
+    letter-spacing: -0.48px;
 }
 
 .adultNum .num_txt {
-/*     width: 56px; */
+    width: 56px;
     color: #222;
     font-family: Pretendard;
-    font-size: 22px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 64px;
-    letter-spacing: -0.66px;
+    letter-spacing: -0.48px;
     margin-right: 19px;
 }
 
 .leaderNum .num_txt {
     color: #222;
     font-family: Pretendard;
-    font-size: 22px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 64px;
-    letter-spacing: -0.66px;
+    letter-spacing: -0.48px;
+    width: 75px;
 }
 
 .icon_box {
-    padding-left: 30px;
     display: flex;
 }
 
@@ -1524,7 +1541,7 @@ button img {
     font-weight: 400;
     /* line-height: normal; */
     letter-spacing: -0.6px;
-    margin-left: 10px;
+    margin-left: 17px;
 }
 
 #right_flex {
@@ -1533,7 +1550,7 @@ button img {
 }
 
 .input_certifinum, .input_phone {
-    width: 62%;
+    width: 65%;
 }
 
 #certifinum_submit, #certifinum_check {
@@ -1542,14 +1559,14 @@ button img {
     border: 1px solid #B0B0B0;
     background: #F5F5F5;
     height: 42px;
+    width: 22%;
     color: #222;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    letter-spacing: -0.6px;
-    width: 25%;
+    letter-spacing: -0.48px;
 }
 
 #certifinum_submit{
@@ -1628,18 +1645,16 @@ button img {
 }
 
 .place_confirm {
-    text-align: center;
-    /* margin: 24px auto; */
+    border-bottom: 1px solid #D2D2D2;
+    padding-bottom: 24px;
+    height: 50px;
     color: #F43F1F;
     font-family: Pretendard;
     font-size: 26px;
     font-style: normal;
     font-weight: 600;
     line-height: 170.02%;
-    letter-spacing: -0.9px;
-    border-bottom: 1px solid #D2D2D2;
-    padding-bottom: 24px;
-    height: 50px;
+    letter-spacing: -0.78px;
 }
 
 .date_confirm, .time_confirm, .num_confirm {
@@ -1654,26 +1669,26 @@ button img {
     background: #6F6F6F;
     width: 60px;
     height: 25px;
-    text-align: center;
+    line-height: 25px;
+    margin-right: 20px;
+    margin-right: 20px;
     color: #FFF;
     text-align: center;
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 25px;
-    letter-spacing: -0.48px;
-    margin-right: 20px;
+    letter-spacing: -0.42px;
 }
 
 .date_insert, .time_insert, .num_insert {
     color: #222;
     font-family: Pretendard;
-    font-size: 22px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: 170.02%;
-    letter-spacing: -0.66px;
+    letter-spacing: -0.54px;
 }
 
 .num_insert{
@@ -1838,73 +1853,72 @@ button img {
 }
 
 .confirm_bottom_title {
+    margin-right: 10px;
     color: #222;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: 170.02%;
-    letter-spacing: -0.6px;
-    margin-right: 10px;
+    letter-spacing: -0.54px;
 }
 
 .div_bar {
+    margin-right: 10px;
     color: #D2D2D2;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: 170.02%;
-    letter-spacing: -0.6px;
-    margin-right: 10px;
+    letter-spacing: -0.54px;
 }
 
 .name_insert, .phone_insert, .vehicle_insert {
     color: #222;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: 170.02%;
-    letter-spacing: -0.6px;
+    letter-spacing: -0.54px;
 }
 
 .request_insert{
 	color: #222;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 170.02%;
-    letter-spacing: -0.6px;
+    letter-spacing: -0.54px;
 }
 
 .message_title {
     color: #222;
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    letter-spacing: -0.72px;
+    letter-spacing: -0.54px;
 }
 
-input.message_txtbox {
+.message_txtbox {
     border-radius: 5px;
     border: 1px solid #C7C7C7;
     background: #FFF;
     height: 180px;
     width: 100%;
     margin-top: 23px;
-    color: #C8C8C8;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.6px;
     padding: 15px 30px;
     box-sizing: border-box;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -0.48px;
 }
 
 .button_wrap {
@@ -2287,7 +2301,7 @@ input.message_txtbox {
 }
 
 .sec_cal_f .cal_wrap .dates .day {
-    width: calc((100% / 7) - 0.8px);
+    width: calc((100% / 7) - 0.9px);
     font-size: 22px;
     text-align: center;
     font-family: Pretendard;
@@ -2840,4 +2854,87 @@ input.message_txtbox {
     font-weight: 400;
     line-height: 170.02%;
     letter-spacing: -0.48px;
+}
+
+/*------------예약완료 모달------------*/
+#res_modal {
+    position: fixed;
+    width:100%;
+    height: 100%;
+    margin-left: 10%;
+    z-index: 1;
+    top: 0;
+    display: none;
+}
+
+.res_modal_content {
+    width: 550px;
+    height: 560px;
+    position: absolute;
+    top: calc(13%);
+    left: calc(25%);
+    background: #fff;
+    border: none;
+    padding: 80px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.12);
+}
+
+#res_modal_content_wrap {
+    box-sizing: border-box;
+    height: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 68px;
+}
+
+#res_modal_img {
+    width: 130px;
+}
+
+.res_title {
+    color: #222;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.res_detail {
+    color: #6B6B6B;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.66px;
+}
+
+.res_modal_layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #33333326;
+    z-index: -1;
+}
+
+#res_modal_ok_btn {
+    background: #F43F1F;
+    width: 390px;
+    height: 50px;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
 }

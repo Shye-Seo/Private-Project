@@ -4,7 +4,7 @@ $(function () {
                 selectFile(this.files);
 
                 //파일 5개 이상일 시 버튼 비활성화
-                if($('#file_names').children().length >=maxFileNum){
+                if($('#file_names').children().length >=5){
                     $('#input_file').attr("disabled","disabled");
                     $('.area3 label').css({'background-color':'#eee', 'cursor':'unset'});
                 }
@@ -36,6 +36,9 @@ $(function () {
 				}else if($('#file_names_thumbnail').children().length > 1){
 					alert('대표이미지는 하나만 첨부해주세요.');
                     return false;
+				}else if(!$('input[name=event_screeningCheck]').is(":checked")){
+					alert('영화상영여부를 선택해주세요.');
+					return false;
 				}
                 if(!result) return false;
                 submitDate('/newsAdd');
@@ -55,6 +58,9 @@ $(function () {
 				}else if($('#file_names_thumbnail').children().length > 1){
 					alert('대표이미지는 하나만 첨부해주세요.');
                     return false;
+				}else if(!$('input[name=event_screeningCheck]').is(":checked")){
+					alert('영화상영여부를 선택해주세요.');
+					return false;
 				}
                 if(!result) return false;
                 submitDate('/newsUpdate');
@@ -201,14 +207,6 @@ $(function () {
    
    // 파일 선택시
         function selectFile_thumbnail(fileObject) {
-        //var files = null;
-        //if (fileObject != null) {
-           // 파일 Drag 이용하여 등록시
-           //files = fileObject;
-       //} else {
-           // 직접 파일 등록시
-           
-            //}
             var thumbnail_file = $('#thumbnail')[0].files;
             // 다중파일 등록
             if (thumbnail_file != null) {
@@ -328,10 +326,10 @@ $(function () {
        // 업로드 파일 테이블 목록에서 삭제
        $("#fileTrThumb_" + fIndex_thumbnail).remove();
        
-//       if($('#input_file').attr("disabled")=='disabled'){
-//        $('#input_file').removeAttr("disabled");
-//        $('.area3 label').css({'background-color':'#fff', 'cursor':'pointer'});
-//       }
+       if($('#thumbnail').attr("disabled")=='disabled'){
+        $('#thumbnail').removeAttr("disabled");
+        $('.area3 thumbnail_label').css({'background-color':'#fff', 'cursor':'pointer'});
+       }
 
         $('input[name=news_poster]').val('');
 	    $('input[name=thumbnail_file]').val('');
@@ -341,9 +339,11 @@ $(function () {
         $("#fileTr_" + fIndex).remove();
         deleteFileNameList.push(fileName);
 
-        if($('#input_file').attr("disabled")=='disabled'){
-            $('#input_file').removeAttr("disabled");
-            $('.area3 label').css({'background-color':'#fff', 'cursor':'pointer'});
+		if($('#file_names').children().length < 5){
+	        if($('#input_file').attr("disabled")=='disabled'){
+	            $('#input_file').removeAttr("disabled");
+	            $('.area3 .files_label').css({'background-color':'#fff', 'cursor':'pointer'});
+	        }
         }
     }
     
@@ -351,10 +351,10 @@ $(function () {
         $("#fileTrThumb_" + fIndex_thumbnail).remove();
         deleteFileNameList_thumbnail.push(fileName_thumbnail);
 
-//        if($('#input_file').attr("disabled")=='disabled'){
-//            $('#input_file').removeAttr("disabled");
-//            $('.area3 label').css({'background-color':'#fff', 'cursor':'pointer'});
-//        }
+        if($('#thumbnail').attr("disabled")=='disabled'){
+        $('#thumbnail').removeAttr("disabled");
+        $('.area3 thumbnail_label').css({'background-color':'#fff', 'cursor':'pointer'});
+       }
     }
    
    function deleteAll() {

@@ -21,15 +21,33 @@
             <div class="container">
                 <div class="page-header">
                     <div class="page-title">
-                        <span>박물관 소식</span>
+                        <span>게시판 관리</span>
                     </div>
                 </div>
 
                 <div class="area">
+                
+                <div class="detail_bar">
+                    <div class="detail1 this_bar" onclick="location.href='admin_newsList'">
+                        <p>박물관 소식</p>
+                    </div>
+                    <div class="detail2" onclick="location.href='admin_eventList'">
+                        <p>이벤트</p>
+                    </div>
+                    <div class="detail3" onclick="location.href='admin_noticeList'">
+                        <p>공고</p>
+                    </div>
+                    <div class="detail4" onclick="location.href='admin_partnerList'">
+                        <p>제휴</p>
+                    </div>
+                    <div class="detail5" onclick="location.href='admin_eduList'">
+                        <p>교육</p>
+                    </div>
+                </div>
 
                     <ul class="list">
                         <ol id="top_ol">
-							<div class="check_area"><li><input type="checkbox" class="all_check"></li></div>
+							<div class="check_area"><li><input type="checkbox" onclick='selectAll(this)'></li></div>
                             <div class="num_area"><li>NO</li></div>
                             <div class="newsTitle_area"><li>제목</li></div>
                             <div class="newsDate_area"><li>등록일</li></div>
@@ -99,6 +117,14 @@
             </div>
         </div>
 <script>
+function selectAll(selectAll)  {
+	const checkboxes = document.getElementsByName('check');
+	
+	checkboxes.forEach((checkbox) => {
+		checkbox.checked = selectAll.checked;
+	})
+};
+
 function news_delete() {
 	var check = [];
 

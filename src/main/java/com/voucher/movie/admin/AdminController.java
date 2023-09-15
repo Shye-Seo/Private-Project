@@ -29,8 +29,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.voucher.movie.ScriptUtils;
 import com.voucher.movie.WebService;
 import com.voucher.movie.aws.AwsS3Service;
+import com.voucher.movie.board.EduVO;
+import com.voucher.movie.board.EventFileVo;
+import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
+import com.voucher.movie.board.NoticeVO;
+import com.voucher.movie.board.PartnerVO;
 import com.voucher.movie.config.PagingVO;
 import com.voucher.movie.reservation.ClosedVO;
 import com.voucher.movie.reservation.FacilitiesVO;
@@ -62,6 +67,10 @@ public class AdminController {
 	List<ClosedVO> closed_list;
 	List<FacilitiesVO> facility_list;
 	List<NewsVO> news_list;
+	List<EventVO> event_list;
+	List<NoticeVO> notice_list;
+	List<PartnerVO> partner_list;
+	List<EduVO> edu_list;
 	List<PopupVO> popup_list;
 	
 	String bucketName = "busanbom";
@@ -671,4 +680,198 @@ public class AdminController {
 				
 			return "admin_popupDetail?id="+popupVo.getId();
 		}
+		
+		//관리자 - 이벤트 리스트
+		@RequestMapping(value="/admin_eventList", method=RequestMethod.GET)
+		public String admin_eventList(@ModelAttribute EventVO eventVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+				
+			// 총 게시물 수 
+		    int totalListCnt = adminService.findAllEvents();
+
+		    // 생성인자로  총 게시물 수, 현재 페이지를 전달
+		    PagingVO pagination = new PagingVO(totalListCnt, page);
+
+		    // DB select start index
+		    int startIndex = pagination.getStartIndex();
+		    // 페이지 당 보여지는 게시글의 최대 개수
+		    int pageSize = pagination.getPageSize();
+
+		    event_list = adminService.findEventPaging(startIndex, pageSize);
+		    
+		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    
+		    for(EventVO event : event_list) {
+		    	String event_date = event.getCreate_date();
+		    	event_date = event_date.substring(0, 4) + "." + event_date.substring(5, 7) +"." + event_date.substring(8, 10);
+		    	event.setCreate_date(event_date);
+		    }
+			    
+			model.addAttribute("event_list", event_list);
+			model.addAttribute("nowpage", page);
+			model.addAttribute("pagination", pagination);
+				 
+			return "/admin_eventList";
+		}
+		
+		//관리자 - 이벤트 등록 페이지
+		@RequestMapping(value="/admin_eventInsert", method=RequestMethod.GET)
+		public String admin_eventInsert(ModelMap model) throws Exception {
+				
+			return "/admin_eventInsert";
+		}
+		
+		//이벤트 등록(post)
+		@ResponseBody
+		@RequestMapping(value="/eventAdd", method=RequestMethod.POST)
+		public String admin_event_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute EventVO eventvo, ModelMap model,@RequestAttribute List<MultipartFile> event_file) throws Exception {
+			
+			MultipartFile eventPoster = multipartRequest.getFile("thumbnail_file");
+			System.out.println(eventPoster);
+			
+			if(eventPoster.getOriginalFilename() != "") {
+				String filename = s3Service.upload_Eventposter(eventPoster);
+				System.out.println("s3 insert ok => "+filename);
+				eventvo.setEvent_poster(filename);
+			}
+			adminService.insertEvent(eventvo);
+			
+			int event_id = adminService.get_event_Id(eventvo.getId());
+		    
+		    Calendar cal = Calendar.getInstance();
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+		    String time = dateFormat.format(cal.getTime());
+		    
+		    if(event_file != null) {
+		    	List<String> filenames = s3Service.upload_event(event_file);
+				for(String name : filenames) {
+					EventFileVo eventFileVo = new EventFileVo();
+					eventFileVo.setEvent_id(event_id);
+					eventFileVo.setFile_name(name);
+					adminService.insertEventFile(eventFileVo);
+				}
+			}
+		    
+			return "/admin_eventList";
+		}	
+		
+		//박물관 이벤트 조회_관리자
+		@RequestMapping(value="/admin_eventDetail", method=RequestMethod.GET)
+		public ModelAndView eventDetail(@RequestParam("id") int event_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			EventVO detailVo = adminService.viewEventDetail(event_id);
+				
+			List<EventFileVo> eventFileList = adminService.viewEventFileDetail(event_id);
+			String event_date = detailVo.getCreate_date();
+		   	event_date = event_date.substring(0, 4) + "." + event_date.substring(5, 7) +"." + event_date.substring(8, 10);
+		   	detailVo.setCreate_date(event_date);
+		    	
+		   	if(detailVo.getEvent_link1() != null) {
+		   		mav.addObject("event_link1", detailVo.getEvent_link1());
+		   	}
+		   	if(detailVo.getEvent_link2() != null) {
+		   		mav.addObject("event_link2", detailVo.getEvent_link2());
+		   	}
+		    	
+			mav.addObject("event", detailVo);
+			mav.addObject("eventFileList", eventFileList);
+			mav.setViewName("admin_eventDetail");
+			return mav;
+		}
+			
+		//박물관 이벤트 파일 다운로드
+		@RequestMapping({"/event_download"})
+		@ResponseBody
+		public ResponseEntity<byte[]> event_download(@RequestParam String filename) throws IOException {
+			return s3Service.getObject_event(filename);
+		}
+			
+		//박물관 이벤트 수정 페이지
+		@RequestMapping(value="/admin_event_update", method=RequestMethod.GET)
+		public ModelAndView admin_event_update(@RequestParam("id") int event_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			EventVO detailVo = adminService.viewEventDetail(event_id);
+			
+			List<EventFileVo> eventFileList = adminService.viewEventFileDetail(event_id);
+			
+			mav.addObject("event", detailVo);
+			mav.addObject("eventFileList", eventFileList);
+
+			mav.setViewName("admin_eventUpdate");
+			return mav;
+		}
+			
+		//박물관 이벤트 수정
+		@ResponseBody
+		@RequestMapping(value="/eventUpdate", method=RequestMethod.POST)
+		public String eventUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute EventVO eventVo, @RequestAttribute("event_file") List<MultipartFile> event_file) throws Exception{
+				
+			String oldFilename = adminService.getOldEventPoster(eventVo.getId());
+			//지울 파일 리스트
+			String[] deleteFileNameList = multipartRequest.getParameterValues("deleteFileNameList");
+			String[] deleteFileNameList_thumbnail = multipartRequest.getParameterValues("deleteFileNameList_thumbnail");
+			System.out.println("deletefile = "+deleteFileNameList);
+				
+			//수정 시 지운파일 삭제
+			if(deleteFileNameList != null) {
+				for( String name : deleteFileNameList) {
+					s3Service.delete_s3Event(name);
+					adminService.deleteEventFile(eventVo.getId(), name);
+					System.out.println("deletefile = "+name);
+				}
+			}
+				
+			if(deleteFileNameList_thumbnail != null) {
+				for( String name : deleteFileNameList_thumbnail ) {
+					s3Service.delete_s3Event(name);
+				}
+			}
+				
+			MultipartFile eventPoster = multipartRequest.getFile("thumbnail_file");
+			if(eventPoster.getOriginalFilename() != "") {
+				String filename = s3Service.upload_Eventposter(eventPoster);
+				System.out.println("s3 insert ok => "+filename);
+				eventVo.setEvent_poster(filename);
+			}else {
+				eventVo.setEvent_poster(oldFilename);
+			}
+				
+			//행사 내용 수정
+			adminService.updateEvent(eventVo);
+					
+			//수정 시 추가한 파일 추가
+			if(event_file != null) {
+				List<String> filenames = s3Service.upload_event(event_file);
+				for(String name : filenames) {
+					EventFileVo eventFileVo = new EventFileVo();
+					eventFileVo.setEvent_id(eventVo.getId());
+					eventFileVo.setFile_name(name);
+					adminService.insertEventFile(eventFileVo);
+				}
+			}
+					
+			return "admin_eventDetail?id="+eventVo.getId();
+		}
+			
+		//박물관 이벤트 삭제
+		@ResponseBody
+		@RequestMapping(value = "event_delete", method = RequestMethod.POST)
+		public String event_delete(HttpServletRequest request, ModelMap modelMap,
+									@RequestParam(value = "check[]", defaultValue = "") List<String> check) {
+
+			int cnt = 0;
+
+			for (String c : check) {
+				adminService.event_delete(c);
+				String[] deleteFileNameList = adminService.getEventFile(c);
+					
+				if(deleteFileNameList != null) {
+					for( String name : deleteFileNameList ) {
+						s3Service.delete_s3Event(name);
+					}
+					adminService.eventFile_delete(c);
+				}
+			}
+			return String.valueOf(cnt);
+		}
+		
 }

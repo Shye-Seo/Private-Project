@@ -274,7 +274,34 @@
 			</div>
 		</div>
 	</form>
+	
+				<!-- 예약신청 완료 모달 -->
+                <div id="res_modal">
+				    <div class="res_modal_content">
+				        <div id="res_modal_content_wrap">
+					        <img src="/imgs/reservation_ok_img.svg" id="res_modal_img">
+						    <div id="modal_content_text">
+						    	<p class="res_title">대관예약신청이 완료되었습니다.</p>
+						        <p class="res_detail">접수된 신청서는 담당자 검토 후 연락드립니다.</p>
+						    </div>
+						    <div id="modal_btn_div">
+						    	<button type="button" id="res_modal_ok_btn">확인</button>
+						    </div>
+				        </div>
+				    </div>
+			   		<div class="res_modal_layer"></div>
+				</div>
 <script>
+/* 모달창 띄우기 */
+// 예약완료 모달
+function reservation_ok_modal(){
+	document.getElementById("res_modal").style.display="block";
+}
+document.getElementById("res_modal_ok_btn").onclick = function() {
+    document.getElementById("res_modal").style.display="none";
+    window.location.href="/reservation_facilities";
+}
+
     $(document).ready(function() {
         calendarInit();
     });
@@ -356,7 +383,7 @@
             // 오늘 날짜 표기
             if (today.getMonth() == currentMonth) {
                 todayDate = today.getDate();
-                var currentMonthDate = document.querySelectorAll('.dates .current');
+                var currentMonthDate = document.querySelectorAll('.dates .dayStyle');
                 currentMonthDate[todayDate -1].classList.add('today');
             }
             

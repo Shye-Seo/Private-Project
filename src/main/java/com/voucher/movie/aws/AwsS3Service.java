@@ -96,6 +96,7 @@ public class AwsS3Service {
                 .build();
     }
 
+    //업로드(리스트)------------------------------------------------------
     public List<String> upload_news(List<MultipartFile> multipartFile) {
     	Calendar cal = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
@@ -126,31 +127,6 @@ public class AwsS3Service {
         return fileNameList;
     }
     
-    public String upload_Newsposter(MultipartFile file) {
-    	Calendar cal = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
-        String time = dateFormat.format(cal.getTime());
-        
-        String fileName = time + "-" +file.getOriginalFilename();
-        System.out.println("-----------");
-        System.out.println("오리지날파일명 : " + file.getOriginalFilename());
-        System.out.println("현재파일명 : " + fileName);
-
-        ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setContentLength(file.getSize());
-        objectMetadata.setContentType(file.getContentType());
-
-        try(InputStream inputStream = file.getInputStream()) {
-            s3Client.putObject(new PutObjectRequest(bucket+"/"+newsFolder, fileName, inputStream, objectMetadata)
-                    .withCannedAcl(CannedAccessControlList.PublicRead));
-            //fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
-        } catch(IOException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
-        }
-
-        return fileName;
-		
-	}
     
     public List<String> upload_event(List<MultipartFile> multipartFile) {
     	Calendar cal = Calendar.getInstance();
@@ -272,6 +248,7 @@ public class AwsS3Service {
         return fileNameList;
     }
     
+    //파일 get(상세에서 보기, 업데이트 시 지우기)---------------------------------------------------------
     public ResponseEntity<byte[]> getObject_news(String storedFileName) throws IOException {
         S3Object o = s3Client.getObject(new GetObjectRequest(bucket+"/"+newsFolder, storedFileName));
         S3ObjectInputStream objectInputStream = ((S3Object) o).getObjectContent();
@@ -338,6 +315,7 @@ public class AwsS3Service {
         return new ResponseEntity<>(bytes, httpHeaders, HttpStatus.OK);
     }
     
+    //삭제-------------------------------------
     public void delete_s3News(String fileName) {
     	s3Client.deleteObject(new DeleteObjectRequest(bucket+"/"+newsFolder, fileName));
     }
@@ -358,6 +336,7 @@ public class AwsS3Service {
     	s3Client.deleteObject(new DeleteObjectRequest(bucket+"/"+eduFolder, fileName));
     }
 
+    //팝업 관련------------------------------------------
 	public String upload_PopupImg(MultipartFile file) {
 		Calendar cal = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
@@ -400,6 +379,7 @@ public class AwsS3Service {
 		s3Client.deleteObject(new DeleteObjectRequest(bucket+"/"+popupFolder, fileName));
 	}
 
+	//대관신청서---------------------------------------------------
 	public String upload_applicationFile(MultipartFile file) {
 		Calendar cal = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
@@ -440,6 +420,110 @@ public class AwsS3Service {
 	
 	public void delete_s3Application(String fileName) {
 		s3Client.deleteObject(new DeleteObjectRequest(bucket+"/"+applicationFolder, fileName));
+	}
+
+	//포스터(대표이미지)---------------------------------------
+	public String upload_Newsposter(MultipartFile file) {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+		String time = dateFormat.format(cal.getTime());
+		
+		String fileName = time + "-" +file.getOriginalFilename();
+		System.out.println("-----------");
+		System.out.println("오리지날파일명 : " + file.getOriginalFilename());
+		System.out.println("현재파일명 : " + fileName);
+		
+		ObjectMetadata objectMetadata = new ObjectMetadata();
+		objectMetadata.setContentLength(file.getSize());
+		objectMetadata.setContentType(file.getContentType());
+		
+		try(InputStream inputStream = file.getInputStream()) {
+			s3Client.putObject(new PutObjectRequest(bucket+"/"+newsFolder, fileName, inputStream, objectMetadata)
+					.withCannedAcl(CannedAccessControlList.PublicRead));
+			//fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+		} catch(IOException e) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+		}
+		
+		return fileName;
+		
+	}
+	
+	public String upload_Eventposter(MultipartFile file) {
+		Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        String time = dateFormat.format(cal.getTime());
+        
+        String fileName = time + "-" +file.getOriginalFilename();
+        System.out.println("-----------");
+        System.out.println("오리지날파일명 : " + file.getOriginalFilename());
+        System.out.println("현재파일명 : " + fileName);
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentLength(file.getSize());
+        objectMetadata.setContentType(file.getContentType());
+
+        try(InputStream inputStream = file.getInputStream()) {
+            s3Client.putObject(new PutObjectRequest(bucket+"/"+eventFolder, fileName, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+            //fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+        } catch(IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+        }
+
+        return fileName;
+	}
+	
+    public String upload_Partnerposter(MultipartFile file) {
+    	Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        String time = dateFormat.format(cal.getTime());
+        
+        String fileName = time + "-" +file.getOriginalFilename();
+        System.out.println("-----------");
+        System.out.println("오리지날파일명 : " + file.getOriginalFilename());
+        System.out.println("현재파일명 : " + fileName);
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentLength(file.getSize());
+        objectMetadata.setContentType(file.getContentType());
+
+        try(InputStream inputStream = file.getInputStream()) {
+            s3Client.putObject(new PutObjectRequest(bucket+"/"+partnerFolder, fileName, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+            //fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+        } catch(IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+        }
+
+        return fileName;
+		
+	}
+    
+    public String upload_Eduposter(MultipartFile file) {
+    	Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        String time = dateFormat.format(cal.getTime());
+        
+        String fileName = time + "-" +file.getOriginalFilename();
+        System.out.println("-----------");
+        System.out.println("오리지날파일명 : " + file.getOriginalFilename());
+        System.out.println("현재파일명 : " + fileName);
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentLength(file.getSize());
+        objectMetadata.setContentType(file.getContentType());
+
+        try(InputStream inputStream = file.getInputStream()) {
+            s3Client.putObject(new PutObjectRequest(bucket+"/"+eduFolder, fileName, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+            //fileNameList.add(s3Client.getUrl(bucket, fileName).toString());
+        } catch(IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+        }
+
+        return fileName;
+		
 	}
 
 }

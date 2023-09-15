@@ -37,11 +37,11 @@
 				<!-- 요약내용  -->
 				<div class="detail_summary">
 					<div class="summary_poster">
-						<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${news.news_poster}}" alt="poster_img">
+						<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/event-folder/' +${event.event_poster}}" alt="poster_img">
 					</div>
 					<div class="summary_info">
 						<div class="summary_title">
-							<p>[(${news.news_title})]</p>
+							<p>[(${event.event_title})]</p>
 						</div>
 						<div class="summary_content">
 							<div class="content_left">
@@ -51,14 +51,14 @@
 								<li>문의</li>
 							</div>
 							<div class="content_right">
-								<li>[(${news.news_date})]</li>
-								<li>[(${news.news_place})]</li>
-								<li>[(${news.news_method})]</li>
-								<li>[(${news.news_contact})]</li>
+								<li>[(${event.event_date})]</li>
+								<li>[(${event.event_place})]</li>
+								<li>[(${event.event_method})]</li>
+								<li>[(${event.event_contact})]</li>
 							</div>
 						</div>
 						<div class="screening_comment">
-							<div th:if="${news.news_screeningCheck != 0}">
+							<div th:if="${event.event_screeningCheck != 0}">
 								상영은 정시에 시작되며 시작 10분 후에는 입장이 제한됩니다. <br>
 								영상홀 내부 음식물 반입은 금지입니다. <br>
 								주차 50% 할인권을 제공합니다. <br>
@@ -71,26 +71,26 @@
 				<div class="detail_content">
 					<div class="bottom_wrap">
 						<div class="content_area">
-							<textarea name="news_content" id="news_content" spellcheck="false" disabled>[(${news.news_content})]</textarea>
+							<textarea name="event_content" id="news_content" spellcheck="false" disabled>[(${event.event_content})]</textarea>
 						</div>
 						<div class="poster_area">
-							<img id="poster_big" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${news.news_poster}}" alt="poster_img">
+							<img id="poster_big" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/event-folder/' +${event.event_poster}}" alt="poster_img">
 						</div>
-						<div class="image_area" th:if="${newsFileList != ''}">
-							<li th:each="img : ${newsFileList}" class="img_div">
-								<img id="img_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${img.file_name}}" alt="img_file" th:if="${#strings.substringAfter(img.file_name, '.')} != 'mp4'">
-								<video id="video_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${img.file_name}}" alt="video_file" controls th:if="${#strings.substringAfter(img.file_name, '.')} == 'mp4'"></video>
+						<div class="image_area" th:if="${eventFileList != ''}">
+							<li th:each="img : ${eventFileList}" class="img_div">
+								<img id="img_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/event-folder/' +${img.file_name}}" alt="img_file" th:if="${#strings.substringAfter(img.file_name, '.')} != 'mp4'">
+								<video id="video_file" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/event-folder/' +${img.file_name}}" alt="video_file" controls th:if="${#strings.substringAfter(img.file_name, '.')} == 'mp4'"></video>
 							</li>
 						</div>
-						<div class="video_area" th:if="${news.news_link1 != '' || news.news_link2 != ''}">
-							<div th:if="${news.news_link1 != ''}" id="video">[(${news.news_link1})]</div>
-							<div th:if="${news.news_link2 != ''}" id="video">[(${news.news_link2})]</div>
+						<div class="video_area" th:if="${event.event_link1 != '' || event.event_link2 != ''}">
+							<div th:if="${event.event_link1 != ''}" id="video">[(${event.event_link1})]</div>
+							<div th:if="${event.event_link2 != ''}" id="video">[(${event.event_link2})]</div>
 						</div>
 					</div>
 				</div>
 				<div class="button_area">
-					<input type="button" class="list_btn" value="목록" onclick="location.href='admin_newsList'">
-					<button type="button" class="update_btn" th:onclick="|location.href='@{admin_news_update(id=${news.id})}'|">수정</button> 
+					<input type="button" class="list_btn" value="목록" onclick="location.href='admin_eventList'">
+					<button type="button" class="update_btn" th:onclick="|location.href='@{admin_event_update(id=${event.id})}'|">수정</button> 
 				</div>
 			</div>
 		</div>

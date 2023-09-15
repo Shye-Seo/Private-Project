@@ -1,5 +1,15 @@
 $(function () {
 
+            $("#input_file").bind('change', function() {
+                selectFile(this.files);
+
+                //파일 5개 이상일 시 버튼 비활성화
+                if($('#file_names').children().length >=5){
+                    $('#input_file').attr("disabled","disabled");
+                    $('.area3 .files_label').css({'background-color':'#eee', 'cursor':'unset'});
+                }
+            });
+            
             $("#thumbnail").bind('change', function() {
                 selectFile_thumbnail(this.files);
 
@@ -11,7 +21,7 @@ $(function () {
             });
 
             //필수값 체크
-            $('#submit_bt').click(function(){
+            $('#submit_btn').click(function(){
                 let result = true;
                 $('.required').each(function(){
                     if($(this).val() == ""){
@@ -21,64 +31,39 @@ $(function () {
                     }
                 })
                 if($('#file_names_thumbnail').children().length < 1){
-					alert('팝업이미지를 첨부해주세요.');
+					alert('대표이미지를 첨부해주세요.');
                     return false;
 				}else if($('#file_names_thumbnail').children().length > 1){
-					alert('팝업이미지는 하나만 첨부해주세요.');
+					alert('대표이미지는 하나만 첨부해주세요.');
                     return false;
+				}else if(!$('input[name=event_screeningCheck]').is(":checked")){
+					alert('영화상영여부를 선택해주세요.');
+					return false;
 				}
-				// 날짜 유효성 검사
-				// 시작일 입력값 가져오기
-				let startDate = $('#startdate_insert').val();
-        		let endDate = $('#enddate_insert').val();    
-		        if (!startDate || !endDate) {
-		            alert("시작 날짜와 종료 날짜를 모두 입력해주세요.");
-		            return false;
-		        }
-		        let makerStartDate = new Date(startDate);
-		        let makerEndDate = new Date(endDate);
-		
-		        if (makerStartDate > makerEndDate) {
-		            alert("끝 날짜가 시작 날짜보다 빠릅니다. 올바른 날짜를 선택해주세요.");
-		            return false;
-		        }
                 if(!result) return false;
-                submitDate('/popupAdd');
+                submitDate('/eventAdd');
             })
-            $('#update_bt').click(function(){
+            $('#update_btn').click(function(){
                 let result = true;
                 $('.required').each(function(){
                     if($(this).val() == ""){
                         $(this).focus();
-		                debugger;
                         result = false;
                         return false;
                     }
                 })
                 if($('#file_names_thumbnail').children().length < 1){
-					alert('팝업이미지를 첨부해주세요.');
+					alert('대표이미지를 첨부해주세요.');
                     return false;
 				}else if($('#file_names_thumbnail').children().length > 1){
-					alert('팝업이미지는 하나만 첨부해주세요.');
+					alert('대표이미지는 하나만 첨부해주세요.');
                     return false;
+				}else if(!$('input[name=event_screeningCheck]').is(":checked")){
+					alert('영화상영여부를 선택해주세요.');
+					return false;
 				}
-				// 날짜 유효성 검사
-				// 시작일 입력값 가져오기
-				let startDate = $('#startdate_insert').val();
-        		let endDate = $('#enddate_insert').val();    
-		        if (!startDate || !endDate) {
-		            alert("시작 날짜와 종료 날짜를 모두 입력해주세요.");
-		            return false;
-		        }
-		        let makerStartDate = new Date(startDate);
-		        let makerEndDate = new Date(endDate);
-		
-		        if (makerStartDate > makerEndDate) {
-		            alert("끝 날짜가 시작 날짜보다 빠릅니다. 올바른 날짜를 선택해주세요.");
-		            return false;
-		        }
                 if(!result) return false;
-                submitDate('/popupUpdate');
+                submitDate('/eventUpdate');
             })
             
         });
@@ -88,13 +73,21 @@ $(function () {
         function submitDate(actionUrl){
             if (confirm("등록 하시겠습니까?") == true){
 
+                for(let i = 0; i < deleteFileNameList.length; i++){
+                    $('form[name="eventAddForm"]').append("<input type='hidden' name='deleteFileNameList' value='"+deleteFileNameList[i]+"'/>")
+                }
                 for(let i = 0; i < deleteFileNameList_thumbnail.length; i++){
-                    $('form[name="popupAddForm"]').append("<input type='hidden' name='deleteFileNameList_thumbnail' value='"+deleteFileNameList_thumbnail[i]+"'/>")
+                    $('form[name="eventAddForm"]').append("<input type='hidden' name='deleteFileNameList_thumbnail' value='"+deleteFileNameList_thumbnail[i]+"'/>")
                 }
 
                 // var uploadFileList = Object.keys(fileList);
-                var form = $('form[name="popupAddForm"]');
+                var form = $('form[name="eventAddForm"]');
                 var formData = new FormData(form[0]);
+                for (var i = 0; i < fileList.length; i++) {
+                    formData.append('event_file', fileList[i]);
+                    console.log(formData.get('event_file')) 
+                    console.log(fileList[i]) 
+                }
 
                 $.ajax({
                     url : actionUrl,
@@ -113,7 +106,24 @@ $(function () {
                 }
         }
 
-            //수정 시 지울 파일 목록
+           // 파일 리스트 번호
+            var fileIndex = 0;
+            // 등록할 전체 파일 사이즈
+            var totalFileSize = 0;
+            // 파일 리스트
+            var fileList = new Array();
+            // 파일 사이즈 리스트
+            var fileSizeList = new Array();
+            // 등록 가능한 파일 사이즈 MB
+            //    var uploadSize = 5;
+            // 등록 가능한 총 파일 사이즈 MB
+            //    var maxUploadSize = 500;
+            
+            var maxFileNum = 5;
+            // 파일 최대갯수
+
+            //행사수정 시 지울 파일 목록
+            let deleteFileNameList = new Array();
             let deleteFileNameList_thumbnail = new Array();
 
             var files = new Array();
@@ -128,10 +138,68 @@ $(function () {
             // 파일 사이즈 리스트
             var fileSizeList_thumbnail = 1;
 
+        // 파일 선택시
+        function selectFile(fileObject) {
+           
+            files = $('#input_file')[0].files;
+            // 다중파일 등록
+            if (files != null) {
+           
+           
+           for (var i = 0; i < files.length; i++) {
+               // 파일 이름
+               var fileName = files[i].name;
+               var fileNameArr = fileName.split("\.");
+               // 확장자
+               var ext = fileNameArr[fileNameArr.length - 1];
+               
+               var special_pattern = /[\{\}\[\]|<>\"]/gi;
+
+               if(special_pattern.test($("input[name='file']").val())){
+                   alert('파일명에 특수문자를 제거해주세요.');
+                   return false;
+               }
+               
+               var fileSize = files[i].size; // 파일 사이즈(단위 :byte)
+               console.log("fileSize="+fileSize);
+               if (fileSize <= 0) {
+                   console.log("0kb file return");
+                   return;
+               }
+               
+               var fileSizeKb = fileSize / 1024; // 파일 사이즈(단위 :kb)
+               var fileSizeMb = fileSizeKb / 1024;    // 파일 사이즈(단위 :Mb)
+               
+               var fileSizeStr = "";
+               if ((1024*1024) <= fileSize) {    // 파일 용량이 1메가 이상인 경우 
+                   console.log("fileSizeMb="+fileSizeMb.toFixed(2));
+                   fileSizeStr = fileSizeMb.toFixed(2) + " Mb";
+               } else if ((1024) <= fileSize) {
+                   console.log("fileSizeKb="+parseInt(fileSizeKb));
+                   fileSizeStr = parseInt(fileSizeKb) + " kb";
+               } else {
+                   console.log("fileSize="+parseInt(fileSize));
+                   fileSizeStr = parseInt(fileSize) + " byte";
+               }
+				
+                   // 전체 파일 사이즈
+                   totalFileSize += fileSizeMb;
+                   // 파일 배열에 넣기
+                   fileList[fileIndex] = files[i];
+                   // 파일 사이즈 배열에 넣기
+                   fileSizeList[fileIndex] = fileSizeMb;
+                   // 업로드 파일 목록 생성
+                   addFileList(fileIndex, fileName, fileSizeStr);
+                   // 파일 번호 증가
+                   fileIndex++;
+           }
+       } else {
+           alert("ERROR");
+       }
+   }
    
-   		// 파일 선택시
+   // 파일 선택시
         function selectFile_thumbnail(fileObject) {
-            //}
             var thumbnail_file = $('#thumbnail')[0].files;
             // 다중파일 등록
             if (thumbnail_file != null) {
@@ -189,6 +257,19 @@ $(function () {
    }
 
    // 업로드 파일 목록 생성
+   function addFileList(fIndex, fileName, fileSizeStr) {
+	   var html = "";
+       html += "<div id='fileTr_" + fIndex + "'>";
+       html += "    <div class='file_con'>";
+       html += "		<div class='filename'>"+fileName + "</div>" 
+               + "<img src='/imgs/close_btn_black.svg' href='#' onclick='deleteFile(" + fIndex + "); return false;'/>"
+       html += "    </div>"
+       html += "</div>"
+       
+       $('#file_names').append(html);
+   }
+   
+   // 업로드 파일 목록 생성
    function addFileList_thumbnail(fIndex_thumbnail, fileName_thumbnail, fileSizeStr_thumbnail) {
 	   var html = "";
        html += "<div id='fileTrThumb_" + fIndex_thumbnail + "'>";
@@ -200,9 +281,32 @@ $(function () {
        
        $('#file_names_thumbnail').empty();
        $('#file_names_thumbnail').append(html);
-       $('input[name=file_name]').val(fileName_thumbnail);
+       $('input[name=event_poster]').val(fileName_thumbnail);
    }
    
+   // 업로드 파일 삭제
+   function deleteFile(fIndex) {
+       console.log("deleteFile.fIndex=" + fIndex);
+       // 전체 파일 사이즈 수정
+       totalFileSize -= fileSizeList[fIndex];
+       // 파일 배열에서 삭제
+       delete fileList[fIndex];
+       // 파일 사이즈 배열 삭제
+       delete fileSizeList[fIndex];
+		
+       // 업로드 파일 테이블 목록에서 삭제
+       $("#fileTr_" + fIndex).remove();
+       
+       if($('#file_names').children().length < 5){
+	       if($('#input_file').attr("disabled")=='disabled'){
+	        $('#input_file').removeAttr("disabled");
+	        $('.area3 .files_label').css({'background-color':'#fff', 'cursor':'pointer'});
+	       }
+       }
+
+        console.log("totalFileSize="+totalFileSize);
+    }
+    
     // 업로드 파일 삭제
    function deleteFile_thumbnail(fIndex_thumbnail) {
        console.log("deleteFile.fIndex=" + fIndex_thumbnail);
@@ -216,12 +320,35 @@ $(function () {
        // 업로드 파일 테이블 목록에서 삭제
        $("#fileTrThumb_" + fIndex_thumbnail).remove();
        
-        console.log("totalFileSize="+totalFileSize_thumbnail);
+       if($('#thumbnail').attr("disabled")=='disabled'){
+        $('#thumbnail').removeAttr("disabled");
+        $('.area3 thumbnail_label').css({'background-color':'#fff', 'cursor':'pointer'});
+       }
+
+        $('input[name=event_poster]').val('');
+	    $('input[name=thumbnail_file]').val('');
     }
 
+    function deleteFile_for_update(fIndex, fileName){
+        $("#fileTr_" + fIndex).remove();
+        deleteFileNameList.push(fileName);
+		
+		if($('#file_names').children().length < 5){
+	        if($('#input_file').attr("disabled")=='disabled'){
+	            $('#input_file').removeAttr("disabled");
+	            $('.area3 .files_label').css({'background-color':'#fff', 'cursor':'pointer'});
+	        }
+        }
+    }
+    
     function deleteFile_for_update_thumbnail(fIndex_thumbnail, fileName_thumbnail){
         $("#fileTrThumb_" + fIndex_thumbnail).remove();
         deleteFileNameList_thumbnail.push(fileName_thumbnail);
+
+        if($('#thumbnail').attr("disabled")=='disabled'){
+        $('#thumbnail').removeAttr("disabled");
+        $('.area3 thumbnail_label').css({'background-color':'#fff', 'cursor':'pointer'});
+       }
     }
    
    function deleteAll() {
@@ -254,3 +381,6 @@ $(function () {
             }
         }
     }
+/**
+ * 
+ */

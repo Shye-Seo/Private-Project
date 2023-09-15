@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.voucher.movie.admin.AdminVO;
 import com.voucher.movie.admin.PopupVO;
+import com.voucher.movie.board.EventFileVo;
+import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.reservation.ClosedVO;
@@ -72,8 +74,7 @@ public interface AdminDao {
 	@Select("select * from reservation_group where res_visitDate = #{date} and res_status = 1")
 	List<GroupVO> getReservation_list(String date);//해당 날짜의 예약확정 리스트 get
 
-	// ----------------- 게시판 관련 -------------
-	
+	// ----------------- 박물관 소식 관련 -------------
 	@Select("select count(*) from museum_news")
 	int fintAllNews(); //박물관 소식 전체 count
 	
@@ -164,4 +165,48 @@ public interface AdminDao {
 	@Insert("insert into reservation_closed (closed_date, setting_status, create_date) value (#{date_str}, 1, sysdate())")
 	boolean closed_scheduler(String date_str); //월요일 휴관설정
 
+	// --------------- 박물관 이벤트 관련 --------------
+	@Select("select count(*) from museum_event")
+	int findAllEvents(); //박물관 이벤트 전체 count
+	
+	@Select("select * from museum_event order by id desc limit #{startIndex}, #{pageSize}")
+	List<EventVO> findEventPaging(int startIndex, int pageSize);
+
+	@Insert("insert into museum_event (event_title, event_date, event_place, event_method, event_contact, "
+			+ "event_content, event_screeningCheck, event_poster, event_link1, event_link2,  create_date)"
+			+ "values (#{event_title}, #{event_date}, #{event_place}, #{event_method}, #{event_contact}, "
+			+ "#{event_content}, #{event_screeningCheck}, #{event_poster}, #{event_link1}, #{event_link2}, sysdate())")
+	boolean insertEvent(EventVO eventvo); //박물관 이벤트 등록
+
+	@Select("select id from museum_event order by id desc limit 1")
+	int get_event_Id(int id);
+
+	@Insert("insert into event_files (event_id, file_name, create_date) value (#{event_id}, #{file_name}, sysdate())")
+	boolean insertEventFile(EventFileVo eventFileVo); //박물관 이벤트 파일 추가
+
+	@Select("select * from museum_event where id = #{event_id}")
+	EventVO viewEventDetail(int event_id); //박물관 이벤트 상세-관리자
+
+	@Select("select * from event_files where event_id = #{event_id}")
+	List<EventFileVo> viewEventFileDetail(int event_id);
+
+	@Update("update museum_event set event_title = #{event_title}, event_date = #{event_date}, event_place = #{event_place},"
+			+ " event_method = #{event_method}, event_contact = #{event_contact}, event_content = #{event_content}, event_screeningCheck = #{event_screeningCheck},"
+			+ " event_poster = #{event_poster}, event_link1 = #{event_link1}, event_link2 = #{event_link2}, update_date = sysdate() where id = #{id}")
+	boolean updateEvent(EventVO eventVo);
+
+	@Delete("delete from event_files where event_id = #{event_id} and file_name = #{file_name}")
+	boolean deleteEventFile(int event_id, String file_name);
+
+	@Delete("delete from museum_event where id = #{c}")
+	boolean event_delete(String c); //박물관 이벤트 삭제
+
+	@Delete("delete from event_files where event_id = #{c}")
+	boolean eventFile_delete(String c);
+
+	@Select("select * from event_files where event_id = #{c}")
+	String[] getEventFile(String c);
+
+	@Select("select event_poster from museum_event where id = #{id}")
+	String getOldEventPoster(int id);
 }
