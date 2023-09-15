@@ -164,6 +164,12 @@ p.total_red {
     margin-top: 8px;
 }
 
+/*--------박물관 이벤트-----------*/
+/*--포스터형식 리스트--*/
+.event_poster {
+    height: 544px;
+}
+
 /*------페이징------*/
 .null, .notnull{
     width: 100%;

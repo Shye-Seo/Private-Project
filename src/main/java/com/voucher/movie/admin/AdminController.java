@@ -29,12 +29,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.voucher.movie.ScriptUtils;
 import com.voucher.movie.WebService;
 import com.voucher.movie.aws.AwsS3Service;
+import com.voucher.movie.board.EduFileVo;
 import com.voucher.movie.board.EduVO;
 import com.voucher.movie.board.EventFileVo;
 import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
 import com.voucher.movie.board.NoticeVO;
+import com.voucher.movie.board.PartnerFileVo;
 import com.voucher.movie.board.PartnerVO;
 import com.voucher.movie.config.PagingVO;
 import com.voucher.movie.reservation.ClosedVO;
@@ -869,6 +871,378 @@ public class AdminController {
 						s3Service.delete_s3Event(name);
 					}
 					adminService.eventFile_delete(c);
+				}
+			}
+			return String.valueOf(cnt);
+		}
+		
+		//관리자 - 제휴 리스트
+		@RequestMapping(value="/admin_partnerList", method=RequestMethod.GET)
+		public String admin_partnerList(@ModelAttribute PartnerVO partnerVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+				
+			// 총 게시물 수 
+		    int totalListCnt = adminService.findAllPartners();
+
+		    // 생성인자로  총 게시물 수, 현재 페이지를 전달
+		    PagingVO pagination = new PagingVO(totalListCnt, page);
+
+		    // DB select start index
+		    int startIndex = pagination.getStartIndex();
+		    // 페이지 당 보여지는 게시글의 최대 개수
+		    int pageSize = pagination.getPageSize();
+
+		    partner_list = adminService.findPartnerPaging(startIndex, pageSize);
+		    
+		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    
+		    for(PartnerVO partner : partner_list) {
+		    	String partner_date = partner.getCreate_date();
+		    	partner_date = partner_date.substring(0, 4) + "." + partner_date.substring(5, 7) +"." + partner_date.substring(8, 10);
+		    	partner.setCreate_date(partner_date);
+		    }
+			    
+			model.addAttribute("partner_list", partner_list);
+			model.addAttribute("nowpage", page);
+			model.addAttribute("pagination", pagination);
+				 
+			return "/admin_partnerList";
+		}
+		
+		//관리자 - 제휴안내 등록 페이지
+		@RequestMapping(value="/admin_partnerInsert", method=RequestMethod.GET)
+		public String admin_partnerInsert(ModelMap model) throws Exception {
+				
+			return "/admin_partnerInsert";
+		}
+		
+		//제휴안내 등록(post)
+		@ResponseBody
+		@RequestMapping(value="/partnerAdd", method=RequestMethod.POST)
+		public String admin_partner_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute PartnerVO partnervo, ModelMap model,@RequestAttribute List<MultipartFile> partner_file) throws Exception {
+			
+			MultipartFile partnerPoster = multipartRequest.getFile("thumbnail_file");
+			System.out.println(partnerPoster);
+			
+			if(partnerPoster.getOriginalFilename() != "") {
+				String filename = s3Service.upload_Partnerposter(partnerPoster);
+				System.out.println("s3 insert ok => "+filename);
+				partnervo.setPartner_poster(filename);
+			}
+			adminService.insertPartner(partnervo);
+			
+			int partner_id = adminService.get_partner_Id(partnervo.getId());
+		    
+		    Calendar cal = Calendar.getInstance();
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+		    String time = dateFormat.format(cal.getTime());
+		    
+		    if(partner_file != null) {
+		    	List<String> filenames = s3Service.upload_partner(partner_file);
+				for(String name : filenames) {
+					PartnerFileVo partnerFileVo = new PartnerFileVo();
+					partnerFileVo.setPartner_id(partner_id);
+					partnerFileVo.setFile_name(name);
+					adminService.insertPartnerFile(partnerFileVo);
+				}
+			}
+		    
+			return "/admin_partnerList";
+		}	
+		
+		//제휴안내 조회_관리자
+		@RequestMapping(value="/admin_partnerDetail", method=RequestMethod.GET)
+		public ModelAndView partnerDetail(@RequestParam("id") int partner_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			PartnerVO detailVo = adminService.viewPartnerDetail(partner_id);
+				
+			List<PartnerFileVo> partnerFileList = adminService.viewPartnerFileDetail(partner_id);
+			String partner_date = detailVo.getCreate_date();
+			partner_date = partner_date.substring(0, 4) + "." + partner_date.substring(5, 7) +"." + partner_date.substring(8, 10);
+		   	detailVo.setCreate_date(partner_date);
+		    	
+			mav.addObject("partner", detailVo);
+			mav.addObject("partnerFileList", partnerFileList);
+			mav.setViewName("admin_partnerDetail");
+			return mav;
+		}
+			
+		//제휴안내 파일 다운로드
+		@RequestMapping({"/partner_download"})
+		@ResponseBody
+		public ResponseEntity<byte[]> partner_download(@RequestParam String filename) throws IOException {
+			return s3Service.getObject_partner(filename);
+		}
+			
+		//제휴안내 수정 페이지
+		@RequestMapping(value="/admin_partner_update", method=RequestMethod.GET)
+		public ModelAndView admin_partner_update(@RequestParam("id") int partner_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			PartnerVO detailVo = adminService.viewPartnerDetail(partner_id);
+			
+			List<PartnerFileVo> partnerFileList = adminService.viewPartnerFileDetail(partner_id);
+			
+			mav.addObject("partner", detailVo);
+			mav.addObject("partnerFileList", partnerFileList);
+
+			mav.setViewName("admin_partnerUpdate");
+			return mav;
+		}
+			
+		//제휴안내 수정
+		@ResponseBody
+		@RequestMapping(value="/partnerUpdate", method=RequestMethod.POST)
+		public String partnerUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute PartnerVO partnerVo, @RequestAttribute("partner_file") List<MultipartFile> partner_file) throws Exception{
+				
+			String oldFilename = adminService.getOldPartnerPoster(partnerVo.getId());
+			//지울 파일 리스트
+			String[] deleteFileNameList = multipartRequest.getParameterValues("deleteFileNameList");
+			String[] deleteFileNameList_thumbnail = multipartRequest.getParameterValues("deleteFileNameList_thumbnail");
+			System.out.println("deletefile = "+deleteFileNameList);
+				
+			//수정 시 지운파일 삭제
+			if(deleteFileNameList != null) {
+				for( String name : deleteFileNameList) {
+					s3Service.delete_s3Partner(name);
+					adminService.deletePartnerFile(partnerVo.getId(), name);
+					System.out.println("deletefile = "+name);
+				}
+			}
+				
+			if(deleteFileNameList_thumbnail != null) {
+				for( String name : deleteFileNameList_thumbnail ) {
+					s3Service.delete_s3Partner(name);
+				}
+			}
+				
+			MultipartFile partnerPoster = multipartRequest.getFile("thumbnail_file");
+			if(partnerPoster.getOriginalFilename() != "") {
+				String filename = s3Service.upload_Partnerposter(partnerPoster);
+				System.out.println("s3 insert ok => "+filename);
+				partnerVo.setPartner_poster(filename);
+			}else {
+				partnerVo.setPartner_poster(oldFilename);
+			}
+				
+			//행사 내용 수정
+			adminService.updatePartner(partnerVo);
+					
+			//수정 시 추가한 파일 추가
+			if(partner_file != null) {
+				List<String> filenames = s3Service.upload_partner(partner_file);
+				for(String name : filenames) {
+					PartnerFileVo partnerFileVo = new PartnerFileVo();
+					partnerFileVo.setPartner_id(partnerVo.getId());
+					partnerFileVo.setFile_name(name);
+					adminService.insertPartnerFile(partnerFileVo);
+				}
+			}
+					
+			return "admin_partnerDetail?id="+partnerVo.getId();
+		}
+			
+		//제휴안내 삭제
+		@ResponseBody
+		@RequestMapping(value = "partner_delete", method = RequestMethod.POST)
+		public String partner_delete(HttpServletRequest request, ModelMap modelMap,
+									@RequestParam(value = "check[]", defaultValue = "") List<String> check) {
+
+			int cnt = 0;
+
+			for (String c : check) {
+				adminService.partner_delete(c);
+				String[] deleteFileNameList = adminService.getPartnerFile(c);
+					
+				if(deleteFileNameList != null) {
+					for( String name : deleteFileNameList ) {
+						s3Service.delete_s3Partner(name);
+					}
+					adminService.partnerFile_delete(c);
+				}
+			}
+			return String.valueOf(cnt);
+		}
+		
+		//관리자 - 지난교육 리스트
+		@RequestMapping(value="/admin_eduList", method=RequestMethod.GET)
+		public String admin_eduList(@ModelAttribute EduVO eduVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+				
+			// 총 게시물 수 
+		    int totalListCnt = adminService.findAllEdu();
+
+		    // 생성인자로  총 게시물 수, 현재 페이지를 전달
+		    PagingVO pagination = new PagingVO(totalListCnt, page);
+
+		    // DB select start index
+		    int startIndex = pagination.getStartIndex();
+		    // 페이지 당 보여지는 게시글의 최대 개수
+		    int pageSize = pagination.getPageSize();
+
+		    edu_list = adminService.findEduPaging(startIndex, pageSize);
+		    
+		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    
+		    for(EduVO edu : edu_list) {
+		    	String edu_date = edu.getCreate_date();
+		    	edu_date = edu_date.substring(0, 4) + "." + edu_date.substring(5, 7) +"." + edu_date.substring(8, 10);
+		    	edu.setCreate_date(edu_date);
+		    }
+			    
+			model.addAttribute("edu_list", edu_list);
+			model.addAttribute("nowpage", page);
+			model.addAttribute("pagination", pagination);
+				 
+			return "/admin_eduList";
+		}
+		
+		//관리자 - 지난교육 등록 페이지
+		@RequestMapping(value="/admin_eduInsert", method=RequestMethod.GET)
+		public String admin_eduInsert(ModelMap model) throws Exception {
+				
+			return "/admin_eduInsert";
+		}
+		
+		//지난교육 등록(post)
+		@ResponseBody
+		@RequestMapping(value="/eduAdd", method=RequestMethod.POST)
+		public String admin_edu_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute EduVO eduvo, ModelMap model,@RequestAttribute List<MultipartFile> edu_file) throws Exception {
+			
+			MultipartFile eduPoster = multipartRequest.getFile("thumbnail_file");
+			System.out.println(eduPoster);
+			
+			if(eduPoster.getOriginalFilename() != "") {
+				String filename = s3Service.upload_Eduposter(eduPoster);
+				System.out.println("s3 insert ok => "+filename);
+				eduvo.setEdu_poster(filename);
+			}
+			adminService.insertEdu(eduvo);
+			
+			int edu_id = adminService.get_edu_Id(eduvo.getId());
+		    
+		    Calendar cal = Calendar.getInstance();
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+		    String time = dateFormat.format(cal.getTime());
+		    
+		    if(edu_file != null) {
+		    	List<String> filenames = s3Service.upload_edu(edu_file);
+				for(String name : filenames) {
+					EduFileVo eduFileVo = new EduFileVo();
+					eduFileVo.setEdu_id(edu_id);
+					eduFileVo.setFile_name(name);
+					adminService.insertEduFile(eduFileVo);
+				}
+			}
+		    
+			return "/admin_eduList";
+		}	
+		
+		//지난교육 조회_관리자
+		@RequestMapping(value="/admin_eduDetail", method=RequestMethod.GET)
+		public ModelAndView eduDetail(@RequestParam("id") int edu_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			EduVO detailVo = adminService.viewEduDetail(edu_id);
+				
+			List<EduFileVo> eduFileList = adminService.viewEduFileDetail(edu_id);
+			String edu_date = detailVo.getCreate_date();
+			edu_date = edu_date.substring(0, 4) + "." + edu_date.substring(5, 7) +"." + edu_date.substring(8, 10);
+		   	detailVo.setCreate_date(edu_date);
+		    	
+			mav.addObject("edu", detailVo);
+			mav.addObject("eduFileList", eduFileList);
+			mav.setViewName("admin_eduDetail");
+			return mav;
+		}
+			
+		//지난교육 파일 다운로드
+		@RequestMapping({"/edu_download"})
+		@ResponseBody
+		public ResponseEntity<byte[]> edu_download(@RequestParam String filename) throws IOException {
+			return s3Service.getObject_edu(filename);
+		}
+			
+		//지난교육 수정 페이지
+		@RequestMapping(value="/admin_edu_update", method=RequestMethod.GET)
+		public ModelAndView admin_edu_update(@RequestParam("id") int edu_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			EduVO detailVo = adminService.viewEduDetail(edu_id);
+			
+			List<EduFileVo> eduFileList = adminService.viewEduFileDetail(edu_id);
+			
+			mav.addObject("edu", detailVo);
+			mav.addObject("eduFileList", eduFileList);
+
+			mav.setViewName("admin_eduUpdate");
+			return mav;
+		}
+			
+		//지난교육 수정
+		@ResponseBody
+		@RequestMapping(value="/eduUpdate", method=RequestMethod.POST)
+		public String eduUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute EduVO eduVo, @RequestAttribute("edu_file") List<MultipartFile> edu_file) throws Exception{
+				
+			String oldFilename = adminService.getOldEduPoster(eduVo.getId());
+			//지울 파일 리스트
+			String[] deleteFileNameList = multipartRequest.getParameterValues("deleteFileNameList");
+			String[] deleteFileNameList_thumbnail = multipartRequest.getParameterValues("deleteFileNameList_thumbnail");
+			System.out.println("deletefile = "+deleteFileNameList);
+				
+			//수정 시 지운파일 삭제
+			if(deleteFileNameList != null) {
+				for( String name : deleteFileNameList) {
+					s3Service.delete_s3Edu(name);
+					adminService.deleteEduFile(eduVo.getId(), name);
+					System.out.println("deletefile = "+name);
+				}
+			}
+				
+			if(deleteFileNameList_thumbnail != null) {
+				for( String name : deleteFileNameList_thumbnail ) {
+					s3Service.delete_s3Edu(name);
+				}
+			}
+				
+			MultipartFile eduPoster = multipartRequest.getFile("thumbnail_file");
+			if(eduPoster.getOriginalFilename() != "") {
+				String filename = s3Service.upload_Eduposter(eduPoster);
+				System.out.println("s3 insert ok => "+filename);
+				eduVo.setEdu_poster(filename);
+			}else {
+				eduVo.setEdu_poster(oldFilename);
+			}
+				
+			//행사 내용 수정
+			adminService.updateEdu(eduVo);
+					
+			//수정 시 추가한 파일 추가
+			if(edu_file != null) {
+				List<String> filenames = s3Service.upload_edu(edu_file);
+				for(String name : filenames) {
+					EduFileVo eduFileVo = new EduFileVo();
+					eduFileVo.setEdu_id(eduVo.getId());
+					eduFileVo.setFile_name(name);
+					adminService.insertEduFile(eduFileVo);
+				}
+			}
+					
+			return "admin_eduDetail?id="+eduVo.getId();
+		}
+			
+		//지난교육 삭제
+		@ResponseBody
+		@RequestMapping(value = "edu_delete", method = RequestMethod.POST)
+		public String edu_delete(HttpServletRequest request, ModelMap modelMap,
+									@RequestParam(value = "check[]", defaultValue = "") List<String> check) {
+
+			int cnt = 0;
+
+			for (String c : check) {
+				adminService.edu_delete(c);
+				String[] deleteFileNameList = adminService.getEduFile(c);
+					
+				if(deleteFileNameList != null) {
+					for( String name : deleteFileNameList ) {
+						s3Service.delete_s3Edu(name);
+					}
+					adminService.eduFile_delete(c);
 				}
 			}
 			return String.valueOf(cnt);

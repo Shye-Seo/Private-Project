@@ -4,10 +4,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.voucher.movie.board.EduFileVo;
+import com.voucher.movie.board.EduVO;
 import com.voucher.movie.board.EventFileVo;
 import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
+import com.voucher.movie.board.PartnerFileVo;
+import com.voucher.movie.board.PartnerVO;
 import com.voucher.movie.mappers.AdminDao;
 import com.voucher.movie.mappers.GroupDao;
 import com.voucher.movie.reservation.ClosedVO;
@@ -285,6 +289,112 @@ public class AdminService {
 
 	public boolean eventFile_delete(String c) {
 		return adminDao.eventFile_delete(c);
+	}
+
+	/*-------------제휴안내--------*/
+	public int findAllPartners() {
+		return adminDao.findAllPartners();
+	}
+
+	public List<PartnerVO> findPartnerPaging(int startIndex, int pageSize) {
+		return adminDao.findPartnerPaging(startIndex, pageSize);
+	}
+
+	public boolean insertPartner(PartnerVO partnervo) {
+		return adminDao.insertPartner(partnervo);
+	}
+
+	public int get_partner_Id(int id) {
+		return adminDao.get_partner_Id(id);
+	}
+
+	public boolean insertPartnerFile(PartnerFileVo partnerFileVo) {
+		return adminDao.insertPartnerFile(partnerFileVo);
+	}
+
+	public PartnerVO viewPartnerDetail(int partner_id) {
+		return adminDao.viewPartnerDetail(partner_id);
+	}
+
+	public List<PartnerFileVo> viewPartnerFileDetail(int partner_id) {
+		return adminDao.viewPartnerFileDetail(partner_id);
+	}
+
+	public String getOldPartnerPoster(int id) {
+		return adminDao.getOldPartnerPoster(id);
+	}
+
+	public boolean deletePartnerFile(int id, String name) {
+		return adminDao.deletePartnerFile(id, name);
+	}
+
+	public boolean updatePartner(PartnerVO partnerVo) {
+		return adminDao.updatePartner(partnerVo);
+	}
+
+	public boolean partner_delete(String c) {
+		return adminDao.partner_delete(c);
+	}
+
+	public String[] getPartnerFile(String c) {
+		return adminDao.getPartnerFile(c);
+	}
+
+	public boolean partnerFile_delete(String c) {
+		return adminDao.partnerFile_delete(c);
 	}	
+	
+	/*-------------지난교육--------*/
+	public int findAllEdu() {
+		return adminDao.findAllEdu();
+	}
+
+	public List<EduVO> findEduPaging(int startIndex, int pageSize) {
+		return adminDao.findEduPaging(startIndex, pageSize);
+	}
+
+	public boolean insertEdu(EduVO eduvo) {
+		return adminDao.insertEdu(eduvo);
+	}
+
+	public int get_edu_Id(int id) {
+		return adminDao.get_edu_Id(id);
+	}
+
+	public boolean insertEduFile(EduFileVo eduFileVo) {
+		return adminDao.insertEduFile(eduFileVo);
+	}
+
+	public EduVO viewEduDetail(int edu_id) {
+		return adminDao.viewEduDetail(edu_id);
+	}
+
+	public List<EduFileVo> viewEduFileDetail(int edu_id) {
+		return adminDao.viewEduFileDetail(edu_id);
+	}
+
+	public String getOldEduPoster(int id) {
+		return adminDao.getOldEduPoster(id);
+	}
+
+	public boolean deleteEduFile(int id, String name) {
+		return adminDao.deleteEduFile(id, name);
+	}
+
+	public boolean updateEdu(EduVO eduVo) {
+		return adminDao.updateEdu(eduVo);
+	}
+
+	public boolean edu_delete(String c) {
+		return adminDao.edu_delete(c);
+	}
+
+	public String[] getEduFile(String c) {
+		return adminDao.getEduFile(c);
+	}
+
+	public boolean eduFile_delete(String c) {
+		return adminDao.eduFile_delete(c);
+	}
 
 }

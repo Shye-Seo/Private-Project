@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부산영화체험박물관 | 관리자</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="/css/admin_boardInsert.css">
+    <script src="/js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="js/edu_register.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="~{common/side :: sidebar_manage ('news')}"></div>
+
+        <!-- main -->
+        <div class="content">
+            <div class="container">
+                <div class="page-header">
+                    <div class="page-title">
+                        <span>게시판 관리</span>
+                    </div>
+                </div>
+
+                <div class="area">
+                	<form name="eduAddForm" action="/eduAdd" enctype="multipart/form-data" method="post" onsubmit="return false">
+                    <div class="area1">
+                        <span>제목</span>
+                        <input type="text" name="edu_title" class="required" placeholder="제목을 입력해주세요." maxlength="50" >
+                    </div>
+                    <div class="area2">
+                        <span>교육일시</span>
+                        <input type="text" name="edu_date" class="required" maxlength="45">
+                    </div>
+                    <div class="area2">
+                        <span>교육장소</span>
+                        <input type="text" name="edu_place" class="required" maxlength="45">
+                    </div>
+                    <div class="area2">
+                        <span>교육대상(인원)</span>
+                        <input type="text" name="edu_target" class="required" maxlength="45">
+                    </div>
+                    <div class="area2">
+                        <span>교육내용</span>
+                        <input type="text" name="edu_explain" class="required" maxlength="45">
+                    </div>
+                    <div class="area2">
+                        <span>수강비용</span>
+                        <input type="text" name="edu_price" class="required" maxlength="45">
+                    </div>
+                    <div class="area2">
+                        <span>접수기간</span>
+                        <input type="text" name="edu_deadline" class="required" maxlength="45">
+                    </div>
+                    <div class="area2">
+                        <span>접수방법</span>
+                        <input type="text" name="edu_method" class="required" maxlength="45">
+                    </div>
+                    <div class="area3">
+                        <span>동영상 링크</span>
+                        <div class="link_wrap">
+	                        <input type="text" name="edu_link1">
+	                        <input type="text" name="edu_link2">
+                        </div>
+                    </div>
+                    <div class="area2">
+                        <span>내용</span>
+                        <textarea placeholder="1000자 이내로 입력" name="edu_content" maxlength="1000" onkeydown="resize(15,100,this)" ></textarea>
+                    </div>
+                    <div class="area3">
+                        <span>대표이미지첨부</span> <!-- vo에 포함시키지 않고 따로 controller에 전송 -->
+                        <div class="file_area">
+                            <div id="file_names_thumbnail">
+                                <!-- 파일 이름 -->
+                            </div>
+                            <label for="thumbnail" id="file_upload" class="thumbnail_label"><img src="/imgs/board_upload_icon.svg"></label>
+                        </div>
+                        <input type="file" id="thumbnail" multiple="multiple" name="thumbnail_file" hidden />
+                        <input type="hidden" id="input_thumbnail" name="edu_poster">
+                        <!-- ... -->
+                    </div>
+                    <div class="area3">
+                        <span>이미지첨부<p>(최대 5개)</p></span>
+                        <div class="file_area">
+                            <div id="file_names">
+                                <!-- 파일 이름 -->
+                            </div>
+                            <label for="input_file" id="file_upload"><img src="/imgs/board_upload_icon.svg"></label>
+                        </div>
+                        <input type="file" id="input_file" multiple="multiple" name="file" hidden />
+                        <!-- ... -->
+                    </div>
+                    <div class="btn_wrap">
+                        <button type="button" id="cancel_btn" onclick="location.href='admin_eduList'">취소</button>
+                        <button type="button" id="submit_btn">저장</button>
+                    </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -85,6 +85,11 @@
     margin-bottom: 20px;
 }
 
+.summary_content_bottom{
+	display: flex;
+    list-style: none;
+}
+
 .content_left {
     color: #222;
     font-family: Pretendard;

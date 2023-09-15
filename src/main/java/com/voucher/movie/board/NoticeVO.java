@@ -8,5 +8,6 @@ public class NoticeVO {
 	private String notice_title;
 	private String notice_date;
 	private String notice_content;
+	private String create_date;
 	private String update_date;
 }

@@ -10,11 +10,15 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.voucher.movie.admin.AdminVO;
+import com.voucher.movie.board.EduFileVo;
 import com.voucher.movie.admin.PopupVO;
+import com.voucher.movie.board.EduVO;
 import com.voucher.movie.board.EventFileVo;
 import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
+import com.voucher.movie.board.PartnerFileVo;
+import com.voucher.movie.board.PartnerVO;
 import com.voucher.movie.reservation.ClosedVO;
 import com.voucher.movie.reservation.FacilitiesVO;
 import com.voucher.movie.reservation.GroupVO;
@@ -209,4 +213,95 @@ public interface AdminDao {
 
 	@Select("select event_poster from museum_event where id = #{id}")
 	String getOldEventPoster(int id);
+	
+	// --------------- 제휴안내 관련 --------------
+	@Select("select count(*) from museum_partner")
+	int findAllPartners(); //제휴안내 전체 count
+	
+	@Select("select * from museum_partner order by id desc limit #{startIndex}, #{pageSize}")
+	List<PartnerVO> findPartnerPaging(int startIndex, int pageSize);
+
+	@Insert("insert into museum_partner (partner_title, partner_date, partner_sale, partner_content, partner_poster, create_date)"
+			+ "values (#{partner_title}, #{partner_date}, #{partner_sale},  #{partner_content}, #{partner_poster}, sysdate())")
+	boolean insertPartner(PartnerVO partnervo); //제휴안내 등록
+
+	@Select("select id from museum_partner order by id desc limit 1")
+	int get_partner_Id(int id);
+
+	@Insert("insert into partner_files (partner_id, file_name, create_date) value (#{partner_id}, #{file_name}, sysdate())")
+	boolean insertPartnerFile(PartnerFileVo partnerFileVo); //제휴안내 파일 추가
+
+	@Select("select * from museum_partner where id = #{partner_id}")
+	PartnerVO viewPartnerDetail(int partner_id); //제휴안내 상세-관리자
+
+	@Select("select * from partner_files where partner_id = #{partner_id}")
+	List<PartnerFileVo> viewPartnerFileDetail(int partner_id);
+
+	@Update("update museum_partner set partner_title = #{partner_title}, partner_date = #{partner_date},"
+			+ " partner_sale = #{partner_sale}, partner_content = #{partner_content},"
+			+ " partner_poster = #{partner_poster}, update_date = sysdate() where id = #{id}")
+	boolean updatePartner(PartnerVO partnerVo);
+
+	@Delete("delete from partner_files where partner_id = #{partner_id} and file_name = #{file_name}")
+	boolean deletePartnerFile(int partner_id, String file_name);
+
+	@Delete("delete from museum_partner where id = #{c}")
+	boolean partner_delete(String c); //제휴안내 삭제
+
+	@Delete("delete from partner_files where partner_id = #{c}")
+	boolean partnerFile_delete(String c);
+
+	@Select("select * from partner_files where partner_id = #{c}")
+	String[] getPartnerFile(String c);
+
+	@Select("select partner_poster from museum_partner where id = #{id}")
+	String getOldPartnerPoster(int id);
+	
+	// --------------- 지난교육 관련 --------------
+	@Select("select count(*) from museum_edu")
+	int findAllEdu(); //지난교육 전체 count
+	
+	@Select("select * from museum_edu order by id desc limit #{startIndex}, #{pageSize}")
+	List<EduVO> findEduPaging(int startIndex, int pageSize);
+
+	@Insert("insert into museum_edu (edu_title, edu_date, edu_place, edu_target,"
+			+ " edu_explain, edu_price, edu_deadline, edu_method, edu_content,"
+			+ " edu_poster, edu_link1, edu_link2, create_date)"
+			+ "values (#{edu_title}, #{edu_date}, #{edu_place},  #{edu_target},"
+			+ " #{edu_explain}, #{edu_price}, #{edu_deadline}, #{edu_method}, #{edu_content},"
+			+ "#{edu_poster}, #{edu_link1}, #{edu_link2}, sysdate())")
+	boolean insertEdu(EduVO eduvo); //지난교육 등록
+
+	@Select("select id from museum_edu order by id desc limit 1")
+	int get_edu_Id(int id);
+
+	@Insert("insert into edu_files (edu_id, file_name, create_date) value (#{edu_id}, #{file_name}, sysdate())")
+	boolean insertEduFile(EduFileVo eduFileVo); //지난교육 파일 추가
+
+	@Select("select * from museum_edu where id = #{edu_id}")
+	EduVO viewEduDetail(int edu_id); //지난교육 상세-관리자
+
+	@Select("select * from edu_files where edu_id = #{edu_id}")
+	List<EduFileVo> viewEduFileDetail(int edu_id);
+
+	@Update("update museum_edu set edu_title = #{edu_title}, edu_date = #{edu_date}, edu_place = #{edu_place}, edu_target = #{edu_target},"
+			+ " edu_explain = #{edu_explain}, edu_price = #{edu_price}, edu_deadline = #{edu_deadline}, edu_method = #{edu_method},"
+			+ " edu_content = #{edu_content}, edu_poster = #{edu_poster}, edu_link1 = #{edu_link1}, edu_link2 = #{edu_link2},"
+			+ " update_date = sysdate() where id = #{id}")
+	boolean updateEdu(EduVO eduVo);
+
+	@Delete("delete from edu_files where edu_id = #{edu_id} and file_name = #{file_name}")
+	boolean deleteEduFile(int edu_id, String file_name);
+
+	@Delete("delete from museum_edu where id = #{c}")
+	boolean edu_delete(String c); //제휴안내 삭제
+
+	@Delete("delete from edu_files where edu_id = #{c}")
+	boolean eduFile_delete(String c);
+
+	@Select("select * from edu_files where edu_id = #{c}")
+	String[] getEduFile(String c);
+
+	@Select("select edu_poster from museum_edu where id = #{id}")
+	String getOldEduPoster(int id);
 }

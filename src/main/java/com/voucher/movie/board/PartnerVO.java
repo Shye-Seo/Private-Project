@@ -11,6 +11,7 @@ public class PartnerVO {
 	private String partner_sale; //제휴할인
 	private String partner_content;
 	private String partner_poster;
+	private String create_date;
 	private String update_date;
 	
 }

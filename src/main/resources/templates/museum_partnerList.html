@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/cardList.css">
+    <title>부산영화체험박물관 | 제휴안내</title>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
+        <li class="category_1">소통</li></li><li class="div_bar">|</li>
+        <li class="category_2">이벤트</li></li><li class="div_bar">|</li>
+        <li class="category_3">제휴안내</li></li><li class="div_bar">|</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>제휴안내</h1></div>
+		</div>
+	</div>
+		<!-- 카드보기 형식 리스트 div -->
+		<div class="cardList_wrap">
+			<!--전체 count, 검색 div-->
+			<div class="contentTop_area">
+				<div class="total_count">전체<p class="total_red">[(${total_cnt})]</p>건</div>
+				
+				<div class="search_area">
+                    	<form id="searchForm" th:action="@{/museum_partnerList}" method="get">
+	                        <div class="text_search">
+	                        	<input type="text" class="word_search" placeholder="검색" name="searchKeyword" th:if="${searchKeyword == null}">
+	                        	<input type="text" class="word_search" th:value="${searchKeyword}" name="searchKeyword" th:if="${searchKeyword != null}">
+	                        	<div class="search_button">
+	                        		<button type="submit" class="search_img"><img src="/imgs/search_btn.svg"></button>
+	                        	</div>
+	                        </div>
+                        </form>
+                    </div>
+			</div>
+			<div class="list_wrap">
+				<ul class="list">
+					<li th:each="partner : ${partner_list}" class="news_div">
+					<a th:href="@{museum_partnerDetail(id=${partner.id})}">
+						<div class="news_poster">
+							<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/partner-folder/' +${partner.partner_poster}}" alt="poster_img">
+						</div>
+						<div class="news_info">
+							<div class="news_title"><p>[(${partner.partner_title})]</p></div>
+							<div class="news_detail">
+								<p>[(${partner.partner_date})]</p>
+							</div>
+						</div>
+					</a>
+					</li>
+				</ul>
+				
+				<!-- 페이징 -->
+					<!--검색 안했을 때-->
+                    <div class="null" th:if="${searchKeyword == null}">
+                         <ul class="pagewrap"> 
+                             <li> 
+                             	<a class="page_icon" th:href="@{museum_partnerList?page=1}"><img src="/imgs/page_start_btn.svg" id="pg_btn_sizing"></a> 
+                             </li> 
+                             <li class="icon_right"> 
+                             	<a class="page_icon" th:if="${nowpage == 1}" th:href="@{museum_partnerList?page={page} (page = ${nowpage})}"><img src="/imgs/page_prev_btn.svg"></a> 
+                             	<a class="page_icon" th:if="${nowpage != 1}" th:href="@{museum_partnerList?page={page} (page = ${nowpage}-1)}"><img src="/imgs/page_prev_btn.svg"></a> 
+                             </li> 
+                              <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"> 
+ 							    <li class="page-item"  
+ 							    		 th:with="start = ${pagination.startPage}, end = ${pagination.endPage}" 
+ 							    		th:each="pageButton : ${#numbers.sequence(start, end)}"> 
+ 							    		<a class="page-link"  th:id="'page_num'+${pageButton}" th:href="@{museum_partnerList?page={page} (page = ${pageButton})}" th:text=${pageButton}></a> 
+ 							    </li> 
+ 						    </th:block> 
+                             <li class="icon_left"> 
+                             	<a class="page_icon" th:if="${nowpage == pagination.totalPageCnt}" th:href="@{museum_partnerList?page={page} (page = ${nowpage})}"><img src="/imgs/page_next_btn.svg"></a> 
+                             	<a class="page_icon" th:if="${nowpage != pagination.totalPageCnt}" th:href="@{museum_partnerList?page={page} (page = ${nowpage}+1)}"><img src="/imgs/page_next_btn.svg"></a> 
+                             </li> 
+                             <li> 
+                             	<a class="page_icon" th:href="@{museum_partnerList?page={page} (page = ${pagination.totalPageCnt})}"><img src="imgs/page_end_btn.svg" id="pg_btn_sizing"></a> 
+                             </li> 
+                         </ul>
+                    </div>
+                    
+                    <!-- 검색어로 검색했을 때  -->
+                    <div th:if="${searchKeyword != null}" class="notnull">
+                        <ul class="pagewrap">
+                            <li>
+                            	<a class="page_icon" th:href="@{museum_partnerList?searchKeyword={key}&page=1 (key = ${searchKeyword})}"><img src="/imgs/page_start_btn.svg" id="pg_btn_sizing"></a>
+                            </li>
+                            <li class="icon_right">
+                            	<a class="page_icon" th:if="${nowpage == 1}" th:href="@{museum_partnerList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${nowpage})}"><img src="/imgs/page_prev_btn.svg"></a>
+                            	<a class="page_icon" th:if="${nowpage != 1}" th:href="@{museum_partnerList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${nowpage}-1)}"><img src="/imgs/page_prev_btn.svg"></a>
+                            </li>
+                             <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+							    <li class="page-item" 
+							    		 th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+							    		th:each="pageButton : ${#numbers.sequence(start, end)}">
+							    		<a class="page-link"  th:id="'page_num'+${pageButton}" th:href="@{museum_partnerList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${pageButton})}" th:text=${pageButton}></a>
+							    </li>
+						    </th:block>
+                            <li class="icon_left">
+                            	<a class="page_icon" th:if="${nowpage == pagination.totalPageCnt}" th:href="@{museum_partnerList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${nowpage})}"><img src="/imgs/page_next_btn.svg"></a>
+                            	<a class="page_icon" th:if="${nowpage != pagination.totalPageCnt}" th:href="@{museum_partnerList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${nowpage}+1)}"><img src="/imgs/page_next_btn.svg"></a>
+                            </li>
+                            <li>
+                            	<a class="page_icon" th:href="@{museum_partnerList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${pagination.totalPageCnt})}"><img src="/imgs/page_end_btn.svg" id="pg_btn_sizing"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <script th:inline="javascript">
+                    	var nowpage = /*[[${nowpage}]]*/
+                    	
+						$('#page_num'+nowpage).addClass("thisPage");
+                    </script>
+			</div>
+		</div>
+</body>
+</html>

@@ -18,6 +18,7 @@ public class EduVO {
 	private String edu_poster;
 	private String edu_link1;
 	private String edu_link2;
+	private String create_date;
 	private String update_date;
 	
 }
