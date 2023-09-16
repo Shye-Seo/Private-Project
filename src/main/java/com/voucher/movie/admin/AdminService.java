@@ -10,6 +10,8 @@ import com.voucher.movie.board.EventFileVo;
 import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
+import com.voucher.movie.board.NoticeFileVo;
+import com.voucher.movie.board.NoticeVO;
 import com.voucher.movie.board.PartnerFileVo;
 import com.voucher.movie.board.PartnerVO;
 import com.voucher.movie.mappers.AdminDao;
@@ -396,5 +398,62 @@ public class AdminService {
 	public boolean eduFile_delete(String c) {
 		return adminDao.eduFile_delete(c);
 	}
+	
+	/*-------------공고--------*/
+	public int findAllNotice() {
+		return adminDao.findAllNotice();
+	}
 
+	public List<NoticeVO> findNoticePaging(int startIndex, int pageSize) {
+		return adminDao.findNoticePaging(startIndex, pageSize);
+	}
+
+	public boolean insertNotice(NoticeVO noticevo) {
+		return adminDao.insertNotice(noticevo);
+	}
+
+	public int get_notice_Id(int id) {
+		return adminDao.get_notice_Id(id);
+	}
+
+	public boolean insertNoticeFile(NoticeFileVo noticeFileVo) {
+		return adminDao.insertNoticeFile(noticeFileVo);
+	}
+
+	public NoticeVO viewNoticeDetail(int notice_id) {
+		return adminDao.viewNoticeDetail(notice_id);
+	}
+
+	public List<NoticeFileVo> viewNoticeFileDetail(int notice_id) {
+		return adminDao.viewNoticeFileDetail(notice_id);
+	}
+
+	public boolean deleteNoticeFile(int id, String name) {
+		return adminDao.deleteNoticeFile(id, name);
+	}
+
+	public boolean updateNotice(NoticeVO noticeVo) {
+		return adminDao.updateNotice(noticeVo);
+	}
+
+	public boolean notice_delete(String c) {
+		return adminDao.notice_delete(c);
+	}
+
+	public String[] getNoticeFile(String c) {
+		return adminDao.getNoticeFile(c);
+	}
+
+	public boolean noticeFile_delete(String c) {
+		return adminDao.noticeFile_delete(c);
+	}
+
+	/*-------------Q&A--------*/
+	public int findAllQuestions() {
+		return adminDao.findAllQuestions();
+	}
+
+	public List<QuestionVO> findQuestionPaging(int startIndex, int pageSize) {
+		return adminDao.findQuestionPaging(startIndex, pageSize);
+	}
 }

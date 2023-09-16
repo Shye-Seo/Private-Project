@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="/js/common.js"></script>
+    <link rel="stylesheet" href="css/cardDetail.css">
+    <title>부산영화체험박물관 | 공고</title>
+    
+    <script>
+		$(function(){
+			$('#news_content').height( $('#news_content').prop('scrollHeight') );
+		})
+	</script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
+        <li class="category_1">소통</li></li><li class="div_bar">|</li>
+        <li class="category_2">공지사항</li></li><li class="div_bar">|</li>
+        <li class="category_3">공고</li></li><li class="div_bar">|</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>공고</h1></div>
+		</div>
+	</div>
+		<!-- 게시글(공고) div -->
+		<div class="cardList_wrap">
+			<div class="detail_wrap">
+				<!-- 상단내용  -->
+				<div class="detail_summary_notice">
+					<div class="summary_info_notice">
+						<div class="summary_title_notice">
+							<p class="notice_title">[(${notice.notice_title})]</p>
+							<div class="notice_small_text">
+								<p>관리자</p>
+								<p id="notice_div_bar">|</p>
+								<p>[(${notice.notice_date})]</p>
+							</div>
+						</div>
+						<div class="notice_file_area" th:if="${noticeFileList != ''}">
+							<!--파일첨부 다운로드 부분-->
+							<ol th:each="files : ${noticeFileList}" class="notice_download_area">
+								<a th:href="@{notice_download(filename=${files.file_name})}">
+									<li class="download_list">
+										<img src="/imgs/notice_download_icon.png">
+										[(${files.file_name})]
+									</li>
+								</a>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- 하단 상세내용 -->
+				<div class="detail_content_notice">
+					<div class="bottom_wrap_notice">
+						<div class="notice_content_area">
+							<textarea name="notice_content" id="news_content" spellcheck="false" disabled>[(${notice.notice_content})]</textarea>
+						</div>
+					</div>
+				</div>
+					<div class="button_area">
+						<input type="button" class="list_btn" value="목록" onclick="location.href='museum_eventList'">
+					</div>
+			</div>
+		</div>
+</body>
+</html>

@@ -12,6 +12,8 @@ import com.voucher.movie.board.EventFileVo;
 import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
+import com.voucher.movie.board.NoticeFileVo;
+import com.voucher.movie.board.NoticeVO;
 import com.voucher.movie.board.PartnerFileVo;
 import com.voucher.movie.board.PartnerVO;
 
@@ -94,4 +96,23 @@ public interface BoardDao {
 
 	@Select("select * from edu_files where edu_id = #{edu_id}")
 	List<EduFileVo> viewEduFileDetail(int edu_id);
+	
+	// --------------- 공고 관련 --------------
+	@Select("select count(*) from museum_notice")
+	int findAllNotice(); //공고 전체 count
+	
+	@Select("select * from museum_notice order by id desc limit #{startIndex}, #{pageSize}")
+	List<NoticeVO> findNoticePaging(int startIndex, int pageSize);
+	
+	@Select("select count(*) from museum_notice where notice_title like concat('%','${searchKeyword}','%')")
+	int searchNoticeCnt(String searchKeyword); //공고 검색
+
+	@Select("select * from museum_notice where notice_title like concat('%','${searchKeyword}','%') order by id desc limit #{startIndex}, #{pageSize}")
+	List<NoticeVO> notice_searchList(String searchKeyword, int startIndex, int pageSize);
+	
+	@Select("select * from museum_notice where id = #{notice_id}")
+	NoticeVO viewNoticeDetail(int notice_id); //공고 상세-관리자
+
+	@Select("select * from notice_files where notice_id = #{notice_id}")
+	List<NoticeFileVo> viewNoticeFileDetail(int notice_id);
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.voucher.movie.config.CardPagingVO;
+import com.voucher.movie.config.PagingVO;
 
 @Controller
 public class BoardController {
@@ -268,6 +269,65 @@ public class BoardController {
 		mav.addObject("edu", detailVo);
 		mav.addObject("eduFileList", eduFileList);
 		mav.setViewName("museum_eduDetail");
+		return mav;
+	}
+	
+	//메인 - 공고 리스트
+	@RequestMapping(value="/museum_noticeList", method=RequestMethod.GET)
+	public String museum_noticeList(@ModelAttribute NoticeVO noticeVo, ModelMap model, @RequestParam(defaultValue = "1") int page, String searchKeyword) throws Exception {
+				
+		// 총 게시물 수 
+		int totalListCnt = boardService.findAllNotice();
+
+		// 생성인자로  총 게시물 수, 현재 페이지를 전달
+		// 공고는 카드보기 형식이 아니므로 -> PagingVO
+		PagingVO pagination = new PagingVO(totalListCnt, page);
+
+		// DB select start index
+		int startIndex = pagination.getStartIndex();
+		// 페이지 당 보여지는 게시글의 최대 개수
+		int pageSize = pagination.getPageSize();
+
+		if(searchKeyword == null) { //키워드 null (기본상태)
+			notice_list = boardService.findNoticePaging(startIndex, pageSize);
+	    	model.addAttribute("pagination", pagination);
+	    	model.addAttribute("total_cnt", totalListCnt);
+	    }else if(searchKeyword != null) { //키워드검색
+    		totalListCnt = boardService.searchEduCnt(searchKeyword);
+    		pagination = new PagingVO(totalListCnt, page);
+    		startIndex = pagination.getStartIndex();
+    		pageSize = pagination.getPageSize();
+    		notice_list = boardService.notice_searchList(searchKeyword, startIndex, pageSize);
+    		model.addAttribute("pagination", pagination);
+    		model.addAttribute("searchKeyword", searchKeyword);
+    		model.addAttribute("total_cnt", totalListCnt);
+    	}
+		    
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    
+		for(NoticeVO notice : notice_list) {
+			String notice_date = notice.getCreate_date();
+			notice_date = notice_date.substring(0, 4) + "." + notice_date.substring(5, 7) +"." + notice_date.substring(8, 10);
+			notice.setCreate_date(notice_date);
+		}
+			    
+		model.addAttribute("notice_list", notice_list);
+		model.addAttribute("nowpage", page);
+				 
+		return "/museum_noticeList";
+	}
+	
+	//공고 조회
+	@RequestMapping(value="/museum_noticeDetail", method=RequestMethod.GET)
+	public ModelAndView museum_noticeDetail(@RequestParam("id") int notice_id) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		NoticeVO detailVo = boardService.viewNoticeDetail(notice_id);
+				
+		List<NoticeFileVo> noticeFileList = boardService.viewNoticeFileDetail(notice_id);
+		    	
+		mav.addObject("notice", detailVo);
+		mav.addObject("noticeFileList", noticeFileList);
+		mav.setViewName("museum_noticeDetail");
 		return mav;
 	}
 

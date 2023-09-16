@@ -35,6 +35,7 @@ import com.voucher.movie.board.EventFileVo;
 import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
+import com.voucher.movie.board.NoticeFileVo;
 import com.voucher.movie.board.NoticeVO;
 import com.voucher.movie.board.PartnerFileVo;
 import com.voucher.movie.board.PartnerVO;
@@ -81,6 +82,10 @@ public class AdminController {
 	String folderName_notice = "notice-folder/";
 	String folderName_partner = "partner-folder/";
 	String folderName_edu = "edu-folder/";
+	
+	//Q&A 관리
+	List<QuestionVO> question_list;
+	List<AnswerVO> answer_list;
 
 	//관리자 로그인
 	@RequestMapping(value = "admin_login")
@@ -683,6 +688,7 @@ public class AdminController {
 			return "admin_popupDetail?id="+popupVo.getId();
 		}
 		
+		//-------------------------------이벤트--------------------------
 		//관리자 - 이벤트 리스트
 		@RequestMapping(value="/admin_eventList", method=RequestMethod.GET)
 		public String admin_eventList(@ModelAttribute EventVO eventVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
@@ -876,6 +882,7 @@ public class AdminController {
 			return String.valueOf(cnt);
 		}
 		
+		//-------------------------------제휴안내--------------------------
 		//관리자 - 제휴 리스트
 		@RequestMapping(value="/admin_partnerList", method=RequestMethod.GET)
 		public String admin_partnerList(@ModelAttribute PartnerVO partnerVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
@@ -1062,6 +1069,7 @@ public class AdminController {
 			return String.valueOf(cnt);
 		}
 		
+		//-------------------------------지난교육--------------------------
 		//관리자 - 지난교육 리스트
 		@RequestMapping(value="/admin_eduList", method=RequestMethod.GET)
 		public String admin_eduList(@ModelAttribute EduVO eduVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
@@ -1246,6 +1254,225 @@ public class AdminController {
 				}
 			}
 			return String.valueOf(cnt);
+		}
+		
+		//-------------------------------공고--------------------------
+		//관리자 - 공고 리스트
+		@RequestMapping(value="/admin_noticeList", method=RequestMethod.GET)
+		public String admin_noticeList(@ModelAttribute NoticeVO noticeVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+				
+			// 총 게시물 수 
+		    int totalListCnt = adminService.findAllNotice();
+
+		    // 생성인자로  총 게시물 수, 현재 페이지를 전달
+		    PagingVO pagination = new PagingVO(totalListCnt, page);
+
+		    // DB select start index
+		    int startIndex = pagination.getStartIndex();
+		    // 페이지 당 보여지는 게시글의 최대 개수
+		    int pageSize = pagination.getPageSize();
+
+		    notice_list = adminService.findNoticePaging(startIndex, pageSize);
+		    
+		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    
+		    for(NoticeVO notice : notice_list) {
+		    	String notice_date = notice.getCreate_date();
+		    	notice_date = notice_date.substring(0, 4) + "." + notice_date.substring(5, 7) +"." + notice_date.substring(8, 10);
+		    	notice.setCreate_date(notice_date);
+		    }
+			    
+			model.addAttribute("notice_list", notice_list);
+			model.addAttribute("nowpage", page);
+			model.addAttribute("pagination", pagination);
+				 
+			return "/admin_noticeList";
+		}
+		
+		//관리자 - 공고 등록 페이지
+		@RequestMapping(value="/admin_noticeInsert", method=RequestMethod.GET)
+		public String admin_noticeInsert(ModelMap model) throws Exception {
+				
+			return "/admin_noticeInsert";
+		}
+		
+		//공고 등록(post)
+		@ResponseBody
+		@RequestMapping(value="/noticeAdd", method=RequestMethod.POST)
+		public String admin_notice_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute NoticeVO noticevo, ModelMap model,@RequestAttribute List<MultipartFile> notice_file) throws Exception {
+			
+			// 오늘 날짜
+		    LocalDate now = LocalDate.now();
+		    Calendar time = Calendar.getInstance();
+		    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    
+		    Calendar cal = Calendar.getInstance();
+		    String today = dateFormat.format(cal.getTime());
+		    
+	    	noticevo.setNotice_date(today);
+	    	
+			adminService.insertNotice(noticevo);
+			
+			int notice_id = adminService.get_notice_Id(noticevo.getId());
+		    
+		    if(notice_file != null) {
+		    	List<String> filenames = s3Service.upload_notice(notice_file);
+				for(String name : filenames) {
+					NoticeFileVo noticeFileVo = new NoticeFileVo();
+					noticeFileVo.setNotice_id(notice_id);
+					noticeFileVo.setFile_name(name);
+					adminService.insertNoticeFile(noticeFileVo);
+				}
+			}
+		    
+			return "/admin_noticeList";
+		}	
+		
+		//공고 조회_관리자
+		@RequestMapping(value="/admin_noticeDetail", method=RequestMethod.GET)
+		public ModelAndView noticeDetail(@RequestParam("id") int notice_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			NoticeVO detailVo = adminService.viewNoticeDetail(notice_id);
+				
+			List<NoticeFileVo> noticeFileList = adminService.viewNoticeFileDetail(notice_id);
+//			String notice_date = detailVo.getCreate_date();
+//			notice_date = notice_date.substring(0, 4) + "." + notice_date.substring(5, 7) +"." + notice_date.substring(8, 10);
+//		   	detailVo.setCreate_date(notice_date);
+		    	
+			mav.addObject("notice", detailVo);
+			mav.addObject("noticeFileList", noticeFileList);
+			mav.setViewName("admin_noticeDetail");
+			return mav;
+		}
+			
+		//공고 파일 다운로드
+		@RequestMapping({"/notice_download"})
+		@ResponseBody
+		public ResponseEntity<byte[]> notice_download(@RequestParam String filename) throws IOException {
+			return s3Service.getObject_notice(filename);
+		}
+			
+		//공고 수정 페이지
+		@RequestMapping(value="/admin_notice_update", method=RequestMethod.GET)
+		public ModelAndView admin_notice_update(@RequestParam("id") int notice_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			NoticeVO detailVo = adminService.viewNoticeDetail(notice_id);
+			
+			List<NoticeFileVo> noticeFileList = adminService.viewNoticeFileDetail(notice_id);
+			
+			mav.addObject("notice", detailVo);
+			mav.addObject("noticeFileList", noticeFileList);
+
+			mav.setViewName("admin_noticeUpdate");
+			return mav;
+		}
+			
+		//공고 수정
+		@ResponseBody
+		@RequestMapping(value="/noticeUpdate", method=RequestMethod.POST)
+		public String noticeUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute NoticeVO noticeVo, @RequestAttribute("notice_file") List<MultipartFile> notice_file) throws Exception{
+				
+//			String oldFilename = adminService.getOldEduPoster(eduVo.getId());
+			//지울 파일 리스트
+			String[] deleteFileNameList = multipartRequest.getParameterValues("deleteFileNameList");
+//			String[] deleteFileNameList_thumbnail = multipartRequest.getParameterValues("deleteFileNameList_thumbnail");
+//			System.out.println("deletefile = "+deleteFileNameList);
+				
+			//수정 시 지운파일 삭제
+			if(deleteFileNameList != null) {
+				for( String name : deleteFileNameList) {
+					s3Service.delete_s3Notice(name);
+					adminService.deleteNoticeFile(noticeVo.getId(), name);
+					System.out.println("deletefile = "+name);
+				}
+			}
+				
+//			if(deleteFileNameList_thumbnail != null) {
+//				for( String name : deleteFileNameList_thumbnail ) {
+//					s3Service.delete_s3Edu(name);
+//				}
+//			}
+				
+//			MultipartFile eduPoster = multipartRequest.getFile("thumbnail_file");
+//			if(eduPoster.getOriginalFilename() != "") {
+//				String filename = s3Service.upload_Eduposter(eduPoster);
+//				System.out.println("s3 insert ok => "+filename);
+//				eduVo.setEdu_poster(filename);
+//			}else {
+//				eduVo.setEdu_poster(oldFilename);
+//			}
+				
+			//행사 내용 수정
+			adminService.updateNotice(noticeVo);
+					
+			//수정 시 추가한 파일 추가
+			if(notice_file != null) {
+				List<String> filenames = s3Service.upload_notice(notice_file);
+				for(String name : filenames) {
+					NoticeFileVo noticeFileVo = new NoticeFileVo();
+					noticeFileVo.setNotice_id(noticeVo.getId());
+					noticeFileVo.setFile_name(name);
+					adminService.insertNoticeFile(noticeFileVo);
+				}
+			}
+					
+			return "admin_noticeDetail?id="+noticeVo.getId();
+		}
+			
+		//공고 삭제
+		@ResponseBody
+		@RequestMapping(value = "notice_delete", method = RequestMethod.POST)
+		public String notice_delete(HttpServletRequest request, ModelMap modelMap,
+									@RequestParam(value = "check[]", defaultValue = "") List<String> check) {
+
+			int cnt = 0;
+
+			for (String c : check) {
+				adminService.notice_delete(c);
+				String[] deleteFileNameList = adminService.getNoticeFile(c);
+					
+				if(deleteFileNameList != null) {
+					for( String name : deleteFileNameList ) {
+						s3Service.delete_s3Notice(name);
+					}
+					adminService.noticeFile_delete(c);
+				}
+			}
+			return String.valueOf(cnt);
+		}
+		
+		//Q&A 관리-------------------------------------------
+		//관리자 - Q&A 리스트
+		@RequestMapping(value="/admin_qnaList", method=RequestMethod.GET)
+		public String admin_qnaList(@ModelAttribute QuestionVO questionVo, ModelMap model, @RequestParam(defaultValue = "1") int page) throws Exception {
+				
+			// 총 게시물 수 
+		    int totalListCnt = adminService.findAllQuestions();
+
+		    // 생성인자로  총 게시물 수, 현재 페이지를 전달
+		    PagingVO pagination = new PagingVO(totalListCnt, page);
+
+		    // DB select start index
+		    int startIndex = pagination.getStartIndex();
+		    // 페이지 당 보여지는 게시글의 최대 개수
+		    int pageSize = pagination.getPageSize();
+
+		    question_list = adminService.findQuestionPaging(startIndex, pageSize);
+		    
+		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    
+		    for(QuestionVO question : question_list) {
+		    	String question_date = question.getCreate_date();
+		    	question_date = question_date.substring(0, 4) + "." + question_date.substring(5, 7) +"." + question_date.substring(8, 10);
+		    	question.setCreate_date(question_date);
+		    }
+			    
+			model.addAttribute("question_list", question_list);
+			model.addAttribute("nowpage", page);
+			model.addAttribute("pagination", pagination);
+				 
+			return "/admin_qnaList";
 		}
 		
 }

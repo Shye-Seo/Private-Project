@@ -241,3 +241,126 @@ iframe {
 	margin-left: 20px;
 	cursor: pointer;
 }
+
+/*----------공고 상세----------*/
+.notice_download_area {
+    margin-bottom: 10px;
+    line-height: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    padding-inline-start: 0px;
+    margin-left: 30px;
+}
+
+.download_list {
+    display: flex;
+    align-items: center;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+
+.download_list img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    /* text-align: center; */
+    /* margin: auto; */
+}
+
+.notice_download_area:last-child {
+    margin-bottom: 0;
+}
+
+.summary_info_notice{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.summary_title_notice {
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #A6A6A6;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+.notice_title{
+	color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.notice_small_text {
+    display: flex;
+    align-items: center;
+    color: #767676;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.42px;
+}
+
+#notice_div_bar {
+    color: #D2D2D2 !important;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.notice_file_area {
+    padding: 22px 0;
+    border-bottom: 1px solid #000;
+    box-sizing: border-box;
+}
+
+.bottom_wrap_notice{
+	margin: 0 auto;
+}
+
+.detail_content_notice {
+    margin: 0 auto;
+    padding-top: 50px;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #A6A6A6;
+}
+
+.notice_content_area {
+    color: #222;
+    /* text-align: center; */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.54px;
+    margin-bottom: 50px;
+    margin-left: 30px;
+}
+
+.notice_content_area textarea {
+    background-color: #ffffff;
+    resize: none;
+    box-sizing: border-box;
+    border: 0;
+    width: 100%;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}

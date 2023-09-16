@@ -112,4 +112,29 @@ public class BoardService {
 	public List<EduFileVo> viewEduFileDetail(int edu_id) {
 		return boardDao.viewEduFileDetail(edu_id);
 	}
+	
+	//공고------------------------------
+	public int findAllNotice() {
+		return boardDao.findAllNotice();
+	}
+
+	public List<NoticeVO> findNoticePaging(int startIndex, int pageSize) {
+		return boardDao.findNoticePaging(startIndex, pageSize);
+	}
+
+	public int searchNoticeCnt(String searchKeyword) {
+		return boardDao.searchNoticeCnt(searchKeyword);
+	}
+
+	public List<NoticeVO> notice_searchList(String searchKeyword, int startIndex, int pageSize) {
+		return boardDao.notice_searchList(searchKeyword, startIndex, pageSize);
+	}
+
+	public NoticeVO viewNoticeDetail(int notice_id) {
+		return boardDao.viewNoticeDetail(notice_id);
+	}
+
+	public List<NoticeFileVo> viewNoticeFileDetail(int notice_id) {
+		return boardDao.viewNoticeFileDetail(notice_id);
+	}
 }

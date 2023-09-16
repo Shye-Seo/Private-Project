@@ -12,11 +12,14 @@ import org.springframework.stereotype.Repository;
 import com.voucher.movie.admin.AdminVO;
 import com.voucher.movie.board.EduFileVo;
 import com.voucher.movie.admin.PopupVO;
+import com.voucher.movie.admin.QuestionVO;
 import com.voucher.movie.board.EduVO;
 import com.voucher.movie.board.EventFileVo;
 import com.voucher.movie.board.EventVO;
 import com.voucher.movie.board.NewsFileVo;
 import com.voucher.movie.board.NewsVO;
+import com.voucher.movie.board.NoticeFileVo;
+import com.voucher.movie.board.NoticeVO;
 import com.voucher.movie.board.PartnerFileVo;
 import com.voucher.movie.board.PartnerVO;
 import com.voucher.movie.reservation.ClosedVO;
@@ -304,4 +307,50 @@ public interface AdminDao {
 
 	@Select("select edu_poster from museum_edu where id = #{id}")
 	String getOldEduPoster(int id);
+	
+	// --------------- 공고 관련 --------------
+	@Select("select count(*) from museum_notice")
+	int findAllNotice(); //공고 전체 count
+	
+	@Select("select * from museum_notice order by id desc limit #{startIndex}, #{pageSize}")
+	List<NoticeVO> findNoticePaging(int startIndex, int pageSize);
+
+	@Insert("insert into museum_notice (notice_title, notice_date, notice_content, create_date)"
+			+ "values (#{notice_title}, #{notice_date}, #{notice_content}, sysdate())")
+	boolean insertNotice(NoticeVO noticevo); //공고 등록
+
+	@Select("select id from museum_notice order by id desc limit 1")
+	int get_notice_Id(int id);
+
+	@Insert("insert into notice_files (notice_id, file_name, create_date) value (#{notice_id}, #{file_name}, sysdate())")
+	boolean insertNoticeFile(NoticeFileVo noticeFileVo); //공고 파일 추가
+
+	@Select("select * from museum_notice where id = #{notice_id}")
+	NoticeVO viewNoticeDetail(int notice_id); //공고 상세-관리자
+
+	@Select("select * from notice_files where notice_id = #{notice_id}")
+	List<NoticeFileVo> viewNoticeFileDetail(int notice_id);
+
+	@Update("update museum_notice set notice_title = #{notice_title}, notice_date = #{notice_date},"
+			+ " notice_content = #{notice_content}, update_date = sysdate() where id = #{id}")
+	boolean updateNotice(NoticeVO noticeVo);
+
+	@Delete("delete from notice_files where notice_id = #{notice_id} and file_name = #{file_name}")
+	boolean deleteNoticeFile(int notice_id, String file_name);
+
+	@Delete("delete from museum_notice where id = #{c}")
+	boolean notice_delete(String c); //공고 삭제
+
+	@Delete("delete from notice_files where notice_id = #{c}")
+	boolean noticeFile_delete(String c);
+
+	@Select("select * from notice_files where notice_id = #{c}")
+	String[] getNoticeFile(String c);
+
+	// --------------- Q&A 관련 --------------
+	@Select("select count(*) from qna_question")
+	int findAllQuestions(); //Q&A 전체 count
+	
+	@Select("select * from qna_question order by id desc limit #{startIndex}, #{pageSize}")
+	List<QuestionVO> findQuestionPaging(int startIndex, int pageSize);
 }
