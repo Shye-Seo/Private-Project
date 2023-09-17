@@ -1,6 +1,8 @@
 package com.voucher.movie.board;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,13 +10,21 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.voucher.movie.admin.AnswerVO;
+import com.voucher.movie.admin.QuestionVO;
 import com.voucher.movie.config.CardPagingVO;
 import com.voucher.movie.config.PagingVO;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class BoardController {
@@ -27,6 +37,8 @@ public class BoardController {
 	List<NoticeVO> notice_list;
 	List<PartnerVO> partner_list;
 	List<EduVO> edu_list;
+	
+	List<QuestionVO> question_list;
 	
 	//메인 - 박물관 소식 리스트
 	@RequestMapping(value="/museum_newsList", method=RequestMethod.GET)
@@ -328,6 +340,106 @@ public class BoardController {
 		mav.addObject("notice", detailVo);
 		mav.addObject("noticeFileList", noticeFileList);
 		mav.setViewName("museum_noticeDetail");
+		return mav;
+	}
+	
+	//메인 - Q&A 리스트
+	@RequestMapping(value="/museum_qnaList", method=RequestMethod.GET)
+	public String museum_qnaList(@ModelAttribute QuestionVO questionVo, ModelMap model, @RequestParam(defaultValue = "1") int page, String searchKeyword) throws Exception {
+				
+		// 총 게시물 수 
+		int totalListCnt = boardService.findAllQuestions();
+
+		// 생성인자로  총 게시물 수, 현재 페이지를 전달
+		// Q&A는 카드보기 형식이 아니므로 -> PagingVO
+		PagingVO pagination = new PagingVO(totalListCnt, page);
+
+		// DB select start index
+		int startIndex = pagination.getStartIndex();
+		// 페이지 당 보여지는 게시글의 최대 개수
+		int pageSize = pagination.getPageSize();
+
+		if(searchKeyword == null) { //키워드 null (기본상태)
+			question_list = boardService.findQuestionPaging(startIndex, pageSize);
+	    	model.addAttribute("pagination", pagination);
+	    	model.addAttribute("total_cnt", totalListCnt);
+	    }else if(searchKeyword != null) { //키워드검색
+    		totalListCnt = boardService.searchEduCnt(searchKeyword);
+    		pagination = new PagingVO(totalListCnt, page);
+    		startIndex = pagination.getStartIndex();
+    		pageSize = pagination.getPageSize();
+    		question_list = boardService.qna_searchList(searchKeyword, startIndex, pageSize);
+    		model.addAttribute("pagination", pagination);
+    		model.addAttribute("searchKeyword", searchKeyword);
+    		model.addAttribute("total_cnt", totalListCnt);
+    	}
+		    
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+		    
+		for(QuestionVO question : question_list) {
+			String question_date = question.getCreate_date();
+			question_date = question_date.substring(0, 4) + "." + question_date.substring(5, 7) +"." + question_date.substring(8, 10);
+			question.setCreate_date(question_date);
+		}
+			    
+		model.addAttribute("question_list", question_list);
+		model.addAttribute("nowpage", page);
+				 
+		return "/museum_qnaList";
+	}
+	
+	//관리자 - 문의글 등록 페이지
+	@RequestMapping(value="/museum_qnaInsert", method=RequestMethod.GET)
+	public String museum_qnaInsert(ModelMap model) throws Exception {
+			
+		return "/museum_qnaInsert";
+	}
+	
+	//문의글 등록(post)
+	@ResponseBody
+	@RequestMapping(value="/questionAdd", method=RequestMethod.POST)
+	public String question_register(HttpServletRequest request, @ModelAttribute QuestionVO questionvo, ModelMap model) throws Exception {
+		
+		// 오늘 날짜
+	    LocalDate now = LocalDate.now();
+	    Calendar time = Calendar.getInstance();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+	    
+	    Calendar cal = Calendar.getInstance();
+	    String today = dateFormat.format(cal.getTime());
+	    
+		boardService.insertQuestion(questionvo);
+		
+		return "/museum_qnaDetail?id="+questionvo.getId();
+	}
+	
+	//문의글 조회 시 - 비밀번호 일치여부 확인
+	@RequestMapping(value="/museum_qna_pwCheck", method=RequestMethod.GET)
+	public String museum_qna_pwCheck(@RequestParam("id") int question_id, @RequestParam("pw") int question_pw) throws Exception {
+		
+		
+		int check = boardService.check_qna_pw(question_id, question_pw);
+		System.out.println("결과 : "+check);
+		
+		if(check == 1) {
+			return "/museum_qnaDetail?id="+question_id;
+		}else {
+			return "/museum_qnaList";
+		}
+		
+	}
+	
+	//문의글 조회
+	@RequestMapping(value="/museum_qnaDetail", method=RequestMethod.GET)
+	public ModelAndView museum_qnaDetail(@RequestParam("id") int question_id) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		QuestionVO detailVo = boardService.viewQuestionDetail(question_id);
+		AnswerVO answerVo = boardService.viewAnswerDetail(question_id);
+				
+		mav.addObject("question", detailVo);
+		mav.addObject("answer", answerVo);
+		mav.setViewName("museum_qnaDetail");
 		return mav;
 	}
 

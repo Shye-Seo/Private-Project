@@ -326,3 +326,109 @@ p.total_red {
     border-bottom: 1px solid #D2D2D2;
     justify-content: space-between;
 }
+
+.title_link{
+	cursor: pointer;
+}
+
+/*------------Q&A 비밀번호 일치여부 확인 모달------------*/
+#check_modal {
+    position: fixed;
+    width:100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    display: none;
+}
+
+.check_modal_content {
+    width: 550px;
+    height: 560px;
+    position: absolute;
+    top: calc(13%);
+    left: calc(13%);
+    background: #fff;
+    border: none;
+    padding: 80px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.12);
+}
+
+#check_modal_content_wrap {
+    box-sizing: border-box;
+    height: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 27px;
+}
+
+#check_modal_img {
+    width: 130px;
+}
+
+.check_title {
+    color: #222;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.72px;
+    margin-bottom: 10px;
+}
+
+.check_detail {
+    color: #6B6B6B;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.66px;
+}
+
+#check_pw {
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 12.1px;
+    height: 52px;
+    background: #FFF;
+    border: none;
+}
+
+#modal_pw_input input:focus {outline: none;}
+
+#modal_pw_input {
+    border-bottom: 1px solid #B0B0B0;
+}
+
+.check_modal_layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #33333326;
+    z-index: -1;
+}
+
+#check_modal_ok_btn {
+    background: #F43F1F;
+    width: 390px;
+    height: 50px;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+}

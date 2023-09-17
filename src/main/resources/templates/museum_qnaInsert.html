@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/qnaInsert.css">
+    <title>부산영화체험박물관 | Q&amp;A</title>
+    <script src="/js/common.js"></script>
+    
+    <script src="js/qna_register.js"></script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
+        <li class="category_1">소통</li></li><li class="div_bar">|</li>
+        <li class="category_2">Q&amp;A</li></li><li class="div_bar">|</li>
+<!--        <li class="category_3">공고</li></li><li class="div_bar">|</li>-->
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>Q&amp;A</h1></div>
+		</div>
+	</div>
+	<div class="insert_wrap">
+		<div class="qna_title">
+			<div>문의하기</div>
+		</div>
+		<form name="questionAddForm" action="/questionAdd" enctype="multipart/form-data" method="post" onsubmit="return false">
+		<div class="table_area">
+				
+			<div class="question_writer">
+				<div class="left_title">작성자</div>
+				<div class="right_title"><input type="text" name="question_writer" class="required" placeholder="작성자 이름을 입력해주세요."></div>
+			</div>
+			<div class="question_phone">
+				<div class="left_title">연락처</div>
+				<div class="right_title"><input type="text" name="question_phone" class="required" placeholder="하이픈(-)을 제외하고 입력해주세요."></div>
+			</div>
+			<div class="question_title">
+				<div class="left_title">제목</div>
+				<div class="right_title"><input type="text" name="question_title" class="required" placeholder="제목을 입력해주세요."></div>
+			</div>
+			<div class="question_content">
+				<div class="left_title">내용</div>
+				<div class="right_title">
+					<textarea name="question_content" class="required" placeholder="내용을 입력해주세요." maxlength="1000" onkeydown="resize(15,100,this)"></textarea>
+				</div>
+			</div>
+			<div class="question_pw">
+				<div class="left_title">비밀번호</div>
+				<div class="right_title"><input type="text" name="question_pw" class="required" placeholder="비밀번호를 6자리(숫자)를 입력해주세요."></div>
+			</div>
+		</div>
+		
+			<div class="agree_area">
+				<div class="agree_contents">
+					<div class="agree_title">
+						<div>개인정보 수집 및 이용에 동의</div>
+					</div>
+					<div class="agree_txtbox">
+						<div class="text_top">
+							&lt;개인정보 수집 및 이용에 동의&gt;
+						</div>
+						<div class="text_content"> <!--내용 변경 필요-->
+							1. 수집/이용 목적 : 단체예약에 대한 고객요청 처리 및 결과 회신 <br/>
+							2. 수집하는 항목 : 이름, 연락처, 주소, 이메일 <br/>
+							3. 보유 / 이용 기간 : 고객요청 처리 후 3개월 <br/>
+							4. 동의를 거부할 수 있으며, 거부시 이용이 제한될 수 있습니다.
+						</div>
+					</div>
+					<div class="agree_btnArea">
+						<input type="checkbox" id="agree_check" name="agree_check">
+						<label for="agree_check"></label>
+						<div class="agree_text">개인정보의 수집 및 이용에 동의합니다</div>
+					</div>
+				</div>
+			</div>
+			<div class="btn_wrap">
+            	<button type="button" id="cancel_btn" onclick="location.href='museum_qnaList'">취소</button>
+                <button type="button" id="submit_btn">등록</button>
+            </div>
+		</form>
+	</div>
+</div>
+</body>
+</html>

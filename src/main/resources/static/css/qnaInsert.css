@@ -1,0 +1,271 @@
+@charset "utf-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+* {
+    margin: 0;
+}
+
+.wrap{
+	width: 100%;
+    margin: 0 auto;
+}
+
+.contents_wrap{
+/*	height: 170px;*/
+}
+
+.page_title{
+	border-bottom: 2px solid black;
+    width: 62.5%;
+    margin: 0 auto;
+}
+
+.page_name_area {
+    /* text-align: center; */
+    /* margin: 100px auto; */
+    font-size: x-large;
+    margin-top: 108px;
+    margin-bottom: 50px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    box-sizing: border-box;
+}
+
+.qna_title{
+	width: 62.5%;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.qna_title div{
+	margin-bottom: 35px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.table_area{
+	margin-bottom: 100px;
+	width: 62.5%;
+	margin: 0 auto;
+}
+
+.left_title {
+    background: #F5F5F5;
+    padding-left: 30px;
+    width: 20%;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -0.48px;
+}
+
+.right_title {
+    padding-left: 30px;
+    width: 80%;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+    display: flex;
+    align-items: center;
+}
+
+.question_writer, .question_phone, .question_title, .question_content, .question_pw{
+	display: flex;
+	border-bottom: 1px solid #D2D2D2;
+}
+
+.question_writer{
+	border-top: 1px solid #D2D2D2;
+}
+
+.question_writer, .question_phone, .question_title, .question_pw{
+	height: 92px;
+	line-height: 92px;
+}
+
+input[type="text"] {
+    border-radius: 5px;
+    border: 1px solid #B0B0B0;
+    height: 52px;
+    font-family: pretendard;
+    padding-left: 30px;
+    box-sizing: border-box;
+    width: 95%;
+}
+
+.question_content {
+    min-height: 302px;
+}
+
+.question_content .left_title {
+    line-height: 92px;
+}
+
+.question_content textarea {
+    border-radius: 5px;
+    border: 1px solid #B0B0B0;
+    min-height: 262px;
+    width: 95%;
+    font-family: Pretendard;
+    padding: 15px 30px;
+    box-sizing: border-box;
+}
+
+.agree_area {
+    width: 62.5%;
+    /* height: 300px; */
+    margin: 50px auto 70px auto;
+}
+
+.agree_title div{
+	margin-bottom: 30px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.agree_txtbox{
+	border: 1px solid #D2D2D2;
+    padding: 30px;
+}
+
+.text_top {
+    margin-bottom: 30px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: -0.54px;
+}
+
+.text_content {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.48px;
+}
+
+#agree_check{
+	display: none;
+}
+
+.agree_contents input[type="checkbox"] + label {
+	display: inline-block;
+	width:25px; 
+	height: 25px; 
+	background: #FFF;
+	cursor: pointer; 
+	border-radius: 50%;
+	border: 1px solid #DFDFDF;
+    margin-right: 10px;
+}
+
+.agree_text{
+	color: #222;
+    font-family: 'Pretendard';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 25px;
+    letter-spacing: -0.6px;
+}
+
+.agree_contents input[type="checkbox"]:checked + label {
+	background:url(../imgs/check_icon.png) no-repeat center/25px 25px; 
+	float: right;
+	border: 1px solid rgba(244, 63, 31, 1);
+}
+
+.agree_btnArea {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.btn_wrap {
+    width: 62.5%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 30px;
+    box-sizing: border-box;
+    margin-bottom: 100px;
+}
+
+#cancel_btn {
+    display: inline-flex;
+    padding: 10px 46px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #F43F1F;
+    background: #FFF;
+    color: #F43F1F;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+#submit_btn {
+    display: inline-flex;
+    padding: 10px 46px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #F43F1F;
+    border: 1px solid #F43F1F;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+}

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.voucher.movie.admin.AnswerVO;
+import com.voucher.movie.admin.QuestionVO;
 import com.voucher.movie.mappers.BoardDao;
 
 @Service
@@ -136,5 +138,34 @@ public class BoardService {
 
 	public List<NoticeFileVo> viewNoticeFileDetail(int notice_id) {
 		return boardDao.viewNoticeFileDetail(notice_id);
+	}
+	
+	/*-------------Q&A--------*/
+	public int findAllQuestions() {
+		return boardDao.findAllQuestions();
+	}
+
+	public List<QuestionVO> findQuestionPaging(int startIndex, int pageSize) {
+		return boardDao.findQuestionPaging(startIndex, pageSize);
+	}
+	
+	public List<QuestionVO> qna_searchList(String searchKeyword, int startIndex, int pageSize) {
+		return boardDao.qna_searchList(searchKeyword, startIndex, pageSize);
+	}
+
+	public boolean insertQuestion(QuestionVO questionvo) {
+		return boardDao.insertQuestion(questionvo);
+	}
+	
+	public QuestionVO viewQuestionDetail(int question_id) {
+		return boardDao.viewQuestionDetail(question_id);
+	}
+	
+	public AnswerVO viewAnswerDetail(int question_id) {
+		return boardDao.viewAnswerDetail(question_id);
+	}
+
+	public int check_qna_pw(int question_id, int question_pw) {
+		return boardDao.check_qna_pw(question_id, question_pw);
 	}
 }

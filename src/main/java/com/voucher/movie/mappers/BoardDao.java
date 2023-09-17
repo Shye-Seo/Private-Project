@@ -2,10 +2,13 @@ package com.voucher.movie.mappers;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import com.voucher.movie.admin.AnswerVO;
+import com.voucher.movie.admin.QuestionVO;
 import com.voucher.movie.board.EduFileVo;
 import com.voucher.movie.board.EduVO;
 import com.voucher.movie.board.EventFileVo;
@@ -115,4 +118,27 @@ public interface BoardDao {
 
 	@Select("select * from notice_files where notice_id = #{notice_id}")
 	List<NoticeFileVo> viewNoticeFileDetail(int notice_id);
+	
+	// --------------- Q&A 관련 --------------
+	@Select("select count(*) from qna_question")
+	int findAllQuestions(); //Q&A 전체 count
+	
+	@Select("select * from qna_question order by id desc limit #{startIndex}, #{pageSize}")
+	List<QuestionVO> findQuestionPaging(int startIndex, int pageSize);
+	
+	@Select("select * from qna_question where question_title like concat('%','${searchKeyword}','%') order by id desc limit #{startIndex}, #{pageSize}")
+	List<QuestionVO> qna_searchList(String searchKeyword, int startIndex, int pageSize);
+
+	@Insert("insert into qna_question (question_writer, question_title, question_phone, question_content, question_pw, question_status, create_date)"
+			+ " values (#{question_writer}, #{question_title}, #{question_phone}, #{question_content}, #{question_pw}, 0, sysdate())")
+	boolean insertQuestion(QuestionVO questionvo);
+	
+	@Select("select * from qna_question where id = #{question_id}")
+	QuestionVO viewQuestionDetail(int question_id); //문의글 상세-문의글 가져오기
+	
+	@Select("select * from qna_answer where question_id = #{question_id}")
+	AnswerVO viewAnswerDetail(int question_id); //문의글 상세-문의글에 대한 답변 가져오기
+
+	@Select("select count(*) from qna_question where id = #{question_id} and question_pw = #{question_pw}")
+	int check_qna_pw(int question_id, int question_pw); //문의글 비밀번호 일치여부 check
 }
