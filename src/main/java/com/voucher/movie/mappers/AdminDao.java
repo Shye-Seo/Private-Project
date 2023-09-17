@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.voucher.movie.admin.AdminVO;
+import com.voucher.movie.admin.AnswerVO;
 import com.voucher.movie.board.EduFileVo;
 import com.voucher.movie.admin.PopupVO;
 import com.voucher.movie.admin.QuestionVO;
@@ -353,4 +354,33 @@ public interface AdminDao {
 	
 	@Select("select * from qna_question order by id desc limit #{startIndex}, #{pageSize}")
 	List<QuestionVO> findQuestionPaging(int startIndex, int pageSize);
+	
+	@Select("select * from qna_question where id = #{question_id}")
+	QuestionVO viewQuestionDetail(int question_id); //문의글 상세-문의글 가져오기
+	
+	@Select("select * from qna_answer where question_id = #{question_id}")
+	AnswerVO viewAnswerDetail(int question_id); //문의글 상세-문의글에 대한 답변 가져오기
+
+	@Delete("delete from qna_question where id = #{c}")
+	boolean question_delete(String c); //문의글 삭제
+	
+	@Delete("delete from qna_answer where question_id = #{c}")
+	boolean answer_delete_all(String c); //문의글 삭제 시, 답변 같이 삭제
+
+	@Delete("delete from qna_question where id = #{question_id}")
+	boolean question_delete_one(int question_id);
+	
+	@Delete("delete from qna_answer where question_id = #{question_id}")
+	boolean answer_delete_one(int question_id); //문의글 삭제 시, 답변 같이 삭제
+
+	@Insert("insert into qna_answer (question_id, answer_title, answer_content, create_date) "
+			+ "values (#{question_id}, #{answer_title}, #{answer_content}, sysdate())")
+	boolean insertAnswer(AnswerVO answervo); //문의글에 답변 등록
+
+	@Delete("delete from qna_answer where id = #{answer_id}")
+	boolean answer_delete(int answer_id);
+
+	@Update("update qna_answer set answer_title = #{answer_title}, answer_content = #{answer_content},"
+			+ " update_date = sysdate() where question_id = #{question_id}")
+	boolean updateAnswer(AnswerVO answerVo);
 }

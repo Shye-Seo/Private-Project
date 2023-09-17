@@ -534,3 +534,113 @@ button{
     display: flex;
     width: 60%;
 }
+
+/*--------Q&A 리스트----------*/
+.list #top_ol_qna {
+    border-top: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 3px 6px #0000000d;
+    align-items: center;
+    background: #FFE9E5;
+    color: #4B4B4B;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
+}
+
+#top_ol_qna div li {
+    display:inline-block;
+    margin-top:17.5px;
+    margin-bottom:17.5px;
+    color: #666666;
+}
+
+.qnaTitle_area {
+    height: 46px;
+    padding: 15px 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    width: 50%;
+}
+
+.qnaTitle_area a {
+    display: flex;
+}
+
+.list_board .qnaTitle_area {
+    align-items: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.qnaWriter_area{
+	height: 46px;
+    padding: 15px 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    width: 13.5%;
+}
+
+.qnaDate_area {
+    height: 46px;
+    padding: 15px 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    width: 13.5%;
+}
+
+.status_button_waiting {
+    display: flex;
+    width: 60px;
+    height: 20px;
+    padding: 8px 2px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    background: #4B4B4B;
+    border: 1px solid #4B4B4B;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.status_button_complete {
+    display: flex;
+    width: 60px;
+    height: 20px;
+    padding: 8px 2px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #4B4B4B;
+	background: #FFF;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    color: #4B4B4B;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}

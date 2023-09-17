@@ -411,23 +411,9 @@ public class BoardController {
 	    
 		boardService.insertQuestion(questionvo);
 		
-		return "/museum_qnaDetail?id="+questionvo.getId();
-	}
-	
-	//문의글 조회 시 - 비밀번호 일치여부 확인
-	@RequestMapping(value="/museum_qna_pwCheck", method=RequestMethod.GET)
-	public String museum_qna_pwCheck(@RequestParam("id") int question_id, @RequestParam("pw") int question_pw) throws Exception {
+		int question_id = boardService.get_question_Id();
 		
-		
-		int check = boardService.check_qna_pw(question_id, question_pw);
-		System.out.println("결과 : "+check);
-		
-		if(check == 1) {
-			return "/museum_qnaDetail?id="+question_id;
-		}else {
-			return "/museum_qnaList";
-		}
-		
+		return "/museum_qnaDetail?id="+question_id;
 	}
 	
 	//문의글 조회
@@ -436,9 +422,18 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		QuestionVO detailVo = boardService.viewQuestionDetail(question_id);
 		AnswerVO answerVo = boardService.viewAnswerDetail(question_id);
-				
+		
+		String question_date = detailVo.getCreate_date();
+    	question_date = question_date.substring(0, 4) + "." + question_date.substring(5, 7) +"." + question_date.substring(8, 10);
+    	detailVo.setCreate_date(question_date);
+    	
+		if(answerVo != null) {
+			String answer_date = answerVo.getCreate_date();
+			answer_date = answer_date.substring(0, 4) + "." + answer_date.substring(5, 7) +"." + answer_date.substring(8, 10);
+	    	answerVo.setCreate_date(answer_date);
+			mav.addObject("answer", answerVo);
+		}
 		mav.addObject("question", detailVo);
-		mav.addObject("answer", answerVo);
 		mav.setViewName("museum_qnaDetail");
 		return mav;
 	}

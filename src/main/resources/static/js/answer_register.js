@@ -1,12 +1,8 @@
 $(function () {
             
             //필수값 체크
-            $('#submit_btn').click(function(){
+            $('#answer_submit_btn').click(function(){
                 let result = true;
-                if(!$('input[name=agree_check]').is(":checked")){
-					alert("개인정보 수집 및 이용에 동의해주세요.");
-					return false;
-				}
                 $('.required').each(function(){
                     if($(this).val() == ""){
                         $(this).focus();
@@ -15,23 +11,20 @@ $(function () {
                     }
                 })
                 if(!result) return false;
-                submitDate('/questionAdd');
+                submitDate('/answerAdd');
             })
-            $('#update_btn').click(function(){
+            $('#answer_update_btn').click(function(){
                 let result = true;
-                if(!$('input[name=agree_check]').is(":checked")){
-					alert("개인정보 수집 및 이용에 동의해주세요.");
-					return false;
-				}
-                $('.required').each(function(){
+                $('.required_update').each(function(){
                     if($(this).val() == ""){
                         $(this).focus();
                         result = false;
                         return false;
                     }
                 })
+                debugger;
                 if(!result) return false;
-                submitDate('/questionUpdate');
+                UpdateDate('/answerUpdate');
             })
             
         });
@@ -39,10 +32,35 @@ $(function () {
 
         // form submit
         function submitDate(actionUrl){
-            if (confirm("등록 하시겠습니까?") == true){
+            if (confirm("등록하시겠습니까?") == true){
 
                 // var uploadFileList = Object.keys(fileList);
-                var form = $('form[name="questionAddForm"]');
+                var form = $('form[name="answerAddForm"]');
+                var formData = new FormData(form[0]);
+
+                $.ajax({
+                    url : actionUrl,
+                    data : formData,
+                    type : 'POST',
+                    enctype : 'multipart/form-data',
+                    processData : false,
+                    contentType : false,
+                    cache : false,
+                    success : function (result) {
+                        window.location.href= result;
+                    }
+                });
+                } else {
+                    return false;
+                }
+        }
+        
+                // form submit
+        function UpdateDate(actionUrl){
+            if (confirm("수정하시겠습니까?") == true){
+
+                // var uploadFileList = Object.keys(fileList);
+                var form = $('form[name="answerUpdateForm"]');
                 var formData = new FormData(form[0]);
 
                 $.ajax({

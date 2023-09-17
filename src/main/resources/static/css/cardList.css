@@ -1,6 +1,26 @@
 @charset "utf-8";
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 * {
     margin: 0;
 }
@@ -349,9 +369,20 @@ p.total_red {
     left: calc(13%);
     background: #fff;
     border: none;
-    padding: 80px;
+    padding: 20px 20px 80px 80px;
     box-sizing: border-box;
     box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.12);
+}
+
+.modal_close_area {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 60px;
+}
+
+#modal_close_btn {
+    width: 20px;
+    cursor: pointer;
 }
 
 #check_modal_content_wrap {
@@ -431,4 +462,27 @@ p.total_red {
     line-height: normal;
     border: none;
     cursor: pointer;
+}
+
+.button_area_qna {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button_area_qna .insert_btn {
+    display: inline-flex;
+    padding: 10px 46px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #F43F1F;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
 }

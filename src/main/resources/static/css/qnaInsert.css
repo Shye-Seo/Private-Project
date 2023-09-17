@@ -269,3 +269,216 @@ input[type="text"] {
     line-height: normal;
     cursor: pointer;
 }
+
+/*------Q&A 상세페이지------*/
+.page_title_qna {
+    width: 62.5%;
+    margin: 0 auto;
+}
+
+.qna_wrap {
+    width: 62.5%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.question_title_area {
+    display: flex;
+    justify-content: space-between;
+    background: #F5F5F5;
+    height: 73px;
+    align-items: center;
+    padding: 22px 30px;
+    box-sizing: border-box;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #A6A6A6;
+}
+
+.answer_title_area{
+	display: flex;
+    justify-content: space-between;
+    background: #F5F5F5;
+    height: 73px;
+    align-items: center;
+    padding: 22px 30px;
+    box-sizing: border-box;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #A6A6A6;
+}
+
+.question_detail_title, .answer_detail_title {
+    display: flex;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.qna_division_q {
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    background: #222;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    margin-right: 13px;
+}
+
+.qna_division_a {
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    background: #F43F1F;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    margin-right: 13px;
+}
+
+.question_small_text, .answer_small_text {
+    display: flex;
+    color: #767676;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.42px;
+}
+
+#question_div_bar, #answer_div_bar {
+    color: #D2D2D2;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.question_content_area, .answer_content_area {
+    padding: 50px 30px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #000;
+}
+
+.question_content_area textarea {
+    background-color: #ffffff;
+    resize: none;
+    box-sizing: border-box;
+    border: 0;
+    font-size: 16px;
+    width: 100%;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+
+.answer_content_area textarea {
+    background-color: #ffffff;
+    resize: none;
+    box-sizing: border-box;
+    border: 0;
+    width: 100%;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+
+.none_answer_area {
+    padding: 50px 0 0 0;
+    box-sizing: border-box;
+}
+
+.none_answer_area p {
+    color: #222;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+
+.btn_wrap_qna {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.btn_right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#delete_btn {
+    display: inline-flex;
+    padding: 10px 46px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #222;
+    box-sizing: border-box;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#update_btn {
+    display: inline-flex;
+    padding: 10px 46px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #222;
+    box-sizing: border-box;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+}
+
+#list_btn {
+    display: inline-flex;
+    padding: 10px 46px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #F43F1F;
+    background: #FFF;
+    color: #F43F1F;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    cursor: pointer;
+}

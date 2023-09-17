@@ -86,7 +86,7 @@ $(function () {
 
         // form submit
         function submitDate(actionUrl){
-            if (confirm("등록 하시겠습니까?") == true){
+            if (confirm("등록하시겠습니까?") == true){
 
                 for(let i = 0; i < deleteFileNameList_thumbnail.length; i++){
                     $('form[name="popupAddForm"]').append("<input type='hidden' name='deleteFileNameList_thumbnail' value='"+deleteFileNameList_thumbnail[i]+"'/>")

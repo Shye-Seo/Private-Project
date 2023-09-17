@@ -141,4 +141,7 @@ public interface BoardDao {
 
 	@Select("select count(*) from qna_question where id = #{question_id} and question_pw = #{question_pw}")
 	int check_qna_pw(int question_id, int question_pw); //문의글 비밀번호 일치여부 check
+
+	@Select("select id from qna_question order by id desc limit 1")
+	int get_question_Id();
 }

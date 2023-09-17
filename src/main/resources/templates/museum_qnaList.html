@@ -135,8 +135,11 @@
                 <!-- 비밀번호 일치여부 체크 모달 -->
                 <div id="check_modal">
 				    <div class="check_modal_content">
+						<div class="modal_close_area">
+							<img src="/imgs/close_btn_black.svg" id="modal_close_btn">
+						</div>
 				        <div id="check_modal_content_wrap">
-							<input type="text" id="question_id">
+							<input type="hidden" id="question_id">
 					        <img src="/imgs/lock_icon.png" id="check_modal_img">
 						    <div id="modal_content_text">
 						    	<p class="check_title">비공개 글입니다.</p>
@@ -164,6 +167,9 @@
 						function pwCheck_modal(id){
 							document.getElementById("check_modal").style.display="block";
 							$('#question_id').val(id);
+						}
+						document.getElementById("modal_close_btn").onclick = function() {
+						    document.getElementById("check_modal").style.display="none";
 						}
 						document.getElementById("check_modal_ok_btn").onclick = function() {
 							var id = $('#question_id').val();

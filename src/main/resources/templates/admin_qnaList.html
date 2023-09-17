@@ -28,12 +28,12 @@
                 <div class="area">
 
                     <ul class="list">
-                        <ol id="top_ol">
+                        <ol id="top_ol_qna">
 							<div class="check_area"><li><input type="checkbox" onclick='selectAll(this)'></li></div>
                             <div class="num_area"><li>NO</li></div>
-                            <div class="newsTitle_area"><li>제목</li></div>
-                            <div class="newsWriter_area"><li>작성자</li></div>
-                            <div class="newsDate_area"><li>등록일</li></div>
+                            <div class="qnaTitle_area"><li>제목</li></div>
+                            <div class="qnaWriter_area"><li>작성자</li></div>
+                            <div class="qnaDate_area"><li>등록일</li></div>
                         </ol>
 						<ol th:each="question : ${question_list}" class="list_board">
 							<div class="check_area">
@@ -44,19 +44,19 @@
 								<li>[[${question.id}]]</li>
 							</div>
 							
-							<div class="newsTitle_area">
-								<a th:href="@{admin_questionDetail(id=${question.id})}">
-									<li th:if="${question.question_status == 0}" class="status_button">대기</li>
-									<li th:if="${question.question_status == 1}" class="status_button">답변완료</li>
+							<div class="qnaTitle_area">
+								<a th:href="@{admin_qnaDetail(id=${question.id})}">
+									<li th:if="${question.question_status == 0}" class="status_button_waiting">대기</li>
+									<li th:if="${question.question_status == 1}" class="status_button_complete">답변완료</li>
 									<li>[[${question.question_title}]]</li>
 								</a>
 							</div>
 							
-							<div class="newsWriter_area">
+							<div class="qnaWriter_area">
 								<li>[[${question.question_writer}]]</li>
 							</div>
 							
-							<div class="newsDate_area">
+							<div class="qnaDate_area">
 								<li>[[${question.create_date}]]</li>
 							</div>
 							

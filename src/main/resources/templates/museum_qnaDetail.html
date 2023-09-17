@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/qnaInsert.css">
+    <title>부산영화체험박물관 | Q&amp;A</title>
+    <script src="/js/common.js"></script>
+    
+    <script>
+		$(function(){
+			$('#question_content').height( $('#question_content').prop('scrollHeight') );
+			$('#answer_content').height( $('#answer_content').prop('scrollHeight') );
+		})
+	</script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
+        <li class="category_1">소통</li></li><li class="div_bar">|</li>
+        <li class="category_2">Q&amp;A</li></li><li class="div_bar">|</li>
+<!--        <li class="category_3">공고</li></li><li class="div_bar">|</li>-->
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title_qna">
+			<div class="page_name_area"><h1>Q&amp;A</h1></div>
+		</div>
+	</div>
+	<div class="qna_wrap">
+		<div class="question_area">
+			<div class="question_title_area">
+				<div class="question_detail_title">
+					<div class="qna_division_q">Q</div>
+					[(${question.question_title})]
+				</div>
+				<div class="question_small_text">
+					<p>[(${question.question_writer})]</p>
+					<p id="question_div_bar">|</p>
+					<p>[(${question.create_date})]</p>
+				</div>
+			</div>
+			<div class="question_content_area">
+				<textarea name="question_content" id="question_content" spellcheck="false" disabled>[(${question.question_content})]</textarea>
+			</div>
+		</div>
+		
+		<div class="answer_area" th:if="${answer != null}">
+			<div class="answer_title_area">
+				<div class="answer_detail_title">
+					<div class="qna_division_a">A</div>
+					[(${answer.answer_title})]
+				</div>
+				<div class="answer_small_text">
+					<p>관리자</p>
+					<p id="answer_div_bar">|</p>
+					<p>[(${answer.create_date})]</p>
+				</div>
+			</div>
+			<div class="answer_content_area">
+				<textarea name="answer_content" id="answer_content" spellcheck="false" disabled>[(${answer.answer_content})]</textarea>
+			</div>
+		</div>
+		<div class="none_answer_area" th:if="${answer == null}">
+			<p>답변된 내용이 없습니다.</p>
+		</div>
+			<div class="btn_wrap_qna">
+				<div class="btn_right">
+                	<button type="button" id="delete_btn">삭제</button>
+                	<button type="button" id="update_btn">수정</button>
+                </div>
+            	<button type="button" id="list_btn" onclick="location.href='museum_qnaList'">목록</button>
+            </div>
+	</div>
+</div>
+</body>
+</html>

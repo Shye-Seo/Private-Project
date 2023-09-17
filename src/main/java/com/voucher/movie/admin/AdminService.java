@@ -456,4 +456,40 @@ public class AdminService {
 	public List<QuestionVO> findQuestionPaging(int startIndex, int pageSize) {
 		return adminDao.findQuestionPaging(startIndex, pageSize);
 	}
+	
+	public QuestionVO viewQuestionDetail(int question_id) {
+		return adminDao.viewQuestionDetail(question_id);
+	}
+	
+	public AnswerVO viewAnswerDetail(int question_id) {
+		return adminDao.viewAnswerDetail(question_id);
+	}
+	
+	public boolean question_delete(String c) {
+		return adminDao.question_delete(c);
+	}
+
+	public boolean answer_delete_all(String c) {
+		return adminDao.answer_delete_all(c);
+	}
+
+	public boolean question_delete_one(int question_id) {
+		return adminDao.question_delete_one(question_id);
+	}
+	
+	public boolean answer_delete_one(int question_id) {
+		return adminDao.answer_delete_one(question_id);
+	}
+
+	public boolean insertAnswer(AnswerVO answervo) {
+		return adminDao.insertAnswer(answervo);
+	}
+
+	public boolean answer_delete(int answer_id) {
+		return adminDao.answer_delete(answer_id);
+	}
+
+	public boolean updateAnswer(AnswerVO answerVo) {
+		return adminDao.updateAnswer(answerVo);
+	}
 }

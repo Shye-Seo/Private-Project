@@ -1299,7 +1299,7 @@ public class AdminController {
 		//공고 등록(post)
 		@ResponseBody
 		@RequestMapping(value="/noticeAdd", method=RequestMethod.POST)
-		public String admin_notice_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute NoticeVO noticevo, ModelMap model,@RequestAttribute List<MultipartFile> notice_file) throws Exception {
+		public String admin_notice_register(HttpServletRequest request, MultipartHttpServletRequest multipartRequest, @ModelAttribute NoticeVO noticevo, ModelMap model, @RequestAttribute List<MultipartFile> notice_file) throws Exception {
 			
 			// 오늘 날짜
 		    LocalDate now = LocalDate.now();
@@ -1373,12 +1373,8 @@ public class AdminController {
 		@RequestMapping(value="/noticeUpdate", method=RequestMethod.POST)
 		public String noticeUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute NoticeVO noticeVo, @RequestAttribute("notice_file") List<MultipartFile> notice_file) throws Exception{
 				
-//			String oldFilename = adminService.getOldEduPoster(eduVo.getId());
 			//지울 파일 리스트
 			String[] deleteFileNameList = multipartRequest.getParameterValues("deleteFileNameList");
-//			String[] deleteFileNameList_thumbnail = multipartRequest.getParameterValues("deleteFileNameList_thumbnail");
-//			System.out.println("deletefile = "+deleteFileNameList);
-				
 			//수정 시 지운파일 삭제
 			if(deleteFileNameList != null) {
 				for( String name : deleteFileNameList) {
@@ -1387,21 +1383,6 @@ public class AdminController {
 					System.out.println("deletefile = "+name);
 				}
 			}
-				
-//			if(deleteFileNameList_thumbnail != null) {
-//				for( String name : deleteFileNameList_thumbnail ) {
-//					s3Service.delete_s3Edu(name);
-//				}
-//			}
-				
-//			MultipartFile eduPoster = multipartRequest.getFile("thumbnail_file");
-//			if(eduPoster.getOriginalFilename() != "") {
-//				String filename = s3Service.upload_Eduposter(eduPoster);
-//				System.out.println("s3 insert ok => "+filename);
-//				eduVo.setEdu_poster(filename);
-//			}else {
-//				eduVo.setEdu_poster(oldFilename);
-//			}
 				
 			//행사 내용 수정
 			adminService.updateNotice(noticeVo);
@@ -1475,4 +1456,90 @@ public class AdminController {
 			return "/admin_qnaList";
 		}
 		
+		//Q&A 조회_관리자
+		@RequestMapping(value="/admin_qnaDetail", method=RequestMethod.GET)
+		public ModelAndView qnaDetail(@RequestParam("id") int question_id) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			QuestionVO detailVo = adminService.viewQuestionDetail(question_id);
+			AnswerVO answerVo = adminService.viewAnswerDetail(question_id);
+				
+			String question_date = detailVo.getCreate_date();
+	    	question_date = question_date.substring(0, 4) + "." + question_date.substring(5, 7) +"." + question_date.substring(8, 10);
+	    	detailVo.setCreate_date(question_date);
+	    	
+			if(answerVo != null) {
+				String answer_date = answerVo.getCreate_date();
+				answer_date = answer_date.substring(0, 4) + "." + answer_date.substring(5, 7) +"." + answer_date.substring(8, 10);
+		    	answerVo.setCreate_date(answer_date);
+				mav.addObject("answer", answerVo);
+			}
+			mav.addObject("question", detailVo);
+			mav.setViewName("admin_qnaDetail");
+			return mav;
+		}
+		
+		//Q&A 삭제
+		@ResponseBody
+		@RequestMapping(value = "question_delete", method = RequestMethod.POST)
+		public String question_delete(HttpServletRequest request, ModelMap modelMap,
+									@RequestParam(value = "check[]", defaultValue = "") List<String> check) {
+
+			int cnt = 0;
+
+			for (String c : check) {
+				adminService.question_delete(c);
+				adminService.answer_delete_all(c);
+			}
+			return String.valueOf(cnt);
+		}
+		
+		
+		//Q&A 각 상세글에서 삭제
+		@ResponseBody
+		@RequestMapping(value = "question_delete_one", method = RequestMethod.POST)
+		public String question_delete_one(HttpServletRequest request, ModelMap modelMap, @RequestParam("id") int question_id) {
+
+			AnswerVO answerVo = adminService.viewAnswerDetail(question_id);
+			
+			adminService.question_delete_one(question_id);
+			if(answerVo != null) {
+				adminService.answer_delete_one(question_id);
+			}
+				
+			return String.valueOf(question_id);
+		}
+		
+		//문의글 답변 등록(post)
+		@ResponseBody
+		@RequestMapping(value="/answerAdd", method=RequestMethod.POST)
+		public String admin_answer_register(HttpServletRequest request, @ModelAttribute AnswerVO answervo, ModelMap model) throws Exception {
+			
+			adminService.insertAnswer(answervo);
+			
+			int question_id = answervo.getQuestion_id();
+		    
+			return "/admin_qnaDetail?id="+question_id;
+		}
+		
+		//문의글 답변 삭제
+		@ResponseBody
+		@RequestMapping(value = "answer_delete", method = RequestMethod.POST)
+		public String answer_delete(HttpServletRequest request, ModelMap modelMap, @RequestParam("id") int answer_id) {
+
+			
+			adminService.answer_delete(answer_id);
+				
+			return String.valueOf(answer_id);
+		}
+		
+		//문의글 답변 수정
+		@ResponseBody
+		@RequestMapping(value="/answerUpdate", method=RequestMethod.POST)
+		public String answerUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute AnswerVO answerVo) throws Exception{
+				
+			//답변 내용 수정
+			adminService.updateAnswer(answerVo);
+					
+			return "admin_qnaDetail?id="+answerVo.getQuestion_id();
+		}
 }

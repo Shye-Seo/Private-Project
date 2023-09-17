@@ -71,7 +71,7 @@ $(function () {
 
         // form submit
         function submitDate(actionUrl){
-            if (confirm("등록 하시겠습니까?") == true){
+            if (confirm("등록하시겠습니까?") == true){
 
                 for(let i = 0; i < deleteFileNameList.length; i++){
                     $('form[name="eventAddForm"]').append("<input type='hidden' name='deleteFileNameList' value='"+deleteFileNameList[i]+"'/>")

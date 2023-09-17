@@ -9,5 +9,6 @@ public class AnswerVO {
 	private int question_id;
 	private String answer_title;
 	private String answer_content;
+	private String create_date;
 	private String update_date;
 }

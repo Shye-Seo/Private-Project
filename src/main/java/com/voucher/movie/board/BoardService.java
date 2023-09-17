@@ -168,4 +168,8 @@ public class BoardService {
 	public int check_qna_pw(int question_id, int question_pw) {
 		return boardDao.check_qna_pw(question_id, question_pw);
 	}
+
+	public int get_question_Id() {
+		return boardDao.get_question_Id();
+	}
 }
