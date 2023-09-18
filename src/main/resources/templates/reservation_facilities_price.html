@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/reservation.css">
+    <title>부산영화체험박물관 | 대관요금</title>
+    <script type="text/javascript" src="/js/reservation.js"></script>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
+        <li class="category_1">관람정보</li></li><li class="div_bar">|</li>
+        <li class="category_2">대관안내</li></li><li class="div_bar">|</li>
+        <li class="category_3">대관요금</li></li><li class="div_bar">|</li>
+    </ul>
+</div>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>대관요금</h1></div>
+		</div>
+	</div>
+		<!-- 대관요금 안내 -->
+		<div class="reservation_wrap">
+			<div class="guide_area">
+					<div class="guide_title">
+						<div>대관요금 (부가세 포함)</div>
+					</div>
+					
+						<div class="rental_price_area">
+							<table class="rental_price_tb">
+								<tr class="rentalTable_top">
+									<td colspan="2" rowspan="2" class="tb_first_rental_div">구분</td>
+									<td colspan="3" class="tb_second_rental_div">대관료(원)</td>
+									<td class="tb_last_rental">비고</td>
+								</tr>
+								<tr class="rentalTable_bottom_first">
+									<td class="tb_second_rental">오전<br>(09:00-12:00)</td>
+									<td class="tb_second_rental">오후<br>(13:00-17:00)</td>
+									<td class="tb_second_rental">야간<br>(18:00-21:00)</td>
+									<td class="tb_last_rental">1일 3회</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td rowspan="4" class="tb_first_rental_merge">시설</td>
+									<td class="tb_first_rental">강의실</td>
+									<td class="tb_second_rental">40,000</td>
+									<td class="tb_second_rental">40,000</td>
+									<td class="tb_second_rental">60,000</td>
+									<td class="tb_last_rental">30석</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td class="tb_first_rental">다목적영상홀</td>
+									<td class="tb_second_rental">200,000</td>
+									<td class="tb_second_rental">200,000</td>
+									<td class="tb_second_rental">300,000</td>
+									<td class="tb_last_rental">210석</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td class="tb_first_rental">2층 전시실</td>
+									<td colspan="3" class="tb_second_rental_merge">별도 임대차 계약에 의함</td>
+									<td class="tb_last_rental">장기임대 가능</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td class="tb_first_rental">1층 로비</td>
+									<td class="tb_second_rental">50,000</td>
+									<td class="tb_second_rental">50,000</td>
+									<td class="tb_second_rental">50,000</td>
+									<td class="tb_last_rental">-</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td rowspan="3" class="tb_first_rental_merge">기자재</td>
+									<td class="tb_first_rental">빔프로젝트</td>
+									<td colspan="3" class="tb_second_rental">강의실 30,000원/회 ・ 다목적영상홀 50,000원/회</td>
+									<td class="tb_last_rental">스크린 포함 ・ 사용 시 요금 추가</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td class="tb_first_rental">노트북</td>
+									<td colspan="3" class="tb_second_rental">20,000원/대</td>
+									<td rowspan="2" class="tb_last_rental">대여 시 요금 추가</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td class="tb_first_rental">마이크</td>
+									<td colspan="3" class="tb_second_rental">10,000원/회</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td rowspan="2" class="tb_first_rental_merge">냉/난방</td>
+									<td class="tb_first_rental">강의실</td>
+									<td colspan="3" class="tb_second_rental">10,000원/회</td>
+									<td rowspan="2" class="tb_last_rental">면적에 따른 수도광열비(관리비) 차등 적용</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td class="tb_first_rental">다목적영상홀</td>
+									<td colspan="3" class="tb_second_rental">30,000원/회</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td rowspan="2" class="tb_first_rental_merge">기타</td>
+									<td class="tb_first_rental">무대 기술인력지원</td>
+									<td class="tb_second_rental">80,000</td>
+									<td class="tb_second_rental">80,000</td>
+									<td class="tb_second_rental">120,000</td>
+									<td class="tb_last_rental">-</td>
+								</tr>
+								<tr class="rentalTable_bottom">
+									<td class="tb_first_rental">영상홀</td>
+									<td colspan="3" class="tb_second_rental">100인 미만 100,000원/일 ・ 100인 이상 200,000원/일</td>
+									<td class="tb_last_rental">-</td>
+								</tr>
+							</table>
+						</div>
+					<div class="guide_content">
+						<li>
+							대관 사용에 따라 발생되는 폐기물의 처리비용은 사용자가 부담하여야 하며, 
+							박물관에 처리를 요청할 경우 1일(1회 포함) 사용인원이 100명 미만인 때에는 10만원, 100명 이상인 때에는 20만원의 청소
+							대행비를 대관료에 포함하여 납부하여야 합니다.
+						</li>
+						<li>사용시간의 기산은 제16조 제4항에 의거하여 전시/문화/교육 등을 위한 인원출입 또는 시설물 반입이 최초로 이루어진 때로 하며, 사용 종료시점은 사용 후 원상복구가 종료되는 때로 합니다.</li>
+						<li>대관료의 반환 기준은 아래와 같습니다.</li>
+					</div>
+					<div class="rental_rule_detail">
+						<p>
+						1. 천재지변 등 불가항력적 사유: 전액 환급<br>
+						2. 대관일 7일 전 취소: 전액 환급<br>
+						3. 대관일 전일까지 취소: 대관료 총액의 100분의 10을 공제 후 환급<br>
+						4. 대관일 이후 취소: 사용한 일수만큼 일할 계산한 금액과 대관료 총액의 100분의 10을 공제 후 나머지 환급<br>
+						</p>
+					</div>
+			</div>
+</body>
+</html>

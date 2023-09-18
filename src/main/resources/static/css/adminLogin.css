@@ -140,6 +140,11 @@ input:focus-visible {
     height: 20px;
 }
 
+.idcheck {
+    display: flex;
+    align-items: center;
+}
+
 .idcheck label {
     color: #222;
     font-family: Pretendard;
@@ -160,6 +165,7 @@ input:focus-visible {
     background: #FFF;
     border: 1px solid #D2D2D2;
     margin: auto;
+    margin-right: 10px;
 }
 
 .idcheck input[type="checkbox"]::before {
@@ -173,11 +179,13 @@ input:focus-visible {
     font-weight: 600;
     color: #fff;
     border: 1px solid #D2D2D2;
+    margin-right: 10px;
 }
 
 .idcheck input[type="checkbox"]:checked{
     background-color: #F43F1F;
     border: 1px solid #F43F1F;
+    margin-right: 10px;
 }
 
 .check_wrap .idfind span{

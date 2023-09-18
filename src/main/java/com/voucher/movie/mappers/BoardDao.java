@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.voucher.movie.admin.AnswerVO;
@@ -144,4 +145,14 @@ public interface BoardDao {
 
 	@Select("select id from qna_question order by id desc limit 1")
 	int get_question_Id();
+
+	@Update("update qna_question set question_writer = #{question_writer}, question_title = #{question_title}, question_phone = #{question_phone}, "
+			+ "question_content = #{question_content}, question_pw = #{question_pw}, question_status = #{question_status}, update_date = sysdate()")
+	boolean updateQuestion(QuestionVO questionVo);
+
+	@Select("select question_status from qna_question where id = #{id}")
+	int get_question_status(int id);
+
+	@Select("select id from qna_question where id = #{id}")
+	int get_detail_Id(int id);
 }

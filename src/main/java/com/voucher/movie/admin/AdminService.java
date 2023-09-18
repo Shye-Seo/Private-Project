@@ -492,4 +492,16 @@ public class AdminService {
 	public boolean updateAnswer(AnswerVO answerVo) {
 		return adminDao.updateAnswer(answerVo);
 	}
+
+	public boolean change_question_status(int question_id) {
+		return adminDao.change_question_status(question_id);
+	}
+	
+	public boolean revert_question_status(int question_id) {
+		return adminDao.revert_question_status(question_id);
+	}
+
+	public int get_answer_questionId(int answer_id) {
+		return adminDao.get_answer_questionId(answer_id);
+	}
 }

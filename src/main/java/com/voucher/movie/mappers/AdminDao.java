@@ -383,4 +383,13 @@ public interface AdminDao {
 	@Update("update qna_answer set answer_title = #{answer_title}, answer_content = #{answer_content},"
 			+ " update_date = sysdate() where question_id = #{question_id}")
 	boolean updateAnswer(AnswerVO answerVo);
+
+	@Update("update qna_question set question_status = 1 where id = #{question_id}")
+	boolean change_question_status(int question_id); //답변 등록 시 -> 해당 문의글 답변완료 상태로 set
+	
+	@Update("update qna_question set question_status = 0 where id = #{question_id}")
+	boolean revert_question_status(int question_id); //답변 삭제 시 -> 해당 문의글 대기 상태로 set
+
+	@Select("select question_id from qna_answer where id = #{answer_id}")
+	int get_answer_questionId(int answer_id);
 }

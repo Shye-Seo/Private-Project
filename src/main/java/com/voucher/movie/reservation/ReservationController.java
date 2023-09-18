@@ -717,4 +717,10 @@ public class ReservationController {
 			String filename = "[별지제1호]대관신청서.hwp";
 			return s3Service.getObject_application(filename);
 		}
+		
+		// 대관요금 안내페이지
+		@GetMapping(value="/reservation_facilities_price")
+		public String reservation_facilities_price() {
+			return "reservation_facilities_price";
+		}
 }

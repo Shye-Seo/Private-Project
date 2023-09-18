@@ -74,11 +74,56 @@
 		</div>
 			<div class="btn_wrap_qna">
 				<div class="btn_right">
-                	<button type="button" id="delete_btn">삭제</button>
-                	<button type="button" id="update_btn">수정</button>
+                	<input type="button" id="delete_btn" th:onclick="'delete_modal('+${question.id}+')'" value="삭제">
+                	<button type="button" id="update_btn" th:onclick="|location.href='@{museum_qnaUpdate(id=${question.id})}'|">수정</button>
                 </div>
             	<button type="button" id="list_btn" onclick="location.href='museum_qnaList'">목록</button>
             </div>
+            
+             <!-- 삭제 모달 -->
+                <div id="delete_modal">
+				    <div class="delete_modal_content">
+				        <div id="delete_modal_content_wrap">
+							<input type="hidden" id="question_id">
+						    <div id="modal_content_text">
+						    	<p class="delete_title">삭제하시겠습니까?</p>
+						    </div>
+						    <div id="modal_btn_div">
+						    	<button type="button" id="delete_modal_cancel_btn">취소</button>
+						    	<button type="button" id="delete_modal_ok_btn">확인</button>
+						    </div>
+				        </div>
+				    </div>
+			   		<div class="delete_modal_layer"></div>
+				</div>
+				
+				<script>
+						/* 모달창 띄우기 */
+						function delete_modal(id){
+							document.getElementById("delete_modal").style.display="block";
+							$('#question_id').val(id);
+						}
+						document.getElementById("delete_modal_cancel_btn").onclick = function() {
+						    document.getElementById("delete_modal").style.display="none";
+						}
+						document.getElementById("delete_modal_ok_btn").onclick = function() {
+							var id = $('#question_id').val();
+							
+							//삭제 확인 시, 모달 없애고 문의글 삭제 후 리스트로 이동
+							$.ajax({
+								url : 'question_delete_one',
+								type : 'post',
+								data : {id:id},
+								success : function(data) {
+										alert('삭제되었습니다.');
+										location.href = 'museum_qnaList';
+								},
+								error : function() {
+									alert("에러입니다");
+								}
+							});
+						}
+					</script>
 	</div>
 </div>
 </body>

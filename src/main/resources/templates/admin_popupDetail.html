@@ -38,14 +38,8 @@
 								</div> 
  							</div>  
  						</div> 
- 					<div class="img_area"> 
- 						<p class="con_title">팝업 이미지</p>
- 						<div class="poster_area">
-							  <img id="preview" class="in_profile" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/popup-folder/' +${popup.file_name}}" alt="poster_img">
-						</div>
- 					</div>
  					<div class="link_area">
- 						<p class="con_title">팝업 이동링크</p>
+ 						<p class="con_title">팝업링크</p>
  						<div class="youtube" th:if="${popup.click_link != ''}">
 							[(${popup.click_link})]
  						</div>
@@ -53,11 +47,17 @@
 							-
  						</div>
  					</div>
+ 					<div class="img_area"> 
+ 						<p class="con_title">팝업 이미지</p>
+ 						<div class="poster_area">
+							  <img id="preview" class="in_profile" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/popup-folder/' +${popup.file_name}}" alt="poster_img">
+						</div>
+ 					</div>
  				</span> 
 
 				<div class="btn_wrap">
- 					<button type="button" onclick="location.href='admin_popupList'">목록으로</button> 
- 					<button type="button" th:onclick="|location.href='@{admin_popup_update(id=${popup.id})}'|">수정하기</button> 
+ 					<button type="button" onclick="location.href='admin_popupList'" id="list_btn">목록</button> 
+ 					<button type="button" th:onclick="|location.href='@{admin_popup_update(id=${popup.id})}'|" id="update_btn">수정</button> 
 				</div>
 			</div>
 		</div>

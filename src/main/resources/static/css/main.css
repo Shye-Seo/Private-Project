@@ -7,8 +7,8 @@
 
 /*-----팝업 css-------*/
 .cont {
-    width: 449px;
-    height: 449px;
+    width: 530px;
+    height: 530px;
 }
 
 #popup{
@@ -18,29 +18,65 @@
 
 #popup_1, #popup_2{
 	display: none;
-	margin-left: 13.5%;
 	background-color: #000;
     z-index: 100;
     color: #FFF;
     position: absolute;
-    margin-top: 5.05%;
 }
 
 #popup_2 {
-     margin-top: 38%; 
+     margin-left: 530px;
 }
 
 .close {
     justify-content: space-between;
     display: flex;
-    height: 30px;
+    height: 36.6px;
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -0.48px;
 }
 
 .btnClose{
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+
+.btnClose img {
+    margin-left: 10px;
+}
+
+.btnTodayHide input[name="chkbox"] {
+	display: none;
+}
+
+.btnTodayHide {
+	display: flex;
+	align-items: center;
+}
+
+.btnTodayHide input[type="checkbox"] + label {
+	display: inline-block;
+	width:23px; 
+	height: 23px; 
+	background:url(../imgs/popup_non_check.svg) no-repeat center/23px 23px;
+	cursor: pointer; 
+    margin-right: 10px;
+}
+
+.btnTodayHide input[type="checkbox"]:checked + label {
+	background:url(../imgs/popup_check.svg) no-repeat center/23px 23px; 
+	float: left;
+	margin-right: 10px;
+	cursor: pointer; 
+	float: right;
 }
 
 .slide_box{

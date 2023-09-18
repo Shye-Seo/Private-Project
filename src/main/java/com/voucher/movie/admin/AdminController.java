@@ -1517,6 +1517,7 @@ public class AdminController {
 			adminService.insertAnswer(answervo);
 			
 			int question_id = answervo.getQuestion_id();
+			adminService.change_question_status(question_id);
 		    
 			return "/admin_qnaDetail?id="+question_id;
 		}
@@ -1526,8 +1527,10 @@ public class AdminController {
 		@RequestMapping(value = "answer_delete", method = RequestMethod.POST)
 		public String answer_delete(HttpServletRequest request, ModelMap modelMap, @RequestParam("id") int answer_id) {
 
+			int question_id = adminService.get_answer_questionId(answer_id);
 			
 			adminService.answer_delete(answer_id);
+			adminService.revert_question_status(question_id);
 				
 			return String.valueOf(answer_id);
 		}

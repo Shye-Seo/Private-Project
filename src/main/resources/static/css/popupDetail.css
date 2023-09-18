@@ -1,6 +1,7 @@
 
 
 /* main */
+
 .img_area, .link_area {
     display: flex;
     gap: 80px;
@@ -17,32 +18,9 @@
     width: 100%;
     height: 100%;
 }
-.area h2{
-    font-size: 20px;
-    margin-bottom: 30px;
-}
 .area span{
     width: 100%;
     gap: 60px;
-}
-.event_table{
-    height: auto;
-    margin-bottom: 60px;
-    display: flex;
-    flex-direction: column;
-}
-.event_table .con_title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 30px;
-}
-.event_table .event_con{
-    width: 100%; height: auto;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
-    padding: 50px;
-    box-sizing: border-box;
-    margin-bottom: 50px;
 }
 
 .event_con .event_line {
@@ -65,282 +43,53 @@
 #event_title{
     font-weight: 600;
 }
-.event_file{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.event_file a{
-    display: flex;
-    height: 20px;
-    font-size: 15px;
-    margin-bottom: 15px;
-}
 
-.event_file a:last-child{
-    margin-bottom: 0;
-}
-
-.event_file a:hover div{
-    color: #999999;
-}
-
-.event_file div:first-child{
-    margin-right: 10px;
-}
-.event_file img{
-    transform: translateY(2px);
-    width: 14px;
-}
-.event_file .file_name{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 300px;
-    white-space: nowrap;
-}
-
-.event_table .event_position{
-    padding: 0;
-    overflow: hidden;
-}
-
-.table_line {
+.btn_wrap {
     width: 100%;
-    display: flex;
-    height: 60px;
-    align-items: center;
-    justify-content: space-around;
-    font-size: 16px;
-    border-bottom: 1px solid #dddddd;
-    box-sizing: border-box;
-}
-.table_line:first-child{
-    background-color: #FAFAFA;
-}
-.table_line:first-child div{
-    color: #7B8DA3;
-}
-.table_line:last-child{
-    border: 0;
-}
-.table_line div{
+    /* margin: 0 auto; */
     text-align: center;
-}
-.table_line div:nth-child(1),.table_line div:nth-child(2){
-    width: 23%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding-left: 20px;
-    box-sizing: border-box;
-}
-.table_line div:nth-child(3),.table_line div:nth-child(4){
-    width: 27%;
-}
-
-.event_table textarea{
-    background-color: #ffffff;
-    resize: none;
-    box-sizing: border-box;
-    border: 0;
-    font-size: 16px;
-    width: 100%;
-}
-#event_file {
-    margin-top: 18px;
-}
-
-.file_tab .t_title{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.event_table .file_tab, .event_table_R ul{
-    flex: 1 0 auto;
-}
-
-
-.btn_wrap{
-    width: 100%; height: 50px;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
     margin-top: 100px;
-}
-
-.btn_wrap button{
-    width: 180px; height: auto;
-    background-color: #ffffff;
-    border: 0.5px solid #99999999;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0px 3px 10px #99999929;
-}
-.btn_wrap button:last-child{
-    border: 0.5px solid #5B8FD2;
-    color: #5B8FD2;
-}
-
-/* modal */
-#modal_wrap{
-    width: 100%; height: 100%;
-    position: fixed;
-    top: 0; left: 0;
-    display: none;
-}
-
-.modal_bg{
-    width: 100%;
-    height: 100%;
-    background-color: #33333326;
-    position: relative;
-    top: 0; left: 0;
-}
-.con_wrap{
-    width: 90%; height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0; right: 0;
-}
-#resume_con, #application_con{
-    position: absolute;
-    background-color: #ffffff;
-    padding: 45px;
-    box-sizing: border-box;
-    width: 540px;
-    border-radius: 20px;
 }
 
-.line{
-    height: 1px;
-    width: 100%;
-    background-color: #DDDDDD;
-    margin: 10px 0 30px 0;
-}
-.app_modal_close{
-    width: 30px; height: 30px;
-    background-image: url("/imgs/close_btn.svg");
-    position: absolute;
-    top: 25px; right: 40px;
-    background-position: center;
-    cursor: pointer;
-}
-#application_con{
-    height: 390px;
-}
-
-#application_con p, #resume_con p{
-    font-size: 18px;
-    /* overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; */
-    display: block;
-    padding-right: 20px;
-}
-
-#application_con p{
-    font-weight: 600;
-}
-
-#modal_title {
-    font-size: 20px;
-    margin-bottom: 40px;
-    font-weight: 600;
-}
-
-#application_con .select_box{
-    width: 450px; height: 50px;
-    border: 0.5px solid #ccc;
-    border-radius: 10px;
-    background-color: #ffffff;
-    position: absolute;
-    top: 180px;
-    overflow: hidden;
-    transition: 0.5s height;
-    box-sizing: border-box;
-}
-.select_box input, .select_box .select{
-    width: 100%; height: 50px;
-    padding: 0 20px;
-    box-sizing: border-box;
-    line-height: 50px;
-    border: 0;
-    background: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-.select_box input{
-    border-bottom: 0.5px solid #ccc;
-}
-.select_box .select{
-    color: #999999;
-}
-.select_box .select:hover{
-    background-color: #eee;
-    color: #333333;
-}
-.select_box::after{
-    content: "";
-    display: block;
-    position: absolute;
-    top: 19px;
-    right: 20px;
-    width: 12px;
-    height: 12px;
-    background-image: url(/imgs/join_arrow.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: rotate(180deg);
-    background-size: contain;
-}
-
-#resume_con {
-    height: 310px;
-}
-
-#resume_con p:first-child{
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.modal_btn_wrap{
-    width: 100%; height: 50px;
+#list_btn {
     display: flex;
-    gap: 20px;
-}
-.modal_btn_wrap{
-    margin-top: 60px;
-}
-.modal_btn_wrap button, #application_con button{
-    width: 270px; height: 50px;
-    border-radius: 10px;
-    border: 0;
-    font-size: 18px;
-    color: #ffffff;
-    background-color: #5B8FD2;
+    width: 60px;
+    height: 40px;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #F43F1F;
+    background: #FFF;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    color: #F43F1F;
+    font-family: 'Pretendard';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    margin-right: 10px;
     cursor: pointer;
 }
-#application_con button{
-    width: 200px;
-    margin-top: 120px;
-    margin-left: calc(50% - 100px);
-}
-.modal_btn_wrap button:first-child{
-    width: 160px;
-    background-color: #DDDDDD;
-}
 
-.unwork{
-    background-color: #ddd !important;
-    border: 0.5px solid #ddd !important;
-    color:  #fff !important;
+#update_btn {
+    display: flex;
+    width: 60px;
+    height: 40px;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #F43F1F;
+    background: #F43F1F;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    color: #FFF;
+    font-family: 'Pretendard';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    cursor: pointer;
 }
-
-
-@media all and (min-width:768px) and (max-width:1023px){}
-@media all and (min-width:320px) and (max-width:767px){}

@@ -1,3 +1,6 @@
-<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path id="Vector" d="M1.6 14.5139L0 13.0625L6.4 7.25693L0 1.45139L1.6 0L8 5.80554L14.4 0L16 1.45139L9.6 7.25693L16 13.0625L14.4 14.5139L8 8.70831L1.6 14.5139Z" fill="white"/>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="material-symbols:close">
+<path id="Vector" d="M6.45211 19.0094L5.10547 17.6628L10.492 12.2762L5.10547 6.88961L6.45211 5.54297L11.8387 10.9295L17.2253 5.54297L18.5719 6.88961L13.1853 12.2762L18.5719 17.6628L17.2253 19.0094L11.8387 13.6228L6.45211 19.0094Z" fill="white"/>
+<rect x="0.545898" y="0.983398" width="22.5853" height="22.5853" stroke="white" stroke-width="0.5"/>
+</g>
 </svg>

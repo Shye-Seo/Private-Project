@@ -437,5 +437,29 @@ public class BoardController {
 		mav.setViewName("museum_qnaDetail");
 		return mav;
 	}
+	
+	//문의글 수정 페이지
+	@RequestMapping(value="/museum_qnaUpdate", method=RequestMethod.GET)
+	public ModelAndView museum_qnaUpdate(@RequestParam("id") int question_id) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		QuestionVO detailVo = boardService.viewQuestionDetail(question_id);
+		System.out.println(detailVo);
+		
+		mav.addObject("question", detailVo);
+		mav.setViewName("museum_qnaUpdate");
+		return mav;
+	}
+		
+	//문의글 수정
+	@ResponseBody
+	@RequestMapping(value="/questionUpdate", method=RequestMethod.POST)
+	public String questionUpdate(MultipartHttpServletRequest multipartRequest, @ModelAttribute QuestionVO questionVo) throws Exception{
+		
+		//문의글 수정
+		boardService.updateQuestion(questionVo);
+//		int question_id = boardService.get_detail_Id(id);
+				
+		return "museum_qnaDetail?id="+questionVo.getId();
+	}
 
 }

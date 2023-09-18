@@ -25,10 +25,11 @@
 					</a>
 		        </div>
 		        <div class="close">
-		            <span id="check" class="btnTodayHide">
-						<input type="checkbox" value="checkbox" name="chkbox" th:id="'chkday_'+${popupStat.count}"/>
-						<label for="chkday">오늘은 그만보기</label>
-					</span>
+		            <div id="check" class="btnTodayHide">
+						<input type="checkbox" value="checkbox" name="chkbox" th:class="'chkday_'+${popupStat.count}" th:id="'chkday_'+${popupStat.count}"/>
+						<label th:for="'chkday_'+${popupStat.count}"></label>
+						<div class="chkday_text">오늘은 그만보기</div>
+					</div>
 		            <span th:id="'close_'+${popupStat.count}" class="btnClose" th:onclick="'closeWin('+${popupStat.count}+')'">
 						close <img src="/imgs/popup_close.svg">
 					</span>
@@ -68,7 +69,7 @@
 	    $('#popup_2').attr('style', 'display:block');
 	}
 	if (noticeCookie1 == "value" && noticeCookie2 != "value"){
-		$('#popup_2').attr('style', 'display:block; margin-top: 5.05%;');                
+		$('#popup_2').attr('style', 'display:block; margin-left: 0;');                
 	}
 	
 	function setCookie(name, value){ 
@@ -78,16 +79,15 @@
 	} 
 	 
 	function closeWin(number){
-		debugger;
 		if(number == 1){
-		    if ($("#chkday_1").is(":checked") ){
+		    if ($(".chkday_1").is(":checked") ){
 		        setCookie("name_1", "value"); 
 		    }
 		    $('#popup_1').css('display', 'none');
-		    $('#popup_2').css('margin-top', '5.05%');
+		    $('#popup_2').css('margin-left', '0');
 		} 
 	    if(number == 2){
-		    if ($("#chkday_2").is(":checked") ){
+		    if ($(".chkday_2").is(":checked") ){
 		        setCookie("name_2", "value"); 
 		    }
 		    $('#popup_2').css('display', 'none');
@@ -119,7 +119,13 @@
     	return document.cookie.substring(start, end);
     }
     return "";
-} 
+}
+    
+    $('.chkbox').change(function() { //신청자명
+    	var check = $('.chkbox').val();
+    debugger;
+//     	$('.name_insert').text(leaderName);
+    });
 </script>
 </body>
 </html>

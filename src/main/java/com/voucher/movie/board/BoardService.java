@@ -172,4 +172,16 @@ public class BoardService {
 	public int get_question_Id() {
 		return boardDao.get_question_Id();
 	}
+
+	public boolean updateQuestion(QuestionVO questionVo) {
+		return boardDao.updateQuestion(questionVo);
+	}
+
+	public int get_question_status(int id) {
+		return boardDao.get_question_status(id);
+	}
+
+	public int get_detail_Id(int id) {
+		return boardDao.get_detail_Id(id);
+	}
 }

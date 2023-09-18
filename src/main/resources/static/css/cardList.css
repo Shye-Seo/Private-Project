@@ -114,7 +114,7 @@ p.total_red {
 .text_search .search_button {
     width: 10%;
     display: flex;
-    border: 1px solid #D2D2D2;
+/*     border: 1px solid #D2D2D2; */
     border-left: none;
     background: #000;
 }
