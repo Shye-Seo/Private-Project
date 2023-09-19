@@ -15,12 +15,50 @@
 </div>
 <div class="gnb_bar">
     <ul class="gnb_wrap">
-        <li class="home_btn"><img src="/imgs/home_icon.png"></li><li class="div_bar">|</li>
-        <li class="category_1">소통</li></li><li class="div_bar">|</li>
-        <li class="category_2">이벤트</li></li><li class="div_bar">|</li>
-        <li class="category_3">박물관 이벤트</li></li><li class="div_bar">|</li>
+        <a href="/"><li class="home_btn"><img src="/imgs/home_icon.png"></li></a>
+        <li class="div_bar">|</li>
+        <li class="category_1" onclick="drop_gnb(1)">소통<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_2" onclick="drop_gnb(2)">이벤트<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_3" onclick="drop_gnb(3)">박물관 이벤트<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
     </ul>
 </div>
+
+<div class="gnb_bar_drop">
+    <ul id="depth_1">
+    	<a href="/viewing_guidance"><li>관람정보</li></a>
+    	<a href="/experience_zone_3rdFloor"><li>전시</li></a>
+    	<a href="/museum_newsList"><li>소통</li></a>
+    	<a href="/greetings"><li>박물관소개</li></a>
+    </ul>
+    
+    <ul id="depth_2">
+    	<a href="/museum_newsList"><li>공지사항</li></a>
+    	<a href="/museum_eventList"><li>이벤트</li></a>
+    	<a href="/museum_qnaList"><li>Q&A</li></a>
+    	<a href="/faq"><li>자주하는 질문</li></a>
+    </ul>
+    
+    <ul id="depth_3">
+    	<a href="/museum_eventList"><li>박물관 이벤트</li></a>
+    	<a href="/museum_partnerList"><li>제휴안내</li></a>
+    </ul>
+</div>
+<script>
+	function drop_gnb(num){
+		$('#depth_'+num).css('display', 'block');
+		
+		//외부영역 클릭시 드롭메뉴 닫기
+		$(document).mouseup(function (e) {
+			var movewrap = $('#depth_'+num);
+			if (movewrap.has(e.target).length === 0) {
+				movewrap.hide();
+			}
+		});
+	}
+</script>
 <div class="wrap">
 	<div class="contents_wrap">
 		<div class="page_title">

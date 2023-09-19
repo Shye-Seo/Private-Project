@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/info.css">
+    <title>부산영화체험박물관 | 기증안내</title>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <a href="/"><li class="home_btn"><img src="/imgs/home_icon.png"></li></a>
+        <li class="div_bar">|</li>
+        <li class="category_1" onclick="drop_gnb(1)">박물관 소개<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_2" onclick="drop_gnb(2)">기증안내<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+    </ul>
+</div>
+
+<div class="gnb_bar_drop">
+    <ul id="depth_1">
+    	<a href="/viewing_guidance"><li>관람정보</li></a>
+    	<a href="/experience_zone_3rdFloor"><li>전시</li></a>
+    	<a href="/museum_newsList"><li>소통</li></a>
+    	<a href="/greetings"><li>박물관소개</li></a>
+    </ul>
+    
+    <ul id="depth_2">
+    	<a href="/greetings"><li>인사말</li></a>
+    	<a href="/organization_chart"><li>조직도</li></a>
+    	<a href="/history"><li>연혁</li></a>
+    	<a href="/facility_info"><li>시설현황</li></a>
+    	<a href="/signature"><li>시그니쳐(MI)</li></a>
+    	<a href="/donation_info"><li>기증안내</li></a>
+    </ul>
+</div>
+<script>
+	function drop_gnb(num){
+		$('#depth_'+num).css('display', 'block');
+		
+		//외부영역 클릭시 드롭메뉴 닫기
+		$(document).mouseup(function (e) {
+			var movewrap = $('#depth_'+num);
+			if (movewrap.has(e.target).length === 0) {
+				movewrap.hide();
+			}
+		});
+	}
+</script>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>기증안내</h1></div>
+		</div>
+	</div>
+	<div class="info_area">
+		<div class="text_title">
+			<div>기증안내</div>
+		</div>
+		<div class="text_content">
+			부산영화체험박물관은 시민고객 여러분의 소중한 유물기증을 항상 기다리고 있습니다.<br>
+			아시아영화도시 부산의 역사와 문화를 고스란히 모으고 간직하고자 하는 부산영화체험박물관은 유물기증사업을 펼쳐오고 있습니다.<br>
+			앞으로도 영화도시 부산의 역사, 그리고 부산시민의 역사를 영구히 보존하고 전시하는 시민의 박물관으로서 역할을 다할 것을 약속드립니다.
+		</div>
+	</div>
+	<div class="info_area">
+		<div class="text_title">
+			<div>유물기증 절차안내</div>
+		</div>
+		<div class="donation_img_area">
+			<img src="/imgs/donation.png" class="donation_img">
+		</div>
+	</div>
+	<div class="info_area">
+		<div class="text_title">
+			<div>기증자 예우</div>
+		</div>
+		<div class="text_content">
+			<li>"기증자의 벽"에 명패 게시</li>
+			<li>중요 기증자료 감사장(패) 수여</li>
+			<li>기증유물을 명시한 기증증서 발급</li>
+			<li>기증유물 전시 개최</li>
+			<li>본인 및 가족(직계존속)의 박물관 무료입장</li>
+			<li>개관기념식 및 주요 행사시 초청</li>
+			<li>소정의 기념품 제공 및 간행물 무료 우송</li>
+		</div>
+	</div>
+	<div class="info_area_last">
+		<div class="text_title">
+			<div>연락처</div>
+		</div>
+		<div class="text_content">
+			<li>담당자 : 학예사 채미희</li>
+			<li>전 화 : 051-715-4203</li>
+			<li>이메일 : curator@busanbom.kr</li>
+		</div>
+	</div>
+</div>
+</body>
+</html>

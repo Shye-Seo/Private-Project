@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/info.css">
+    <title>부산영화체험박물관 | 홍영철전시관</title>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <a href="/"><li class="home_btn"><img src="/imgs/home_icon.png"></li></a>
+        <li class="div_bar">|</li>
+        <li class="category_1" onclick="drop_gnb(1)">전시<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_2" onclick="drop_gnb(2)">기획전시<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_3" onclick="drop_gnb(3)">홍영철전시관<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+    </ul>
+</div>
+
+<div class="gnb_bar_drop">
+    <ul id="depth_1">
+    	<a href="/viewing_guidance"><li>관람정보</li></a>
+    	<a href="/experience_zone_3rdFloor"><li>전시</li></a>
+    	<a href="/museum_newsList"><li>소통</li></a>
+    	<a href="/greetings"><li>박물관소개</li></a>
+    </ul>
+    
+    <ul id="depth_2">
+    	<a href="/experience_zone_3rdFloor"><li>상설전시</li></a>
+    	<a href="/exhibition_1stFloor"><li>기획전시</li></a>
+    	<a href="/exhibition_actor"><li>특별전시</li></a>
+    	<a href="/online_exhibition"><li>온라인전시관</li></a>
+    	<a href="/activity_document"><li>교육</li></a>
+    </ul>
+    
+    <ul id="depth_3">
+    	<a href="/exhibition_1stFloor"><li>홍영철전시관(1층)</li></a>
+    	<a href="/exhibition_4thFloor"><li>명화극장(4층)</li></a>
+    </ul>
+</div>
+<script>
+	function drop_gnb(num){
+		$('#depth_'+num).css('display', 'block');
+		
+		//외부영역 클릭시 드롭메뉴 닫기
+		$(document).mouseup(function (e) {
+			var movewrap = $('#depth_'+num);
+			if (movewrap.has(e.target).length === 0) {
+				movewrap.hide();
+			}
+		});
+	}
+</script>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>홍영철전시관</h1></div>
+		</div>
+	</div>
+	<div class="exhb_info_area">
+		<div class="text_content_exhb">
+			부산영화체험박물관은 홍영철 한국영화자료연구원장이 수집한 부산극장·영화사 자료를 인수하게 되었습니다.<br>
+			<br>
+			홍영철 원장이 1971년부터 한국 영화와 극장과 관련해 모은 자료는<br>
+			시나리오, 영화잡지, 극장자료, 영화 필름, 영화 전단 및 포스터 등 현재 분류된 것만 약 90,000점에 이릅니다.<br>
+			망실되어가는 국내외 영화 자료를 발굴, 연구, 보존하기 위해 평생을 바쳐 노력해온 한국영화자료연구원장 故홍영철 선생의 일생을 조명하고 
+			부산의 영화사 및 극장사 정립에 힘쓴 그의 업적을 기리고자 특별전을 개최합니다.<br>
+			<br>
+			선생의 근대부산극장사 연구 성과를 토대로 개항이래부터 영화와의 인연을 맺어 온 부산이 오늘날 국제적인 영화도시로 거듭나기까지 
+			‘부산영화’의 흐름을 한 자리에서 확인할 수 있는 이번 전시에 많은 관심 바랍니다.<br>
+			<br>
+			운영시간 : 10:00 - 18:00(매주 월요일, 설·추석 당일 휴관)
+		</div>
+	</div>
+	
+	<div class="big_img_area_hong">
+		<img src="/imgs/1st_hong_poster.jpg">
+	</div>
+	<div class="exhb_text_hong">
+		<div class="hong_title">
+			故홍영철 한국영화자료연구원장<br>
+			[약력]
+		</div>
+		<div class="hong_history">
+			<div class="hong_history_list">
+				<div class="hong_history_year">
+					1946년
+				</div>
+				<div class="hong_history_text">
+					함남 원산 출생
+				</div>
+			</div>
+			<div class="hong_history_list">
+				<div class="hong_history_year">
+					1954년
+				</div>
+				<div class="hong_history_text">
+					6·25전쟁 피란 때 부산 정착
+				</div>
+			</div>
+			<div class="hong_history_list">
+				<div class="hong_history_year">
+					1971년
+				</div>
+				<div class="hong_history_text">
+					한국영화자료연구원 출범
+				</div>
+			</div>
+			<div class="hong_history_list">
+				<div class="hong_history_year">
+					1977년
+				</div>
+				<div class="hong_history_text">
+					아카데미영화상 자료전 및 영화상영을 시작으로, 한국영화사 전시회, 부산영화 100년전, 
+					우리영화 흥행을 이끌어온 대표작 60년전 등 자료전 30여회 개최
+				</div>
+			</div>
+			<div class="hong_history_list">
+				<div class="hong_history_year">
+					2013년
+				</div>
+				<div class="hong_history_text">
+					부산시 문화상 (대중예술 부문) 수상
+				</div>
+			</div>
+		</div>
+		<div class="hong_info">
+			<div class="hong_info_detail">
+				<div class="hong_info_div">
+					저서
+				</div>
+				<div class="hong_info_text">
+					팬시네마(1982), 한국영화도서자료 편람(1991), 부산영화 100년(2001), 부산영화 21 제1-4호(2001-2004), 부산근대영화사(2009) 등
+				</div>
+			</div>
+			<div class="hong_info_detail">
+				<div class="hong_info_div">
+					논문
+				</div>
+				<div class="hong_info_text">
+					부산최초의 극장 '행좌'의 역사성 검증 보고(2008) 등
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="img_wrap_hong">
+		<div class="hong_img_1">
+			<img src="/imgs/hong_1.png">
+			<img src="/imgs/hong_2.png">
+		</div>
+		<div class="hong_img_2">
+			<img src="/imgs/hong_3.png">
+			<img src="/imgs/hong_4.png">
+		</div>
+	</div>
+</div>
+</body>
+</html>

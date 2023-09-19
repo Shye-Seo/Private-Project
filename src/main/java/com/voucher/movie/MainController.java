@@ -73,22 +73,100 @@ public class MainController {
 		return "map";
 	}
 	
-	// 전시 페이지
-	@GetMapping(value="/exhibition")
-	public String exhibition() {
-		return "exhibition";
+	// 소통-FAQ
+	@GetMapping(value="/faq")
+	public String faq() {
+		return "faq";
+	}
+	
+	// 전시-상설전시-체험존(3층)
+	@GetMapping(value="/experience_zone_3rdFloor")
+	public String experience_zone_3rdFloor() {
+		return "experience_zone_3rdFloor";
 	}
 
-	// 소통 페이지
-	@GetMapping(value="/community")
-	public String community() {
-		return "community";
+	// 전시-상설전시-체험존(4층)
+	@GetMapping(value="/experience_zone_4thFloor")
+	public String experience_zone_4thFloor() {
+		return "experience_zone_4thFloor";
+	}
+	
+	// 전시-상설전시-트릭아이뮤지엄(2층)
+	@GetMapping(value="/trickEye_2ndFloor")
+	public String trickEye_2ndFloor() {
+		return "trickEye_2ndFloor";
+	}
+	
+	// 전시-기획전시-홍영철전시관(1층)
+	@GetMapping(value="/exhibition_1stFloor")
+	public String exhibition_1stFloor() {
+		return "exhibition_1stFloor";
+	}
+	
+	// 전시-기획전시-명화극장(4층)
+	@GetMapping(value="/exhibition_4thFloor")
+	public String exhibition_4thFloor() {
+		return "exhibition_4thFloor";
+	}
+	
+	// 전시-특별전시-한국배우200사진전(2층)
+	@GetMapping(value="/exhibition_actor")
+	public String exhibition_actor() {
+		return "exhibition_actor";
+	}
+	
+	// 전시-온라인전시관-홍영철 온라인 전시관
+	@GetMapping(value="/online_exhibition")
+	public String online_exhibition() {
+		return "online_exhibition";
+	}
+	
+	// 전시-온라인전시관-공모전 전시관
+	@GetMapping(value="/contest_exhibition")
+	public String contest_exhibition() {
+		return "contest_exhibition";
+	}
+	
+	// 전시-교육-박물관 활동지
+	@GetMapping(value="/activity_document")
+	public String activity_document() {
+		return "activity_document";
 	}
 
-	// 박물관 소개 페이지
-	@GetMapping(value="/museum_info")
-	public String museum_info() {
-		return "museum_info";
+	// 박물관 소개-인사말
+	@GetMapping(value="/greetings")
+	public String greetings() {
+		return "greetings";
+	}
+	
+	// 박물관 소개-조직도
+	@GetMapping(value="/organization_chart")
+	public String organization_chart() {
+		return "organization_chart";
+	}
+	
+	// 박물관 소개-연혁
+	@GetMapping(value="/history")
+	public String history() {
+		return "history";
+	}
+	
+	// 박물관 소개-시설현황
+	@GetMapping(value="/facility_info")
+	public String facility_info() {
+		return "facility_info";
+	}
+	
+	// 박물관 소개-시그니처
+	@GetMapping(value="/signature")
+	public String signature() {
+		return "signature";
+	}
+	
+	// 박물관 소개-기증안내
+	@GetMapping(value="/donation_info")
+	public String donation_info() {
+		return "donation_info";
 	}
 
 }

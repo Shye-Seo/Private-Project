@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/info.css">
+    <title>부산영화체험박물관 | 시설현황</title>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <a href="/"><li class="home_btn"><img src="/imgs/home_icon.png"></li></a>
+        <li class="div_bar">|</li>
+        <li class="category_1" onclick="drop_gnb(1)">박물관 소개<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_2" onclick="drop_gnb(2)">시설현황<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+    </ul>
+</div>
+
+<div class="gnb_bar_drop">
+    <ul id="depth_1">
+    	<a href="/viewing_guidance"><li>관람정보</li></a>
+    	<a href="/experience_zone_3rdFloor"><li>전시</li></a>
+    	<a href="/museum_newsList"><li>소통</li></a>
+    	<a href="/greetings"><li>박물관소개</li></a>
+    </ul>
+    
+    <ul id="depth_2">
+    	<a href="/greetings"><li>인사말</li></a>
+    	<a href="/organization_chart"><li>조직도</li></a>
+    	<a href="/history"><li>연혁</li></a>
+    	<a href="/facility_info"><li>시설현황</li></a>
+    	<a href="/signature"><li>시그니쳐(MI)</li></a>
+    	<a href="/donation_info"><li>기증안내</li></a>
+    </ul>
+</div>
+<script>
+	function drop_gnb(num){
+		$('#depth_'+num).css('display', 'block');
+		
+		//외부영역 클릭시 드롭메뉴 닫기
+		$(document).mouseup(function (e) {
+			var movewrap = $('#depth_'+num);
+			if (movewrap.has(e.target).length === 0) {
+				movewrap.hide();
+			}
+		});
+	}
+</script>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>시설현황</h1></div>
+		</div>
+	</div>
+	<div class="info_area">
+		<div class="text_title">
+			<div>시설개요</div>
+		</div>
+		<div class="text_content">
+			<li>시설유형 : 문화 및 집회시설(1종 전문박물관)</li>
+			<li>건립위치 : 부산광역시 중구 대청로126번길 12(동광동3가)</li>
+			<li>건립규모 : 부지 4,469.1㎡, 연면적 11,300㎡ (지하3층, 지상4층)</li>
+			<li>건립방식 : 임대형 민간투자사업(BTL, Build-Transfer-Lease)</li>
+			<li>주요시설 : 체험전시실, HMD상영관, 상설전시실, 영상홀, 강의실,  트릭아이뮤지엄</li>
+		</div>
+	</div>
+	<div class="table_area">
+		<div class="table_title">
+			<div>시설현황</div>
+		</div>
+		<div class="facility_table_area">
+			<table class="facility_tb">
+				<tr class="tb_top">
+					<td class="first_td">명칭</td>
+					<td class="second_td">부산영화체험박물관</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">종류</td>
+					<td class="second_td">1종 전문 박물관</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">부지면적</td>
+					<td class="second_td">4,469,10㎡</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">전시실</td>
+					<td class="second_td">1실 2649.4㎡</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">수장고</td>
+					<td class="second_td">1실 199.12㎡</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">작업실·준비실</td>
+					<td class="second_td">2실 82.88㎡</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">사무실·연구실</td>
+					<td class="second_td">4실 165.44㎡</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">자료실·도서실</td>
+					<td class="second_td">1실 34.79㎡</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">시청각실·강당</td>
+					<td class="second_td">1실 300.14㎡</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">화재방지시설</td>
+					<td class="second_td">스프링클러, 소화전, 가스소화설비</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">도난방지시설</td>
+					<td class="second_td">S1무인방범시스템, CCTV 67대</td>
+				</tr>
+				<tr class="tb_bottom">
+					<td class="first_td">습도조절장치</td>
+					<td class="second_td">항온항습기</td>
+				</tr>
+			</table>			
+		</div>
+</body>
+</html>

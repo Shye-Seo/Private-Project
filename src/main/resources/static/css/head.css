@@ -71,7 +71,11 @@ a:active { /*클릭하는 순간*/
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.54px;
-    width: 191px;
+    width: 16%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 }
 
 .gnb_wrap li{
@@ -176,4 +180,87 @@ a:active { /*클릭하는 순간*/
 .home_btn img{
 	height: 14px;
 	width: 16px;
+}
+
+#depth_1, #depth_2, #depth_3{
+	display: none;
+}
+
+#depth_1 {
+    width: 12.3%;
+    margin: 0 auto;
+    list-style: none;
+    position: absolute;
+    left: 20.8%;
+}
+
+#depth_2 {
+    width: 12.3%;
+    margin: 0 auto;
+    list-style: none;
+    position: absolute;
+    left: 32.9%;
+}
+
+#depth_3 {
+    width: 12.3%;
+    margin: 0 auto;
+    list-style: none;
+    position: absolute;
+    left: 45%;
+}
+
+#depth_1 li {
+    border-right: 1px solid #D2D2D2;
+    border-bottom: 1px solid #D2D2D2;
+    border-left: 1px solid #D2D2D2;
+    background: #FFF;
+    height: 52px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.54px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+}
+
+#depth_2 li {
+    border-right: 1px solid #D2D2D2;
+    border-bottom: 1px solid #D2D2D2;
+    border-left: 1px solid #D2D2D2;
+    background: #FFF;
+    height: 52px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.54px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+}
+
+#depth_3 li {
+    border-right: 1px solid #D2D2D2;
+    border-bottom: 1px solid #D2D2D2;
+    border-left: 1px solid #D2D2D2;
+    background: #FFF;
+    height: 52px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.54px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+}
+
+#depth_1 li:hover, #depth_2 li:hover, #depth_3 li:hover{
+	background: #F9F9F9;
 }
