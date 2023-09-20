@@ -1,5 +1,6 @@
 package com.voucher.movie;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -15,9 +16,12 @@ import java.util.stream.Stream;
 
 import javax.inject.Inject;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.voucher.movie.admin.AdminService;
 import com.voucher.movie.admin.PopupVO;
@@ -168,5 +172,5 @@ public class MainController {
 	public String donation_info() {
 		return "donation_info";
 	}
-
+	
 }

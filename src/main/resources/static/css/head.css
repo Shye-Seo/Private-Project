@@ -35,12 +35,6 @@ header {
 li a {
     font-size: large;
 }
-.logo_menu li::marker {
-    color: #FF3D00;
-    width: 5px;
-    height: 5px;
-    line-height: 100%;
-}
 
 a {
     text-decoration: none;

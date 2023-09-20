@@ -1,5 +1,6 @@
 package com.voucher.movie.board;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -7,6 +8,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.voucher.movie.admin.AnswerVO;
 import com.voucher.movie.admin.QuestionVO;
+import com.voucher.movie.aws.AwsS3Service;
 import com.voucher.movie.config.CardPagingVO;
 import com.voucher.movie.config.PagingVO;
 
@@ -31,6 +35,9 @@ public class BoardController {
 	
 	@Inject
 	BoardService boardService;
+	
+	@Autowired
+	AwsS3Service s3Service;
 	
 	List<NewsVO> news_list;
 	List<EventVO> event_list;
@@ -462,4 +469,44 @@ public class BoardController {
 		return "museum_qnaDetail?id="+questionVo.getId();
 	}
 
+	//------------------------------박물관 활동지 양식파일 다운로드
+	//체험활동보고서(유치원~초등저학년용)
+	@RequestMapping({"/download_activity_report"})
+	@ResponseBody
+	public ResponseEntity<byte[]> activity_report_download() throws IOException {
+		String filename = "1.유치원~초등저학년.hwp";
+		return s3Service.getObject_edu(filename);
+	}
+		
+	//체험활동 심화 보고서(초등고학년~중학생)
+	@RequestMapping({"/download_activity_report_deepened"})
+	@ResponseBody
+	public ResponseEntity<byte[]> activity_report_deepened_download() throws IOException {
+		String filename = "2.초등학생_심화.hwp";
+		return s3Service.getObject_edu(filename);
+	}
+	
+	//체험활동학습지(초등고학년~중학생)
+	@RequestMapping({"/download_activity_worksheet"})
+	@ResponseBody
+	public ResponseEntity<byte[]> activity_worksheet_download() throws IOException {
+		String filename = "3.초등고학년~중학생.hwp";
+		return s3Service.getObject_edu(filename);
+	}	
+	
+	//체험활동 심화학습지(중고등학생)
+	@RequestMapping({"/download_activity_worksheet_deepened"})
+	@ResponseBody
+	public ResponseEntity<byte[]> activity_worksheet_deepened_download() throws IOException {
+		String filename = "4.중고등학생_심화.hwp";
+		return s3Service.getObject_edu(filename);
+	}	
+	
+	//가로세로퍼즐
+	@RequestMapping({"/download_puzzle"})
+	@ResponseBody
+	public ResponseEntity<byte[]> puzzle_download() throws IOException {
+		String filename = "5.가로세로퍼즐.hwp";
+		return s3Service.getObject_edu(filename);
+	}	
 }
