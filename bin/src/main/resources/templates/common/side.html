@@ -28,7 +28,7 @@
 
         <div class="sidebar Msidebar" th:fragment="sidebar_manage (thisLink)">
             <a href="/admin_reservationList" class="logo">
-                <img src="/imgs/logo.png" alt="busanbom">
+<!--                 <img src="/imgs/logo.svg" alt="busanbom"> -->
             </a>
             <ul class="menu-categories Mcategories">
                 <span th:if="${thisLink == 'list'}">
@@ -61,9 +61,33 @@
                 <span th:unless="${thisLink == 'news'}">
                 <li class="menu">
                 </span>
-                    <a href="/admin_newsList">
+                    <a href="/admin_news">
                         <div>
-                            <span>게시판 관리</span>
+                            <span>박물관 소식</span>
+                        </div>
+                    </a>
+                </li>
+                <span th:if="${thisLink == 'notice'}">
+                <li class="menu selected">
+                </span>
+                <span th:unless="${thisLink == 'notice'}">
+                <li class="menu">
+                </span>
+                    <a href="/admin_notice">
+                        <div>
+                            <span>공고</span>
+                        </div>
+                    </a>
+                </li>
+                <span th:if="${thisLink == 'event'}">
+                <li class="menu selected">
+                </span>
+                <span th:unless="${thisLink == 'event'}">
+                <li class="menu">
+                </span>
+                    <a href="/admin_event">
+                        <div>
+                            <span>이벤트</span>
                         </div>
                     </a>
                 </li>
@@ -73,9 +97,9 @@
                 <span th:unless="${thisLink == 'qna'}">
                 <li class="menu">
                 </span>
-                    <a href="/admin_qnaList">
+                    <a href="/admin_qna">
                         <div>
-                            <span>Q&amp;A관리</span>
+                            <span>Q&A관리</span>
                         </div>
                     </a>
                 </li>
@@ -85,7 +109,7 @@
                 <span th:unless="${thisLink == 'popup'}">
                 <li class="menu">
                 </span>
-                    <a href="/admin_popupList">
+                    <a href="/admin_popup">
                         <div>
                             <span>팝업설정</span>
                         </div>

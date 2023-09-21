@@ -26,15 +26,6 @@
                 </div>
 
                 <div class="area">
-                
-				<div class="detail_bar">
-                    <div class="detail1 this_bar" onclick="location.href='admin_reservationList'">
-                        <p>단체예약</p>
-                    </div>
-                    <div class="detail2" onclick="location.href='admin_facilityList'">
-                        <p>대관예약</p>
-                    </div>
-                </div>
 
                     <ul class="list">
                         <ol id="top_ol">
@@ -49,15 +40,18 @@
 						<ol th:each="group : ${group_list}" class="list_ol">
 							
 							<div class="title_area">
-								<li>[[${group.res_visitDate}]]<br>[[${group.res_visitNum}]]회차 / [[${group.res_visitTime}]]</li>
+							<li th:text="${group.res_visitDate}"></li>
+							<li th:text="${group.res_visitNum} + '회차 / ' + ${group.res_visitTime}"></li>
 							</div>
 							
 							<div class="date_area">
-								<li>[[${group.res_groupName}]]<br>[[${group.res_totalNum}]]명</li>
+							<li th:text="${group.res_groupName}"></li>
+							<li th:text="${group.res_totalNum} + '명'"></li>
 							</div>
 							
 							<div class="status_area">
-								<li>[[${group.res_name}]]<br>[[${group.res_phone}]]</li>
+							<li th:text="${group.res_name}"></li>
+							<li th:text="${group.res_phone}"></li>
 							</div>
 							
 							<div class="vehicle_area">
@@ -65,13 +59,11 @@
 							</div>
 							
 							<div class="request_area">
-							<li th:if="${group.res_requestCheck == '예'}">O</li>
-							<li th:if="${group.res_requestCheck == '아니오'}">X</li>
+							<li th:text="${group.res_requestCheck}"></li>
 							</div>
 							
 							<div class="message_area">
-							<li th:text="${group.res_message}" th:if="${group.res_message != ''}"></li>
-							<li th:if="${group.res_message == ''}">-</li>
+							<li th:text="${group.res_message}"></li>
 							</div>
 							
 							<div class="confirm_area">

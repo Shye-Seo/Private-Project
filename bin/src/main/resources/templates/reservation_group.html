@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="css/reservation.css">
     <title>부산영화체험박물관 | 단체예약</title>
     <script type="text/javascript" src="/js/reservation.js"></script>
@@ -16,136 +15,36 @@
 </div>
 <div class="gnb_bar">
     <ul class="gnb_wrap">
-        <a href="/"><li class="home_btn"><img src="/imgs/home_icon.png"></li></a>
-        <li class="div_bar">|</li>
-        <li class="category_1" onclick="drop_gnb(1)">관람정보<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
-        <li class="div_bar">|</li>
-        <li class="category_2" onclick="drop_gnb(2)">예약<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
-        <li class="div_bar">|</li>
-        <li class="category_3" onclick="drop_gnb(3)">단체<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
-        <li class="div_bar">|</li>
+        <li><img src="/imgs/home_icon.svg"></li>
+        <li>관람정보</li>
+        <li>관람예약</li>
+        <li>단체</li>
     </ul>
 </div>
-
-<div class="gnb_bar_drop">
-    <ul id="depth_1">
-    	<a href="/viewing_guidance"><li>관람정보</li></a>
-    	<a href="/experience_zone_3rdFloor"><li>전시</li></a>
-    	<a href="/museum_newsList"><li>소통</li></a>
-    	<a href="/greetings"><li>박물관소개</li></a>
-    </ul>
-    
-    <ul id="depth_2">
-    	<a href="/viewing_guidance"><li>이용안내</li></a>
-    	<a href="/reservation_personal"><li>예약</li></a>
-    	<a href="/reservation_facilities"><li>대관안내</li></a>
-    </ul>
-    
-    <ul id="depth_3">
-    	<a href="/reservation_personal"><li>개인</li></a>
-    	<a href="/reservation_group"><li>단체</li></a>
-    </ul>
-</div>
-<script>
-	function drop_gnb(num){
-		$('#depth_'+num).css('display', 'block');
-		
-		//외부영역 클릭시 드롭메뉴 닫기
-		$(document).mouseup(function (e) {
-			var movewrap = $('#depth_'+num);
-			if (movewrap.has(e.target).length === 0) {
-				movewrap.hide();
-			}
-		});
-	}
-</script>
 <div class="wrap">
 	<div class="contents_wrap">
 		<div class="page_title">
-			<div class="page_name_area"><h1>단체예약</h1></div>
+			<div class="page_name_area"><h1>단체</h1></div>
 		</div>
 	</div>
-		<!-- 단체예약 안내 -->
 		<div class="reservation_wrap">
-			<div class="guide_area">
-					<div class="guide_title">
-						<div>단체관람 안내</div>
-					</div>
-						<div class="guide_content">
-							<li><b>20명 이상</b> 시 단체 적용됩니다.</li>
-							<li>부산영화체험박물관 상설 관람 시 : 1시간 ~ 1시간 30분 소요</li>
-							<li>부산영화체험박물관+트릭아이뮤지엄 통합 관람 시 : 2시간 소요</li>
-							<li>예약은 <b>관람 희망일 일주일 전까지</b> 신청을 권장합니다. [온라인 신청 혹은 전화예약 가능]</li>
-							<li>동시간대 이미 예약이 있을 경우 30분 정도 미뤄질 수 있습니다.</li>
-							<li><b>예약 취소는 관람일 1일 전까지</b> 가능합니다.</li>
-							<li>인터넷 사전 예약을 마친 단체는 대기예약상태이며, <b>예약 담당자와 전화 통화 후 최종 예약 완료</b>가 됩니다.</li>
-							<li>단체관람 예약 시 궁금한 사항은 <b>051-715-4200</b>로 문의하시기 바랍니다.</li>
-						</div>
+			<div class="place_area">
+				<div class="img_1"><img src="" alt="전시관1"><input type="radio" name="res_theaterCheck" value="1"></div>
+				<div class="img_2"><img src="" alt="전시관2"><input type="radio" name="res_theaterCheck" value="2"></div>
 			</div>
-			<div class="guide_area">
-				<div class="guide_title">
-					<div>단체관람 요금</div>
-				</div>
-				<div class="price_table">
-					<div class="top_table">
-						<div class="left_text">구분</div>
-						<div class="middle_text">부산영화체험박물관</div>
-						<div class="right_text">부산영화체험박물관+트릭아이뮤지엄</div>
-					</div>
-					<div class="price">
-						<div class="left_text">성인</div>
-						<div class="middle_text">5,000</div>
-						<div class="right_text">8,000</div>
-					</div>
-					<div class="price">
-						<div class="left_text">청소년/어린이</div>
-						<div class="middle_text">3,500</div>
-						<div class="right_text">6,000</div>
-					</div>
-				</div>
-				<div class="guide_content">
-					<li>학교 또는 여행사에서 오시는 경우 일부 인솔자는 무료 관람 가능합니다.</li>
-					<li>그 외 단체일 경우 무료 적용이 제한될 수 있습니다.</li>
+			<div class="agree_area">
+				<div class="agree_contents">
+					<input type="checkbox" id="agree_check" name="agree_check"> 개인정보의 수집 및 이용에 동의합니다
 				</div>
 			</div>
-			<div class="guide_area">
-				<div class="guide_title">
-					<div>단체 해설</div>
-				</div>
-				<div class="guide_content">
-					<li>전시해설사가 상설전시실 입구부터 '명작의 광장'까지 해설을 제공합니다.(약 15~20분 소요)</li>
-					<li>해설사의 전시해설은 20명~30명 규모일 경우에 적합합니다.</li>
-					<li>그 이상의 인원은 모바일 기반의 전시해설 서비스 이용을 권장합니다.</li>
+			<div>
+				<div class="button_area">
+					<input type="button" value="확인" class="submit_btn" id="agree_btn">
 				</div>
 			</div>
-			<div class="guide_area">
-				<div class="guide_title">
-					<div>주차장 이용 시</div>
-				</div>
-				<div class="guide_content">
-					<li>2.1M 이하의 차량 지하 주차장 이용 가능</li>
-					<li>25인승 이하의 버스 주차장 입구 하역장 이용 가능</li>
-					<li>부산영화체험박물관 상설 관람 시 : 1시간 무료 주차</li>
-					<li>부산영화체험박물관+트릭아이뮤지엄 통합 관람 시 : 2시간 무료 주차</li>
-					<li>단, 무료 관람일 경우 주차 할인 불가</li>
-				</div>
-			</div>
-			<div class="guide_area_last">
-				<div class="guide_title">
-					<div>관광버스 이용 시</div>
-				</div>
-				<div class="guide_content">
-					<li>45인승 대형버스 정차 및 주차는 용두산공원 부산타워 아래 광장에 가능합니다.</li>
-					<li>용두산 공원 : 부산시 중구 용두산길 37-55 051-860-7820</li>
-				</div>
-			</div>
-			<div class="ticketButton_area">
-				<div class="button_wrap">
-					<button id="group_button" onclick="location.href='/reservation_group_date'">
-						<img src="/imgs/ticket_icon.png">
-						단체예약 신청하기
-					</button>
-				</div>
-			</div>
+		</div>
+</div>
+<div></div>
+<div></div>
 </body>
 </html>
