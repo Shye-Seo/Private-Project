@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부산영화체험박물관 | 관리자</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="/css/admin_boardInsert.css">
+    <script src="/js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+	<script src="js/notice_register.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="~{common/side :: sidebar_manage ('news')}"></div>
+
+        <!-- main -->
+        <div class="content">
+            <div class="container">
+                <div class="page-header">
+                    <div class="page-title">
+                        <span>게시판 관리</span>
+                    </div>
+                </div>
+
+                <div class="area">
+                	<form name="noticeAddForm" action="/noticeAdd" enctype="multipart/form-data" method="post" onsubmit="return false">
+                    <input type="hidden" th:value="${notice.notice_date}" name="notice_date">
+                    <div class="area1">
+                        <span>제목</span>
+                        <input type="text" name="notice_title" class="required" placeholder="제목을 입력해주세요." th:value="${notice.notice_title}" >
+                    </div>
+                    <div class="area2">
+                        <span>내용</span>
+                        <textarea placeholder="5000자 이내로 입력" name="notice_content" class="required" maxlength="5000" th:value="${notice.notice_content}" th:text="${notice.notice_content}" onkeydown="resize(15,100,this)" ></textarea>
+                    </div>
+                    <div class="area3">
+                        <span>파일첨부<p>(최대 5개)</p></span>
+                        <div class="file_area">
+                            <div id="file_names">
+                                <!-- 파일 이름 -->
+                                <div th:each="FileList : ${noticeFileList}"  th:id="'fileTr_' + ${FileListStat.index}">
+                                    <div class='file_con'>
+                                        <div class="filename" th:text="${FileList.file_name}"></div>
+                                        <img src="/imgs/close_btn_black.svg" th:data-fileName="${FileList.file_name}" th:data-index="${FileListStat.index}" 
+                                        th:onclick="deleteFile_for_update(this.getAttribute('data-index'),this.getAttribute('data-fileName'))">
+                                    </div>
+                                </div>
+                            </div>
+                            <label for="input_file" id="file_upload" class="files_label"><img src="/imgs/board_upload_icon.svg"></label>
+                        </div>
+                        <input type="file" id="input_file" multiple="multiple" name="file" hidden />
+                        <!-- ... -->
+                    </div>
+                    <div class="btn_wrap">
+                        <button type="button" id="cancel_btn" onclick="location.href='admin_noticeList'">취소</button>
+                        <button type="button" id="update_btn">저장</button>
+                    </div>
+
+                    <!-- update -->
+                        <input type="text" name="id" hidden th:value="${notice.id}">
+                        
+                    </form>
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        $(function(){
+                            let noticeFileList = /*[[${noticeFileList}]]*/
+
+                            fileIndex=noticeFileList.length;
+                            
+                            if($('#file_names').children().length >=5){
+                                $('#input_file').attr("disabled","disabled");
+                                $('.area3 .files_label').css({'background-color':'#eee', 'cursor':'unset'});
+                            }
+                            
+                            $('textarea').height((15 + $('textarea').prop('scrollHeight')));
+                        })
+                        /*]]>*/
+                    </script>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

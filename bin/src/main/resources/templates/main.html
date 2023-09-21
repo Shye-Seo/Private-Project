@@ -10,33 +10,122 @@
     <script src="/js/main.js"></script>
 </head>
 <body>
-<div th:replace="/head :: head">
+	<div th:replace="/head :: head"></div>
+	
+	<!-- 팝업 창 작성 시작 부분 -->
+	<div th:each="popup : ${popup_list}" class="popup_modal">
+		<div th:id="'popup_'+${popupStat.count}" class="popup">
+		    <div class="layerBox">
+		        <div class="cont" th:if="${popup.click_link == ''}">
+					<img id="popup" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/popup-folder/' +${popup.file_name}}" alt="poster_img">
+		        </div>
+		        <div class="cont" th:if="${popup.click_link != ''}">
+					<a th:href="@{(${popup.click_link})}">
+					<img id="popup" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/popup-folder/' +${popup.file_name}}" alt="poster_img">
+					</a>
+		        </div>
+		        <div class="close">
+		            <div id="check" class="btnTodayHide">
+						<input type="checkbox" value="checkbox" name="chkbox" th:class="'chkday_'+${popupStat.count}" th:id="'chkday_'+${popupStat.count}"/>
+						<label th:for="'chkday_'+${popupStat.count}"></label>
+						<div class="chkday_text">오늘은 그만보기</div>
+					</div>
+		            <span th:id="'close_'+${popupStat.count}" class="btnClose" th:onclick="'closeWin('+${popupStat.count}+')'">
+						close <img src="/imgs/popup_close.svg">
+					</span>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	
+	<div class="slide_box">
+	    <ul class="slide">
+	        <li><img src="/imgs/bg.jpg" alt="슬라이드1"></li>
+	        <li><img src="/imgs/bg2.jpg" alt="슬라이드2"></li>
+	        <li><img src="/imgs/bg3.jpg" alt="슬라이드3"></li>
+	    </ul>
+	    <div class="inwrap">
+	        <h1>영화체험박물관</h1>
+	        <h1>영화체험박물관</h1>
+	        <h1>영화체험박물관</h1>
+	    </div>
+	    <span class="prev">&lang;</span>
+	    <span class="next">&rang;</span>
+	</div>
+	
+	<div></div>
+	<div></div>
 
-</div>
-<div class="slide_box">
-    <ul class="slide">
-        <li><img src="/imgs/bg.jpg" alt="슬라이드1"></li>
-        <li><img src="/imgs/bg2.jpg" alt="슬라이드2"></li>
-        <li><img src="/imgs/bg3.jpg" alt="슬라이드3"></li>
-    </ul>
-    <div class="inwrap">
-        <h1>영화체험박물관</h1>
-        <h1>영화체험박물관</h1>
-        <h1>영화체험박물관</h1>
-    </div>
-    <span class="prev">&lang;</span>
-    <span class="next">&rang;</span>
-</div>
+<!-- 팝업 JS 부분 -->
+<script>
+	// popup //
+	var noticeCookie1 = getCookie("name_1");  // 쿠키 가져오기
+	var noticeCookie2 = getCookie("name_2");  // 쿠키 가져오기
+	
+	if (noticeCookie1 != "value"){                
+	    $('#popup_1').attr('style', 'display:block');
+	}
+	if(noticeCookie2 != "value"){
+	    $('#popup_2').attr('style', 'display:block');
+	}
+	if (noticeCookie1 == "value" && noticeCookie2 != "value"){
+		$('#popup_2').attr('style', 'display:block; margin-left: 0;');                
+	}
+	
+	function setCookie(name, value){ 
+	    var todayDate = new Date();
+	    todayDate.setHours( 24 );
+	    document.cookie = name+ "=" + escape( value ) + "; path=/; expires=" +   todayDate.toGMTString() + ";";
+	} 
+	 
+	function closeWin(number){
+		if(number == 1){
+		    if ($(".chkday_1").is(":checked") ){
+		        setCookie("name_1", "value"); 
+		    }
+		    $('#popup_1').css('display', 'none');
+		    $('#popup_2').css('margin-left', '0');
+		} 
+	    if(number == 2){
+		    if ($(".chkday_2").is(":checked") ){
+		        setCookie("name_2", "value"); 
+		    }
+		    $('#popup_2').css('display', 'none');
+		}
+	}
 
-<section id="section_1" class="inwrap">
-    <div>
-
-    </div>
-
-</section>
-
-
-<div></div>
-<div></div>
+    function getCookie(name) {
+    var Found = false;
+    var start, end;
+    var i = 0;
+    
+    while(i <= document.cookie.length) {
+        start = i;
+        end = start + name.length;
+        
+        if(document.cookie.substring(start, end) == name) {
+          Found = true;
+          break;
+        }
+        i++;
+    }
+    
+    if(Found == true) {
+    start = end + 1;
+    end = document.cookie.indexOf(";", start);
+      if(end < start){
+        end = document.cookie.length;
+	  }
+    	return document.cookie.substring(start, end);
+    }
+    return "";
+}
+    
+    $('.chkbox').change(function() { //신청자명
+    	var check = $('.chkbox').val();
+    debugger;
+//     	$('.name_insert').text(leaderName);
+    });
+</script>
 </body>
 </html>

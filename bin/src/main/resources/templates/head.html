@@ -6,126 +6,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="css/head.css">
-    <script>
-        $(document).ready(function () {
-            $(".toggle_btn").click(function () {
-                var submenu = $(this).next("ul");
-                if (submenu.is(":visible")) {
-                    submenu.slideUp();
-                } else {
-                    submenu.slideDown();
-                }
-            });
-            $("#close_btn").click(function () {
-                const menu = document.querySelector("#menu");
-                $('.menu').slideUp();
-            });
-        });
-
-    </script>
 </head>
-
 <body>
 <header th:fragment="head">
     <section class="inwrap">
         <nav class="navbar">
             <div class="logo_menu">
-                <img src="/imgs/logo.png"></img>
-                <ul class="head_menu">
-                    <li><a href="/viewing_guidance">관람정보</a></li>
-                    <li><a href="/exhibition">전시</a></li>
-                    <li><a href="/community">소통</a></li>
-                    <li><a href="/museum_info">박물관 소개</a></li>
+                <img src="/imgs/logo.png" onclick="location.href='/'">
+                <ul class="head_menu" onclick="open_sitemap()">
+                    <li>관람정보</li>
+                    <li>전시</li>
+                    <li>소통</li>
+                    <li>박물관 소개</li>
                 </ul>
-            </div>
-            <div class="right_section">
-                <div class="search">
-                    <img id="search_btn" src="/imgs/search.svg">
+                <div class="language_menu">
+                	<div class="language_choice">
+                		<p>한국어</p>
+                		<img src="/imgs/language_select_icon.png">
+                	</div>
                 </div>
-                <div class="toggle_btn">
-                    <img id="ham_btn" src="/imgs/menu_btn.svg">
+                <div class="language_select">
+                	<ul class="language_option">
+                		<li class="optionItem">한국어</li>
+                		<li class="optionItem">ENGLISH</li>
+				      	<li class="optionItem">日本語</li>
+				      	<li class="optionItem">简体中文</li>
+                	</ul>
                 </div>
-                <ul class="menu" id="menu">
-                    <img id="close_btn" src="/imgs/close_btn_black.svg">
-                    <div class="side_menu">
-                        <div>
-                            <h2>사이트 맵</h2>
-                        </div>
-                        <div>
-                            <h2>관람정보</h2>
-                            <h1>이용안내</h1>
-                            <ul>
-                                <li>관람안내</li>
-                                <li>찾아오시는 길</li>
-                            </ul>
-                            <h1>예약</h1>
-                            <ul>
-                                <li><a href="https://booking.naver.com/booking/5/bizes/225783?area=ple">개인</a></li>
-                                <li><a href="/reservation_group">단체</a></li>
-                            </ul>
-                            <h1>대관안내</h1>
-                            <ul>
-                                <li>대관예약</li>
-                                <li>대관요금</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h2>전시</h2>
-                            <h1>상설전시</h1>
-                            <ul>
-                                <li>체험존(3층)</li>
-                                <li>체험존(4층)</li>
-                                <li>트릭아이뮤지엄(2층)</li>
-                            </ul>
-                            <h1>기획전시</h1>
-                            <ul>
-                                <li>홍영철전시관(1층)</li>
-                                <li>명화극장(4층)</li>
-                            </ul>
-                            <h1>특별전시</h1>
-                            <ul>
-                                <li>한국배우200사진전(2층)</li>
-                            </ul>
-                            <h1>온라인전시관</h1>
-                            <ul>
-                                <li>홍영철 온라인 전시관</li>
-                                <li>공모전 전시관</li>
-                            </ul>
-                            <h1>교육</h1>
-                            <ul>
-                                <li>박물관 활동지</li>
-                                <li>지난교육</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h2>소통</h2>
-                            <h1>공지사항</h1>
-                            <ul>
-                                <li>박물관 소식</li>
-                                <li>공고</li>
-                            </ul>
-                            <h1>이벤트</h1>
-                            <ul>
-                                <li>박물관 이벤트</li>
-                                <li>제휴안내</li>
-                            </ul>
-                            <h1>Q&A</h1>
-                            <h1>자주하는 질문</h1>
-                        </div>
-                        <div>
-                            <h2>박물관 소개</h2>
-                            <h1>인사말</h1>
-                            <h1>조직도</h1>
-                            <h1>연혁</h1>
-                            <h1>시설현황</h1>
-                            <h1>시그니쳐(MI)</h1>
-                            <h1>기증안내</h1>
-                        </div>
-                    </div>
-
-                </ul>
-
             </div>
+            
+			<div id="sitemap">
+				<div class="sitemap_wrap">
+				
+					<!-- 관람정보 -->
+					<div class="info_wrap">
+						<div class="top_depth">
+							관람정보
+						</div>
+						<div class="middle_depth">
+							이용안내
+						</div>
+						<ul class="last_depth">
+							<li>관람안내</li>
+							<li>찾아오시는 길</li>
+						</ul>
+						
+						<div class="middle_depth">
+							예약
+						</div>
+						<ul class="last_depth">
+							<li>개인</li>
+							<li>단체</li>
+						</ul>
+						
+						<div class="middle_depth">
+							대관안내
+						</div>
+						<ul class="last_depth">
+							<li>대관예약</li>
+							<li>대관요금</li>
+						</ul>
+					</div>
+					
+					<!-- 전시 -->
+					<div class="info_wrap">
+						<div class="top_depth">
+							전시
+						</div>
+						<div class="middle_depth">
+							상설전시
+						</div>
+						<ul class="last_depth">
+							<li>체험존(3층)</li>
+							<li>체험존(4층)</li>
+							<li>트릭아이뮤지엄(2층)</li>
+						</ul>
+						
+						<div class="middle_depth">
+							기획전시
+						</div>
+						<ul class="last_depth">
+							<li>홍영철전시관(1층)</li>
+							<li>명화극장(4층)</li>
+						</ul>
+						
+						<div class="middle_depth">
+							특별전시
+						</div>
+						<ul class="last_depth">
+							<li>한국배우200사진전(2층)</li>
+						</ul>
+						
+						<div class="middle_depth">
+							온라인전시관
+						</div>
+						<ul class="last_depth">
+							<li>홍영철 온라인 전시관</li>
+							<li>공모전 전시관</li>
+						</ul>
+						
+						<div class="middle_depth">
+							교육
+						</div>
+						<ul class="last_depth">
+							<li>박물관 활동지</li>
+							<li>지난교육</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<script>
+				function open_sitemap() {
+					debugger;
+					$('#sitemap').css('display', 'block');
+					
+					//외부영역 클릭시 드롭메뉴 닫기
+					$(document).mouseup(function (e) {
+						var movewrap = $('#sitemap');
+						if (movewrap.has(e.target).length === 0) {
+							movewrap.hide();
+						}
+					});
+				}
+			</script>
         </nav>
     </section>
 </header>

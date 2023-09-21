@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/cardList.css">
+    <title>부산영화체험박물관 | Q&amp;A</title>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <a href="/"><li class="home_btn"><img src="/imgs/home_icon.png"></li></a>
+        <li class="div_bar">|</li>
+        <li class="category_1" onclick="drop_gnb(1)">소통<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_2" onclick="drop_gnb(2)">Q&A<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+<!--         <li class="category_3" onclick="drop_gnb(3)">박물관 이벤트<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li> -->
+<!--         <li class="div_bar">|</li> -->
+    </ul>
+</div>
+
+<div class="gnb_bar_drop">
+    <ul id="depth_1">
+    	<a href="/viewing_guidance"><li>관람정보</li></a>
+    	<a href="/experience_zone_3rdFloor"><li>전시</li></a>
+    	<a href="/museum_newsList"><li>소통</li></a>
+    	<a href="/greetings"><li>박물관소개</li></a>
+    </ul>
+    
+    <ul id="depth_2">
+    	<a href="/museum_newsList"><li>공지사항</li></a>
+    	<a href="/museum_eventList"><li>이벤트</li></a>
+    	<a href="/museum_qnaList"><li>Q&A</li></a>
+    	<a href="/faq"><li>자주하는 질문</li></a>
+    </ul>
+    
+<!--     <ul id="depth_3"> -->
+<!--     	<a href="/museum_eventList"><li>박물관 이벤트</li></a> -->
+<!--     	<a href="/museum_partnerList"><li>제휴안내</li></a> -->
+<!--     </ul> -->
+</div>
+<script>
+	function drop_gnb(num){
+		$('#depth_'+num).css('display', 'block');
+		
+		//외부영역 클릭시 드롭메뉴 닫기
+		$(document).mouseup(function (e) {
+			var movewrap = $('#depth_'+num);
+			if (movewrap.has(e.target).length === 0) {
+				movewrap.hide();
+			}
+		});
+	}
+</script>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>Q&amp;A</h1></div>
+		</div>
+	</div>
+		<!-- 리스트 형식 div -->
+		<div class="cardList_wrap">
+			<!--전체 count, 검색 div-->
+			<div class="contentTop_area">
+				<div class="total_count">전체<p class="total_red">[(${total_cnt})]</p>건</div>
+				
+				<div class="search_area">
+                    	<form id="searchForm" th:action="@{/museum_qnaList}" method="get">
+	                        <div class="text_search">
+	                        	<input type="text" class="word_search" placeholder="검색" name="searchKeyword" th:if="${searchKeyword == null}">
+	                        	<input type="text" class="word_search" th:value="${searchKeyword}" name="searchKeyword" th:if="${searchKeyword != null}">
+	                        	<div class="search_button">
+	                        		<button type="submit" class="search_img"><img src="/imgs/search_btn.svg"></button>
+	                        	</div>
+	                        </div>
+                        </form>
+                    </div>
+			</div>
+			<div class="list_wrap">
+				<ul class="notice_list">
+                        <ol id="top_ol_notice">
+                            <div class="noticeNum_area"><li>번호</li></div>
+                            <div class="noticeTitle_area"><li>제목</li></div>
+                            <div class="noticeWriter_area"><li>작성자</li></div>
+                            <div class="noticeDate_area"><li>작성일</li></div>
+                        </ol>
+						<ol th:each="question : ${question_list}" class="list_board">
+							<div class="noticeNum_area">
+								<li>[[${question.id}]]</li>
+							</div>
+							
+							<div class="noticeTitle_area">
+								<input type="hidden" th:value="${question.question_pw}" th:id="'pw_'+${question.id}">
+								<li th:onclick="'pwCheck_modal('+${question.id}+')'" class="title_link">[[${question.question_title}]]</li>
+							</div>
+							
+							<div class="noticeWriter_area">
+								<li>[[${question.question_writer}]]</li>
+							</div>
+							
+							<div class="noticeDate_area">
+								<li>[[${question.create_date}]]</li>
+							</div>
+							
+						</ol>
+				</ul>
+				<div class="button_area_qna">
+					<button onclick="location.href='/museum_qnaInsert'" class="insert_btn">문의하기</button>
+				</div>
+				
+				<!-- 페이징 -->
+					<!--검색 안했을 때-->
+                    <div class="null" th:if="${searchKeyword == null}">
+                         <ul class="pagewrap"> 
+                             <li> 
+                             	<a class="page_icon" th:href="@{museum_qnaList?page=1}"><img src="/imgs/page_start_btn.svg" id="pg_btn_sizing"></a> 
+                             </li> 
+                             <li class="icon_right"> 
+                             	<a class="page_icon" th:if="${nowpage == 1}" th:href="@{museum_qnaList?page={page} (page = ${nowpage})}"><img src="/imgs/page_prev_btn.svg"></a> 
+                             	<a class="page_icon" th:if="${nowpage != 1}" th:href="@{museum_qnaList?page={page} (page = ${nowpage}-1)}"><img src="/imgs/page_prev_btn.svg"></a> 
+                             </li> 
+                              <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"> 
+ 							    <li class="page-item"  
+ 							    		 th:with="start = ${pagination.startPage}, end = ${pagination.endPage}" 
+ 							    		th:each="pageButton : ${#numbers.sequence(start, end)}"> 
+ 							    		<a class="page-link"  th:id="'page_num'+${pageButton}" th:href="@{museum_qnaList?page={page} (page = ${pageButton})}" th:text=${pageButton}></a> 
+ 							    </li> 
+ 						    </th:block> 
+                             <li class="icon_left"> 
+                             	<a class="page_icon" th:if="${nowpage == pagination.totalPageCnt}" th:href="@{museum_qnaList?page={page} (page = ${nowpage})}"><img src="/imgs/page_next_btn.svg"></a> 
+                             	<a class="page_icon" th:if="${nowpage != pagination.totalPageCnt}" th:href="@{museum_qnaList?page={page} (page = ${nowpage}+1)}"><img src="/imgs/page_next_btn.svg"></a> 
+                             </li> 
+                             <li> 
+                             	<a class="page_icon" th:href="@{museum_qnaList?page={page} (page = ${pagination.totalPageCnt})}"><img src="imgs/page_end_btn.svg" id="pg_btn_sizing"></a> 
+                             </li> 
+                         </ul>
+                    </div>
+                    
+                    <!-- 검색어로 검색했을 때  -->
+                    <div th:if="${searchKeyword != null}" class="notnull">
+                        <ul class="pagewrap">
+                            <li>
+                            	<a class="page_icon" th:href="@{museum_qnaList?searchKeyword={key}&page=1 (key = ${searchKeyword})}"><img src="/imgs/page_start_btn.svg" id="pg_btn_sizing"></a>
+                            </li>
+                            <li class="icon_right">
+                            	<a class="page_icon" th:if="${nowpage == 1}" th:href="@{museum_qnaList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${nowpage})}"><img src="/imgs/page_prev_btn.svg"></a>
+                            	<a class="page_icon" th:if="${nowpage != 1}" th:href="@{museum_qnaList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${nowpage}-1)}"><img src="/imgs/page_prev_btn.svg"></a>
+                            </li>
+                             <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+							    <li class="page-item" 
+							    		 th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+							    		th:each="pageButton : ${#numbers.sequence(start, end)}">
+							    		<a class="page-link"  th:id="'page_num'+${pageButton}" th:href="@{museum_qnaList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${pageButton})}" th:text=${pageButton}></a>
+							    </li>
+						    </th:block>
+                            <li class="icon_left">
+                            	<a class="page_icon" th:if="${nowpage == pagination.totalPageCnt}" th:href="@{museum_qnaList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${nowpage})}"><img src="/imgs/page_next_btn.svg"></a>
+                            	<a class="page_icon" th:if="${nowpage != pagination.totalPageCnt}" th:href="@{museum_qnaList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${nowpage}+1)}"><img src="/imgs/page_next_btn.svg"></a>
+                            </li>
+                            <li>
+                            	<a class="page_icon" th:href="@{museum_qnaList?searchKeyword={key}&page={page} (key = ${searchKeyword}, page = ${pagination.totalPageCnt})}"><img src="/imgs/page_end_btn.svg" id="pg_btn_sizing"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                <!-- 비밀번호 일치여부 체크 모달 -->
+                <div id="check_modal">
+				    <div class="check_modal_content">
+						<div class="modal_close_area">
+							<img src="/imgs/close_btn_black.svg" id="modal_close_btn">
+						</div>
+				        <div id="check_modal_content_wrap">
+							<input type="hidden" id="question_id">
+					        <img src="/imgs/lock_icon.png" id="check_modal_img">
+						    <div id="modal_content_text">
+						    	<p class="check_title">비공개 글입니다.</p>
+						        <p class="check_detail">비밀번호를 입력해주세요.</p>
+						    </div>
+						    <div id="modal_pw_input">
+								<input type="text" maxlength="6" placeholder="******" id="check_pw">
+							</div>
+						    <div id="modal_btn_div">
+						    	<button type="button" id="check_modal_ok_btn">확인</button>
+						    </div>
+				        </div>
+				    </div>
+			   		<div class="check_modal_layer"></div>
+				</div>
+                    
+                    <script th:inline="javascript">
+                    	var nowpage = /*[[${nowpage}]]*/
+                    	
+						$('#page_num'+nowpage).addClass("thisPage");
+                    </script>
+                    <script>
+						/* 모달창 띄우기 */
+						// 비밀번호 일치여부 체크 모달
+						function pwCheck_modal(id){
+							document.getElementById("check_modal").style.display="block";
+							$('#question_id').val(id);
+						}
+						document.getElementById("modal_close_btn").onclick = function() {
+						    document.getElementById("check_modal").style.display="none";
+						}
+						document.getElementById("check_modal_ok_btn").onclick = function() {
+							var id = $('#question_id').val();
+							var pw = $('#pw_'+id).val();
+							var compare_id = $('#check_pw').val();
+							
+							//id, pw 일치 시 -> 모달 없애고 qnaDetail로 이동
+							if(pw == compare_id){
+							    document.getElementById("check_modal").style.display="none";
+							    window.location.href="/museum_qnaDetail?id="+id;
+							}else{ //일치 안하면 -> alert 띄우고 모달 그대로
+								alert("비밀번호가 일치하지 않습니다.");
+								return false;
+							}
+						}
+					</script>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

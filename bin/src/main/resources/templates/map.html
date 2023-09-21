@@ -16,12 +16,49 @@
 </div>
 <div class="gnb_bar">
     <ul class="gnb_wrap">
-        <li><img src="/imgs/home_icon.svg"></li>
-        <li>관람정보</li>
-        <li>이용안내</li>
-        <li>찾아오시는 길</li>
+        <a href="/"><li class="home_btn"><img src="/imgs/home_icon.png"></li></a>
+        <li class="div_bar">|</li>
+        <li class="category_1" onclick="drop_gnb(1)">관람정보<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_2" onclick="drop_gnb(2)">이용안내<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_3" onclick="drop_gnb(3)">찾아오시는 길<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
     </ul>
 </div>
+
+<div class="gnb_bar_drop">
+    <ul id="depth_1">
+    	<a href="/viewing_guidance"><li>관람정보</li></a>
+    	<a href="/experience_zone_3rdFloor"><li>전시</li></a>
+    	<a href="/museum_newsList"><li>소통</li></a>
+    	<a href="/greetings"><li>박물관소개</li></a>
+    </ul>
+    
+    <ul id="depth_2">
+    	<a href="/viewing_guidance"><li>이용안내</li></a>
+    	<a href="/reservation_personal"><li>예약</li></a>
+    	<a href="/reservation_facilities"><li>대관안내</li></a>
+    </ul>
+    
+    <ul id="depth_3">
+    	<a href="/viewing_guidance"><li>관람안내</li></a>
+    	<a href="/map"><li>찾아오시는 길</li></a>
+    </ul>
+</div>
+<script>
+	function drop_gnb(num){
+		$('#depth_'+num).css('display', 'block');
+		
+		//외부영역 클릭시 드롭메뉴 닫기
+		$(document).mouseup(function (e) {
+			var movewrap = $('#depth_'+num);
+			if (movewrap.has(e.target).length === 0) {
+				movewrap.hide();
+			}
+		});
+	}
+</script>
 <div class="wrap">
 	<div class="contents_wrap">
 		<div class="page_title">
@@ -33,70 +70,131 @@
 				<div id="map"></div>
 			</div>
 			<div class="map_txtarea">
-				<div>
-					부산광역시 중구 대청로126번길 12<br>
-					(동광동3가 41-4)
+				<div class="map_txt_left">
+					<div class="map_icon">
+						<img src="/imgs/map_location_icon.svg" id="map_icon_location">
+					</div>
+					<p>부산광역시 중구 대청로126번길 12 (동광동3가 41-4)</p>
 				</div>
-				<div>
-					051-715-4200
+				<div class="map_txt_right">
+					<div class="map_icon">
+						<img src="/imgs/map_phone_icon.svg" id="map_icon_phone">
+					</div>
+					<p>051-715-4200</p>
 				</div>
 			</div>
 		</div>
 		<div class="transport_wrap">
 			<div class="transport_title">
-				<h2>대중교통 이용</h2>
+				<div>대중교통 이용</div>
 			</div>
 			<div class="transport_contents">
 				<div class="transport_left">
-					<div>지하철</div>
-					<div>버스</div>
+					<div class="trans_div">지하철</div>
+					<div class="trans_method">1호선 중앙역 5번출구</div>
 				</div>
 				<div class="transport_right">
-					<div>1호선 중앙역 5번출구</div>
-					<div>백산기념관 : 15, 86, 126, 186</div>
-					<div>제일은행앞 : 86, 186</div>
-					<div>중앙동주민센터 : 66, 82, 85, 88A, 186, 190, 508</div>
+					<div class="trans_div">버스</div>
+					<div class="trans_method">
+						<li>백산기념관<p class="method_small_txt">: 15, 86, 126, 186</p></li>
+						<li>제일은행앞<p class="method_small_txt">: 86, 186</p></li>
+						<li>중앙동주민센터<p class="method_small_txt">: 66, 82, 85, 88A, 186, 190, 508</p></li>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="parking_wrap">
 			<div class="parking_title">
-				<h2>주차 안내</h2>
+				<div>주차 안내 및 요금</div>
 			</div>
 			<div class="parking_contents">
-				<div>
-					부산영화체험박물관 건물 내(지하2-3층) 주차 가능 <br>
-					부산영화체험박물관 단품 관람 : 1시간 무료
-					부산영화체험박물관+트릭아이뮤지엄 통합 관람 : 2시간 무료
+				<div id="list_flex">
+				<li><p class="list_style">・</p> 부산영화체험박물관 <p class="txt_red">건물 내(지하2-3층)</p> <p class="txt_bold">주차 가능</p></li>
+				<li><p class="list_style">・</p> 부산영화체험박물관 <p class="txt_bold">단품</p> 관람 : <p class="txt_red">1시간 무료</p></li>
+				<li><p class="list_style">・</p> 부산영화체험박물관+트릭아이뮤지엄 <p class="txt_bold">통합</p> 관람 : <p class="txt_red">2시간 무료</p></li>
 				</div>
 			</div>
 			<div class="parking_fee">
-				<div class="fee_table"></div>
+				<table class="fee_table">
+					<tr class="feeTable_top">
+						<td class="tb_first">구분</td>
+						<td class="tb_second_first">1시간 이내</td>
+						<td class="tb_second_second">1~2시간</td>
+						<td class="tb_third">2~4시간</td>
+						<td class="tb_fourth">4시간~폐관시간까지</td>
+						<td class="tb_fifth">폐관이후</td>
+					</tr>
+					<tr class="feeTable_bottom">
+						<td class="tb_first">유료(단품)이용객</td>
+						<td class="tb_second_first">무료</td>
+						<td class="tb_second_second">10분당 250원</td>
+						<td rowspan="2" class="tb_third">10분당 375원</td>
+						<td rowspan="6" class="tb_fourth">시간 정산하여 20,000원 초과시<br>1일 최대 20,000원</td>
+						<td rowspan="6" class="tb_fifth">
+							<div class="merge_div_last">시간요금 적용하여 정산<br>(30,000원 초과 가능)</div>
+							<div class="merge_div_last">입차 후 48시간 초과 무단 장기 주차시<br>견인조치</div>
+						</td>
+					</tr>
+					<tr class="feeTable_bottom">
+						<td class="tb_first">유료(통합)이용객</td>
+						<td colspan="2" class="tb_second_merge">20,000원/대</td>
+					</tr>
+					<tr class="feeTable_bottom">
+						<td class="tb_first">시설이용객(강의실, 영상홀)</td>
+						<td colspan="2" class="tb_second_merge">10,000원/회</td>
+						<td  class="tb_third">10분당 375원</td>
+					</tr>
+					<tr class="feeTable_bottom">
+						<td class="tb_first">부속시설 이용객</td>
+						<td colspan="2" class="tb_second_merge">10,000원/회</td>
+						<td  class="tb_third">10분당 750원</td>
+					</tr>
+					<tr class="feeTable_bottom">
+						<td class="tb_first">장애인/전기차 등 법정 할인 차량</td>
+						<td colspan="2" class="tb_second_merge">30,000원/회</td>
+						<td  class="tb_third">10분당 375원</td>
+					</tr>
+					<tr class="feeTable_bottom">
+						<td class="tb_first">일반인(외부, 무료 관람객)</td>
+						<td colspan="2" class="tb_second_merge">30,000원/회</td>
+						<td  class="tb_third">10분당 750원</td>
+					</tr>
+					<tr class="feeTable_bottom_last">
+						<td class="tb_first">기타</td>
+						<td colspan="5" class="tb_all_merge">- 관람객과 다른 시설 이용객간의 중복 할인은 불가<br>- 위 이외에는 박물관 운영위원회가 정하는 할인율 적용</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 		<div class="ceo_wrap">
 			<div class="ceo_title">
-				<h2>사업자 정보</h2>
+				<div>사업자 정보</div>
 			</div>
-			<div>
-			
+			<div class="ceo_contents">
+				<div class="ceo_left">
+					<p>상호명</p>
+					<p>대표자</p>
+					<p>사업자번호</p>
+					<p>통신판매번호</p>
+					<p>이메일</p>
+				</div>
+				<div class="ceo_right">
+					<p>(주)원중기업</p>
+					<p>고재정</p>
+					<p>131-81-20328</p>
+					<p>제2017-인천남동구-0659호</p>
+					<p>busanbom@busanbom.kr</p>
+				</div>
 			</div>
 		</div>    
 </div>
-
-<section id="section_1" class="inwrap">
-    <div>
-
-    </div>
-
-</section>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=886ed342c277bc7b58703ea3a8c422c4&libraries=services"></script>
 <script type="text/javascript">
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 8 // 지도의 확대 레벨
     };  
 
 	// 지도를 생성합니다    

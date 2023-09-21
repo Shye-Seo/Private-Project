@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/cardList.css">
+    <title>부산영화체험박물관 | 자주하는 질문</title>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <a href="/"><li class="home_btn"><img src="/imgs/home_icon.png"></li></a>
+        <li class="div_bar">|</li>
+        <li class="category_1" onclick="drop_gnb(1)">소통<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_2" onclick="drop_gnb(2)">자주하는 질문<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+<!--         <li class="category_3" onclick="drop_gnb(3)">박물관 이벤트<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li> -->
+<!--         <li class="div_bar">|</li> -->
+    </ul>
+</div>
+
+<div class="gnb_bar_drop">
+    <ul id="depth_1">
+    	<a href="/viewing_guidance"><li>관람정보</li></a>
+    	<a href="/experience_zone_3rdFloor"><li>전시</li></a>
+    	<a href="/museum_newsList"><li>소통</li></a>
+    	<a href="/greetings"><li>박물관소개</li></a>
+    </ul>
+    
+    <ul id="depth_2">
+    	<a href="/museum_newsList"><li>공지사항</li></a>
+    	<a href="/museum_eventList"><li>이벤트</li></a>
+    	<a href="/museum_qnaList"><li>Q&A</li></a>
+    	<a href="/faq"><li>자주하는 질문</li></a>
+    </ul>
+    
+<!--     <ul id="depth_3"> -->
+<!--     	<a href="/museum_eventList"><li>박물관 이벤트</li></a> -->
+<!--     	<a href="/museum_partnerList"><li>제휴안내</li></a> -->
+<!--     </ul> -->
+</div>
+<script>
+	function drop_gnb(num){
+		$('#depth_'+num).css('display', 'block');
+		
+		//외부영역 클릭시 드롭메뉴 닫기
+		$(document).mouseup(function (e) {
+			var movewrap = $('#depth_'+num);
+			if (movewrap.has(e.target).length === 0) {
+				movewrap.hide();
+			}
+		});
+	}
+</script>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>자주하는 질문</h1></div>
+		</div>
+	</div>
+		<!-- 리스트 형식 div -->
+		<div class="cardList_wrap">
+			<!--전체 count, 검색 div-->
+			<div class="contentTop_area">
+				<div class="total_count">전체<p class="total_red">18</p>건</div>
+			</div>
+			<div class="list_wrap">
+				<ul class="faq_list">
+						<ol class="list_faq" onclick="open_faq(1)">
+							<input type="hidden" value="0" id="open_check_1">
+							<div class="faq_div_area">
+								<li>찾아오시는 길</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>버스 이용하려고 하는데 몇 번 버스를 이용하면 되나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_1"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_1">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>백산기념관 (일반 15, 86, 126, 186번)</li>
+								<li>제일은행앞 (일반 86, 186번</li>
+								<li>중앙동주민센터 (일반 66, 82, 85, 88A, 186, 190, 508번)</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(2)">
+							<input type="hidden" value="0" id="open_check_2">
+							<div class="faq_div_area">
+								<li>찾아오시는 길</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>자가용으로는 어떻게 가나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_2"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_2">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>주소 : 부산광역시 중구 대청로126번길12(동광동3가 41-1) </li>
+								<li>삼락IC에서 약 30분(14km), 사상IC에서 약 40분(16km) </li>
+								<li>명지IC에서 약 40분(11km), 원동IC에서 약 26분(14km)</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(3)">
+							<input type="hidden" value="0" id="open_check_3">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>관람시간이 어떻게 되나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_3"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_3">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>10:00~18:00(발권 및 입장은 17:00까지. 통합 관람 시 16:30까지 입장을 권장합니다.)</li>
+								<li>* 휴관: 매주 월요일(월요일이 공휴일인 경우 그 다음날), 1월 1일, 설·추석 당일</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(4)">
+							<input type="hidden" value="0" id="open_check_4">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>예약을 해야 하나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_4"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_4">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>개인 관람객의 경우 예약은 필요하지 않습니다.</li>
+								<li>단, 20인 이상의 단체일 경우 동일한 시간에 많은 인원이 방문하면 관람에 불편이 있을 수 있으므로</li>
+								<li>방문 2일 전까지 유선 또는 홈페이지를 통해 단체관람 예약을 권장합니다.</li>
+								<li>예약문의) 051-715-4200</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(5)">
+							<input type="hidden" value="0" id="open_check_5">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>박물관 관람 소요 시간은 대략 얼마나 걸리나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_5"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_5">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>- 부산영화체험박물관 단독 관람시: 약 1시간~1시간 30분 소요</li>
+								<li>- 부산영화체험박물관+트릭아이뮤지엄 통합관람시: 약 2시간 소요</li>
+								<li>* 관람 시간은 개인 별로 다를 수 있습니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(6)">
+							<input type="hidden" value="0" id="open_check_6">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>관람 순서는 어떻게 해야 하나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_6"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_6">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>부산영화체험박물관 관람은 지하1층 영화미니어쳐전시 → 3층 상설전시실 → 4층 상설전시실 순서로 관람하시는 것을 추천합니다. </li>
+								<li>2층 트릭아이뮤지엄은 별도 발권 또는 통합티켓 발권 후 관람 가능합니다.</li>
+								<li>故홍영철 영화아카이브 전시실 1층에 위치해 있으며 무료 관람입니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(7)">
+							<input type="hidden" value="0" id="open_check_7">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>단체관람은 신청해야하나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_7"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_7">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>20명 이상의 단체라면 관람을 원하는 날짜 2일 전까지 단체관람을 예약해주세요. 예약없이 방문하시면 입장이 지연될 수 있습니다.</li>
+								<li>온라인 예약) [홈페이지] → [관람] → [단체예약(20인 이상)]</li>
+								<li>전화 예약) 051-715-4200</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(8)">
+							<input type="hidden" value="0" id="open_check_8">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>관람당일 관람을 하려면 어디로 가야하나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_8"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_8">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>2층 매표소에서 티켓 발권 후 관람 가능합니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(9)">
+							<input type="hidden" value="0" id="open_check_9">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>단체관람을 신청하면 전시 투어를 해주시는 건가요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_9"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_9">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>단체관람의 경우 원하시면 전시 해설을 신청하실 수 있습니다.</li>
+								<li>전시 해설 신청) 051-715-4200</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(10)">
+							<input type="hidden" value="0" id="open_check_10">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>어린이영화마을(앨리스 존) 관람연령이 어떻게 되나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_10"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_10">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>유치원생 이하의 미취학 아동들을 대상으로 하고 있습니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(11)">
+							<input type="hidden" value="0" id="open_check_11">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>어린이영화마을(앨리스 존) 관람인원 제한이 있나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_11"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_11">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>안전사고를 예방하기 위해 동시 입장 인원은 최대 30명까지로 제한하고 있습니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(12)">
+							<input type="hidden" value="0" id="open_check_12">
+							<div class="faq_div_area">
+								<li>관람안내</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>어린이영화마을(앨리스 존)에 보호자도 함께 들어갈 수 있나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_12"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_12">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>관람질서 유지 및 안전사고 예방을 위해 보호자께서 동행해 주시기 바랍니다.</li>
+								<li>보호자는 시설물 사용 불가한 점 참고부탁드립니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(13)">
+							<input type="hidden" value="0" id="open_check_13">
+							<div class="faq_div_area">
+								<li>전시해설</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>전시해설은 무엇인가요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_13"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_13">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>초등학교 이상에서 성인까지를 대상으로 좀 더 심층적으로 전시 관람을 원하시는 분들을 위해 전시해설을 하고 있습니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(14)">
+							<input type="hidden" value="0" id="open_check_14">
+							<div class="faq_div_area">
+								<li>전시해설</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>현장에서도 신청가능한가요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_14"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_14">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>사전 단체 예약시 진행이 가능한 점 참고부탁드립니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(15)">
+							<input type="hidden" value="0" id="open_check_15">
+							<div class="faq_div_area">
+								<li>편의시설</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>수유실은 어디에 있나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_15"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_15">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>2층 화장실 옆에 수유실이 있습니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(16)">
+							<input type="hidden" value="0" id="open_check_16">
+							<div class="faq_div_area">
+								<li>편의시설</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>유모차 및 휠체어 대여는 어디서 하나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_16"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_16">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>지하1층 안내데스크에서 대여 가능합니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(17)">
+							<input type="hidden" value="0" id="open_check_17">
+							<div class="faq_div_area">
+								<li>편의시설</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>물품보관함이 있나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_17"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_17">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>지하1층과 2층 출입구에 위치해 있으며, 무료이용 가능합니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+						<ol class="list_faq" onclick="open_faq(18)">
+							<input type="hidden" value="0" id="open_check_18">
+							<div class="faq_div_area">
+								<li>편의시설</li>
+							</div>
+							<div class="faq_qna_area">
+								<li>Q</li>
+							</div>
+							<div class="faq_title_area">
+								<li>기념품은 어디서 살 수 있나요?</li>
+							</div>
+							<div class="faq_icon_area">
+								<li><img src="/imgs/faq_icon_1.svg" id="icon_18"></li>
+							</div>
+						</ol>
+						<ol class="display_answer" id="answer_18">
+							<ol class="list_faq_answer">
+							<div class="faq_div_area">
+								<li></li>
+							</div>
+							<div class="faq_qna_area_answer">
+								<li>A</li>
+							</div>
+							<div class="faq_answer_area">
+								<li>4층에 기념품 샵(봄 스토어)가 있습니다.</li>
+							</div>
+							<div class="faq_icon_area">
+								<li></li>
+							</div>
+							</ol>
+						</ol>
+						
+                    </ul>
+				</ul>
+				<script>
+					function open_faq(num){
+						var open_check = $('#open_check_'+num).val();
+						
+						if(open_check == 0){
+							$('#answer_'+num).css('display', 'block');
+							$('#open_check_'+num).val(1);
+							document.getElementById("icon_"+num).src = "/imgs/faq_icon_2.svg";
+						}else if(open_check == 1){
+							$('#answer_'+num).css('display', 'none');
+							$('#open_check_'+num).val(0);
+							document.getElementById("icon_"+num).src = "/imgs/faq_icon_1.svg";
+						}
+					}
+				</script>
+			</div>
+		</div>
+</body>
+</html>

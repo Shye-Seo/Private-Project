@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부산영화체험박물관 | 관리자</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="/css/admin_boardInsert.css">
+    <script src="/js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+	<script src="js/edu_register.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="~{common/side :: sidebar_manage ('news')}"></div>
+
+        <!-- main -->
+        <div class="content">
+            <div class="container">
+                <div class="page-header">
+                    <div class="page-title">
+                        <span>게시판 관리</span>
+                    </div>
+                </div>
+
+                <div class="area">
+                	<form name="eduAddForm" action="/eduAdd" enctype="multipart/form-data" method="post" onsubmit="return false">
+                    <div class="area1">
+                        <span>제목</span>
+                        <input type="text" name="edu_title" class="required" placeholder="제목을 입력해주세요." th:value="${edu.edu_title}" >
+                    </div>
+                    <div class="area2">
+                        <span>교육일시</span>
+                        <input type="text" name="edu_date" class="required" maxlength="45" th:value="${edu.edu_date}">
+                    </div>
+                    <div class="area2">
+                        <span>교육장소</span>
+                        <input type="text" name="edu_place" class="required" maxlength="45" th:value="${edu.edu_place}">
+                    </div>
+                    <div class="area2">
+                        <span>교육대상(인원)</span>
+                        <input type="text" name="edu_target" class="required" maxlength="45" th:value="${edu.edu_target}">
+                    </div>
+                    <div class="area2">
+                        <span>교육내용</span>
+                        <input type="text" name="edu_explain" class="required" maxlength="45" th:value="${edu.edu_explain}">
+                    </div>
+                    <div class="area2">
+                        <span>수강비용</span>
+                        <input type="text" name="edu_price" class="required" maxlength="45" th:value="${edu.edu_price}">
+                    </div>
+                    <div class="area2">
+                        <span>접수기간</span>
+                        <input type="text" name="edu_deadline" class="required" maxlength="45" th:value="${edu.edu_deadline}">
+                    </div>
+                    <div class="area2">
+                        <span>접수방법</span>
+                        <input type="text" name="edu_method" class="required" maxlength="45" th:value="${edu.edu_method}">
+                    </div>
+                    <div class="area3">
+                        <span>동영상 링크</span>
+                        <div class="link_wrap">
+	                        <input type="text" name="edu_link1" th:value="${edu.edu_link1}">
+	                        <input type="text" name="edu_link2" th:value="${edu.edu_link2}">
+                        </div>
+                    </div>
+                    <div class="area2">
+                        <span>내용</span>
+                        <textarea placeholder="1000자 이내로 입력" name="edu_content" maxlength="1000" th:value="${edu.edu_content}" th:text="${edu.edu_content}" onkeydown="resize(15,100,this)" ></textarea>
+                    </div>
+                    <div class="area3">
+                        <span>대표이미지첨부</span> <!-- vo에 포함시키지 않고 따로 controller에 전송 -->
+                        <div class="file_area">
+                            <div id="file_names_thumbnail">
+                                <!-- 파일 이름 -->
+                                    <div class='file_con'>
+                                        <div class="filename" th:text="${edu.edu_poster}" th:if="${edu.edu_poster != ''}"></div>
+                                        <img src="/imgs/close_btn_black.svg" th:data-fileName="${edu.edu_poster}"
+                                        th:onclick="deleteFile_for_update_thumbnail(this.getAttribute('data-fileName'))">
+                                    </div>
+                            </div>
+                            <label for="thumbnail" id="file_upload" class="thumbnail_label"><img src="/imgs/board_upload_icon.svg"></label>
+                        </div>
+                        <input type="file" id="thumbnail" multiple="multiple" name="thumbnail_file" hidden/>
+                        <input type="hidden" id="input_thumbnail" name="edu_poster">
+                        <!-- ... -->
+                    </div>
+                    <div class="area3">
+                        <span>이미지/동영상첨부<p>(최대 5개)</p></span>
+                        <div class="file_area">
+                            <div id="file_names">
+                                <!-- 파일 이름 -->
+                                <div th:each="FileList : ${eduFileList}"  th:id="'fileTr_' + ${FileListStat.index}">
+                                    <div class='file_con'>
+                                        <div class="filename" th:text="${FileList.file_name}"></div>
+                                        <img src="/imgs/close_btn_black.svg" th:data-fileName="${FileList.file_name}" th:data-index="${FileListStat.index}" 
+                                        th:onclick="deleteFile_for_update(this.getAttribute('data-index'),this.getAttribute('data-fileName'))">
+                                    </div>
+                                </div>
+                            </div>
+                            <label for="input_file" id="file_upload" class="files_label"><img src="/imgs/board_upload_icon.svg"></label>
+                        </div>
+                        <input type="file" id="input_file" multiple="multiple" name="file" hidden />
+                        <!-- ... -->
+                    </div>
+                    <div class="btn_wrap">
+                        <button type="button" id="cancel_btn" onclick="location.href='admin_eduList'">취소</button>
+                        <button type="button" id="update_btn">저장</button>
+                    </div>
+
+                    <!-- update -->
+                        <input type="text" name="id" hidden th:value="${edu.id}">
+                        
+                    </form>
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        $(function(){
+                            let eduFileList = /*[[${eduFileList}]]*/
+
+                            fileIndex=eduFileList.length;
+                            
+                            if($('#file_names').children().length >=5){
+                                $('#input_file').attr("disabled","disabled");
+                                $('.area3 .files_label').css({'background-color':'#eee', 'cursor':'unset'});
+                            }
+                            
+                            $('textarea').height((15 + $('textarea').prop('scrollHeight')));
+                        })
+                        /*]]>*/
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

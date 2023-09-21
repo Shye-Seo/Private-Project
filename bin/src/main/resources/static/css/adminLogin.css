@@ -1,8 +1,34 @@
+@charset "utf-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-/* login, find_id_pw, join1~3 공통 css */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #FFE9E5 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #FFE9E5 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+* {
+    margin: 0;
+    font: 'Pretendard'
+}
 
 body {
-    background:#F8F9FB;
+    background: #F5F5F5;
+    margin: 0px;
 }
 
 #wrap {
@@ -15,14 +41,16 @@ body {
 }
 
 input:focus-visible {
-    border: 0.5px solid #5B8FD2;
+/*    border: 0.5px solid #5B8FD2;*/
 }
 
 
-/* 공통 좌측 부분*/
-.login_wrap_L, .login_wrap_R{
-    width: 50%; height: auto;
+.login_wrap_R{
+    width: 400px;
+    height: 377px;
     position: relative;
+    margin: 13.5% auto;
+    /* top: 272px; */
 }
 .login_comment {
     width: 100%;
@@ -49,34 +77,57 @@ input:focus-visible {
 
 /* login_page */
 .login_word {
-    text-align:center;
+    /* text-align: center; */
     font-size: 30px;
     font-weight: 800;
-    margin-bottom: 80px;
+    margin-bottom: 32px;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 33px;
 }
 
 .login_position {
     width: 400px;
+/*    height: 312px;*/
     margin: 0 auto;
+    background: #FFF;
+    padding: 24px;
+    box-sizing: border-box;
+    box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.04), 0px 20px 24px -4px rgba(16, 24, 40, 0.10);
 }
 
-.login_position p{
+.login_position p {
     font-size: 14px;
     font-weight: 600;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 5px;
 }
 
 .login_position p:nth-child(3){
-    margin-top: 5px;
+/*    margin-top: 5px;*/
 }
 
 .id_pw_text {
     width: 100%;
     height: 50px;
     border: 1px solid #0000001A;
+    border: 1px solid #D2D2D2;
     padding-left: 20px;
     box-sizing: border-box;
-    margin: 10px 0;
-    border-radius: 5px;
+    /* margin: 10px 0; */
+    /* border-radius: 5px; */
+    padding: 10px 14px;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    margin-bottom: 16px;
 }
 
 .login_position .check_wrap {
@@ -84,37 +135,57 @@ input:focus-visible {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 90px;
+    margin-bottom: 24px;
+    line-height: 20px;
+    height: 20px;
 }
 
-.idcheck label{
-    font: normal normal normal 14px/17px Pretendard;
+.idcheck {
+    display: flex;
+    align-items: center;
 }
 
-.idcheck input[type="checkbox"]{
+.idcheck label {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.idcheck input[type="checkbox"] {
     -webkit-appearance: none;
     position: relative;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
     outline: none !important;
-    border-radius: 3px;
-    background: #DDDDDD;
+    /* border-radius: 3px; */
+    background: #FFF;
+    border: 1px solid #D2D2D2;
+    margin: auto;
+    margin-right: 10px;
 }
 
 .idcheck input[type="checkbox"]::before {
-    content: "\2713";
-    line-height: 18px;
-    width: 18px; height: 18px;
+    /* content: "\2713"; */
+    line-height: 16px;
+    width: 16px;
+    height: 16px;
     text-align: center;
     display: block;
     font-size: 16px;
     font-weight: 600;
     color: #fff;
+    border: 1px solid #D2D2D2;
+    margin-right: 10px;
 }
 
 .idcheck input[type="checkbox"]:checked{
-    background-color: #5B8FD2;
+    background-color: #F43F1F;
+    border: 1px solid #F43F1F;
+    margin-right: 10px;
 }
 
 .check_wrap .idfind span{
@@ -124,706 +195,24 @@ input:focus-visible {
     opacity: 1;
 }
 
-.login_position input[type="button"]{
-    width: 400px; height: 50px;
-    box-shadow: 0px 3px 6px #66666629;
+.login_position input[type="button"] {
+    width: 100%;
+    height: 50px;
     font: normal normal 600 16px/19px Pretendard;
-    border: 1px solid #5B8FD2;
-    border-radius: 5px;
     cursor: pointer;
-}
-
-.login_position .login_btn {color:#ffffff;
-    background-color: #5B8FD2;
-    margin-bottom: 20px;
-}
-
-.login_position .join_btn { color:#5B8FD2;
-    background-color: #FFFFFF;
+    border: 1px solid #F43F1F;
+    background: #F43F1F;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    display: flex;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
 }
 /* login_end */
-
-
-/* find_id,pw */
-#tab1, #tab2 {
-    display:none;
-}
-.radio_wrap{
-    width: 400px; height: 50px;
-    display: flex;
-    border-bottom: 1px solid #E5E5E5;
-    position: relative;
-    box-sizing: border-box;
-    margin: 0 auto;
-    margin-bottom: 50px;
-}
-.radio_wrap label {
-    width: 50%;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    line-height: 50px;
-}
-
-#tab1:checked ~ label[for="tab1"], #tab2:checked ~ label[for="tab2"]{
-    color: #5B8FD2;
-    border-bottom: 2px solid #5B8FD2;
-}
-
-.tab1_content, .tab2_content{
-    width: 400px;
-    margin: 0 auto;
-}
-
-#find_id p, #find_pw p {
-    font-size: 14px;
-    font-weight: 600;
-    margin: 10px 0;
-}
-#find_id p:nth-child(3), #find_pw p:nth-child(3){
-    margin-top: 15px;
-}
-#find_id p:nth-child(6), #find_pw p:nth-child(6){
-    margin-top: 15px;
-}
-.put_name {
-    width: 100%;
-    height: 50px;
-    border: 1px solid #0000001A;
-    padding-left: 20px;
-    box-sizing: border-box;
-    border-radius: 5px;
-}
-
-.put_number {
-    width: 280px; height: 50px;
-    background-color: #FFFFFF;
-    border: 1px solid #0000001A;
-    border-radius: 5px;
-    box-sizing: border-box;
-    padding-left: 20px;
-}
-
-.certifi_num {
-    width: 280px; height: 50px;
-    background-color: #FFFFFF;
-    border: 1px solid #0000001A;
-    border-radius: 5px;
-    box-sizing: border-box;
-    padding-left: 20px;
-}
-
-.ask_certifinum,
-.asked_certifinum {
-    width: 100px; height: 50px;
-    border:0;
-    color:#FFFFFF;
-    font-size: 16px;
-    background-color: #999999;
-    border-radius: 5px;
-    margin-left: 15px;
-    cursor: pointer;
-}
-
-.find_id_btn,
-.find_pw_btn,
-.change_pw_btn {
-    margin-top:50px;
-    margin-bottom:20px;
-    width: 400px;
-    height: 50px;
-    color:#FFFFFF;
-    font: normal normal 600 16px/19px Pretendard;
-    border:1px solid #5B8FD2;
-    background: #5B8FD2 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #66666629;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.back_tohome {
-    width: 400px;
-    height: 50px;
-    color:#5B8FD2;
-    font: normal normal 600 16px/19px Pretendard;;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #66666629;
-    border: 1px solid #5B8FD2;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.found_id{
-    width: 400px; height: 429px;
-    margin: 0 auto;
-    padding-top: 100px;
-    box-sizing: border-box;
-}
-.id_line{
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-#getid{
-    color: #5B8FD2;
-    font-weight: 600;
-}
-#getdate{
-    color: #999999;
-}
-.date_line {
-    color: #999999;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 110px;
-}
-.found_tohome{
-    width: 200px;
-    margin-left: calc(50% - 100px);
-    background: #5B8FD2;
-    color: #ffffff;
-}
-
-.changing_pw{
-    width: 400px; height: 429px;
-    margin: 0 auto;
-
-}
-.changing_pw_comment{
-    text-align: center;
-    font-size: 16px;
-    line-height: 24px;
-    margin-bottom: 35px;
-}
-.changing_pw_comment p{
-    color: #999999;
-}
-.changing_pw_comment p:first-child{
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #333333;
-}
-.changing_pw_input_wrap p{
-    margin: 15px 0 10px 0;
-}
-.changed_complete{
-    width: 400px; height: 429px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 50px;
-    box-sizing: border-box;
-}
-
-.changed_complete .check_img{
-    margin: 0 auto;
-    margin-bottom: 40px;
-}
-
-.changed_complete h2 {
-    text-align: center;
-    color: #333333;
-    font-weight: normal;
-    margin-bottom: 20px;
-}
-
-.changed_complete p {
-    text-align: center;
-    font: normal normal normal 16px/19px Pretendard;
-    color: #999999;
-    margin-bottom: 80px;
-}
-
-.tab2_content,
-.found_id,
-.changing_pw,
-.changed_complete {
-    display:none;
-}
-/* find_id,pw end */
-
-
-/* join1 */
-/* 원때기 시작 */
-.process_join {
-    margin:auto;
-    vertical-align:middle;
-    width: 60%;
-    margin-bottom: 50px;
-}
-
-.process_join ul {
-    text-align:center;
-    margin:0;  padding:0;
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-}
-
-.process_join ul li {
-    list-style:none;
-    display:table-cell;
-    position:relative;
-    text-align: center;
-    font-size:12px;
-    color:#3333331A;
-    width: 33.33%;
-    height: 50px;
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.process_join .active {
-    color: #333333;
-    font-weight: bold;
-}
-
-.process_join .active::before {
-    width: 14px;
-    height: 14px;
-    content: "";
-
-    border: 5px solid rgba(169, 190, 236, 0.68);
-    background-clip:padding-box;
-    display: block;
-    text-align: center;
-    margin: 0 auto 0 auto;
-    border-radius: 50%;
-    position: relative;
-    z-index: 2;
-    background-color: #5B8FD2;
-}
-
-.process_join .inactive::before {
-    top:-5px;
-}
-
-.process_join ul li::before {
-    width: 14px;
-    height: 14px;
-    content: "";
-
-    background-clip:padding-box;
-    display: block;
-    text-align: center;
-    margin: 0 auto 0 auto;
-    border-radius: 50%;
-    position: relative;
-    z-index: 2;
-    background-color: #DDDDDD;
-}
-
-.process_join ul li::after {
-    content:"";
-    width: 100%;
-    /* height: 0px; */
-    height: 2px;
-    background-color: #DDDDDD;
-    /* border: 2px solid #DDDDDD; */
-    opacity: 1;
-    position:absolute;
-    top:13px;
-    left:50%;
-}
-
-.process_join ul li:last-child::after {
-    content:none;
-}
-/* 원때기 끝 */
-
-.agreement {
-    width: 500px;
-    margin: 0 auto;
-}
-
-.agreement input[type="checkbox"]{
-    -webkit-appearance: none;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    outline: none !important;
-    border-radius: 50%;
-    background: #DDDDDD;
-}
-
-.agreement input[type="checkbox"]::before {
-    content: "\2713";
-    line-height: 20px;
-    width: 20px; height: 20px;
-    text-align: center;
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-}
-
-.agreement input[type="checkbox"]:checked{
-    background-color: #5B8FD2;
-}
-.agreement label[for="all_chk"] {
-    font-size: 16px;
-    font-weight: 600;
-    margin-left: 10px;
-}
-
-
-.agreement .agreement_area {
-    margin-top: 15px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    border: 1px solid #0000001A;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-.agreement .agreement_area hr {
-    border: 1px solid #0000001A;
-    margin: 8px 0;
-    width: calc(100% + 18px);
-    transform: translateX(-10px);
-}
-
-.agreement .agreement_area label {
-    text-align: left;
-    font: normal normal normal 15px/18px Pretendard;
-    letter-spacing: 0px;
-    color: #333333;
-    margin-left: 5px;
-}
-
-.agreement .agreement_area span {
-    text-align: left;
-    font: normal normal normal 15px/18px Pretendard;
-    letter-spacing: 0px;
-    color: #5B8FD2;
-}
-
-.agreement .agreement_area textarea {
-    resize:none;
-    width:100%;
-    height:159px;
-    border:0;
-    padding: 5px;
-    box-sizing: border-box;
-    font-size: 12px;
-}
-
-.agreement textarea::-webkit-scrollbar {
-    width: 5px;
-}
-.agreement textarea::-webkit-scrollbar-thumb {
-    height: 30%;
-    background: #999999;
-    border-radius: 10px;
-}
-
-.agreement textarea::-webkit-scrollbar-track {
-    background: #DDDDDD;
-    border-left: 2px solid #fff;
-    border-right: 2px solid #fff;
-}
-
-.button_position {
-    width: 420px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 60px;
-}
-
-.button_position .cancel_btn {
-    width: 100px;
-    height: 50px;
-    color:#5B8FD2;
-    font: normal normal 600 16px/19px Pretendard;
-    letter-spacing: 0.32px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #66666629;
-    border: 1px solid #DDDDDD;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.button_position .join_btn {
-    width: 300px;
-    height: 50px;
-    color:#FFFFFF;
-    font: normal normal bold 16px/19px Pretendard;
-    letter-spacing: 0.32px;
-    background: #CCCCCC 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #66666629;
-    border: 1px solid #CCCCCC;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* join1 end */
-
-
-/* join2 */
-
-sup, #sup {
-    color: #dd5067;
-}
-
-#checking {
-    width: 500px;
-    text-align:right;
-    margin: auto;
-}
-
-#checking p {
-    font-size: 12px;
-}
-
-#member {
-    width:500px;
-    margin:0 auto;
-}
-#member form>div{
-    width: 100%; height: 80px;
-    position: relative;
-}
-#member form>div span{
-    position: absolute;
-    top: 33px; right: 0;
-    font-size: 12px;
-}
-.item {
-    text-align: left;
-    font: normal normal 600 14px/17px Pretendard;
-    letter-spacing: 0px;
-    color: #333333;
-    opacity: 1;
-}
-
-#member input[type="text"], #member input[type="password"]{
-    width: 100%; height: 35px;
-    background: none;
-    outline: none;
-    border: 0;
-    border-bottom: 1px solid #DDDDDD;
-    margin-top: 5px;
-    font-size: 15px;
-}
-#member input[type="text"]:focus-visible, #member input[type="password"]:focus-visible{
-    border: 0;
-    border-bottom: 1px solid #5B8FD2;
-}
-
-#member input::placeholder,.birth_area select {
-    text-align: left;
-    font-size: 16px; font-weight: 300;
-    letter-spacing: 0px;
-    color: #DDDDDD;
-}
-.name_email_wrap, .birth_gender_wrap, .phone_certifinum_wrap{
-    display: flex;
-    justify-content: space-between;
-}
-.name_area{
-    width: 35%;
-}
-.email_area{
-    width: 60%;
-}
-.birth_area,.phone_area{
-    width: 55%;
-}
-.certifinum_area{
-    width: 40%;
-}
-.birth_area div{
-    display: inline;
-    position: relative;
-}
-.birth_area div::after{
-    content: "";
-    display: block; position: absolute;
-    top: 5px; right: 3px;
-    width: 10px; height: 10px;
-    background-image: url(../imgs/join_arrow.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: rotate(180deg);
-}
-.birth_area div.changed::after{
-    content: "";
-    display: block; position: absolute;
-    top: 5px; right: 3px;
-    width: 10px; height: 10px;
-    background-image: url(../imgs/join_arrow.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: rotate(0);
-}
-
-.birth_area select{
-    -webkit-appearance: none;
-    width: 25%; height: 35px;
-    background: none;
-    outline: none;
-    border: 0;
-    border-bottom: 1px solid #DDDDDD;
-    margin-top: 5px;
-    margin-left: 20px;
-}
-.birth_area select:focus-visible{
-    border: 0;
-    border-bottom: 1px solid #5B8FD2;
-}
-
-#birth_year{
-    width: 30%;
-    margin-left: 0;
-}
-select::-webkit-scrollbar {
-    width: 8px;
-}
-select::-webkit-scrollbar-thumb {
-    height: 30%;
-    background: #dddddd;
-    border-radius: 10px;
-    background-clip: padding-box;
-    border: 3px solid transparent;
-}
-.gender_area{
-    width: 40%;
-    font-size: 16px;
-    color: #999999;
-    display: flex;
-    align-items: center;
-}
-.gender_area input[type="radio"]{
-    -webkit-appearance: none;
-    margin: 0 10px 0 30px;
-    width: 20px; height: 20px;
-    border: 1px solid #DDDDDD;
-    border-radius: 50%;
-    background-color: #ffffff;
-    cursor: pointer;
-}
-.gender_area input[type="radio"]:checked{
-    border: 1px solid #5B8FD2;
-    background: #5B8FD2 content-box;
-    padding: 4px;
-}
-
-/* 자동완성 시 색깔 변하는 것 제거하기 */
-input[name="user_phone"]:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px #F8F9FB inset;
-    box-shadow: 0 0 0 1000px #F8F9FB inset;
-}
-
-.phone_area, .certifinum_area {
-    position: relative;
-}
-
-#certifinum_submit{
-    position: absolute;
-    top: 23px; right: 0;
-    width: 60px; height: 25px;
-    background-color: #fff;
-    border: 0.5px solid #999999;
-    border-radius: 5px;
-    color: #999999;
-    font-size: 13px;
-    cursor: pointer;
-}
-
-#certifinum_check{
-    position: absolute;
-    top: 30px; right: 0;
-    width: 20px;  height: 20px;
-    /* cursor: pointer; */
-    /* outline: none !important; */
-    border-radius: 50%;
-    background: #DDDDDD;
-    border: 0;
-    line-height: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-}
-
-#certifi_time{
-    color: #DD5067;
-    margin-right: 30px;
-}
-
-.join2_button {
-    width: 300px;
-    margin-top: 40px;
-}
-
-.join2_button .back_btn {
-    width: 100px; height: 50px;
-    color:#5B8FD2;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #66666629;
-    border: 1px solid #DDDDDD;
-    border-radius: 5px;
-    font-size: 16px; font-weight: 600;
-    cursor: pointer;
-}
-
-.join2_button .join_complete_btn {
-    width: 180px; height: 50px;
-    color: #FFFFFF;
-    background: #5B8FD2 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #66666629;
-    border: 1px solid #5B8FD2;
-    border-radius: 5px;
-    font-size: 16px; font-weight: 600;
-    cursor: pointer;
-}
-/* join2 end */
-
-/* join3 */
-.join_complete {
-    margin-top: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.check_img {
-    width:50px; height:50px;
-    background:url(../imgs/join_completed.svg) no-repeat;
-    margin-bottom: 40px;
-}
-
-.join_complete h2 {
-    text-align: center;
-    color: #333333;
-    font-weight: normal;
-    margin-bottom: 20px;
-}
-
-.join_complete p {
-    text-align: center;
-    font: normal normal normal 16px/19px Pretendard;
-    color: #999999;
-    margin-bottom: 80px;
-}
-
-.goto_login_btn {
-    width: 200px; height: 50px;
-    font: normal normal bold 16px/19px Pretendard;
-    color: #FFFFFF;
-    background: #5B8FD2 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #66666629;
-    border: 1px solid #5b8fd2;
-    border-radius: 5px;
-    margin-bottom: 30px;
-    cursor: pointer;
-}
-/* join3 end */
-
-/* 로그인 상단 라인 맞추기 위해 */
-.join_R{
-    height: 700px;
-    margin-top: 30px;
-}

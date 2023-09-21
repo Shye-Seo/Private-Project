@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/info.css">
+    <title>부산영화체험박물관 | 한국배우200사진전</title>
+</head>
+<body>
+<div th:replace="/head :: head">
+
+</div>
+<div class="gnb_bar">
+    <ul class="gnb_wrap">
+        <a href="/"><li class="home_btn"><img src="/imgs/home_icon.png"></li></a>
+        <li class="div_bar">|</li>
+        <li class="category_1" onclick="drop_gnb(1)">전시<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_2" onclick="drop_gnb(2)">특별전시<img src="/imgs/gnb_drop_icon.svg" class="gnb_drop_icon"></li>
+        <li class="div_bar">|</li>
+        <li class="category_3">한국배우200사진전</li>
+        <li class="div_bar">|</li>
+    </ul>
+</div>
+
+<div class="gnb_bar_drop">
+    <ul id="depth_1">
+    	<a href="/viewing_guidance"><li>관람정보</li></a>
+    	<a href="/experience_zone_3rdFloor"><li>전시</li></a>
+    	<a href="/museum_newsList"><li>소통</li></a>
+    	<a href="/greetings"><li>박물관소개</li></a>
+    </ul>
+    
+    <ul id="depth_2">
+    	<a href="/experience_zone_3rdFloor"><li>상설전시</li></a>
+    	<a href="/exhibition_1stFloor"><li>기획전시</li></a>
+    	<a href="/exhibition_actor"><li>특별전시</li></a>
+    	<a href="/online_exhibition"><li>온라인 전시관</li></a>
+    	<a href="/activity_document"><li>교육</li></a>
+    </ul>
+</div>
+<script>
+	function drop_gnb(num){
+		$('#depth_'+num).css('display', 'block');
+		
+		//외부영역 클릭시 드롭메뉴 닫기
+		$(document).mouseup(function (e) {
+			var movewrap = $('#depth_'+num);
+			if (movewrap.has(e.target).length === 0) {
+				movewrap.hide();
+			}
+		});
+	}
+</script>
+<div class="wrap">
+	<div class="contents_wrap">
+		<div class="page_title">
+			<div class="page_name_area"><h1>한국배우 200 사진전</h1></div>
+		</div>
+	</div>
+	<div class="exhb_info_area">
+		<div class="text_content_exhb">
+			당신을 감동시킬 배우가 여기 있다.<br>
+			당신이 사랑하는 한국배우 200인&lt;한국배우 200사진전&gt;
+		</div>
+	</div>
+	
+	<div class="big_img_area_hong">
+		<img src="/imgs/actor_poster.jpg">
+	</div>
+	<div class="img_wrap_hong">
+		<div class="hong_img_1">
+			<img src="/imgs/actor_1.png">
+			<img src="/imgs/actor_2.png">
+		</div>
+		<div class="hong_img_2">
+			<img src="/imgs/actor_3.png">
+			<img src="/imgs/actor_4.png">
+		</div>
+	</div>
+</div>
+</body>
+</html>
