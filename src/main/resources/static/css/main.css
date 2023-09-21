@@ -19,7 +19,7 @@
 #popup_1, #popup_2{
 	display: none;
 	background-color: #000;
-    z-index: 100;
+    z-index: 99;
     color: #FFF;
     position: absolute;
 }
