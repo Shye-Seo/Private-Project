@@ -26,6 +26,10 @@ header {
     width: 62.5%;
 }
 
+.logo_menu img{
+	cursor: pointer;
+}
+
 .head_menu {
     display: flex;
     gap: 70px;
@@ -343,4 +347,8 @@ header {
 
 #depth_1 li:hover, #depth_2 li:hover, #depth_3 li:hover{
 	background: #F9F9F9;
+}
+
+.gnb_bar_drop ul a {
+    text-decoration-line: none;
 }
