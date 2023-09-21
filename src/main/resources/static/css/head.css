@@ -120,7 +120,7 @@ header {
     margin-bottom: 20px;
 }
 
-.middle_depth {
+.middle_depth_div {
     border: 1px solid #D9D9D9;
     background: #FFF;
     color: #222;
@@ -158,6 +158,54 @@ header {
 
 .last_depth li {
     cursor: pointer;
+}
+
+.middle_depth_qna {
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.6px;
+    padding: 9px 23px;
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 42px;
+    margin-bottom: 72px;
+}
+
+.middle_depth_last {
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.6px;
+    padding: 9px 23px;
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 42px;
+    margin-bottom: 30px;
+}
+
+.middle_depth_last:hover{
+	background: #F1F1F1;
+}
+
+.middle_depth_qna:hover{
+	background: #F1F1F1;
+}
+
+.middle_depth:has(.last_depth:hover) {
+	.middle_depth_div {
+    background: #F1F1F1;
+	}
 }
 
 /*------------navigation bar-------------*/
