@@ -20,19 +20,21 @@
                     <li>박물관 소개</li>
                 </ul>
                 <div class="language_menu">
-                	<div class="language_choice">
+                	<div class="language_choice" onclick="open_language()">
                 		<p>한국어</p>
                 		<img src="/imgs/language_select_icon.png">
                 	</div>
                 </div>
-                <div class="language_select">
-                	<ul class="language_option">
-                		<li class="optionItem">한국어</li>
-                		<li class="optionItem">ENGLISH</li>
-				      	<li class="optionItem">日本語</li>
-				      	<li class="optionItem">简体中文</li>
-                	</ul>
-                </div>
+            </div>
+            
+            <div class="language_select">
+               	<ul class="language_option">
+               		<li class="optionItem">한국어</li>
+               		<li class="optionItem">ENGLISH</li>
+			      	<li class="optionItem">日本語</li>
+			      	<li class="optionItem">简体中文</li> <!-- 간체 -->
+			      	<li class="optionItem">繁体中文</li> <!-- 번체 -->
+               	</ul>
             </div>
             
 			<div id="sitemap">
@@ -183,6 +185,18 @@
 					//외부영역 클릭시 드롭메뉴 닫기
 					$(document).mouseup(function (e) {
 						var movewrap = $('#sitemap');
+						if (movewrap.has(e.target).length === 0) {
+							movewrap.hide();
+						}
+					});
+				}
+				
+				function open_language() {
+					$('.language_select').css('display', 'block');
+					
+					//외부영역 클릭시 드롭메뉴 닫기
+					$(document).mouseup(function (e) {
+						var movewrap = $('.language_select');
 						if (movewrap.has(e.target).length === 0) {
 							movewrap.hide();
 						}
