@@ -48,6 +48,7 @@ public class MainController {
 	    Calendar cal = Calendar.getInstance();
 	    String today = dateFormat.format(cal.getTime());
 	    System.out.println("today = "+today);
+	    System.out.println("돔황챠");
 	    
 		int popup_cnt = webService.today_popup_cnt(today);
 		if(popup_cnt != 0) {

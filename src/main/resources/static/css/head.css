@@ -52,10 +52,11 @@ header {
     height: 100px;
 	padding: 20px 0;
     box-sizing: border-box;
+    border-bottom: 1px solid #222;
 }
 
 .language_menu {
-/* 	margin-left: 280px; */
+	margin-left: 15%;
 	width: 13.5%;
 }
 
@@ -85,7 +86,7 @@ header {
 	display: none;
 	z-index: 100;
     position: absolute;
-    left: 62.8%;
+    left: 72.5%;
     width: 8.3%;
     border: 1px solid #222;
 }
@@ -126,7 +127,7 @@ header {
     width: 100%;
     background: #FFF;
     z-index: 100;
-    border-top: 1px solid #222;
+/*     border-top: 1px solid #222; */
     height: calc(100% - 100px);
 }
 

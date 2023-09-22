@@ -79,8 +79,157 @@
 	float: right;
 }
 
+/*----------슬라이드 영역----------*/
+#slide{
+	width: 100%;
+    height: 860px;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.swiper-pagination-fraction {
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.swiper-button-prev {
+    left: 45% !important;
+    height: 32px !important;
+    width: 32px !important;
+    color: #FFF;
+    top: 805px !important;
+    background: url(/imgs/main_slide_prev.png) no-repeat;
+}
+.swiper-button-next {
+    right: 45% !important;
+    height: 32px !important;
+    width: 32px !important;
+    color: #FFF;
+    top: 805px !important;
+	background: url(/imgs/main_slide_next.png) no-repeat;    
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
+
+
+.slide_text {
+    z-index: 50;
+    position: absolute;
+    top: 25%;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: -0.96px;
+    margin: 0 auto;
+    display: grid;
+    width: 100%;
+    gap: 10px;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.73);
+}
+
+.slide_text_bold {
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 52px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -1.56px;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.73);
+}
+
+.main_slide_iconBox {
+    display: flex;
+    position: absolute;
+    top: 250px;
+    z-index: 50;
+    position: absolute;
+    top: 47.5%;
+    width: 100%;
+    /* margin: 0 auto; */
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.66px;
+    justify-content: center;
+}
+.personal_icon_area {
+    width: 12%;
+    height: 100%;
+    background: rgba(70, 70, 70, 0.80);
+    backdrop-filter: blur(10px);
+    padding: 3% 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.group_icon_area, .price_icon_area, .map_icon_area {
+    width: 12%;
+    height: 100%;
+    border-left: 0.5px solid #FFF;
+    background: rgba(70, 70, 70, 0.80);
+    backdrop-filter: blur(10px);
+    padding: 3% 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.personal_icon_area:hover, .group_icon_area:hover, .price_icon_area:hover, .map_icon_area:hover {
+    background: #FB4829;
+}
+.personal_icon_area:hover .hover_personal{
+    display: block;
+}
+.personal_icon_area:hover .unhover_personal{
+    display: none;
+}
+.group_icon_area:hover .hover_group{
+    display: block;
+}
+.group_icon_area:hover .unhover_group{
+    display: none;
+}
+.map_icon_area:hover .hover_map{
+    display: block;
+}
+.map_icon_area:hover .unhover_map{
+    display: none;
+}
+.hover_personal, .hover_group, .hover_map{
+	display: none;
+}
+.icon_wrap img {
+    margin: 0 auto;
+}
+.icon_wrap {
+    justify-content: center;
+    display: grid;
+    gap: 30px;
+}
+.icon_img{
+	height: 60px;
+}
+
+
 .slide_box{
-    height: 660px;
+    height: 860px;
     position:relative;
     top:0;
     width: 100%;
@@ -109,6 +258,10 @@
 }
 .slide li {
     list-style: none;
+    width: 100%;
+}
+.slide li img {
+    width: 100%;
 }
 .slide_box span {
     position: absolute;
@@ -121,10 +274,69 @@
     cursor: pointer;
     background-color: white;
 }
-.prev {
-    left: 65%;
-}
-.next {
-    right: 30%;
 
+/*--------슬라이드 끝--------*/
+/*--------하단 info--------*/
+.main_info_area {
+    height: 100px;
+    border-bottom: 1px solid #000;
+}
+
+.info_text_wrap {
+    width: 62.5%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.left_info_wrap {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: #222;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: -0.66px;
+}
+
+.viewing_time_info {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.div_bar_info {
+    background: #000;
+    width: 2px;
+    height: 20px;
+}
+
+.closed_day_info {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.more_info {
+    color: #222;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.66px;
+    display: flex;
+    gap: 9px;
+    cursor: pointer;
+}
+
+/*--------전시 info--------*/
+.exhb_slide_area {
+    width: 62.5%;
+    margin: 0 auto;
 }

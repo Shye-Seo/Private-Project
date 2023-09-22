@@ -5,10 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <title>부산영화체험박물관</title>
     <script src="/js/main.js"></script>
 </head>
+<script>
+$(document).ready(function () {
+	new Swiper('.swiper',{ 
+	  direction : 'horizontal', // 수직 슬라이드
+	  autoplay: {     //자동슬라이드 (false-비활성화)
+	      delay: 3000, // 시간 설정
+	      disableOnInteraction: false, // false-스와이프 후 자동 재생
+	    },
+	  loop:true,	//반복 재생 여부
+	  slidesPerView: 1, //한번에 보여질 슬라이드 수
+	  pagination: {
+		    el: '.swiper-pagination',
+		    clickable: true,
+		    type: "fraction"
+		  },
+	  navigation: {
+		    prevEl: '.swiper-button-prev',
+		    nextEl: '.swiper-button-next'
+		  }
+	});
+})
+</script>
 <body>
 	<div th:replace="/head :: head"></div>
 	
@@ -38,23 +63,108 @@
 		</div>
 	</div>
 	
-	<div class="slide_box">
-	    <ul class="slide">
-	        <li><img src="/imgs/bg.jpg" alt="슬라이드1"></li>
-	        <li><img src="/imgs/bg2.jpg" alt="슬라이드2"></li>
-	        <li><img src="/imgs/bg3.jpg" alt="슬라이드3"></li>
-	    </ul>
-	    <div class="inwrap">
-	        <h1>영화체험박물관</h1>
-	        <h1>영화체험박물관</h1>
-	        <h1>영화체험박물관</h1>
+	<div class="swiper" id="slide">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide"><img src="/imgs/main_1.jpg" alt="슬라이드1"></div>
+	        <div class="swiper-slide"><img src="/imgs/main_2.jpg" alt="슬라이드2"></div>
+	        <div class="swiper-slide"><img src="/imgs/main_3.jpg" alt="슬라이드3"></div>
 	    </div>
-	    <span class="prev">&lang;</span>
-	    <span class="next">&rang;</span>
+	    
+	    <div class="slide_text">
+	    	<p>영화에 대한 모든 것을 보고 느끼는</p>
+	    	<p class="slide_text_bold">부산영화체험박물관</p>
+	    </div>
+	    
+	    <div class="main_slide_iconBox">
+	    	<div class="personal_icon_area" onclick="location.href='/reservation_personal'">
+	    		<div class="icon_wrap">
+		    		<div class="icon_img">
+		    			<img src="/imgs/main_personal_icon.png" class="unhover_personal">
+		    			<img src="/imgs/main_personal_icon_hover.png" class="hover_personal">
+		    		</div>
+		    		<p>개인 예매</p>
+	    		</div>
+	    	</div>
+	    	<div class="group_icon_area" onclick="location.href='/reservation_group'">
+		    	<div class="icon_wrap">
+		    		<div class="icon_img">
+		    			<img src="/imgs/main_group_icon.png" class="unhover_group">
+		    			<img src="/imgs/main_group_icon_hover.png" class="hover_group">
+		    		</div>
+		    		<p>단체 예약</p>
+	    		</div>
+	    	</div>
+	    	<div class="price_icon_area" onclick="location.href='/viewing_guidance#price_table'">
+	    		<div class="icon_wrap">
+		    		<div class="icon_img">
+		    			<img src="/imgs/main_price_icon.png" class="unhover">
+		    		</div>
+		    		<p>요금안내</p>
+	    		</div>
+	    	</div>
+	    	<div class="map_icon_area" onclick="location.href='/map'">
+	    		<div class="icon_wrap">
+		    		<div class="icon_img">
+		    			<img src="/imgs/main_map_icon.png" class="unhover_map">
+		    			<img src="/imgs/main_map_icon_hover.png" class="hover_map">
+		    		</div>
+		    		<p>오시는길</p>
+	    		</div>
+	    	</div>
+	    </div>
+	    
+	    <div class="swiper-pagination"></div>
+	    <div class="swiper-button-prev"></div>
+  		<div class="swiper-button-next"></div>
 	</div>
 	
-	<div></div>
-	<div></div>
+	<div class="main_info_area">
+		<div class="info_text_wrap">
+			<div class="left_info_wrap">
+				<div class="viewing_time_info">
+					<p>관람시간</p>
+					<div class="div_bar_info"></div>
+					<p>10:00 - 18:00</p>
+				</div>
+				<p>・</p>
+				<div class="closed_day_info">
+					<p>휴관일</p>
+					<div class="div_bar_info"></div>
+					<p>매주 월요일(단, 공휴일과 겹치는 경우 그 다음 날), 1월 1일, 설날, 추석 당일</p>
+				</div>
+			</div>
+			<div class="more_info" onclick="location.href='/viewing_guidance'">
+				<p>더보기</p>
+				<p>+</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="exhb_slide_area">
+		<div class="exhb_area_title">
+			<div class="title_flex_area">
+				<p class="title_gray">EXHIBITON</p>
+				<p class="title_main">전시안내</p>
+			</div>
+			<div class="slide_icon_area">
+				<img src="/imgs/main_slide_prev_black.png">
+				<img src="/imgs/main_slide_next_black.png">
+			</div>
+		</div>
+		<div class="exhb_slide_area" id="3rdFloor">
+			<img src="/imgs/main_3rdFloor.png">
+			<div class="exhb_img_info">
+				<div class="img_info_top">
+					<p>상설전시</p>
+					<p>체험존 3층</p>
+				</div>
+				<div class="exhb_link_div">
+					<p>자세히보기</p>
+					<img src="/imgs/exhb_link_icon.png">
+				</div>
+			</div>
+		</div>
+	</div>
 
 <!-- 팝업 JS 부분 -->
 <script>
@@ -121,10 +231,8 @@
     return "";
 }
     
-    $('.chkbox').change(function() { //신청자명
+    $('.chkbox').change(function() {
     	var check = $('.chkbox').val();
-    debugger;
-//     	$('.name_insert').text(leaderName);
     });
 </script>
 </body>
