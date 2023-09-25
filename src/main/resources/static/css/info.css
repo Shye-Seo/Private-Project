@@ -750,3 +750,116 @@
 .puzzle_area {
     width: 25%;
 }
+
+/*-----------------------------개인정보 처리방침-------------------------*/
+.policy_wrap {
+    width: 62.5%;
+    margin: 0 auto;
+    padding: 120px;
+}
+
+.top_policy {
+    padding-bottom: 60px;
+}
+
+.policy_title {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 42px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -1.05px;
+}
+
+.policy_top_txt {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: -0.6px;
+    margin-top: 20px;
+}
+
+.policy_content {
+    padding-bottom: 50px;
+    display: grid;
+    gap: 20px;
+}
+
+.content_rule_title {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+}
+
+.content_rule_detail {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.4px;
+}
+
+.content_rule_detail_num {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.45px;
+    margin-bottom: 10px;
+}
+
+.content_rule_detail_txt {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.4px;
+    margin-bottom: 4px;
+}
+
+.detail_process {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.4px;
+    margin-bottom: 10px;
+}
+
+.detail_list_last{
+	color: #414141;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.4px;
+    margin-bottom: 10px;
+}
+
+.detail_list {
+    color: #414141;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.4px;
+    margin-bottom: 4px;
+}

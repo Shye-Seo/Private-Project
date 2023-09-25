@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.voucher.movie.admin.PopupVO;
+import com.voucher.movie.board.EventVO;
+import com.voucher.movie.board.NewsVO;
+import com.voucher.movie.board.PartnerVO;
 import com.voucher.movie.mappers.AdminDao;
 import com.voucher.movie.mappers.WebDao;
 
@@ -29,6 +32,18 @@ public class WebService {
 
 	public List<PopupVO> get_today_popup(String today) {
 		return webDao.get_today_popup(today);
+	}
+
+	public List<NewsVO> getAllNews() {
+		return webDao.getAllNews();
+	}
+
+	public List<EventVO> getAllEvents() {
+		return webDao.getAllEvents();
+	}
+
+	public List<PartnerVO> getAllPartners() {
+		return webDao.getAllPartners();
 	}
 
 }

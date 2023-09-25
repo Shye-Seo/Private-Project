@@ -128,7 +128,7 @@ header {
     background: #FFF;
     z-index: 100;
 /*     border-top: 1px solid #222; */
-    height: calc(100% - 100px);
+/*     height: calc(100% - 100px); */
 }
 
 .sitemap_wrap {
@@ -385,4 +385,83 @@ header {
 
 .gnb_bar_drop ul a {
     text-decoration-line: none;
+}
+
+/*---------------footer----------------*/
+footer {
+    width: 100%;
+}
+
+.footer_wrap {
+    min-height: 291px;
+    background: #282828;
+    padding: 50px 0;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.footer_title_wrap {
+    width: 62.5%;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.17);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.company_name {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.55px;
+}
+
+.sns_icon_wrap {
+    display: flex;
+    gap: 12px;
+}
+
+.sns_icon_wrap img {
+    cursor: pointer;
+}
+
+.footer_bottom_wrap {
+    width: 62.5%;
+    margin: 0 auto;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.4px;
+    display: flex;
+    padding: 50px 20px;
+    align-items: center;
+}
+
+.footer_div {
+    background: #B0B0B0;
+    width: 0.5px;
+    height: 13px;
+    margin: 0 12px;
+}
+
+.footer_privacy {
+    cursor: pointer;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.4px;
 }

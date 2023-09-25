@@ -15,7 +15,7 @@
 <script>
 $(document).ready(function () {
 	new Swiper('.swiper',{ 
-	  direction : 'horizontal', // 수직 슬라이드
+	  direction : 'horizontal', //수평 슬라이드
 	  autoplay: {     //자동슬라이드 (false-비활성화)
 	      delay: 3000, // 시간 설정
 	      disableOnInteraction: false, // false-스와이프 후 자동 재생
@@ -32,6 +32,89 @@ $(document).ready(function () {
 		    nextEl: '.swiper-button-next'
 		  }
 	});
+	
+	new Swiper('.swiper_exhb',{ 
+		  direction : 'horizontal', //수평 슬라이드
+		  autoplay: false,
+		  spaceBetween : 360,
+		  loop:true,	//반복 재생 여부
+		  slidesPerView: 1, //한번에 보여질 슬라이드 수
+		  pagination: {
+			    el: '.swiper-pagination',
+			    clickable: true,
+			    type: "fraction"
+			  },
+		  navigation: {
+			    prevEl: '.exhb_navigation_prev',
+			    nextEl: '.exhb_navigation_next'
+			  }
+		});
+	
+	new Swiper('.swiper_news',{ 
+		  direction : 'horizontal', //수평 슬라이드
+		  autoplay: false,
+		  spaceBetween : 24,
+		  slidesPerGroup : 3,
+		  loop:false,	//반복 재생 여부
+		  slidesPerView: 'auto', //한번에 보여질 슬라이드 수
+		  centeredSlides: false, // 양쪽 미리보기
+		  autoHeight: true,
+		  allowTouchMove : false, //(false-스와이핑안됨)버튼으로만 슬라이드 조작이 가능
+		  loopAdditionalSlides : 1,
+		  pagination: {
+			    el: '.swiper-pagination',
+			    clickable: true,
+			    type: "fraction"
+			  },
+		  navigation: {
+			    prevEl: '.news_navigation_prev',
+			    nextEl: '.news_navigation_next'
+			  }
+		});
+	
+	new Swiper('.swiper_event',{ 
+		  direction : 'horizontal', //수평 슬라이드
+		  autoplay: false,
+// 		  spaceBetween : 24,
+		  slidesPerGroup : 1,
+		  loop:false,	//반복 재생 여부
+		  slidesPerView: 'auto', //한번에 보여질 슬라이드 수
+		  centeredSlides: false, // 양쪽 미리보기
+		  autoHeight: true,
+		  allowTouchMove : false, //(false-스와이핑안됨)버튼으로만 슬라이드 조작이 가능
+		  loopAdditionalSlides : 1,
+		  pagination: {
+			    el: '.swiper-pagination',
+			    clickable: true,
+			    type: "fraction"
+			  },
+		  navigation: {
+			    prevEl: '.event_navigation_prev',
+			    nextEl: '.event_navigation_next'
+			  }
+		});
+	
+	new Swiper('.swiper_partner',{ 
+		  direction : 'horizontal', //수평 슬라이드
+		  autoplay: false,
+		  spaceBetween : 25,
+		  slidesPerGroup : 3,
+		  loop:false,	//반복 재생 여부
+		  slidesPerView: 'auto', //한번에 보여질 슬라이드 수
+		  centeredSlides: false, // 양쪽 미리보기
+		  autoHeight: true,
+		  allowTouchMove : false, //(false-스와이핑안됨)버튼으로만 슬라이드 조작이 가능
+		  loopAdditionalSlides : 1,
+		  pagination: {
+			    el: '.swiper-pagination',
+			    clickable: true,
+			    type: "fraction"
+			  },
+		  navigation: {
+			    prevEl: '.partner_navigation_prev',
+			    nextEl: '.partner_navigation_next'
+			  }
+		});
 })
 </script>
 <body>
@@ -147,25 +230,268 @@ $(document).ready(function () {
 				<p class="title_main">전시안내</p>
 			</div>
 			<div class="slide_icon_area">
-				<img src="/imgs/main_slide_prev_black.png">
-				<img src="/imgs/main_slide_next_black.png">
+				<img src="/imgs/main_slide_prev_black.png" class="exhb_navigation_prev">
+				<img src="/imgs/main_slide_next_black.png" class="exhb_navigation_next">
 			</div>
 		</div>
-		<div class="exhb_slide_area" id="3rdFloor">
-			<img src="/imgs/main_3rdFloor.png">
-			<div class="exhb_img_info">
-				<div class="img_info_top">
-					<p>상설전시</p>
-					<p>체험존 3층</p>
+		
+		<div id="swiper_wrapper_exhb">
+		<div class="swiper_exhb">
+			<div class="exhb_slide_info_area swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="/imgs/main_3rdFloor.png">
+					<div class="exhb_img_info">
+						<div class="img_info_top">
+							<p>상설전시</p>
+							<div class="img_info_div"></div>
+							<p class="img_info_title">체험존 3층</p>
+						</div>
+						<div class="exhb_link_div" onclick="location.href='/experience_zone_3rdFloor'">
+							<p>자세히보기</p>
+							<img src="/imgs/exhb_link_icon.png">
+						</div>
+					</div>
 				</div>
-				<div class="exhb_link_div">
-					<p>자세히보기</p>
-					<img src="/imgs/exhb_link_icon.png">
+				
+				<div class="swiper-slide">
+					<img src="/imgs/main_4thFloor.png">
+					<div class="exhb_img_info">
+						<div class="img_info_top">
+							<p>상설전시</p>
+							<div class="img_info_div"></div>
+							<p class="img_info_title">체험존 4층</p>
+						</div>
+						<div class="exhb_link_div" onclick="location.href='/experience_zone_4thFloor'">
+							<p>자세히보기</p>
+							<img src="/imgs/exhb_link_icon.png">
+						</div>
+					</div>
+				</div>
+				
+				<div class="swiper-slide">
+					<img src="/imgs/main_trickEye.png">
+					<div class="exhb_img_info">
+						<div class="img_info_top">
+							<p>상설전시</p>
+							<div class="img_info_div"></div>
+							<p class="img_info_title">트릭아이뮤지엄</p>
+						</div>
+						<div class="exhb_link_div" onclick="location.href='/trickEye_2ndFloor'">
+							<p>자세히보기</p>
+							<img src="/imgs/exhb_link_icon.png">
+						</div>
+					</div>
+				</div>
+				
+				<div class="swiper-slide">
+					<img src="/imgs/main_painting.png">
+					<div class="exhb_img_info">
+						<div class="img_info_top">
+							<p>기획전시</p>
+							<div class="img_info_div"></div>
+							<p class="img_info_title">명화극장</p>
+						</div>
+						<div class="exhb_link_div" onclick="location.href='/exhibition_4thFloor'">
+							<p>자세히보기</p>
+							<img src="/imgs/exhb_link_icon.png">
+						</div>
+					</div>
+				</div>
+				
+				<div class="swiper-slide">
+					<img src="/imgs/main_1stFloor.png">
+					<div class="exhb_img_info">
+						<div class="img_info_top">
+							<p>기획전시</p>
+							<div class="img_info_div"></div>
+							<p class="img_info_title">홍영철전시관</p>
+						</div>
+						<div class="exhb_link_div" onclick="location.href='/exhibition_1stFloor'">
+							<p>자세히보기</p>
+							<img src="/imgs/exhb_link_icon.png">
+						</div>
+					</div>
+				</div>
+				
+				<div class="swiper-slide">
+					<img src="/imgs/main_actor.png">
+					<div class="exhb_img_info">
+						<div class="img_info_top">
+							<p>특별전시</p>
+							<div class="img_info_div"></div>
+							<p class="img_info_title">한국배우<br>200인 사진전</p>
+						</div>
+						<div class="exhb_link_div" onclick="location.href='/exhibition_actor'">
+							<p>자세히보기</p>
+							<img src="/imgs/exhb_link_icon.png">
+						</div>
+					</div>
+				</div>
+				
+				<div class="swiper-slide">
+					<img src="/imgs/main_online.png">
+					<div class="exhb_img_info">
+						<div class="img_info_top">
+							<p>온라인전시</p>
+							<div class="img_info_div_online"></div>
+							<p class="img_info_title">홍영철<br>온라인 전시관</p>
+						</div>
+						<div class="exhb_link_div" onclick="location.href='/online_exhibition'">
+							<p>자세히보기</p>
+							<img src="/imgs/exhb_link_icon.png">
+						</div>
+					</div>
+				</div>
+				
+				<div class="swiper-slide">
+					<img src="/imgs/main_contest.png">
+					<div class="exhb_img_info">
+						<div class="img_info_top">
+							<p>온라인전시</p>
+							<div class="img_info_div_online"></div>
+							<p class="img_info_title">공모전 전시관</p>
+						</div>
+						<div class="exhb_link_div" onclick="location.href='/contest_exhibition'">
+							<p>자세히보기</p>
+							<img src="/imgs/exhb_link_icon.png">
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		</div>
+	</div>
+	
+	<div class="news_area">
+		<div class="exhb_area_title">
+			<div class="title_flex_area">
+				<p class="title_gray">NEWS</p>
+				<p class="title_main">박물관 소식</p>
+			</div>
+			<div class="slide_icon_area">
+				<img src="/imgs/main_slide_prev_black.png" class="news_navigation_prev">
+				<img src="/imgs/main_slide_next_black.png" class="news_navigation_next">
+			</div>
+		</div>
+		
+		<div id="swiper_wrapper_news">
+			<div class="swiper_news">
+				<div class="news_slide_info_area swiper-wrapper">
+					<div class="swiper-slide" th:each="news : ${news_list}">
+						<a th:href="@{museum_newsDetail(id=${news.id})}">
+							<div class="news_poster">
+								<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/news-folder/' +${news.news_poster}}" alt="poster_img">
+							</div>
+							<div class="news_info">
+								<div class="news_title"><p>[(${news.news_title})]</p></div>
+								<div class="news_detail">
+									<p>일시 : [(${news.news_date})]</p>
+									<p>장소 : [(${news.news_place})]</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="main_bottom_flex">
+		<div class="event_area">
+			<div class="event_area_title">
+				<div class="title_flex_area">
+					<p class="title_gray">EVENT</p>
+					<p class="title_main">박물관 이벤트</p>
+				</div>
+				<div class="slide_icon_area">
+					<img src="/imgs/main_slide_prev_black.png" class="event_navigation_prev">
+					<img src="/imgs/main_slide_next_black.png" class="event_navigation_next">
+				</div>
+			</div>
+			
+			<div id="swiper_wrapper_event">
+			<div class="swiper_event">
+				<div class="event_slide_info_area swiper-wrapper">
+					<div class="swiper-slide event_slide" th:each="event : ${event_list}">
+						<a th:href="@{museum_eventDetail(id=${event.id})}">
+							<div class="event_poster_left">
+								<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/event-folder/' +${event.event_poster}}" alt="poster_img">
+							</div>
+							<div class="event_info_right">
+								<div class="event_flex_text">
+								<div class="event_title"><p>[(${event.event_title})]</p></div>
+								<div class="event_detail"><p>[(${event.event_content})]</p></div>
+								</div>
+								<div class="event_date"><p>[(${event.create_date})]</p></div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		
+		<div class="main_bottom_right_area">
+			<div class="partner_area">
+				<div class="partner_area_title">
+					<div class="title_flex_area">
+						<p class="title_gray">PARTNERSHIP</p>
+						<p class="title_main">제휴 안내</p>
+					</div>
+					<div class="slide_icon_area">
+						<img src="/imgs/main_slide_prev_black.png" class="partner_navigation_prev">
+						<img src="/imgs/main_slide_next_black.png" class="partner_navigation_next">
+					</div>
+				</div>
+				
+				<div id="swiper_wrapper_partner">
+					<div class="swiper_partner">
+						<div class="partner_slide_info_area swiper-wrapper">
+							<div class="swiper-slide" th:each="partner : ${partner_list}">
+								<a th:href="@{museum_partnerDetail(id=${partner.id})}">
+									<div class="partner_poster">
+										<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/partner-folder/' +${partner.partner_poster}}" alt="poster_img">
+									</div>
+									<div class="partner_info">
+										<div class="partner_title"><p>[(${partner.partner_title})]</p></div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="mobile_guide_area">
+				<div class="mobile_guide_wrapper">
+					<div class="mobile_left_display">
+						<div class="mobile_text">
+							<p>"스마트한 박물관.<br>내 손안의 전시해설 모바일 가이드"</p>
+						</div>
+						<div class="mobile_btn_area">
+							<div class="iOS_btn" onclick="window.open('https://apps.apple.com/kr/app/%EB%8F%84%EC%8A%A8%ED%8A%B8-%EC%98%81%ED%99%94%EC%B2%B4%ED%97%98%EB%B0%95%EB%AC%BC%EA%B4%80/id1371952978?ign-mpt=uo%3D4')">
+								<div class="mobile_icon"><img src="/imgs/mobile_icon.svg"></div>
+								<p>iOS</p>
+							</div>
+							<div class="android_btn" onclick="window.open('https://play.google.com/store/apps/details?id=kr.co.accessict.docent.busanbom')">
+								<div class="mobile_icon"><img src="/imgs/mobile_icon.svg"></div>
+								<p>Android</p>
+							</div>
+						</div>
+					</div>
+					<div class="mobile_right_display">
+						<img src="/imgs/mobile_audio_guide_2.png">
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	
+	<div th:replace="/footer :: footer"></div>
+	
+	
 <!-- 팝업 JS 부분 -->
 <script>
 	// popup //

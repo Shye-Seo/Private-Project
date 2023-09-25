@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>sidebar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+<footer th:fragment="footer">
+	<section class="footer_wrap">
+		<div class="footer_title_wrap">
+			<div class="company_name">
+				<p>부산영화체험박물관</p>
+			</div>
+			<div class="sns_icon_wrap">
+				<img src="/imgs/blog_icon.png" onclick="window.open('https://blog.naver.com/bommoviebusan')">
+				<img src="/imgs/youtube_icon.png" onclick="window.open('https://www.youtube.com/@busanbom')">
+				<img src="/imgs/instagram_icon.png" onclick="window.open('https://www.instagram.com/busanbom')">
+				<img src="/imgs/kakao_icon.png" onclick="window.open('http://pf.kakao.com/_xmxnylG')">
+			</div>
+		</div>
+		<div class="footer_bottom_wrap">
+			<div class="footer_bottom_txt"><p>주소 : (48950)부산광역시 중구 대청로 126번길 12(동광동3가 41-4)</p></div>
+			<div class="footer_div"></div>
+			<div class="footer_bottom_txt"><p>대표번호 : 051-715-4200</p></div>
+			<div class="footer_div"></div>
+			<div class="footer_bottom_txt"><p>FAX : 051-715-4202</p></div>
+			<div class="footer_div"></div>
+			<div class="footer_privacy" onclick="location.href='/privacy_policy'"><p>개인정보처리방침</p></div>
+		</div>
+	</section>
+</footer>
+</body>
+</html>

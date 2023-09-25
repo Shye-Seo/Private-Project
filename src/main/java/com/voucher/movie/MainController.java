@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.voucher.movie.admin.AdminService;
 import com.voucher.movie.admin.PopupVO;
+import com.voucher.movie.board.EventVO;
+import com.voucher.movie.board.NewsVO;
+import com.voucher.movie.board.PartnerVO;
 import com.voucher.movie.reservation.ClosedVO;
 
 @Controller
@@ -34,6 +37,9 @@ public class MainController {
 	WebService webService;
 	
 	List<PopupVO> popup_list;
+	List<NewsVO> news_list;
+	List<EventVO> event_list;
+	List<PartnerVO> partner_list;
 
 	// 최초 진입 시 실행 페이지
 	@GetMapping(value="/")
@@ -47,17 +53,27 @@ public class MainController {
 	    
 	    Calendar cal = Calendar.getInstance();
 	    String today = dateFormat.format(cal.getTime());
-	    System.out.println("today = "+today);
-	    System.out.println("돔황챠");
 	    
 		int popup_cnt = webService.today_popup_cnt(today);
 		if(popup_cnt != 0) {
 			popup_list = webService.get_today_popup(today);
-//			for(PopupVO vo : popup_list) {
-//				vo.setNo();
-//			}
 			model.addAttribute("popup_list", popup_list);
 		}
+		
+		//박물관 소식 리스트 get
+		news_list = webService.getAllNews();
+		model.addAttribute("news_list", news_list);
+		
+		event_list = webService.getAllEvents();
+		for(EventVO event : event_list) {
+			String event_date = event.getCreate_date();
+		    event_date = event_date.substring(0, 4) + "." + event_date.substring(5, 7) +"." + event_date.substring(8, 10);
+		    event.setCreate_date(event_date);
+		}
+		model.addAttribute("event_list", event_list);
+		
+		partner_list = webService.getAllPartners();
+		model.addAttribute("partner_list", partner_list);
 		
 		return "main"; 
 	}
@@ -172,6 +188,12 @@ public class MainController {
 	@GetMapping(value="/donation_info")
 	public String donation_info() {
 		return "donation_info";
+	}
+	
+	// 푸터-개인정보처리방침
+	@GetMapping(value="/privacy_policy")
+	public String privacy_policy() {
+		return "privacy_policy";
 	}
 	
 }

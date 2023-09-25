@@ -90,13 +90,13 @@
 						<div class="event_poster">
 							<img id="poster" th:src="@{'https://busanbom.s3.ap-northeast-2.amazonaws.com/event-folder/' +${event.event_poster}}" alt="poster_img">
 						</div>
-<!--						<div class="news_info">-->
-<!--							<div class="news_title"><p>[(${event.event_title})]</p></div>-->
-<!--							<div class="news_detail">-->
-<!--								<p>일시 : [(${event.event_date})]</p>-->
-<!--								<p>장소 : [(${event.event_place})]</p>-->
-<!--							</div>-->
-<!--						</div>-->
+						<div class="news_info">
+							<div class="news_title"><p>[(${event.event_title})]</p></div>
+							<div class="news_detail">
+								<p>일시 : [(${event.event_date})]</p>
+								<p>장소 : [(${event.event_place})]</p>
+							</div>
+						</div>
 					</a>
 					</li>
 				</ul>
@@ -163,5 +163,7 @@
                     </script>
 			</div>
 		</div>
+		
+	<div th:replace="/footer :: footer"></div>
 </body>
 </html>

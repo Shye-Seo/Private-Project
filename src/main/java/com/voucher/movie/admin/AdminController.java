@@ -92,7 +92,6 @@ public class AdminController {
 	public ModelAndView loginCheck(HttpServletResponse response, @ModelAttribute AdminVO adminVo, HttpSession session) throws Exception {
         int result =adminService.loginCheck(adminVo, session);
         ModelAndView mav = new ModelAndView();
-        System.out.println(result);
 
         if(result==1) { // 로그인 성공
             //관리자 페이지 이동
@@ -221,18 +220,15 @@ public class AdminController {
 	public String admin_resSetting(ModelMap model) throws Exception {
 		
 		// 오늘 날짜
-	    LocalDate now = LocalDate.now();
 	    Calendar time = Calendar.getInstance();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-	    String nowTime = format.format(time.getTime());
 	    
 	    Calendar cal = Calendar.getInstance();
 	    String today = dateFormat.format(cal.getTime());
 	    
 	    //휴관일 정보 가져오기
 	    closed_list = adminService.getClosed();
-	    System.out.println(closed_list);
 	    
 	    for(ClosedVO vo : closed_list) {
 	    	 String closed_date = vo.getClosed_date();
@@ -256,12 +252,6 @@ public class AdminController {
 	public String reservation_setting(@RequestParam("setting_date") String setting_date, @RequestParam("closed_status") int closed_status, @RequestParam("time_num") int time_num,
 									  @RequestParam("setting_time") String setting_time, @RequestParam("limited_num") int limited_num, @RequestParam("time_status") int time_status, ModelMap model) throws Exception {
 			
-		System.out.println("setting_date : "+setting_date);
-		System.out.println("time_num : "+time_num);
-		System.out.println("setting_time : "+setting_time);
-		System.out.println("limited_num : "+limited_num);
-		System.out.println("time_status : "+time_status);
-		
 		if(closed_status == 1) { // 휴관일 설정 O -> reservation_closed 테이블에 insert
 			adminService.setClosed(setting_date);
 		}else if(closed_status == 0) { // 휴관일 설정 X
@@ -303,8 +293,6 @@ public class AdminController {
 	    int pageSize = pagination.getPageSize();
 
 	    news_list = adminService.findNewsPaging(startIndex, pageSize);
-	    
-	    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 	    
 	    for(NewsVO news : news_list) {
 	    	String news_date = news.getCreate_date();

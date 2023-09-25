@@ -1,13 +1,13 @@
 //$(document).ready(function () {
 //	
 //	
-//    const slides = document.querySelector('.slide'); //전체 슬라이드 컨테이너
-//    const slideImg = document.querySelectorAll('.slide li'); //모든 슬라이드들
+//    const slides = document.querySelector('.swiper_exhb'); //전체 슬라이드 컨테이너
+//    const slideImg = document.querySelectorAll('.exhb_slide_info_area .swiper-slide'); //모든 슬라이드들
 //    let currentIdx = 0; //현재 슬라이드 index
 //    const slideCount = slideImg.length; // 슬라이드 개수
-//    const prev = document.querySelector('.prev'); //이전 버튼
-//    const next = document.querySelector('.next'); //다음 버튼
-//    const slideWidth = 1920; //한개의 슬라이드 넓이
+//    const prev = document.querySelector('.exhb_navigation_prev'); //이전 버튼
+//    const next = document.querySelector('.exhb_navigation_next'); //다음 버튼
+//    const slideWidth = 1200; //한개의 슬라이드 넓이
 //    const slideMargin = 0; //슬라이드간의 margin 값
 //    makeClone(); // 처음이미지와 마지막 이미지 복사 함수
 //    initfunction(); //슬라이드 넓이와 위치값 초기화 함수
