@@ -7,6 +7,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="css/reservation.css">
+    <script src="/js/common.js"></script>
     <title>부산영화체험박물관 | 대관예약</title>
     <script type="text/javascript" src="/js/reservation_facility.js"></script>
 </head>
@@ -208,14 +209,14 @@
 						<div class="phone_num">
 							<div class="left_title">신청자 연락처</div>
 							<div class="right_title" id="right_flex">
-								<input type="text" name="res_phone" class="input_phone">
+								<input type="text" name="res_phone" class="input_phone onlyNum">
 								<input type="button" id="certifinum_submit" value="본인인증">
 							</div>
 						</div>
 						<div class="certifi_num">
 							<div class="left_title">인증번호</div>
 							<div  class="right_title" id="right_flex">
-								<input type="text" id="certifinum" placeholder="인증번호를 입력해주세요" onkeyup="certifinum_checking();" class="input_certifinum">
+								<input type="text" id="certifinum" placeholder="인증번호를 입력해주세요" onkeyup="certifinum_checking();" class="input_certifinum onlyNum">
 								<div class="check_icon"></div>
 	                    		<input type="button" id="certifinum_check" value="인증완료" disabled>
 	                    		<input type="hidden" id="certifi_ok" name="certifi_ok">

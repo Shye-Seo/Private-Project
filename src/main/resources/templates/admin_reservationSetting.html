@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="/css/admin_resSetting.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+    <script src="/js/common.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -83,10 +83,10 @@
 									<option value="13">13회차</option>
 									<option value="14">14회차</option>
 								</select>
-								<input type="text" name="setting_time" class="time_input" placeholder="--:--">
-								<input type="text" name="limited_num" class="num_input" placeholder="인원수 입력">
-								<button class="able_btn" onclick="able_time();"><img src="/imgs/able_time.png">활성</button>
-								<button class="unable_btn" onclick="unable_time();"><img src="/imgs/unable_time.png">비활성</button>
+								<input type="text" name="setting_time" class="time_input onlyNum" placeholder="--:--" onkeyup="chkTime($(this))" id="setting_time">
+								<span class="num_input_div"><p>명</p><input type="text" name="limited_num" class="num_input onlyNum" placeholder="인원수 입력" id="limited_num"></span>
+								<button class="able_btn" onclick="able_time()"><img src="/imgs/able_time.png">활성</button>
+								<button class="unable_btn" onclick="unable_time()"><img src="/imgs/unable_time.png">비활성</button>
 								<input type="hidden" name="time_status" id="time_status" value="1">
 							</div>
 							<div class="button_area">
@@ -103,6 +103,7 @@
 <script>
     $(document).ready(function() {
         calendarInit();
+        
     });
     /*
         달력 렌더링 할 때 필요한 정보 목록 
@@ -298,7 +299,7 @@
     
     function changeSelect() {
     	$('.time_input').show();
-    	$('.num_input').show();
+    	$('.num_input_div').show();
     	$('.able_btn').show();
     }
     
@@ -306,12 +307,16 @@
     	$('.able_btn').hide();
     	$('.unable_btn').show();
     	$('#time_status').val(0);
+    	$('#setting_time').prop("disabled", true);
+		$('#limited_num').prop("disabled", true);
     }
     
     function unable_time(){ //비활성버튼 누르면 활성버튼으로 변경, status 1:활성
     	$('.able_btn').show();
     	$('.unable_btn').hide();
     	$('#time_status').val(1);
+    	$('#setting_time').prop("disabled", false);
+		$('#limited_num').prop("disabled", false);
     }
     
     function setting_ok() {

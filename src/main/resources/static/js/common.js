@@ -101,3 +101,19 @@ function costText(obj){
 	console.log(costtext)
 	obj.innerHTML =costtext;
 }
+
+function chkTime(obj){
+	let timeData = "";
+    let text = $(obj).val();
+    
+    if(!text.includes('.')){
+    	if(text.length<3){
+        	$(obj).val(text);
+        }else if(text.length<6){
+        	timeData += text.substr(0, 2);
+            timeData += ":"
+            timeData += text.substr(2);
+            $(obj).val(timeData.substr(0,5));
+        }
+    }
+}

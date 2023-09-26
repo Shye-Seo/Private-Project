@@ -863,3 +863,17 @@
     letter-spacing: -0.4px;
     margin-bottom: 4px;
 }
+
+.policy_detail_content, .cookie_txt {
+    margin-top: 10px;
+}
+
+.cookie_detail_txt {
+    color: #000;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.4px;
+}

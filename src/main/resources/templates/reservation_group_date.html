@@ -7,6 +7,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="css/reservation.css">
+    <script src="/js/common.js"></script>
     <title>부산영화체험박물관 | 단체예약</title>
     <script type="text/javascript" src="/js/reservation.js"></script>
 </head>
@@ -329,7 +330,7 @@
 							<div class="calc_wrapper">
 							<div class="studentNum">
 								<div class="num_txt">학생</div>
-								<div class="num_input_area"><input type="text" name="res_studentNum" id="studentNum" value="0"></div>
+								<div class="num_input_area"><input type="text" name="res_studentNum" id="studentNum" value="0" maxlength="3"></div>
 								<div class="icon_box">
 								<div class="plus_icon" onclick="countStudent('plus')"><div id="icon_wrap"><img src="/imgs/plus_icon.svg"></div></div>
 								<div class="minus_icon" onclick="countStudent('minus')"><div id="icon_wrap"><img src="/imgs/minus_icon.svg"></div></div>
@@ -337,7 +338,7 @@
 							</div>
 							<div class="adultNum">
 								<div class="num_txt">성인</div>
-								<div class="num_input_area"><input type="text" name="res_adultNum" id="adultNum" value="0"></div>
+								<div class="num_input_area"><input type="text" name="res_adultNum" id="adultNum" value="0" maxlength="3"></div>
 								<div class="icon_box">
 								<div class="plus_icon" onclick="countAdult('plus')"><div id="icon_wrap"><img src="/imgs/plus_icon.svg"></div></div>
 								<div class="minus_icon" onclick="countAdult('minus')"><div id="icon_wrap"><img src="/imgs/minus_icon.svg"></div></div>
@@ -346,7 +347,7 @@
 							</div>
 							<div class="leaderNum">
 								<div class="num_txt">인솔자</div>
-								<div class="num_input_area"><input type="text" name="res_leaderNum" id="leaderNum" value="0"></div>
+								<div class="num_input_area"><input type="text" name="res_leaderNum" id="leaderNum" value="0" maxlength="3"></div>
 								<div class="icon_box">
 								<div class="plus_icon" onclick="countLeader('plus')"><div id="icon_wrap"><img src="/imgs/plus_icon.svg"></div></div>
 								<div class="minus_icon" onclick="countLeader('minus')"><div id="icon_wrap"><img src="/imgs/minus_icon.svg"></div></div>
@@ -361,14 +362,14 @@
 						<div class="phone_num">
 							<div class="left_title">인솔자 연락처</div>
 							<div class="right_title" id="right_flex">
-								<input type="text" name="res_phone" class="input_phone">
+								<input type="text" name="res_phone" class="input_phone onlyNum">
 								<input type="button" id="certifinum_submit" value="본인인증">
 							</div>
 						</div>
 						<div class="certifi_num">
 							<div class="left_title">인증번호</div>
 							<div  class="right_title" id="right_flex">
-								<input type="text" id="certifinum" placeholder="인증번호를 입력해주세요" onkeyup="certifinum_checking();" class="input_certifinum">
+								<input type="text" id="certifinum" placeholder="인증번호를 입력해주세요" onkeyup="certifinum_checking();" class="input_certifinum onlyNum">
 								<div class="check_icon"></div>
 	                    		<input type="button" id="certifinum_check" value="인증완료" disabled>
 	                    		<input type="hidden" id="certifi_ok" name="certifi_ok">

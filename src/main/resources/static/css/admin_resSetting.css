@@ -339,29 +339,52 @@ select::-ms-expand{ display: none; } /* 익스플로러용 */
 
 .select_time {
     display: flex;
-    width: 256px;
-    height: 60px;
-    padding: 20px;
+    width: 30%;
+    height: 64px;
+    padding-left: 20px;
     justify-content: space-between;
     align-items: center;
     border: 1px solid #202020;
     margin-right: 20px;
+    color: #202020;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.54px;
+    box-sizing: border-box;
 }
 
-.time_limited .time_input{
-	padding: 20px;
-	margin-right: 20px;
-	width: 215px;
-	display: none;
-/* 	height: 60px; */
+.time_limited .time_input {
+    padding-left: 20px;
+    margin-right: 20px;
+    width: 25%;
+    display: none;
+    /* height: 60px; */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.54px;
 }
 
-.time_limited .num_input{
-	padding: 20px;
-	margin-right: 20px;
-	width: 215px;
+.time_limited .num_input {
+    padding-left: 20px;
+    margin-right: 20px;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.54px;
+    width: 230px;
+    height: 60px;
+}
+
+.num_input_div{
 	display: none;
-/* 	height: 60px; */
 }
 
 .time_limited .able_btn{
@@ -415,4 +438,17 @@ select::-ms-expand{ display: none; } /* 익스플로러용 */
 	font-weight: 600;
 	line-height: 24px; /* 150% */
 	cursor: pointer;
+}
+
+.time_limited span {
+    position: relative;
+}
+
+span p {
+    position: absolute;
+    right: 50px;
+    bottom: 0;
+    line-height: 60px;
+    /* display: flex; */
+    /* align-items: center; */
 }
