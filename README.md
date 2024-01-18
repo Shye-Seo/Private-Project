@@ -31,6 +31,3 @@
 ![2023_09_20_영화체험박물관_ERD](https://github.com/Shye-Seo/busanbom/assets/93040911/1bfb3207-0f92-4b78-82a5-6d580c54008b)
 <br>
 
-## ✔ 프로젝트 구조
-
-<br>
