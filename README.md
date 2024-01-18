@@ -1,5 +1,7 @@
 # 🎬 부산 영화체험박물관
-![easyme](/assets/readme/cartoon.png)
+![메인페이지](https://github.com/Shye-Seo/busanbom/assets/93040911/d4337fd1-adb4-453c-9724-b2eec1d016aa)
+
+![단체예약 및 휴관일설정](https://github.com/Shye-Seo/busanbom/assets/93040911/92551d03-f50e-422a-96e4-112c730fa2b9)
 * 개발기간 : 2023.08.16 ~ 2023.09.26 (6주)
 * 참여인원 : 개발자 1명, 디자이너 1명
 * URL : <https://busanbom.kr/>
