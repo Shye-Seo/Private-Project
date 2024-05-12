@@ -49,10 +49,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AwsS3Service {
 
-	@Value("AKIASM4TE7FUPG22NRSE")
+    @Value("#accessKey")
     private String accessKey;
 
-    @Value("fp2R9Ux9x+tTSx5A7i+nGfHbqCAN8C+r5N5aJt8X")
+    @Value("#secretKey")
     private String secretKey;
 
     @Value("busanbom")
