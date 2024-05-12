@@ -13,10 +13,10 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 @Configuration
 public class AwsS3Config {
 
-    @Value("AKIASM4TE7FUPG22NRSE")
+    @Value("#AccessKey")
     private String accessKey;
 
-    @Value("fp2R9Ux9x+tTSx5A7i+nGfHbqCAN8C+r5N5aJt8X")
+    @Value("#SecretKey")
     private String secretKey;
 
     @Value("ap-northeast-2")
